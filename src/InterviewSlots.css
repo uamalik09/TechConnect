@@ -1,0 +1,61 @@
+.interview-slots-container {
+    padding: 20px;
+    color: #333;
+    background-color: #fff;
+    min-height: 100vh;
+  }
+  .interview-slots-container h1{
+    text-align: center;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background-color: #222;
+    color: #fff;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #555;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #666;
+  }
+  
+  .slots-list {
+    margin-top: 20px;
+  }
+  
+  .slots-list ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .slots-list li {
+    background-color: #444;
+    margin: 10px 0;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: #fff;
+  }
+  
