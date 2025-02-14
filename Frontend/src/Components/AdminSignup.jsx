@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import {Link, useNavigate} from 'react-router-dom';
 import { Axios } from "axios";
 
-function Signup() {
+function AdSignup() {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -40,7 +40,7 @@ function Signup() {
         console.log("Form Submitted", formData);
 
         try {
-            const url = "http://localhost:8080/auth/signup";
+            const url = "http://localhost:8080/auth/adminsignup";
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
@@ -163,7 +163,7 @@ function Signup() {
                                 Create an account
                             </button>
                             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                Already have an account? <a href="/login" className="font-medium text-blue-600 hover:underline dark:text-blue-500">Login here</a>
+                                Already have an account? <a href="/adminlogin" className="font-medium text-blue-600 hover:underline dark:text-blue-500">Login here</a>
                             </p>
                         </form>
                     </div>
@@ -173,4 +173,4 @@ function Signup() {
     );
 }
 
-export default Signup;
+export default AdSignup;

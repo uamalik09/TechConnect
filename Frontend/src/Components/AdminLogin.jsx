@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+function AdLogin() {
     const [loginData, setLoginData] = useState({
         email: "",
         password: "",
@@ -32,7 +32,7 @@ function Login() {
         console.log("Form Submitted", loginData);
 
         try {
-            const url = "http://localhost:8080/auth/login";
+            const url = "http://localhost:8080/auth/adminlogin";
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
@@ -62,7 +62,7 @@ function Login() {
                 alert(message);
             }
         } catch (err) {
-            console.error("Signup error:", err);
+            console.error("Login error:", err);
         }
     };
 
@@ -104,7 +104,7 @@ function Login() {
                                 Login
                             </button>
                             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                Don’t have an account yet? <a href="/signup" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
+                                Don’t have an account yet? <a href="/adminsignup" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
                             </p>
                         </form>
                     </div>
@@ -114,4 +114,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default AdLogin;
