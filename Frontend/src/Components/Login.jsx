@@ -50,9 +50,7 @@ function Login() {
                 alert("Login Successfull");
                 localStorage.setItem('token', jwtToken);
                 localStorage.setItem('loggedInUser', name);
-                setTimeout(() => {
-                   navigate('/home')
-                });
+                navigate('/studentdashboard');
             }
             else if(error){
                 const details = error?.details[0].message;

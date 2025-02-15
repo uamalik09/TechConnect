@@ -11,6 +11,7 @@ import AddTalk from "./Components/AddTalks";
 import TalksPage from "./Components/TalksPage";
 import AdminDashboard from "./Components/AdminDashboard";
 import ChoicePage from "./Components/Choice";
+import StudentDashboard from "./Components/StudentDashboard";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/addtalks" element={<AddTalk/>}/>
         <Route path="/gettalks" element={<TalksPage/>}/>
         <Route path="/admindashboard" element={<AdminDashboard/>}/>
+        <Route path="/studentdashboard" element={<StudentDashboard/>}/>
         <Route path="/choice" element={<ChoicePage/>}/>
       </Routes>
     </div>
