@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { FaBullhorn, FaVideo, FaCalendarAlt, FaUserCircle } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { FaBullhorn, FaVideo, FaCalendarAlt, FaUserCircle, FaClipboardList } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const StudentDashboard = () => {
   const navigate = useNavigate();
@@ -42,23 +42,29 @@ const StudentDashboard = () => {
 
       {/* Main Content */}
       <div className="container mx-auto py-10 px-6">
-       
-        <div className="grid md:grid-cols-3 gap-6">
-          <div onClick={() => navigate("/getannouncement")} className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Announcements */}
+          <div onClick={() => navigate("/getannouncement")} className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition cursor-pointer">
             <FaBullhorn size={40} className="text-yellow-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-center mb-3">Announcements</h3>
           </div>
 
-          <div onClick={() => navigate("/gettalks")} className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition">
+          {/* Pre Recruitment Talk */}
+          <div onClick={() => navigate("/gettalks")} className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition cursor-pointer">
             <FaVideo size={40} className="text-blue-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-center mb-3">Pre Recruitment Talk</h3>
-           
           </div>
 
-          <div  onClick={() => navigate("/addinterviewslots")} className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition">
+          {/* Interview Slots */}
+          <div onClick={() => navigate("/addinterviewslots")} className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition cursor-pointer">
             <FaCalendarAlt size={40} className="text-green-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-center mb-3">Interview Slots</h3>
+          </div>
 
+          {/* Online Assessment (OA) */}
+          <div onClick={() => navigate("/clubs")} className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition cursor-pointer">
+            <FaClipboardList size={40} className="text-purple-400 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-center mb-3">Online Assessment</h3>
           </div>
         </div>
       </div>

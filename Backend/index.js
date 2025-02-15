@@ -7,6 +7,8 @@ const AuthRouter = require('./Routes/AuthRouter');
 const AdminRouter = require('./Routes/AdminRouter');
 const AnnouncementRouter = require('./Routes/AnnouncementRouter');
 const TalkRouter = require('./Routes/TalkRouter');
+const QuestionsRouter = require('./routes/QuestionsRouter');
+
 require('dotenv').config();
 require('./Models/db');
 const PORT = process.env.PORT || 8080;
@@ -23,6 +25,7 @@ app.use('/auth', AuthRouter);
 app.use('/admin', AdminRouter);
 app.use('/api', AnnouncementRouter);
 app.use('/api', TalkRouter);
+app.use('/questions', QuestionsRouter); 
 
 app.listen(PORT, () => {
     console.log("Server is listening");
