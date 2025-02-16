@@ -72,7 +72,7 @@ const Announcements = () => {
             required
             className="w-full p-3 bg-gray-700 text-white rounded-lg focus:ring focus:ring-blue-500"
           />
-          <button
+          <button onClick={() => handleSubmit}
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-500 transition-all p-3 rounded-lg font-semibold"
           >
