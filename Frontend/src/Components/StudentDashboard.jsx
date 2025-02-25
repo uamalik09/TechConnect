@@ -44,7 +44,7 @@ const StudentDashboard = () => {
       <div className="container mx-auto py-10 px-6">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Announcements */}
-          <div onClick={() => navigate("/getannouncement")} className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition cursor-pointer">
+          <div onClick={() => navigate("/allannouncement")} className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition cursor-pointer">
             <FaBullhorn size={40} className="text-yellow-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-center mb-3">Announcements</h3>
           </div>

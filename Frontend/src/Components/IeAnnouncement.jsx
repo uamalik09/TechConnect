@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 
-const Announcements = () => {
+const IeAnnouncements = () => {
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
   const [announcements, setAnnouncements] = useState([]);
@@ -15,7 +15,7 @@ const Announcements = () => {
   const fetchAnnouncements = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/api/getannouncement"
+        "http://localhost:8080/api/ie/get"
       );
       setAnnouncements(response.data);
     } catch (error) {
@@ -27,7 +27,7 @@ const Announcements = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/addannouncement",
+        "http://localhost:8080/api/ie/add",
         { title, message }
       );
       setAnnouncements([...announcements, response.data]); // Update UI instantly
@@ -40,7 +40,7 @@ const Announcements = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/api/deleteannouncement/${id}`);
+      await axios.delete(`http://localhost:8080/api/ie/delete/${id}`);
       setAnnouncements(announcements.filter((ann) => ann._id !== id));
     } catch (error) {
       console.error("Error deleting announcement:", error);
@@ -55,7 +55,7 @@ const Announcements = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-2xl font-bold text-center mb-4">Add Announcement</h2>
+        <h2 className="text-2xl font-bold text-center mb-4">IE Announcement</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
@@ -112,4 +112,4 @@ const Announcements = () => {
   );
 };
 
-export default Announcements;
+export default IeAnnouncements;

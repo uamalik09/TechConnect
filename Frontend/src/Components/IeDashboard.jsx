@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaBullhorn, FaVideo, FaCalendarAlt, FaUserCircle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
-const AdminDashboard = () => {
+const IeDashboard = () => {
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -15,7 +15,7 @@ const AdminDashboard = () => {
     <div className="min-h-screen bg-gray-900 text-white">
       {/* Navbar */}
       <nav className="bg-gray-800 p-4 flex justify-between items-center shadow-lg">
-        <h1 className="text-xl font-bold">Admin Dashboard</h1>
+        <h1 className="text-xl font-bold">IE Dashboard</h1>
 
         <div className="relative">
           <button
@@ -85,4 +85,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default IeDashboard;

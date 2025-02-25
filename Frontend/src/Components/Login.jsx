@@ -19,18 +19,62 @@ function Login() {
         });
     };
 
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     console.log("Form Data before sending:", loginData);
+
+
+    //     if (!loginData.email || !loginData.password) {
+    //         alert("All fields are required!");
+    //         return;
+    //     }
+
+    //     console.log("Form Submitted", loginData);
+
+    //     try {
+    //         const url = "http://localhost:8080/auth/login";
+    //         const response = await fetch(url, {
+    //             method: "POST",
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify({
+    //                 email: loginData.email,
+    //                 password: loginData.password, 
+    //             }),
+    //         });
+
+    //         const result = await response.json();
+    //         const {success, message, jwtToken, name, error} = result;
+    //         if(success){
+    //             alert("Login Successfull");
+    //             localStorage.setItem('token', jwtToken);
+    //             localStorage.setItem('loggedInUser', name);
+    //             navigate('/studentdashboard');
+    //         }
+    //         else if(error){
+    //             const details = error?.details[0].message;
+    //             alert(details);
+    //         }
+    //         else if(!success){
+    //             alert(message);
+    //         }
+    //     } catch (err) {
+    //         console.error("Signup error:", err);
+    //     }
+    // };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("Form Data before sending:", loginData);
-
-
+    
         if (!loginData.email || !loginData.password) {
             alert("All fields are required!");
             return;
         }
-
+    
         console.log("Form Submitted", loginData);
-
+    
         try {
             const url = "http://localhost:8080/auth/login";
             const response = await fetch(url, {
@@ -40,29 +84,53 @@ function Login() {
                 },
                 body: JSON.stringify({
                     email: loginData.email,
-                    password: loginData.password, 
+                    password: loginData.password,
                 }),
             });
-
+    
             const result = await response.json();
-            const {success, message, jwtToken, name, error} = result;
-            if(success){
-                alert("Login Successfull");
+            console.log(result); // Log the full response to verify the structure
+            const { success, message, jwtToken, user, error } = result;
+            const { name, role } = user;
+    
+            if (success) {
+                alert("Login Successful");
                 localStorage.setItem('token', jwtToken);
                 localStorage.setItem('loggedInUser', name);
-                navigate('/studentdashboard');
-            }
-            else if(error){
+                console.log("User Role: ", role);
+                // Check role and navigate accordingly
+                if (role === 'admin') {
+                    navigate('/admindashboard'); // Redirect to admin dashboard
+                } 
+                else if (role === 'iet') {
+                    navigate('/ietdashboard'); // Redirect to admin dashboard
+                } 
+                else if (role === 'ieee') {
+                    navigate('/ieeedashboard'); // Redirect to admin dashboard
+                } 
+                else if (role === 'acm') {
+                    navigate('/acmdashboard'); // Redirect to admin dashboard
+                } 
+                else if (role === 'ie') {
+                    navigate('/iedashboard'); // Redirect to admin dashboard
+                } 
+                else if (role === 'iste') {
+                    navigate('/istedashboard'); // Redirect to admin dashboard
+                }  
+                else {
+                    navigate('/studentdashboard'); // Redirect to student dashboard
+                }
+            } else if (error) {
                 const details = error?.details[0].message;
                 alert(details);
-            }
-            else if(!success){
+            } else if (!success) {
                 alert(message);
             }
         } catch (err) {
-            console.error("Signup error:", err);
+            console.error("Login error:", err);
         }
     };
+    
 
 
     return (
@@ -113,3 +181,4 @@ function Login() {
 }
 
 export default Login;
+

@@ -1,38 +1,81 @@
+// const Announcement = require("../Models/Announcement");
+
+// const addAnnouncement = async (req, res) => {
+//   try {
+//     const { title, message } = req.body;
+//     const newAnnouncement = new Announcement({ title, message });
+//     await newAnnouncement.save();
+//     res.status(201).json({ message: "Announcement added successfully!" });
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+// };
+
+// const getAnnouncements = async (req, res) => {
+//   try {
+//     const announcements = await Announcement.find().sort({ date: -1 });
+//     res.status(200).json(announcements);
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+// };
+
+// const deleteAnnouncement = async (req, res) => {
+//     try {
+//       const { id } = req.params;
+//       const deletedAnnouncement = await Announcement.findByIdAndDelete(id);
+  
+//       if (!deletedAnnouncement) {
+//         return res.status(404).json({ message: "Announcement not found!" });
+//       }
+  
+//       res.status(200).json({ message: "Announcement deleted successfully!" });
+//     } catch (err) {
+//       res.status(500).json({ error: err.message });
+//     }
+//   };
+  
+//   module.exports = { addAnnouncement, getAnnouncements, deleteAnnouncement };
+
+const mongoose = require("mongoose");
 const Announcement = require("../Models/Announcement");
 
-const addAnnouncement = async (req, res) => {
+const addAnnouncement = async (req, res, type) => {
   try {
     const { title, message } = req.body;
-    const newAnnouncement = new Announcement({ title, message });
+    const AnnouncementModel = mongoose.model(type);
+    const newAnnouncement = new AnnouncementModel({ title, message });
     await newAnnouncement.save();
-    res.status(201).json({ message: "Announcement added successfully!" });
+    res.status(201).json({ message: `${type} added successfully!` });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
-const getAnnouncements = async (req, res) => {
+const getAnnouncements = async (req, res, type) => {
   try {
-    const announcements = await Announcement.find().sort({ date: -1 });
+    const AnnouncementModel = mongoose.model(type);
+    const announcements = await AnnouncementModel.find().sort({ date: -1 });
     res.status(200).json(announcements);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
-const deleteAnnouncement = async (req, res) => {
-    try {
-      const { id } = req.params;
-      const deletedAnnouncement = await Announcement.findByIdAndDelete(id);
-  
-      if (!deletedAnnouncement) {
-        return res.status(404).json({ message: "Announcement not found!" });
-      }
-  
-      res.status(200).json({ message: "Announcement deleted successfully!" });
-    } catch (err) {
-      res.status(500).json({ error: err.message });
+const deleteAnnouncement = async (req, res, type) => {
+  try {
+    const { id } = req.params;
+    const AnnouncementModel = mongoose.model(type);
+    const deletedAnnouncement = await AnnouncementModel.findByIdAndDelete(id);
+
+    if (!deletedAnnouncement) {
+      return res.status(404).json({ message: `${type} not found!` });
     }
-  };
-  
-  module.exports = { addAnnouncement, getAnnouncements, deleteAnnouncement };
+
+    res.status(200).json({ message: `${type} deleted successfully!` });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+module.exports = { addAnnouncement, getAnnouncements, deleteAnnouncement };

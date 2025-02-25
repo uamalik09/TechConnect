@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaBullhorn, FaVideo, FaCalendarAlt, FaUserCircle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
-const AdminDashboard = () => {
+const IeeeDashboard = () => {
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -15,7 +15,7 @@ const AdminDashboard = () => {
     <div className="min-h-screen bg-gray-900 text-white">
       {/* Navbar */}
       <nav className="bg-gray-800 p-4 flex justify-between items-center shadow-lg">
-        <h1 className="text-xl font-bold">Admin Dashboard</h1>
+        <h1 className="text-xl font-bold">IEEE Dashboard</h1>
 
         <div className="relative">
           <button
@@ -49,7 +49,7 @@ const AdminDashboard = () => {
             <FaBullhorn size={40} className="text-yellow-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-center mb-3">Add Announcement</h3>
             <button
-              onClick={() => navigate("/ietannouncement")}
+              onClick={() => navigate("/ieeeannouncement")}
               className="w-full bg-yellow-500 hover:bg-yellow-600 text-white py-2 rounded-lg transition"
             >
               Add
@@ -85,4 +85,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default IeeeDashboard;
