@@ -35,6 +35,17 @@ import IeeeDashboard from "./Components/IeeeDashboard";
 import AcmDashboard from "./Components/AcmDashboard";
 import IeDashboard from "./Components/IeDashboard";
 import IsteDashboard from "./Components/IsteDashboard";
+import IetTalk from "./Components/IetTalk";
+import IeeeTalk from "./Components/IeeeTalk";
+import AcmTalk from "./Components/AcmTalk";
+import IeTalk from "./Components/IeTalk";
+import IsteTalk from "./Components/IsteTalk";
+import IetTalksPage from "./Components/GetIetTalk";
+import IeeeTalksPage from "./Components/GetIeeeTalk";
+import AcmTalksPage from "./Components/GetAcmTalk";
+import IeTalksPage from "./Components/GetIeTalk";
+import IsteTalksPage from "./Components/GetIsteTalk";
+import AllTalks from "./Components/AllTalks";
 
 function App() {
   return (
@@ -76,6 +87,17 @@ function App() {
         <Route path="/superadmin" element={<SuperAdminPanel />}/>
         <Route path="/faqs" element={<FAQ />}/>
         <Route path="/allannouncement" element={<AllAnnouncement />}/>
+        <Route path="/addiettalk" element={<IetTalk />}/>
+        <Route path="/getiettalk" element={<IetTalksPage />}/>
+        <Route path="/addieeetalk" element={<IeeeTalk />}/>
+        <Route path="/getieeetalk" element={<IeeeTalksPage />}/>
+        <Route path="/addacmtalk" element={<AcmTalk />}/>
+        <Route path="/getacmtalk" element={<AcmTalksPage />}/>
+        <Route path="/addietalk" element={<IeTalk />}/>
+        <Route path="/getietalk" element={<IeTalksPage />}/>
+        <Route path="/addistetalk" element={<IsteTalk />}/>
+        <Route path="/getistetalk" element={<IsteTalksPage />}/>
+        <Route path="/alltalks" element={<AllTalks />}/>
       </Routes>
     </div>
   );

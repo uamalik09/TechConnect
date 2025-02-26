@@ -50,7 +50,7 @@ const StudentDashboard = () => {
           </div>
 
           {/* Pre Recruitment Talk */}
-          <div onClick={() => navigate("/gettalks")} className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition cursor-pointer">
+          <div onClick={() => navigate("/alltalks")} className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition cursor-pointer">
             <FaVideo size={40} className="text-blue-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-center mb-3">Pre Recruitment Talk</h3>
           </div>

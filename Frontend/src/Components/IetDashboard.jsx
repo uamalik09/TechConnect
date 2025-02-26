@@ -61,7 +61,7 @@ const IetDashboard = () => {
             <FaVideo size={40} className="text-blue-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-center mb-3">Add Talk</h3>
             <button
-              onClick={() => navigate("/addtalks")}
+              onClick={() => navigate("/addiettalk")}
               className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg transition"
             >
               Add
