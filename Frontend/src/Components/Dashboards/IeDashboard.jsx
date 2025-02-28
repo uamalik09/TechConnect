@@ -49,7 +49,7 @@ const IeDashboard = () => {
             <FaBullhorn size={40} className="text-yellow-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-center mb-3">Add Announcement</h3>
             <button
-              onClick={() => navigate("/ietannouncement")}
+              onClick={() => navigate("/ieannouncement")}
               className="w-full bg-yellow-500 hover:bg-yellow-600 text-white py-2 rounded-lg transition"
             >
               Add

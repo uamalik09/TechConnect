@@ -48,6 +48,7 @@ import IsteTalksPage from "./Components/Talks/GetTalks/GetIsteTalk";
 import AllTalks from "./Components/Talks/AllTalks";
 
 function App() {
+
   return (
     <div className="App">
       <Routes>

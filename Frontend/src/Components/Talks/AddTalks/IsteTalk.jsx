@@ -13,8 +13,16 @@ const IsteTalk = () => {
 
   const fetchTalks = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/iste/gettalks");
-      setTalks(response.data);
+      const token = localStorage.getItem("token");
+      const response = await axios.get("http://localhost:8080/api/iste/gettalks", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (Array.isArray(response.data)) {
+        setTalks(response.data);
+      } else {
+        console.error("Unexpected response format:", response.data);
+      }
     } catch (error) {
       console.error("Error fetching talks:", error);
     }
@@ -23,12 +31,19 @@ const IsteTalk = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/api/iste/addtalk", {
-        title,
-        talkUrl,
-        date, // Include date field
-      });
-      setTalks([...talks, response.data]);
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        "http://localhost:8080/api/iste/addtalk",
+        { title, talkUrl, date },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      if (response.data && response.data._id) {
+        setTalks([...talks, response.data]);
+      } else {
+        console.error("Failed to add talk, invalid response:", response.data);
+      }
+
       setTitle("");
       setTalkUrl("");
       setDate("");
@@ -38,8 +53,17 @@ const IsteTalk = () => {
   };
 
   const handleDelete = async (id) => {
+    if (!id) {
+      console.error("Invalid talk ID for deletion:", id);
+      return;
+    }
+
     try {
-      await axios.delete(`http://localhost:8080/api/iste/deletetalk/${id}`);
+      const token = localStorage.getItem("token");
+      await axios.delete(`http://localhost:8080/api/iste/deletetalk/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
       setTalks(talks.filter((talk) => talk._id !== id));
     } catch (error) {
       console.error("Error deleting talk:", error);
@@ -49,10 +73,7 @@ const IsteTalk = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-white p-6 flex flex-col items-center">
       <h2 className="text-3xl font-bold mb-4">Add Talk</h2>
-      <form
-        onSubmit={handleSubmit}
-        className="bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-lg"
-      >
+      <form onSubmit={handleSubmit} className="bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-lg">
         <input
           type="text"
           placeholder="Talk Title"
@@ -76,25 +97,17 @@ const IsteTalk = () => {
           required
           className="w-full p-2 mb-3 bg-gray-700 text-white rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
         />
-        <button
-          type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition"
-        >
+        <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition">
           Add Talk
         </button>
       </form>
 
       <h2 className="text-3xl font-bold mt-6">Talks</h2>
       <ul className="w-full max-w-lg">
-        {talks.map((talk) => (
-          <li
-            key={talk._id}
-            className="bg-gray-800 p-4 mt-4 rounded-lg shadow-md"
-          >
+        {talks.map((talk, index) => (
+          <li key={talk._id || index} className="bg-gray-800 p-4 mt-4 rounded-lg shadow-md">
             <h3 className="text-xl font-semibold">{talk.title}</h3>
-            <p className="text-gray-400 text-sm">
-              Date: {new Date(talk.date).toLocaleDateString()}
-            </p>
+            <p className="text-gray-400 text-sm">Date: {new Date(talk.date).toLocaleDateString()}</p>
             <div className="flex justify-center mt-2">
               <iframe
                 width="100%"
