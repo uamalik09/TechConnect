@@ -14,38 +14,93 @@ const AcmAnnouncements = () => {
 
   const fetchAnnouncements = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:8080/api/acm/get"
-      );
+      const token = localStorage.getItem("token");
+  
+      const response = await axios.get("http://localhost:8080/api/acm/get", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
+  
+      console.log("Fetched Announcements:", response.data);
+      
+      // ✅ Update state with latest announcements
       setAnnouncements(response.data);
     } catch (error) {
       console.error("Error fetching announcements:", error);
     }
   };
+  
+  
+  
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // ✅ Prevent default form submission
+  
     try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        throw new Error("No token found, user is not authenticated.");
+      }
+  
+      const newAnnouncement = { title, message }; // ✅ Capture input values
+  
       const response = await axios.post(
         "http://localhost:8080/api/acm/add",
-        { title, message }
+        newAnnouncement,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
       );
-      setAnnouncements([...announcements, response.data]); // Update UI instantly
+  
+      console.log("Announcement added:", response.data);
+  
+      // ✅ Update the UI immediately
+      setAnnouncements([...announcements, newAnnouncement]);
+  
+      // ✅ Clear input fields after submission
       setTitle("");
       setMessage("");
+  
+      // ✅ Fetch the latest announcements from the backend
+      fetchAnnouncements();
     } catch (error) {
       console.error("Error adding announcement:", error);
     }
   };
+  
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/api/acm/delete/${id}`);
+      const token = localStorage.getItem("token"); // ✅ Get the token
+      if (!token) {
+        throw new Error("No token found, user is not authenticated.");
+      }
+  
+      await axios.delete(`http://localhost:8080/api/acm/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // ✅ Include token
+        },
+        withCredentials: true, // ✅ Ensure cookies are sent if needed
+      });
+  
+      console.log("Announcement deleted successfully!");
+  
+      // ✅ Remove from UI immediately
       setAnnouncements(announcements.filter((ann) => ann._id !== id));
+  
+      // ✅ Fetch updated announcements (optional)
+      fetchAnnouncements();
     } catch (error) {
       console.error("Error deleting announcement:", error);
     }
   };
+  
 
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center p-6">
@@ -55,7 +110,7 @@ const AcmAnnouncements = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-2xl font-bold text-center mb-4">Acm Announcement</h2>
+        <h2 className="text-2xl font-bold text-center mb-4">ACM Announcement</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
@@ -72,12 +127,13 @@ const AcmAnnouncements = () => {
             required
             className="w-full p-3 bg-gray-700 text-white rounded-lg focus:ring focus:ring-blue-500"
           />
-          <button onClick={() => handleSubmit}
+          <button
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-500 transition-all p-3 rounded-lg font-semibold"
           >
             Add Announcement
           </button>
+
         </form>
       </motion.div>
 

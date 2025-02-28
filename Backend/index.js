@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-app.use(cors());
 const bodyParser = require('body-parser');
 const AuthRouter = require('./Routes/AuthRouter');
 const AdminRouter = require('./Routes/AdminRouter');
@@ -9,6 +8,14 @@ const AnnouncementRouter = require('./Routes/AnnouncementRouter');
 const TalkRouter = require('./Routes/TalkRouter');
 const QuestionsRouter = require('./routes/QuestionsRouter');
 const AdminRoutes = require('./Routes/AdminRoutes');
+
+app.use(cors({
+    origin: "http://localhost:5173", // Allow only frontend
+    credentials: true, // Allow cookies/authentication headers
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+  }));
+  
 
 require('dotenv').config();
 require('./Models/db');
