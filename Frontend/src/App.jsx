@@ -46,6 +46,8 @@ import AcmTalksPage from "./Components/Talks/GetTalks/GetAcmTalk";
 import IeTalksPage from "./Components/Talks/GetTalks/GetIeTalk";
 import IsteTalksPage from "./Components/Talks/GetTalks/GetIsteTalk";
 import AllTalks from "./Components/Talks/AllTalks";
+import ProtectedRoute from "./Components/ProtectedRoute";
+import RoleBasedRoute from "./Components/RoleBasedRoute";
 
 function App() {
 
