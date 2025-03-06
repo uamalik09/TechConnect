@@ -6,8 +6,9 @@ const AuthRouter = require('./Routes/AuthRouter');
 const AdminRouter = require('./Routes/AdminRouter');
 const AnnouncementRouter = require('./Routes/AnnouncementRouter');
 const TalkRouter = require('./Routes/TalkRouter');
-const QuestionsRouter = require('./routes/QuestionsRouter');
+const QuestionsRouter = require('./Routes/QuestionsRouter');
 const AdminRoutes = require('./Routes/AdminRoutes');
+const TestStatusRoutes = require('./Routes/TestStatusRoutes');
 
 app.use(cors({
     origin: "http://localhost:5173", // Allow only frontend
@@ -34,6 +35,7 @@ app.use('/admin', AdminRouter);
 app.use('/api', AnnouncementRouter);
 app.use('/api', TalkRouter);
 app.use('/questions', QuestionsRouter); 
+app.use('/test-status',TestStatusRoutes);
 app.use('/superadmin', AdminRoutes);
 
 app.listen(PORT, () => {

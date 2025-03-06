@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaBullhorn, FaVideo, FaCalendarAlt, FaUserCircle } from "react-icons/fa";
+import { FaClipboardList } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
 const IetDashboard = () => {
@@ -43,7 +44,7 @@ const IetDashboard = () => {
       {/* Main Content */}
       <div className="container mx-auto py-10 px-6">
         <h2 className="text-3xl font-bold text-center mb-8">Admin Actions</h2>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-4 gap-6">
           {/* Add Announcement */}
           <div className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition">
             <FaBullhorn size={40} className="text-yellow-400 mx-auto mb-4" />
@@ -79,6 +80,16 @@ const IetDashboard = () => {
               Add
             </button>
           </div>
+           <div  className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition cursor-pointer">
+                     <FaClipboardList size={40} className="text-purple-400 mx-auto mb-4" />
+                     <h3 className="text-xl font-semibold text-center mb-3">Online Assessment</h3>
+                     <button
+              onClick={() => navigate("/addietquestions")}
+              className="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg transition"
+            >
+              Add
+            </button>
+                   </div>
         </div>
       </div>
     </div>

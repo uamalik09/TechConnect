@@ -8,15 +8,66 @@ const QuizPage = () => {
     const [timeLeft, setTimeLeft] = useState(600); // 10 minutes in seconds
     const navigate = useNavigate();
 
+    // Format time as mm:ss
+    const formatTime = (seconds) => {
+        const minutes = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+    };
+
     // Fetch questions from backend
     useEffect(() => {
-        Axios.get("http://localhost:8080/questions/get-questions")
-            .then((response) => {
-                setQuestions(response.data);
-                setAnswers(Array(response.data.length).fill(""));
-            })
-            .catch((error) => console.error("Error fetching questions:", error));
-    }, []);
+        // Retrieve the token from localStorage
+        const token = localStorage.getItem('token');
+
+        // Check if token exists
+        if (!token) {
+            console.error("No authentication token found");
+            // Optionally redirect to login page
+            navigate('/login');
+            return;
+        }
+
+        // Fetch questions with authorization header
+        Axios.get("http://localhost:8080/questions/iet/cipher/get", {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then((response) => {
+            setQuestions(response.data);
+            setAnswers(Array(response.data.length).fill(""));
+        })
+        .catch((error) => {
+            console.error("Error fetching questions:", error);
+            // Handle different types of errors
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.error("Error response:", error.response.data);
+                console.error("Error status:", error.response.status);
+                
+                // Handle specific error cases
+                if (error.response.status === 401) {
+                    // Unauthorized - token might be invalid
+                    alert("Your session has expired. Please log in again.");
+                    navigate('/login');
+                } else if (error.response.status === 403) {
+                    // Forbidden - user might not have permission
+                    alert("You do not have permission to access this quiz.");
+                }
+            } else if (error.request) {
+                // The request was made but no response was received
+                console.error("No response received:", error.request);
+                alert("Unable to connect to the server. Please check your internet connection.");
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.error("Error setting up request:", error.message);
+                alert("An unexpected error occurred.");
+            }
+        });
+    }, [navigate]);
 
     // Load saved timer progress (prevents reset on refresh)
     useEffect(() => {
@@ -38,13 +89,6 @@ const QuizPage = () => {
         }, 1000);
         return () => clearInterval(timer);
     }, [timeLeft]);
-
-    // Format time as mm:ss
-    const formatTime = (seconds) => {
-        const minutes = Math.floor(seconds / 60);
-        const secs = seconds % 60;
-        return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
-    };
 
     // Submit the quiz manually or automatically
     const submitQuiz = () => {
