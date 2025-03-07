@@ -25,6 +25,18 @@ const QuestionSchema = new Schema({
         type: String,
         required: true
     },
+    quizTimeLimitSeconds:{
+        type:Number,
+        default:600,
+    },
+    quizStartTime:{
+        type:Date,
+        required:true,
+    },
+    quizEndTime:{
+        type:Date,
+        required:true,
+    },
 });
 
 const models = {

@@ -5,7 +5,13 @@ import { useNavigate } from "react-router-dom";
 const QuizPage = () => {
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState([]);
-    const [timeLeft, setTimeLeft] = useState(600); // 10 minutes in seconds
+    const [timeLeft, setTimeLeft] = useState(null);
+    const [quizStatus, setQuizStatus] = useState("loading"); // loading, scheduled, active, ended
+    const [quizSettings, setQuizSettings] = useState({
+        quizTimeLimitSeconds: 600,
+        quizStartTime: null,
+        quizEndTime: null
+    });
     const navigate = useNavigate();
 
     // Format time as mm:ss
@@ -15,20 +21,80 @@ const QuizPage = () => {
         return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
     };
 
-    // Fetch questions from backend
-    useEffect(() => {
-        // Retrieve the token from localStorage
-        const token = localStorage.getItem('token');
+    // Format date as readable string
+    const formatDate = (dateString) => {
+        const options = { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        };
+        return new Date(dateString).toLocaleDateString(undefined, options);
+    };
 
-        // Check if token exists
+    // Get quiz settings and check availability
+    useEffect(() => {
+        const token = localStorage.getItem('token');
         if (!token) {
-            console.error("No authentication token found");
-            // Optionally redirect to login page
             navigate('/login');
             return;
         }
 
-        // Fetch questions with authorization header
+        // First, fetch quiz settings
+        Axios.get("http://localhost:8080/questions/iet/cipher/settings", {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            const settings = response.data;
+            setQuizSettings(settings);
+
+            const now = new Date();
+            const startTime = new Date(settings.quizStartTime);
+            const endTime = new Date(settings.quizEndTime);
+
+            // Check if quiz is available now
+            if (now < startTime) {
+                // Quiz not started yet
+                setQuizStatus("scheduled");
+            } else if (now > endTime) {
+                // Quiz already ended
+                setQuizStatus("ended");
+            } else {
+                // Quiz is active
+                setQuizStatus("active");
+                
+                // Load timer from sessionStorage or set to quiz time limit
+                const savedTime = sessionStorage.getItem("quizTime");
+                const savedStartTime = sessionStorage.getItem("quizStartTime");
+                
+                if (savedTime && savedStartTime) {
+                    // If we have saved progress, calculate remaining time
+                    const elapsedSeconds = Math.floor((now - new Date(savedStartTime)) / 1000);
+                    const remainingTime = Math.max(0, parseInt(savedTime) - elapsedSeconds);
+                    setTimeLeft(remainingTime);
+                } else {
+                    // Start fresh timer
+                    setTimeLeft(settings.quizTimeLimitSeconds);
+                    sessionStorage.setItem("quizTime", settings.quizTimeLimitSeconds);
+                    sessionStorage.setItem("quizStartTime", now.toISOString());
+                }
+                
+                // Fetch questions since quiz is active
+                fetchQuestions(token);
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching quiz settings:", error);
+            setQuizStatus("error");
+        });
+    }, [navigate]);
+
+    // Fetch questions function
+    const fetchQuestions = (token) => {
         Axios.get("http://localhost:8080/questions/iet/cipher/get", {
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -41,60 +107,129 @@ const QuizPage = () => {
         })
         .catch((error) => {
             console.error("Error fetching questions:", error);
+            
             // Handle different types of errors
             if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                console.error("Error response:", error.response.data);
-                console.error("Error status:", error.response.status);
-                
-                // Handle specific error cases
                 if (error.response.status === 401) {
-                    // Unauthorized - token might be invalid
                     alert("Your session has expired. Please log in again.");
                     navigate('/login');
                 } else if (error.response.status === 403) {
-                    // Forbidden - user might not have permission
                     alert("You do not have permission to access this quiz.");
                 }
             } else if (error.request) {
-                // The request was made but no response was received
-                console.error("No response received:", error.request);
                 alert("Unable to connect to the server. Please check your internet connection.");
             } else {
-                // Something happened in setting up the request that triggered an Error
-                console.error("Error setting up request:", error.message);
                 alert("An unexpected error occurred.");
             }
         });
-    }, [navigate]);
-
-    // Load saved timer progress (prevents reset on refresh)
-    useEffect(() => {
-        const savedTime = sessionStorage.getItem("quizTime");
-        if (savedTime) {
-            setTimeLeft(Number(savedTime));
-        }
-    }, []);
+    };
 
     // Timer countdown logic
     useEffect(() => {
+        if (quizStatus !== "active" || timeLeft === null) return;
+        
         if (timeLeft <= 0) {
             submitQuiz(); // Auto-submit when time runs out
             return;
         }
+        
         const timer = setInterval(() => {
-            setTimeLeft((prevTime) => prevTime - 1);
-            sessionStorage.setItem("quizTime", timeLeft - 1); // Save progress
+            setTimeLeft((prevTime) => {
+                const newTime = prevTime - 1;
+                sessionStorage.setItem("quizTime", newTime); // Save progress
+                return newTime;
+            });
         }, 1000);
+        
         return () => clearInterval(timer);
-    }, [timeLeft]);
+    }, [timeLeft, quizStatus]);
 
     // Submit the quiz manually or automatically
     const submitQuiz = () => {
-        sessionStorage.removeItem("quizTime"); // Clear saved timer
-        navigate("/results", { state: { submitted: true } });
+        // Get the token
+        const token = localStorage.getItem('token');
+        
+        // Mark as submitted locally (as backup)
+        localStorage.setItem('quizSubmitted', 'true');
+        
+        // Clear session storage
+        sessionStorage.removeItem("quizTime");
+        sessionStorage.removeItem("quizStartTime");
+        
+        // Submit to backend
+        Axios.post("http://localhost:8080/questions/iet/cipher/submit", {
+            answers: answers
+        }, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            // Navigate to results page with score
+            navigate("/results", { 
+                state: { 
+                    submitted: true,
+                    answers: answers,
+                    score: response.data.score,
+                    totalQuestions: response.data.totalQuestions
+                } 
+            });
+        })
+        .catch(error => {
+            console.error("Error submitting quiz:", error);
+            
+            // Check if user already submitted
+            if (error.response && error.response.status === 400) {
+                setQuizStatus("submitted");
+                navigate("/results");
+            } else {
+                alert("Failed to submit quiz. Please try again.");
+            }
+        });
     };
+    // Render different content based on quiz status
+    if (quizStatus === "loading") {
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                <div className="text-xl">Loading quiz...</div>
+            </div>
+        );
+    }
+    
+    if (quizStatus === "scheduled") {
+        return (
+            <div className="flex flex-col items-center justify-center min-h-screen p-6">
+                <div className="bg-blue-100 rounded-lg p-8 max-w-md text-center">
+                    <h1 className="text-2xl font-bold mb-4">Quiz Not Available Yet</h1>
+                    <p className="mb-4">This quiz will be available from:</p>
+                    <p className="font-semibold text-lg mb-2">
+                        {formatDate(quizSettings.quizStartTime)}
+                    </p>
+                    <p className="mb-4">Until:</p>
+                    <p className="font-semibold text-lg mb-6">
+                        {formatDate(quizSettings.quizEndTime)}
+                    </p>
+                    <p>Please return during this time to take the quiz.</p>
+                </div>
+            </div>
+        );
+    }
+    
+    if (quizStatus === "ended") {
+        return (
+            <div className="flex flex-col items-center justify-center min-h-screen p-6">
+                <div className="bg-red-100 rounded-lg p-8 max-w-md text-center">
+                    <h1 className="text-2xl font-bold mb-4">Quiz Has Ended</h1>
+                    <p className="mb-4">This quiz was available until:</p>
+                    <p className="font-semibold text-lg mb-4">
+                        {formatDate(quizSettings.quizEndTime)}
+                    </p>
+                    <p>The quiz is no longer available for participation.</p>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="p-6 max-w-3xl mx-auto">

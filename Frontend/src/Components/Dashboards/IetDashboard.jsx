@@ -89,7 +89,17 @@ const IetDashboard = () => {
             >
               Add
             </button>
-                   </div>
+          </div>
+          <div className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition">
+            <FaCalendarAlt size={40} className="text-green-400 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-center mb-3">Get results</h3>
+            <button
+              onClick={() => navigate("/getietresults")}
+              className="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg transition"
+            >
+              Get
+            </button>
+          </div>
         </div>
       </div>
     </div>

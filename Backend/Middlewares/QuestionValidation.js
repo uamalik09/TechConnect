@@ -10,6 +10,9 @@ const questionSchema = Joi.object({
     correctAnswer: Joi.string()
         .valid(Joi.ref("option1"), Joi.ref("option2"), Joi.ref("option3"), Joi.ref("option4")) // Must match one of the options
         .required(),
+         quizTimeLimitSeconds: Joi.number().integer().min(60).max(7200).required(), // 1 min to 2 hours
+            quizStartTime: Joi.date().iso().required(),
+            quizEndTime: Joi.date().iso().min(Joi.ref('quizStartTime')).required(),
 });
 
 // Middleware function for validation

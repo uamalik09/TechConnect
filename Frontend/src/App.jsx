@@ -49,6 +49,7 @@ import AllTalks from "./Components/Talks/AllTalks";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import RoleBasedRoute from "./Components/RoleBasedRoute";
 import IetQuestions from "./Components/Questions/AddQuestions/IET/CipherQuestions";
+import IetResults from "./Components/Questions/AddQuestions/IET/Submissions";
 // import IeeeQuestions from "./Components/Questions/AddQuestions/IeeeQuestions";
 // import AcmQuestions from "./Components/Questions/AddQuestions/AcmQuestions";
 // import IeQuestions from "./Components/Questions/AddQuestions/IeQuestions";
@@ -107,6 +108,7 @@ function App() {
         <Route path="/getistetalk" element={<IsteTalksPage />}/>
         <Route path="/alltalks" element={<AllTalks />}/>
         <Route path="/addietquestions" element={<IetQuestions />}/>
+        <Route path="/getietresults" element={<IetResults />}/>
         {/* <Route path="/addieeequestions" element={<IeeeQuestions />}/> */}
         {/* <Route path="/addacmquestions" element={<AcmQuestions />}/> */}
         {/* <Route path="/addiequestions" element={<IeQuestions />}/> */}
