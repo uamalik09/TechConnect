@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { FaBullhorn, FaVideo, FaCalendarAlt, FaUserCircle, FaClipboardList } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import QuizStatus from "../QuizStatus";
+
 
 const StudentDashboard = () => {
   const navigate = useNavigate();
@@ -56,7 +58,7 @@ const StudentDashboard = () => {
           </div>
 
           {/* Interview Slots */}
-          <div onClick={() => navigate("/addinterviewslots")} className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition cursor-pointer">
+          <div onClick={() => navigate("/registration")} className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition cursor-pointer">
             <FaCalendarAlt size={40} className="text-green-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-center mb-3">Interview Slots</h3>
           </div>
@@ -68,6 +70,7 @@ const StudentDashboard = () => {
           </div>
         </div>
       </div>
+      <QuizStatus />;
     </div>
   );
 };

@@ -6,7 +6,9 @@ import { Link, useNavigate } from "react-router-dom";
 const IetDashboard = () => {
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
+  const handleRegister=()=>{
+    navigate("/getstudentdetails");
+  }
   const handleLogout = () => {
     // Perform any logout actions here (e.g., clearing tokens)
     navigate("/"); // Redirect to home page
@@ -31,6 +33,12 @@ const IetDashboard = () => {
           {dropdownOpen && (
             <div className="absolute right-0 mt-2 w-40 bg-gray-800 shadow-lg rounded-lg overflow-hidden">
               <button
+                onClick={handleRegister}
+                className="block w-full text-left px-4 py-2 text-white hover:bg-red-500 transition"
+              >
+                Register
+              </button>
+               <button
                 onClick={handleLogout}
                 className="block w-full text-left px-4 py-2 text-white hover:bg-red-500 transition"
               >
@@ -74,7 +82,7 @@ const IetDashboard = () => {
             <FaCalendarAlt size={40} className="text-green-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-center mb-3">Add Interview Slot</h3>
             <button
-              onClick={() => navigate("/addinterviewslots")}
+              onClick={() => navigate("/getstudentdetails")}
               className="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg transition"
             >
               Add
@@ -84,7 +92,7 @@ const IetDashboard = () => {
                      <FaClipboardList size={40} className="text-purple-400 mx-auto mb-4" />
                      <h3 className="text-xl font-semibold text-center mb-3">Online Assessment</h3>
                      <button
-              onClick={() => navigate("/addietquestions")}
+              onClick={() => navigate("/iet")}
               className="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg transition"
             >
               Add
@@ -94,7 +102,7 @@ const IetDashboard = () => {
             <FaCalendarAlt size={40} className="text-green-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-center mb-3">Get results</h3>
             <button
-              onClick={() => navigate("/getietresults")}
+              onClick={() => navigate("/getcipherresults")}
               className="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg transition"
             >
               Get
@@ -102,6 +110,7 @@ const IetDashboard = () => {
           </div>
         </div>
       </div>
+     
     </div>
   );
 };

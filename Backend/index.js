@@ -7,13 +7,16 @@ const AdminRouter = require('./Routes/AdminRouter');
 const AnnouncementRouter = require('./Routes/AnnouncementRouter');
 const TalkRouter = require('./Routes/TalkRouter');
 const QuestionsRouter = require('./Routes/QuestionsRouter');
+const ResultRouter = require('./Routes/ResultRouter');
 const AdminRoutes = require('./Routes/AdminRoutes');
+const StudentRoutes = require('./Routes/StudentRouter');
 const TestStatusRoutes = require('./Routes/TestStatusRoutes');
+const QuizStatusRoutes = require('./Routes/QuizStatus');
 
 app.use(cors({
-    origin: "http://localhost:5173", // Allow only frontend
+    origin: ['http://localhost:5173','http://localhost:5174'], // Allow only frontend
     credentials: true, // Allow cookies/authentication headers
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+    methods: ["GET", "POST", "PUT", "DELETE","PATCH"], // Allowed HTTP methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
   }));
   
@@ -35,8 +38,11 @@ app.use('/admin', AdminRouter);
 app.use('/api', AnnouncementRouter);
 app.use('/api', TalkRouter);
 app.use('/questions', QuestionsRouter); 
+app.use('/results', ResultRouter); 
 app.use('/test-status',TestStatusRoutes);
 app.use('/superadmin', AdminRoutes);
+app.use('/students', StudentRoutes);
+app.use('/status', QuizStatusRoutes);
 
 app.listen(PORT, () => {
     console.log("Server is listening");

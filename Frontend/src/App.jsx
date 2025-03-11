@@ -48,8 +48,14 @@ import IsteTalksPage from "./Components/Talks/GetTalks/GetIsteTalk";
 import AllTalks from "./Components/Talks/AllTalks";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import RoleBasedRoute from "./Components/RoleBasedRoute";
-import IetQuestions from "./Components/Questions/AddQuestions/IET/CipherQuestions";
-import IetResults from "./Components/Questions/AddQuestions/IET/Submissions";
+import CipherQuestions from "./Components/Questions/AddQuestions/IET/Cipher/CipherQuestions";
+import RovispQuestions from "./Components/Questions/AddQuestions/IET/Rovisp/RovispQuestions";
+import CipherResults from "./Components/Questions/AddQuestions/IET/Cipher/Submissions";
+import RovispResults from "./Components/Questions/AddQuestions/IET/Rovisp/Submissions";
+import Register from "./Components/Questions/AddQuestions/IET/StudentRegister";
+import Details from "./Components/Questions/AddQuestions/IET/StudentDetails";
+import FrontPage from "./Components/FrontPage";
+import IetSig from "./Components/Questions/AddQuestions/IET/sigs";
 // import IeeeQuestions from "./Components/Questions/AddQuestions/IeeeQuestions";
 // import AcmQuestions from "./Components/Questions/AddQuestions/AcmQuestions";
 // import IeQuestions from "./Components/Questions/AddQuestions/IeQuestions";
@@ -88,11 +94,11 @@ function App() {
         <Route path="/studentdashboard" element={<StudentDashboard/>}/>
         <Route path="/choice" element={<ChoicePage/>}/>
         <Route path="/adminquestions" element={<AdminQuestions />} />
-        <Route path="/quiz" element={<Quiz />} /> 
+        <Route path="/:club/:sig/quiz" element={<Quiz />} /> 
         <Route path="/clubs" element={<ClubPage/>}/>
         <Route path="/sigs/:clubId" element={<SigPage/>}/>
         <Route path="/sig-details/:clubId/:sigId" element={<SigDetails/>}/>
-        <Route path="/results" element={<Result />} />
+        <Route path="/:club/:sig/results" element={<Result />} />
         <Route path="/superadmin" element={<SuperAdminPanel />}/>
         <Route path="/faqs" element={<FAQ />}/>
         <Route path="/allannouncement" element={<AllAnnouncement />}/>
@@ -107,8 +113,14 @@ function App() {
         <Route path="/addistetalk" element={<IsteTalk />}/>
         <Route path="/getistetalk" element={<IsteTalksPage />}/>
         <Route path="/alltalks" element={<AllTalks />}/>
-        <Route path="/addietquestions" element={<IetQuestions />}/>
-        <Route path="/getietresults" element={<IetResults />}/>
+        <Route path="/addcipherquestions" element={<CipherQuestions />}/>
+        <Route path="/addrovispquestions" element={<RovispQuestions />}/>
+        <Route path="/getcipherresults" element={<CipherResults />}/>
+        <Route path="/getrovispresults" element={<RovispResults />}/>
+        <Route path="/registration" element={<Register />}/>
+        <Route path="/getstudentdetails" element={<Details />}/>
+        <Route path="/:clubId/:sigId/frontpage" element={<FrontPage />}/>
+        <Route path="/iet" element={<IetSig />}/>
         {/* <Route path="/addieeequestions" element={<IeeeQuestions />}/> */}
         {/* <Route path="/addacmquestions" element={<AcmQuestions />}/> */}
         {/* <Route path="/addiequestions" element={<IeQuestions />}/> */}

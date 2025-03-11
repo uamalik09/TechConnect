@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 
-const QuizSettings = () => {
+const QuizSettings = ({ totalMarks, totalQuestions }) => {
   const [quizSettings, setQuizSettings] = useState({
     quizTimeLimitSeconds: 600,
     quizStartTime: "",
     quizEndTime: "",
+    totalMarks: 0,
+    totalQuestions: 0
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -34,6 +36,8 @@ const QuizSettings = () => {
         quizTimeLimitSeconds: data.quizTimeLimitSeconds || 600,
         quizStartTime: formatDateTimeForInput(data.quizStartTime) || "",
         quizEndTime: formatDateTimeForInput(data.quizEndTime) || "",
+        totalMarks: data.totalMarks || 0,
+        totalQuestions: data.totalQuestions || 0
       });
       setLoading(false);
     } catch (error) {
@@ -101,6 +105,10 @@ const QuizSettings = () => {
     }
   };
 
+  // Use props if they're provided, otherwise use the state values
+  const displayTotalMarks = totalMarks !== undefined ? totalMarks : quizSettings.totalMarks;
+  const displayTotalQuestions = totalQuestions !== undefined ? totalQuestions : quizSettings.totalQuestions;
+
   if (loading) {
     return (
       <div className="flex justify-center items-center p-4">
@@ -114,6 +122,21 @@ const QuizSettings = () => {
       <h2 className="text-2xl font-bold text-center mb-4 text-green-600">
         Quiz Settings
       </h2>
+      
+      <div className="flex justify-between mb-4 p-3 bg-gray-50 rounded-lg">
+        <div className="text-center">
+          <p className="text-sm text-gray-600">Total Questions</p>
+          <p className="text-xl font-bold text-gray-800">{displayTotalQuestions}</p>
+        </div>
+        <div className="text-center">
+          <p className="text-sm text-gray-600">Total Marks</p>
+          <p className="text-xl font-bold text-gray-800">{displayTotalMarks}</p>
+        </div>
+        <div className="text-center">
+          <p className="text-sm text-gray-600">Duration</p>
+          <p className="text-xl font-bold text-gray-800">{quizSettings.quizTimeLimitSeconds / 60} min</p>
+        </div>
+      </div>
       
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

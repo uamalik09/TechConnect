@@ -25,6 +25,11 @@ const QuestionSchema = new Schema({
         type: String,
         required: true
     },
+    marks: {
+        type: Number,
+        required: true,
+        default: 1
+    },
     quizTimeLimitSeconds:{
         type:Number,
         default:600,
@@ -40,9 +45,9 @@ const QuestionSchema = new Schema({
 });
 
 const models = {
-    ietCipher: mongoose.model("ietCipher", QuestionSchema),
+    ietcipher: mongoose.model("ietcipher", QuestionSchema),
+    ietrovisp: mongoose.model("ietrovisp", QuestionSchema),
     ietVenture: mongoose.model("ietVenture", QuestionSchema),
-    ietROVISP: mongoose.model("ietROVISP", QuestionSchema),
     ietInheart: mongoose.model("ietInheart", QuestionSchema),
     ietMedia: mongoose.model("ietMedia", QuestionSchema),
     ietTorsion: mongoose.model("ietTorsion", QuestionSchema),

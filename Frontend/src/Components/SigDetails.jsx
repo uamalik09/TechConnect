@@ -64,7 +64,7 @@ function SigDetails() {
 
   // Handle the start of the test
   const handleStartTest = () => {
-    navigate('/quiz');  // Navigate to the quiz page when "Start" button is clicked
+    navigate(`/${clubId}/${sigId}/frontpage`);  // Navigate to the quiz page when "Start" button is clicked
   };
 
   return (
