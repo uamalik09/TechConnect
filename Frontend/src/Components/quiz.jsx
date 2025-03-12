@@ -5,7 +5,7 @@ const QuizPage = () => {
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState([]);
     const [timeLeft, setTimeLeft] = useState(null);
-    const [quizStatus, setQuizStatus] = useState("loading"); // loading, scheduled, active, ended, submitted
+    const [quizStatus, setQuizStatus] = useState("loading"); // loading, scheduled, active, ended, submitted, notRegistered
     const [quizSettings, setQuizSettings] = useState({
         quizTimeLimitSeconds: 600,
         quizStartTime: null,
@@ -41,13 +41,6 @@ const QuizPage = () => {
             minute: '2-digit'
         };
         return new Date(dateString).toLocaleDateString(undefined, options);
-    };
-
-    // Handle user info form submission
-    const handleUserInfoSubmit = (e) => {
-        e.preventDefault();
-        localStorage.setItem('userInfo', JSON.stringify(userInfo));
-        fetchQuizSettings();
     };
 
     // Reset quiz state function (for testing)
@@ -249,8 +242,7 @@ const QuizPage = () => {
         sessionStorage.removeItem(`quizStartTime_${uniqueQuizId}`);
     
         // Get user info from localStorage or from state
-        const storedUserInfo = JSON.parse(localStorage.getItem('userInfo')) || userInfo;
-        const { name, rollNumber } = storedUserInfo;
+        const { name, rollNumber } = userInfo;
             
         if (!rollNumber || !name) {
             alert("User information not found. Please provide your details again.");
@@ -313,59 +305,136 @@ const QuizPage = () => {
         }
     };
 
-    // Check if user info is already stored
-    useEffect(() => {
-        const savedUserInfo = localStorage.getItem('userInfo');
+    // Check if student is registered for this club and SIG
+    const checkRegistration = () => {
+        // Get registration data from localStorage
+        const rollNumber = userInfo.rollNumber;
+        if (!rollNumber) return false;
         
-        if (savedUserInfo) {
-            setUserInfo(JSON.parse(savedUserInfo));
-            // If user info already exists, proceed to fetch quiz settings
-            fetchQuizSettings();
+        const storageKey = `student_registration_${rollNumber}`;
+        const registrationData = JSON.parse(localStorage.getItem(storageKey));
+        
+        if (!registrationData || !registrationData.registrations) {
+            return false;
+        }
+        
+        // Convert club and sig names to lowercase for case-insensitive comparison
+        const currentClub = club.toLowerCase();
+        const currentSig = sig.toLowerCase();
+        
+        // Check if student is registered for this club and SIG
+        return registrationData.registrations.some(reg => 
+            reg.clubName.toLowerCase() === currentClub && 
+            reg.sigName.toLowerCase() === currentSig
+        );
+    };
+
+    // Check if user info is already stored and validate registration
+    useEffect(() => {
+        // Try to get registration data from localStorage
+        const registrations = JSON.parse(localStorage.getItem('student_registrations') || '[]');
+        
+        if (registrations.length > 0) {
+            // Find the most recent registration
+            const latestRegistration = registrations[registrations.length - 1];
+            
+            if (latestRegistration && latestRegistration.studentData) {
+                // Set user info from registration data
+                setUserInfo({
+                    name: latestRegistration.studentData.name,
+                    rollNumber: latestRegistration.studentData.rollNumber
+                });
+                
+                // Save to localStorage for compatibility with rest of code
+                localStorage.setItem('userInfo', JSON.stringify({
+                    name: latestRegistration.studentData.name,
+                    rollNumber: latestRegistration.studentData.rollNumber
+                }));
+                
+                // Check if student is registered for this specific club and SIG
+                const currentClub = club.toLowerCase();
+                const currentSig = sig.toLowerCase();
+                
+                const isRegistered = latestRegistration.registrations.some(reg => 
+                    reg.clubName.toLowerCase() === currentClub && 
+                    reg.sigName.toLowerCase() === currentSig
+                );
+                
+                if (isRegistered) {
+                    // Proceed to fetch quiz settings
+                    fetchQuizSettings();
+                } else {
+                    // Not registered for this club/SIG
+                    setQuizStatus("notRegistered");
+                }
+            } else {
+                // Fall back to regular userInfo if registration data is incomplete
+                const savedUserInfo = localStorage.getItem('userInfo');
+                if (savedUserInfo) {
+                    setUserInfo(JSON.parse(savedUserInfo));
+                    // Check registration with the user info
+                    if (checkRegistration()) {
+                        fetchQuizSettings();
+                    } else {
+                        setQuizStatus("notRegistered");
+                    }
+                }
+            }
+        } else {
+            // No registration data found, check if we have user info
+            const savedUserInfo = localStorage.getItem('userInfo');
+            if (savedUserInfo) {
+                setUserInfo(JSON.parse(savedUserInfo));
+                // Check registration with the user info
+                if (checkRegistration()) {
+                    fetchQuizSettings();
+                } else {
+                    setQuizStatus("notRegistered");
+                }
+            }
         }
     }, [club, sig]);
 
-    // User info input form
-    if (!localStorage.getItem('userInfo')) {
+    // User info input form - This will only show if no registration or user info is found
+    if (!localStorage.getItem('userInfo') && quizStatus !== "notRegistered") {
         return (
             <div className="flex items-center justify-center min-h-screen bg-gray-100">
                 <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
-                    <h1 className="text-2xl font-bold text-center mb-6">Enter Your Details</h1>
-                    <form onSubmit={handleUserInfoSubmit}>
-                        <div className="mb-4">
-                            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                                Full Name
-                            </label>
-                            <input
-                                type="text"
-                                id="name"
-                                value={userInfo.name}
-                                onChange={(e) => setUserInfo({...userInfo, name: e.target.value})}
-                                required
-                                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="Enter your full name"
-                            />
-                        </div>
-                        <div className="mb-6">
-                            <label htmlFor="rollNumber" className="block text-sm font-medium text-gray-700 mb-1">
-                                Roll Number
-                            </label>
-                            <input
-                                type="text"
-                                id="rollNumber"
-                                value={userInfo.rollNumber}
-                                onChange={(e) => setUserInfo({...userInfo, rollNumber: e.target.value})}
-                                required
-                                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="Enter your roll number"
-                            />
-                        </div>
+                    <h1 className="text-2xl font-bold text-center mb-6">Registration Required</h1>
+                    <p className="mb-6 text-center">Please register for clubs and SIGs first.</p>
+                    <div className="flex justify-center">
                         <button
-                            type="submit"
-                            className="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
+                            onClick={() => navigate('/register')}
+                            className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
                         >
-                            Proceed to Quiz
+                            Go to Registration
                         </button>
-                    </form>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    // Show not registered message
+    if (quizStatus === "notRegistered") {
+        return (
+            <div className="flex items-center justify-center min-h-screen bg-gray-100">
+                <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
+                    <h1 className="text-2xl font-bold text-center mb-6">Not Registered</h1>
+                    <p className="mb-4 text-center">
+                        You are not registered for {club.toUpperCase()} - {sig.toUpperCase()}.
+                    </p>
+                    <p className="mb-6 text-center">
+                        Please register for this club and SIG before attempting the quiz.
+                    </p>
+                    <div className="flex justify-center">
+                        <button
+                            onClick={() => navigate('/register')}
+                            className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
+                        >
+                            Go to Registration
+                        </button>
+                    </div>
                 </div>
             </div>
         );
@@ -458,14 +527,12 @@ const QuizPage = () => {
         );
     }
 
-    const storedUserInfo = JSON.parse(localStorage.getItem('userInfo')) || userInfo;
-
     return (
         <div className="p-6 max-w-3xl mx-auto">
             {/* User Info Display */}
             <div className="bg-gray-100 p-4 rounded-lg mb-4">
-                <p className="text-lg"><strong>Name:</strong> {storedUserInfo.name}</p>
-                <p className="text-lg"><strong>Roll Number:</strong> {storedUserInfo.rollNumber}</p>
+                <p className="text-lg"><strong>Name:</strong> {userInfo.name}</p>
+                <p className="text-lg"><strong>Roll Number:</strong> {userInfo.rollNumber}</p>
             </div>
             
             {/* Timer and Marks Display */}

@@ -5,10 +5,14 @@ const { registerStudent, getAllStudents, getStudentByRollNumber } = require('../
 const { authenticateUser, authorizeRoles } = require('../Middlewares/AuthMiddleware');
 
 // Public route for student registration
-router.post('/register', registerStudent);
+router.post('/iet/cipher/register', registerStudent);
+router.post('/iet/rovisp/register', registerStudent);
 
 // Admin routes - protected
-router.get('/all', authenticateUser, authorizeRoles('iet'), getAllStudents);
-router.get('/:rollNumber', authenticateUser, authorizeRoles('iet'), getStudentByRollNumber);
+router.get('/iet/cipher/all', authenticateUser, authorizeRoles('iet'), getAllStudents);
+router.get('/iet/cipher/:rollNumber', authenticateUser, authorizeRoles('iet'), getStudentByRollNumber);
+
+router.get('/iet/rovisp/all', authenticateUser, authorizeRoles('iet'), getAllStudents);
+router.get('/iet/rovisp/:rollNumber', authenticateUser, authorizeRoles('iet'), getStudentByRollNumber);
 
 module.exports = router;

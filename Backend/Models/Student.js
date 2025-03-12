@@ -1,35 +1,52 @@
-// models/Student.js
+// Models/Student.js
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 
-const StudentSchema = new Schema({
+const studentSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'Name is required']
+    required: true,
+    trim: true
   },
   rollNumber: {
     type: String,
-    required: [true, 'Roll number is required'],
+    required: true,
     unique: true,
     trim: true
   },
   email: {
     type: String,
-    required: [true, 'Email is required'],
+    required: true,
     unique: true,
-    trim: true,
-    lowercase: true,
-    match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
+    trim: true
   },
   phoneNumber: {
     type: String,
-    required: [true, 'Phone number is required'],
-    match: [/^\d{10}$/, 'Phone number should be 10 digits']
+    required: true,
+    trim: true
   },
+  // Add club and SIG information
+  registrations: [{
+    club: {
+      type: String,
+      required: true,
+      uppercase: true
+    },
+    sig: {
+      type: String,
+      required: true,
+      uppercase: true
+    },
+    registeredAt: {
+      type: Date,
+      default: Date.now
+    }
+  }],
   registeredAt: {
     type: Date,
     default: Date.now
   }
 });
 
-module.exports = mongoose.model('Student', StudentSchema);
+const Student = mongoose.model('Student', studentSchema);
+
+module.exports = Student;

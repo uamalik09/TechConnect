@@ -8,7 +8,13 @@ function SigDetails() {
 
   console.log("Club ID:", clubId);
   console.log("SIG ID:", sigId);
-
+  const clubNames = {
+    "1": "IET",
+    "2": "IEEE",
+    "3": "ACM",
+    "4": "ISTE",
+    "5": "IE"
+  };
   // Hardcoded details for each SIG
   const sigDetails = {
     1: [
@@ -55,16 +61,19 @@ function SigDetails() {
 
   // Check if the SIG exists in the data
   const selectedSig = sigDetails[clubId]?.find(sig => sig.id === parseInt(sigId));
+  const clubName = clubNames[clubId] || "Club Id";
+  const sigName = selectedSig?.name || "SIG Id";
 
   console.log("Selected SIG:", selectedSig);
 
   if (!selectedSig) {
     return <p className="text-center text-red-500">SIG Not Found</p>;
   }
-
+  const clubUrlParam = clubName.split(' ')[0].toLowerCase();
+  const sigUrlParam = sigName.toLowerCase();
   // Handle the start of the test
   const handleStartTest = () => {
-    navigate(`/${clubId}/${sigId}/frontpage`);  // Navigate to the quiz page when "Start" button is clicked
+    navigate(`/${clubUrlParam}/${sigUrlParam}/quiz`);  // Navigate to the quiz page when "Start" button is clicked
   };
 
   return (

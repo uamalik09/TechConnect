@@ -10,8 +10,7 @@ const IetDashboard = () => {
     navigate("/getstudentdetails");
   }
   const handleLogout = () => {
-    // Perform any logout actions here (e.g., clearing tokens)
-    navigate("/"); // Redirect to home page
+    navigate("/");
   };
 
   return (

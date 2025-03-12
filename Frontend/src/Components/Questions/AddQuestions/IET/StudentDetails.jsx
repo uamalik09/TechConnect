@@ -16,7 +16,7 @@ const AdminDashboard = () => {
           } catch (e) {
             console.error("Invalid token format");
           }
-        const response = await fetch('http://localhost:8080/students/all', {
+        const response = await fetch('http://localhost:8080/students/iet/cipher/all', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
