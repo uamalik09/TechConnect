@@ -1,4 +1,4 @@
-// Models/Student.js
+
 const mongoose = require('mongoose');
 
 const studentSchema = new mongoose.Schema({
@@ -24,7 +24,7 @@ const studentSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  // Add club and SIG information
+  
   registrations: [{
     club: {
       type: String,

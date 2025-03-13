@@ -34,6 +34,7 @@ exports.getQuizStatus = async (req, res) => {
                 status: {
                     hasSubmitted: false,
                     score: null,
+                    totalScore:null,
                     qualifiedRound2: false,
                     qualifiedRound3: false,
                     recruited: false
@@ -48,6 +49,7 @@ exports.getQuizStatus = async (req, res) => {
             quizStatusMap[submission.quizModel] = {
                 hasSubmitted: true,
                 score: submission.score,
+                totalScore: submission.totalScore,
                 qualifiedRound2: submission.qualifiedRound2,
                 qualifiedRound3: submission.qualifiedRound3,
                 recruited: submission.recruited,
@@ -104,6 +106,7 @@ exports.getSpecificQuizStatus = async (req, res) => {
                 status: {
                     hasSubmitted: false,
                     score: null,
+                    totalScore:null,
                     qualifiedRound2: false,
                     qualifiedRound3: false,
                     recruited: false
@@ -118,9 +121,11 @@ exports.getSpecificQuizStatus = async (req, res) => {
                 hasSubmitted: true,
                 quizModel: submission.quizModel,
                 score: submission.score,
+                totalScore: submission.totalScore,
                 qualifiedRound2: submission.qualifiedRound2,
                 qualifiedRound3: submission.qualifiedRound3,
                 recruited: submission.recruited,
+                interviewSlot: submission.interviewSlot,
                 submittedAt: submission.submittedAt
             }
         });

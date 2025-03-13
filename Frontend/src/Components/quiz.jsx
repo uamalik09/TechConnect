@@ -43,20 +43,19 @@ const QuizPage = () => {
         return new Date(dateString).toLocaleDateString(undefined, options);
     };
 
-    // Reset quiz state function (for testing)
-    const resetQuizState = () => {
-        const uniqueQuizId = `${club}_${sig}`;
-        const quizSubmittedKey = `quizSubmitted_${uniqueQuizId}`;
+    // const resetQuizState = () => {
+    //     const uniqueQuizId = `${club}_${sig}`;
+    //     const quizSubmittedKey = `quizSubmitted_${uniqueQuizId}`;
         
-        // Clear all quiz-related storage
-        localStorage.removeItem(quizSubmittedKey);
-        sessionStorage.removeItem(`quizTime_${uniqueQuizId}`);
-        sessionStorage.removeItem(`quizStartTime_${uniqueQuizId}`);
-        sessionStorage.removeItem(`quizAnswers_${uniqueQuizId}`);
+    //     // Clear all quiz-related storage
+    //     localStorage.removeItem(quizSubmittedKey);
+    //     sessionStorage.removeItem(`quizTime_${uniqueQuizId}`);
+    //     sessionStorage.removeItem(`quizStartTime_${uniqueQuizId}`);
+    //     sessionStorage.removeItem(`quizAnswers_${uniqueQuizId}`);
         
-        // Reload the page to start fresh
-        window.location.reload();
-    };
+    //     // Reload the page to start fresh
+    //     window.location.reload();
+    // };
 
     const fetchQuizSettings = () => {
         const token = localStorage.getItem('token');
@@ -155,22 +154,17 @@ const QuizPage = () => {
             return response.json();
         })
         .then(data => {
-            console.log("API Response:", data); // Debug: Log the response
-            
-            // Handle different response structures
+            console.log("API Response:", data); 
             let questionsList = [];
             let totalMarksCount = 0;
             
             if (data && typeof data === 'object' && data.questions) {
-                // If the API returns an object with a questions property
                 questionsList = data.questions;
                 totalMarksCount = data.totalMarks || questionsList.reduce((total, q) => total + (q.marks || 1), 0);
             } else if (Array.isArray(data)) {
-                // If the API directly returns an array of questions
                 questionsList = data;
                 totalMarksCount = questionsList.reduce((total, q) => total + (q.marks || 1), 0);
             } else {
-                // Default to empty array if structure is unexpected
                 console.error("Unexpected data structure:", data);
                 questionsList = [];
                 totalMarksCount = 0;
@@ -179,7 +173,6 @@ const QuizPage = () => {
             setQuestions(questionsList);
             setTotalMarks(totalMarksCount);
             
-            // Try to load saved answers from sessionStorage
             const savedAnswers = sessionStorage.getItem(`quizAnswers_${uniqueQuizId}`);
             if (savedAnswers) {
                 setAnswers(JSON.parse(savedAnswers));
@@ -189,13 +182,12 @@ const QuizPage = () => {
         })
         .catch(error => {
             console.error("Error fetching questions:", error);
-            setQuestions([]); // Ensure questions is always an array
+            setQuestions([]);
             setTotalMarks(0);
             alert("An unexpected error occurred. Please check your internet connection.");
         });
     };
 
-    // Save answers whenever they change
     useEffect(() => {
         if (answers.length > 0 ) {
             const uniqueQuizId = `${club}_${sig}`;
@@ -203,12 +195,11 @@ const QuizPage = () => {
         }
     }, [answers, club, sig]);
 
-    // Timer countdown logic
     useEffect(() => {
         if (quizStatus !== "active" || timeLeft === null) return;
         
         if (timeLeft <= 0) {
-            submitQuiz(); // Auto-submit when time runs out
+            submitQuiz(); 
             return;
         }
         
@@ -216,7 +207,7 @@ const QuizPage = () => {
             setTimeLeft((prevTime) => {
                 const newTime = prevTime - 1;
                 const uniqueQuizId = `${club}_${sig}`;
-                sessionStorage.setItem(`quizTime_${uniqueQuizId}`, newTime); // Save progress
+                sessionStorage.setItem(`quizTime_${uniqueQuizId}`, newTime); 
                 return newTime;
             });
         }, 1000);
@@ -224,24 +215,18 @@ const QuizPage = () => {
         return () => clearInterval(timer);
     }, [timeLeft, quizStatus, club, sig]);
    
-    // Submit the quiz manually or automatically
     const submitQuiz = async () => {
         const token = localStorage.getItem('token');
         if (!token) {
             navigate('/login');
             return;
         }
-        
-        // Get unique quiz ID
         const uniqueQuizId = `${club}_${sig}`;
         const quizSubmittedKey = `quizSubmitted_${uniqueQuizId}`;
-    
-        // Mark as submitted locally (as backup)
         localStorage.setItem(quizSubmittedKey, 'true');
         sessionStorage.removeItem(`quizTime_${uniqueQuizId}`);
         sessionStorage.removeItem(`quizStartTime_${uniqueQuizId}`);
     
-        // Get user info from localStorage or from state
         const { name, rollNumber } = userInfo;
             
         if (!rollNumber || !name) {
@@ -249,7 +234,6 @@ const QuizPage = () => {
             return;
         }
         
-        // Format answers as expected by backend
         const formattedAnswers = answers.map((answer, index) => {
             return {
                 questionId: questions[index]?._id || `question-${index}`,
@@ -260,12 +244,11 @@ const QuizPage = () => {
         const payload = {
             rollNumber: rollNumber,
             studentName: name,
-            quizModel: `${club}${sig}`, // Use the correct model name
-            answers: formattedAnswers, // Use the properly formatted answers
+            quizModel: `${club}${sig}`, 
+            answers: formattedAnswers, 
         };
     
         console.log('Payload being sent:', payload);
-        // Submit to backend using fetch - using dynamic club/sig in URL
         try {
             const response = await fetch(`http://localhost:8080/results/${club}/${sig}/submit`, {
                 method: "POST",
@@ -273,7 +256,7 @@ const QuizPage = () => {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(payload) // Use the fixed payload
+                body: JSON.stringify(payload) 
             });
     
             if (!response.ok) {
@@ -284,7 +267,6 @@ const QuizPage = () => {
             const data = await response.json();
             setScoredMarks(data.score || 0);
             console.log('Marks:',data.score);
-            // Navigate to results page with score
             navigate(`/${club}/${sig}/results`, {
                 state: {
                     name: name,
@@ -305,9 +287,7 @@ const QuizPage = () => {
         }
     };
 
-    // Check if student is registered for this club and SIG
     const checkRegistration = () => {
-        // Get registration data from localStorage
         const rollNumber = userInfo.rollNumber;
         if (!rollNumber) return false;
         
@@ -317,41 +297,29 @@ const QuizPage = () => {
         if (!registrationData || !registrationData.registrations) {
             return false;
         }
-        
-        // Convert club and sig names to lowercase for case-insensitive comparison
         const currentClub = club.toLowerCase();
         const currentSig = sig.toLowerCase();
-        
-        // Check if student is registered for this club and SIG
         return registrationData.registrations.some(reg => 
             reg.clubName.toLowerCase() === currentClub && 
             reg.sigName.toLowerCase() === currentSig
         );
     };
-
-    // Check if user info is already stored and validate registration
     useEffect(() => {
-        // Try to get registration data from localStorage
         const registrations = JSON.parse(localStorage.getItem('student_registrations') || '[]');
         
         if (registrations.length > 0) {
-            // Find the most recent registration
             const latestRegistration = registrations[registrations.length - 1];
             
             if (latestRegistration && latestRegistration.studentData) {
-                // Set user info from registration data
                 setUserInfo({
                     name: latestRegistration.studentData.name,
                     rollNumber: latestRegistration.studentData.rollNumber
                 });
-                
-                // Save to localStorage for compatibility with rest of code
                 localStorage.setItem('userInfo', JSON.stringify({
                     name: latestRegistration.studentData.name,
                     rollNumber: latestRegistration.studentData.rollNumber
                 }));
                 
-                // Check if student is registered for this specific club and SIG
                 const currentClub = club.toLowerCase();
                 const currentSig = sig.toLowerCase();
                 
@@ -361,18 +329,18 @@ const QuizPage = () => {
                 );
                 
                 if (isRegistered) {
-                    // Proceed to fetch quiz settings
+                    
                     fetchQuizSettings();
                 } else {
-                    // Not registered for this club/SIG
+                    
                     setQuizStatus("notRegistered");
                 }
             } else {
-                // Fall back to regular userInfo if registration data is incomplete
+                
                 const savedUserInfo = localStorage.getItem('userInfo');
                 if (savedUserInfo) {
                     setUserInfo(JSON.parse(savedUserInfo));
-                    // Check registration with the user info
+                    
                     if (checkRegistration()) {
                         fetchQuizSettings();
                     } else {
@@ -381,11 +349,11 @@ const QuizPage = () => {
                 }
             }
         } else {
-            // No registration data found, check if we have user info
+            
             const savedUserInfo = localStorage.getItem('userInfo');
             if (savedUserInfo) {
                 setUserInfo(JSON.parse(savedUserInfo));
-                // Check registration with the user info
+                
                 if (checkRegistration()) {
                     fetchQuizSettings();
                 } else {
@@ -395,7 +363,7 @@ const QuizPage = () => {
         }
     }, [club, sig]);
 
-    // User info input form - This will only show if no registration or user info is found
+   
     if (!localStorage.getItem('userInfo') && quizStatus !== "notRegistered") {
         return (
             <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -415,7 +383,6 @@ const QuizPage = () => {
         );
     }
 
-    // Show not registered message
     if (quizStatus === "notRegistered") {
         return (
             <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -429,7 +396,7 @@ const QuizPage = () => {
                     </p>
                     <div className="flex justify-center">
                         <button
-                            onClick={() => navigate('/register')}
+                            onClick={() => navigate('/registration')}
                             className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
                         >
                             Go to Registration
@@ -440,7 +407,6 @@ const QuizPage = () => {
         );
     }
 
-    // Render different content based on quiz status
     if (quizStatus === "loading") {
         return (
             <div className="flex items-center justify-center min-h-screen">
@@ -491,19 +457,18 @@ const QuizPage = () => {
                     <p className="mb-6">You have already submitted this quiz.</p>
                     <div className="flex flex-col space-y-3">
                         <button
-                            onClick={() => navigate(`/results/${club}/${sig}`)}
+                            onClick={() => navigate(`/${club}/${sig}/results`)}
                             className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
                         >
                             View Results
                         </button>
-                        
-                        {/* For testing only - remove in production */}
-                        <button
+                    
+                        {/* <button
                             onClick={resetQuizState}
                             className="bg-red-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-red-600 transition duration-300"
                         >
                             Reset Quiz (For Testing)
-                        </button>
+                        </button> */}
                     </div>
                 </div>
             </div>
@@ -529,13 +494,10 @@ const QuizPage = () => {
 
     return (
         <div className="p-6 max-w-3xl mx-auto">
-            {/* User Info Display */}
             <div className="bg-gray-100 p-4 rounded-lg mb-4">
                 <p className="text-lg"><strong>Name:</strong> {userInfo.name}</p>
                 <p className="text-lg"><strong>Roll Number:</strong> {userInfo.rollNumber}</p>
             </div>
-            
-            {/* Timer and Marks Display */}
             <div className="flex justify-between items-center mb-4">
                 <span className={`px-4 py-2 rounded-lg ${timeLeft <= 60 ? "bg-red-500 text-white animate-pulse" : "bg-green-500 text-white"}`}>
                     ⏳ Time Left: {formatTime(timeLeft)}

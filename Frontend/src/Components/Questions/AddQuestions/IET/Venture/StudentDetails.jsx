@@ -12,11 +12,10 @@ const AdminDashboard = () => {
         try {
             const tokenData = JSON.parse(atob(token.split('.')[1]));
             console.log("Token payload:", tokenData);
-            // Verify tokenData.role is 'iet'
           } catch (e) {
             console.error("Invalid token format");
           }
-        const response = await fetch('http://localhost:8080/students/iet/cipher/all', {
+        const response = await fetch('http://localhost:8080/students/iet/venture/all', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

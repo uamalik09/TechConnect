@@ -1,18 +1,14 @@
-const models = require("../Models/Questions");  // Import all models
-const QuestionModel = require("../Models/Questions");  // Keep this import
+const models = require("../Models/Questions");  
+const QuestionModel = require("../Models/Questions");  
 
-// Add a new question (Admin side)
 const addQuestion = async (req, res, modelName) => {
     try {
-        // Select the correct model based on the modelName
         const SelectedModel = models[modelName] || QuestionModel;
-        
-        // If marks is not provided, it will use the default value (1) from the schema
         const newQuestion = new SelectedModel(req.body);
         await newQuestion.save();
         res.status(201).json({ message: "Question added successfully!" });
     } catch (error) {
-        console.error("Error adding question:", error);  // Log the full error for debugging
+        console.error("Error adding question:", error);
         res.status(500).json({ 
             error: "Error adding question", 
             details: error.message 
@@ -20,15 +16,10 @@ const addQuestion = async (req, res, modelName) => {
     }
 };
 
-// Get all questions (Student side)
 const getQuestions = async (req, res, modelName) => {
     try {
-        // Select the correct model based on the modelName
         const SelectedModel = models[modelName] || QuestionModel;
-        
         const questions = await SelectedModel.find();
-        
-        // Calculate total marks available
         const totalMarks = questions.reduce((sum, question) => sum + (question.marks || 1), 0);
         
         res.status(200).json({
@@ -39,11 +30,8 @@ const getQuestions = async (req, res, modelName) => {
         res.status(500).json({ error: "Error fetching questions" });
     }
 };
-
-// Delete a question (Admin side)
 const deleteQuestion = async (req, res, modelName) => {
     try {
-        // Select the correct model based on the modelName
         const SelectedModel = models[modelName] || QuestionModel;
         
         const { id } = req.params;
@@ -54,16 +42,11 @@ const deleteQuestion = async (req, res, modelName) => {
     }
 };
 
-// Update marks for a question (Admin side)
 const updateQuestionMarks = async (req, res, modelName) => {
     try {
-        // Select the correct model based on the modelName
         const SelectedModel = models[modelName] || QuestionModel;
-        
         const { id } = req.params;
         const { marks } = req.body;
-        
-        // Validate marks
         if (!marks || !Number.isInteger(marks) || marks < 1 || marks > 100) {
             return res.status(400).json({ error: "Marks must be an integer between 1 and 100" });
         }
@@ -93,22 +76,15 @@ const updateQuestionMarks = async (req, res, modelName) => {
 
 const getquizsettings = async (req, res, modelName) => {
     try {
-        // Select the correct model based on the modelName
         const SelectedModel = models[modelName] || QuestionModel;
-        
-        // Find all questions to calculate total marks
         const questions = await SelectedModel.find();
         const totalMarks = questions.reduce((sum, question) => sum + (question.marks || 1), 0);
-        
-        // Find the latest question for time settings
         const latestQuestion = await SelectedModel.findOne().sort({_id: -1});
-        
-        // If no questions exist, return default settings
         if (!latestQuestion) {
             return res.status(200).json({
-                quizTimeLimitSeconds: 600, // Default 10 minutes
-                quizStartTime: new Date(), // Current time
-                quizEndTime: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // One week from now
+                quizTimeLimitSeconds: 600, 
+                quizStartTime: new Date(), 
+                quizEndTime: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), 
                 totalMarks: 0,
                 totalQuestions: 0
             });
@@ -128,17 +104,14 @@ const getquizsettings = async (req, res, modelName) => {
 };
 const updateQuizSettings = async (req, res, modelName) => {
     try {
-        // Select the correct model based on the modelName
         const SelectedModel = models[modelName] || QuestionModel;
         
         const { quizTimeLimitSeconds, quizStartTime, quizEndTime } = req.body;
         
-        // Validate required fields
         if (!quizTimeLimitSeconds || !quizStartTime || !quizEndTime) {
             return res.status(400).json({ message: 'Missing required quiz settings' });
         }
         
-        // Update all existing questions with the new settings
         await SelectedModel.updateMany({}, { 
             $set: { 
                 quizTimeLimitSeconds,

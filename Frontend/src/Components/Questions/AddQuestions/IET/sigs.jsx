@@ -7,10 +7,10 @@ const IetSig = () => {
     const clubs = [
         { name: 'Cipher', path: '/addcipherquestions' },
         { name: 'ROVISP', path: '/addrovispquestions' },
-        { name: 'Venture', path: '/venture' },
-        { name: 'Torsion', path: '/torsion' },
-        { name: 'Inkheart', path: '/inkheart' },
-        { name: 'Media', path: '/media' }
+        { name: 'Venture', path: '/addventurequestions' },
+        { name: 'Torsion', path: '/addtorsionquestions' },
+        { name: 'Inkheart', path: '/addinkheartquestions' },
+        { name: 'Media', path: '/addmediaquestions' }
     ];
 
     return (

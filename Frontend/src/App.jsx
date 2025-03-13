@@ -50,12 +50,34 @@ import ProtectedRoute from "./Components/ProtectedRoute";
 import RoleBasedRoute from "./Components/RoleBasedRoute";
 import CipherQuestions from "./Components/Questions/AddQuestions/IET/Cipher/CipherQuestions";
 import RovispQuestions from "./Components/Questions/AddQuestions/IET/Rovisp/RovispQuestions";
+import TorsionQuestions from "./Components/Questions/AddQuestions/IET/Torsion/TorsionQuestions";
+import MediaQuestions from "./Components/Questions/AddQuestions/IET/Media/MediaQuestions";
+import InkheartQuestions from "./Components/Questions/AddQuestions/IET/Inkheart/InkheartQuestions";
+import VentureQuestions from "./Components/Questions/AddQuestions/IET/Venture/VentureQuestions";
 import CipherResults from "./Components/Questions/AddQuestions/IET/Cipher/Submissions";
 import RovispResults from "./Components/Questions/AddQuestions/IET/Rovisp/Submissions";
-import Register from "./Components/Questions/AddQuestions/IET/StudentRegister";
-import Details from "./Components/Questions/AddQuestions/IET/StudentDetails";
+import TorsionResults from "./Components/Questions/AddQuestions/IET/Torsion/Submissions";
+import MediaResults from "./Components/Questions/AddQuestions/IET/Media/Submissions";
+import InkheartResults from "./Components/Questions/AddQuestions/IET/Inkheart/Submissions";
+import VentureResults from "./Components/Questions/AddQuestions/IET/Venture/Submissions";
+import Register from "./Components/StudentRegister";
+import CipherDetails from "./Components/Questions/AddQuestions/IET/Cipher/StudentDetails";
+import RovispDetails from "./Components/Questions/AddQuestions/IET//Rovisp/StudentDetails";
+import TorsionDetails from "./Components/Questions/AddQuestions/IET/Torsion/StudentDetails";
+import MediaDetails from "./Components/Questions/AddQuestions/IET/Media/StudentDetails";
+import VentureDetails from "./Components/Questions/AddQuestions/IET/Venture/StudentDetails";
+import InkheartDetails from "./Components/Questions/AddQuestions/IET/Inkheart/StudentDetails";
+import CipherStatus from "./Components/Questions/AddQuestions/IET/Cipher/QuizStatus";
+import RovispStatus from "./Components/Questions/AddQuestions/IET//Rovisp/QuizStatus";
+import TorsionStatus from "./Components/Questions/AddQuestions/IET/Torsion/QuizStatus";
+import MediaStatus from "./Components/Questions/AddQuestions/IET/Media/QuizStatus";
+import VentureStatus from "./Components/Questions/AddQuestions/IET/Venture/QuizStatus";
+import InkheartStatus from "./Components/Questions/AddQuestions/IET/Inkheart/QuizStatus";
 import FrontPage from "./Components/FrontPage";
 import IetSig from "./Components/Questions/AddQuestions/IET/sigs";
+import IetSigresults from "./Components/Questions/AddQuestions/IET/sigsforresults";
+import IetSigdetails from "./Components/Questions/AddQuestions/IET/sigsforregistrationdetails";
+import IetSigsstatus from "./Components/Questions/AddQuestions/IET/SigsforStatus";
 // import IeeeQuestions from "./Components/Questions/AddQuestions/IeeeQuestions";
 // import AcmQuestions from "./Components/Questions/AddQuestions/AcmQuestions";
 // import IeQuestions from "./Components/Questions/AddQuestions/IeQuestions";
@@ -115,12 +137,34 @@ function App() {
         <Route path="/alltalks" element={<AllTalks />}/>
         <Route path="/addcipherquestions" element={<CipherQuestions />}/>
         <Route path="/addrovispquestions" element={<RovispQuestions />}/>
+        <Route path="/addtorsionquestions" element={<TorsionQuestions />}/>
+        <Route path="/addmediaquestions" element={<MediaQuestions />}/>
+        <Route path="/addinkheartquestions" element={<InkheartQuestions />}/>
+        <Route path="/addventurequestions" element={<VentureQuestions />}/>
         <Route path="/getcipherresults" element={<CipherResults />}/>
         <Route path="/getrovispresults" element={<RovispResults />}/>
+        <Route path="/gettorsionresults" element={<TorsionResults />}/>
+        <Route path="/getmediaresults" element={<MediaResults />}/>
+        <Route path="/getinkheartresults" element={<InkheartResults />}/>
+        <Route path="/getventureresults" element={<VentureResults />}/>
         <Route path="/registration" element={<Register />}/>
-        <Route path="/getstudentdetails" element={<Details />}/>
+        <Route path="/getcipherdetails" element={<CipherDetails />}/>
+        <Route path="/getrovispdetails" element={<RovispDetails />}/>
+        <Route path="/gettorsiondetails" element={<TorsionDetails />}/>
+        <Route path="/getinkheartdetails" element={<InkheartDetails />}/>
+        <Route path="/getmediadetails" element={<MediaDetails />}/>
+        <Route path="/getventuredetails" element={<VentureDetails />}/>
+        <Route path="/getcipherstatus" element={<CipherStatus />}/>
+        <Route path="/getrovispstatus" element={<RovispStatus />}/>
+        <Route path="/gettorsionstatus" element={<TorsionStatus />}/>
+        <Route path="/getinkheartstatus" element={<InkheartStatus />}/>
+        <Route path="/getmediastatus" element={<MediaStatus />}/>
+        <Route path="/getventurestatus" element={<VentureStatus />}/>
         <Route path="/:clubId/:sigId/frontpage" element={<FrontPage />}/>
         <Route path="/iet" element={<IetSig />}/>
+        <Route path="/ietresults" element={<IetSigresults />}/>
+        <Route path="/ietdetails" element={<IetSigdetails />}/>
+        <Route path="/ietstatus" element={<IetSigsstatus />}/>
         {/* <Route path="/addieeequestions" element={<IeeeQuestions />}/> */}
         {/* <Route path="/addacmquestions" element={<AcmQuestions />}/> */}
         {/* <Route path="/addiequestions" element={<IeQuestions />}/> */}

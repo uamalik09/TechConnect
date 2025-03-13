@@ -1,4 +1,3 @@
-// models/QuizSubmission.js
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -18,9 +17,17 @@ const SubmissionSchema = new Schema({
     },
     answers: [{
         questionId: Schema.Types.ObjectId,
-        selectedAnswer: String
+        selectedOption: String 
     }],
     score: {
+        type: Number,
+        default: 0
+    },
+    additionalMarks: {
+        type: Number,
+        default: 0
+    },
+    totalScore: {
         type: Number,
         default: 0
     },
@@ -35,6 +42,10 @@ const SubmissionSchema = new Schema({
     recruited: {
         type: Boolean,
         default: false
+    },
+    interviewSlot: {
+        type: Date,
+        required:true
     },
     submittedAt: {
         type: Date,

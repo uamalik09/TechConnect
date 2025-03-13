@@ -14,8 +14,6 @@ const StudentRegistration = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
   const navigate = useNavigate();
-  
-  // List of clubs available for registration
   const clubs = [
     { id: 1, name: 'IET', description: 'Institute of Engineering and Technology' },
     { id: 2, name: 'IEEE', description: 'Institute of Electrical and Electronics Engineers' },
@@ -118,25 +116,20 @@ const StudentRegistration = () => {
       [name]: value
     });
   };
-
-  // Handler for club checkbox changes
   const handleClubChange = (e) => {
     const { value, checked } = e.target;
     
     setFormData(prev => {
       if (checked) {
-        // Add the club to the array
         return { 
           ...prev, 
           selectedClubs: [...prev.selectedClubs, value],
-          // Initialize empty array for this club's SIGs if it doesn't exist
           selectedSigs: { 
             ...prev.selectedSigs, 
             [value]: prev.selectedSigs[value] || [] 
           }
         };
       } else {
-        // Remove the club from the array and its SIGs
         const updatedSigs = { ...prev.selectedSigs };
         delete updatedSigs[value];
         
@@ -149,7 +142,6 @@ const StudentRegistration = () => {
     });
   };
 
-  // Handler for SIG checkbox changes
   const handleSigChange = (clubId, sigId, checked) => {
     setFormData(prev => {
       const updatedSigs = { ...prev.selectedSigs };
@@ -159,10 +151,8 @@ const StudentRegistration = () => {
       }
       
       if (checked) {
-        // Add the SIG to the array
         updatedSigs[clubId] = [...updatedSigs[clubId], sigId];
       } else {
-        // Remove the SIG from the array
         updatedSigs[clubId] = updatedSigs[clubId].filter(sig => sig !== sigId);
       }
       
@@ -173,9 +163,7 @@ const StudentRegistration = () => {
     });
   };
 
-  // Function to prepare and format registration data
   const prepareRegistrationData = () => {
-    // First, prepare the basic student data
     const studentData = {
       name: formData.name,
       rollNumber: formData.rollNumber,
@@ -183,18 +171,14 @@ const StudentRegistration = () => {
       phoneNumber: formData.phoneNumber
     };
     
-    // Create array to store all registrations
     const registrations = [];
-    
-    // For each selected club and its SIGs, create a registration
+
     for (const clubId of formData.selectedClubs) {
       const club = clubs.find(c => c.id.toString() === clubId);
       const selectedSigIds = formData.selectedSigs[clubId] || [];
-      
-      // Skip if no SIGs are selected for this club
+
       if (selectedSigIds.length === 0) continue;
       
-      // For each selected SIG, create a specific registration
       for (const sigId of selectedSigIds) {
         const sig = clubSigs[clubId].find(s => s.id.toString() === sigId);
         
@@ -224,25 +208,13 @@ const StudentRegistration = () => {
       setSubmitMessage('');
       
       try {
-        // Prepare the registration data
         const registrationData = prepareRegistrationData();
-        
-        // Log the data to console
         console.log('Registration Data:', registrationData);
-        
-        // Store in localStorage
         const storageKey = `student_registration_${formData.rollNumber}`;
         localStorage.setItem(storageKey, JSON.stringify(registrationData));
-        
-        // Create an array to store all registration promises
         const registrationPromises = [];
-        
-        // For each registration, create a API request
         for (const registration of registrationData.registrations) {
-          // Create the registration endpoint path
           const registrationPath = `${registration.clubName.toLowerCase()}/${registration.sigName.toLowerCase()}/register`;
-          
-          // Create registration promise
           const registrationPromise = fetch(`http://localhost:8080/students/${registrationPath}`, {
             method: 'POST',
             headers: {
@@ -254,17 +226,14 @@ const StudentRegistration = () => {
           registrationPromises.push(registrationPromise);
         }
         
-        // Wait for all registrations to complete
         const responses = await Promise.all(registrationPromises);
         
-        // Check if all registrations were successful
         const allSuccessful = responses.every(response => response.ok);
         
         if (!allSuccessful) {
           throw new Error('One or more registrations failed');
         }
         
-        // Store all successful registrations in localStorage
         const allRegistrations = JSON.parse(localStorage.getItem('student_registrations') || '[]');
         allRegistrations.push(registrationData);
         localStorage.setItem('student_registrations', JSON.stringify(allRegistrations));
@@ -272,7 +241,7 @@ const StudentRegistration = () => {
         console.log('All registrations saved to localStorage');
         
         setSubmitMessage('Registration successful!');
-        setTimeout(() => navigate('/login'), 2000); // Redirect to login after 2 seconds
+        setTimeout(() => navigate('/studentdashboard'), 2000);
       } catch (error) {
         setSubmitMessage('Registration failed. Please try again later.');
         console.error('Registration error:', error);
@@ -368,8 +337,6 @@ const StudentRegistration = () => {
                       {club.name} - {club.description}
                     </label>
                   </div>
-                  
-                  {/* Show SIGs only if the club is selected */}
                   {formData.selectedClubs.includes(club.id.toString()) && (
                     <div className="ml-6 mt-2">
                       <p className="text-sm font-medium text-gray-700 mb-1">Select SIGs for {club.name}:</p>

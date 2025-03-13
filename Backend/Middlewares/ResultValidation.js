@@ -1,6 +1,5 @@
 const Joi = require("joi");
 
-// Define validation schema for quiz submission
 const submissionSchema = Joi.object({
     rollNumber: Joi.string().required(),
     studentName:Joi.string().required(),
@@ -13,7 +12,6 @@ const submissionSchema = Joi.object({
     ).required()
 });
 
-// Middleware function for quiz submission validation
 const validateSubmission = (req, res, next) => {
     const { error } = submissionSchema.validate(req.body, { abortEarly: false });
 

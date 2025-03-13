@@ -2,42 +2,37 @@ const QuizSubmission = require('../Models/Result');
 const Student = require('../Models/Student');
 const Question = require('../Models/Questions');
 const { notifyStudentOfStatusUpdate } = require('../Services/NotificationService');
- // This imports the models object
 
-// Submit quiz answers
-const submitQuiz = async (req, res) => {
+const submitQuiz = async (req, res, quizType) => {
   try {
     console.log('Received data:', req.body);
+    const { rollNumber, studentName, answers, interviewSlot } = req.body;
     
-    const { rollNumber, studentName, quizModel, answers } = req.body;
-    
-    // Validate answers format
     if (!answers || !Array.isArray(answers)) {
       return res.status(400).json({
         message: 'Invalid answers format. Expected an array of answer objects.'
       });
     }
     
-    // Get all questions for this quiz model to check correct answers
-    const modelName = quizModel.toLowerCase();
+    
+    const modelName = quizType.toLowerCase();
     if (!Question[modelName]) {
       return res.status(400).json({ 
-        message: `Invalid quiz model: ${quizModel}`,
+        message: `Invalid quiz model: ${quizType}`,
         success: false
       });
     }
+    
     const questions = await Question[modelName].find({});
     
     if (!questions || questions.length === 0) {
       return res.status(400).json({ 
-        message: `No questions found for quiz model: ${quizModel}`,
+        message: `No questions found for quiz model: ${quizType}`,
         success: false
       });
     }
     
-    console.log(`Found ${questions.length} questions for quiz model: ${quizModel}`);
-    
-    // Calculate score - with error handling
+    console.log(`Found ${questions.length} questions for quiz model: ${quizType}`);
     let scoreResult;
     try {
       scoreResult = calculateScore(answers, questions);
@@ -50,15 +45,17 @@ const submitQuiz = async (req, res) => {
       });
     }
     
-    // Create quiz submission
+    const totalScore = scoreResult.score + 0; 
     const submission = new QuizSubmission({
       rollNumber,
       studentName: studentName,
-      quizModel,
+      quizModel: quizType,
       answers,
       score: scoreResult.score,
+      additionalMarks: 0, 
+      totalScore: totalScore, 
       totalQuestions: scoreResult.totalQuestions,
-      correctAnswers: scoreResult.correctAnswers
+      correctAnswers: scoreResult.correctAnswers,
     });
     
     await submission.save();
@@ -67,8 +64,9 @@ const submitQuiz = async (req, res) => {
       success: true,
       message: 'Quiz submitted successfully',
       score: scoreResult.score,
+      totalScore: totalScore,
       totalQuestions: scoreResult.totalQuestions,
-      correctAnswers: scoreResult.correctAnswers.length
+      correctAnswers: scoreResult.correctAnswers.length,
     });
   } catch (error) {
     console.error('Error submitting quiz:', error);
@@ -80,12 +78,9 @@ const submitQuiz = async (req, res) => {
   }
 };
 
-// Helper function to calculate score
 const calculateScore = (answers, questions) => {
   let score = 0;
   let correctAnswers = [];
-  
-  // Create a map of questions by ID for easy lookup
   const questionMap = {};
   questions.forEach(question => {
     const questionId = question._id.toString();
@@ -94,22 +89,13 @@ const calculateScore = (answers, questions) => {
   
   console.log("Question IDs in database:", Object.keys(questionMap));
   console.log("Answer Question IDs:", answers.map(a => a.questionId));
-  
-  // Process each answer
   for (const answer of answers) {
     const { questionId, selectedOption } = answer;
-    
-    // Find the corresponding question
     const question = questionMap[questionId];
-    
-    // Skip if question not found
     if (!question) {
       console.warn(`Question not found for ID: ${questionId}`);
       continue;
     }
-    
-    // Determine the correct answer field - adapt this to your schema
-    // This handles different possible field names
     let correctOption = null;
     if (question.correctOption) {
       correctOption = question.correctOption;
@@ -123,11 +109,8 @@ const calculateScore = (answers, questions) => {
       console.warn(`No correct answer found for question ID: ${questionId}`);
       continue;
     }
-    
-    // Check if the answer is correct
     if (selectedOption === correctOption) {
-      // Add the marks for this question to the total score
-      const marks = question.marks || 1; // Default to 1 mark if not specified
+      const marks = question.marks || 1; 
       score += marks;
       correctAnswers.push(questionId);
       console.log(`Correct answer for question ${questionId}: +${marks} marks`);
@@ -143,10 +126,8 @@ const calculateScore = (answers, questions) => {
   };
 };
 
-// Get all submissions (for admin)
 const getAllSubmissions = async (req, res, quizModel) => {
   try {
-    // Filter submissions by quizModel
     const query = quizModel ? { quizModel } : {};
     
     const submissions = await QuizSubmission.find(query)
@@ -165,39 +146,53 @@ const getAllSubmissions = async (req, res, quizModel) => {
   }
 };
 
-// Update qualification status
-// controllers/QuizController.js
-// Update the updateQualificationStatus function to use the notification service
-
-
-// Update qualification status
-const updateQualificationStatus = async (req, res) => {
+const updateQualificationStatus = async (req, res, quizModel) => {
   try {
     const { submissionId } = req.params;
-    const { qualifiedRound2, qualifiedRound3, recruited } = req.body;
+    const { qualifiedRound2, qualifiedRound3, recruited, additionalMarks, interviewSlot } = req.body;
     
     const submission = await QuizSubmission.findById(submissionId);
     if (!submission) {
       return res.status(404).json({ message: 'Submission not found' });
     }
+
+    if (submission.quizModel !== quizModel) {
+      return res.status(400).json({ 
+        message: `Submission does not belong to ${quizModel} quiz model`,
+        success: false
+      });
+    }
     
-    // Track if there was a status change
     const statusChanged = 
       (qualifiedRound2 !== undefined && submission.qualifiedRound2 !== qualifiedRound2) ||
       (qualifiedRound3 !== undefined && submission.qualifiedRound3 !== qualifiedRound3) ||
       (recruited !== undefined && submission.recruited !== recruited);
-    
-    // Update qualification status
+      
     if (qualifiedRound2 !== undefined) submission.qualifiedRound2 = qualifiedRound2;
     if (qualifiedRound3 !== undefined) submission.qualifiedRound3 = qualifiedRound3;
     if (recruited !== undefined) submission.recruited = recruited;
+    if (additionalMarks !== undefined) {
+      submission.additionalMarks = parseFloat(additionalMarks) || 0;
+      submission.totalScore = submission.score + submission.additionalMarks;
+    }
+    if (interviewSlot !== undefined) {
+      // Ensure valid date or set to null if invalid
+      try {
+        submission.interviewSlot = interviewSlot ? new Date(interviewSlot) : null;
+      } catch (e) {
+        console.error("Invalid interview slot date:", interviewSlot);
+        submission.interviewSlot = null;
+      }
+    }
     
     await submission.save();
-    
-    // Send notification to student if status changed
-    if (statusChanged) {
-      const notified = await notifyStudentOfStatusUpdate(submission);
-      console.log(`Notification ${notified ? 'sent' : 'failed'} for student ${submission.rollNumber}`);
+    if (statusChanged && typeof notifyStudentOfStatusUpdate === 'function') {
+      try {
+        const notified = await notifyStudentOfStatusUpdate(submission);
+        console.log(`Notification ${notified ? 'sent' : 'failed'} for student ${submission.rollNumber}`);
+      } catch (notificationError) {
+        console.error('Error sending notification:', notificationError);
+      }
     }
     
     res.status(200).json({ 

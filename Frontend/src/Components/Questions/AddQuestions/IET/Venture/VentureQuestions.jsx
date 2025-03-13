@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import QuizSettings from "./QuizSettings"; // Import the new component
-
+import QuizSettings from "./QuizSettings"; 
 const AdminQuestions = () => {
   const [questions, setQuestions] = useState([]);
   const [totalMarks, setTotalMarks] = useState(0);
@@ -11,7 +10,7 @@ const AdminQuestions = () => {
     option3: "",
     option4: "",
     correctAnswer: "",
-    marks: 1, // Default value for marks
+    marks: 1, 
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -22,12 +21,10 @@ const AdminQuestions = () => {
   useEffect(() => {
     fetchQuestions();
   }, []);
-
-  // Fetch questions from the backend
   const fetchQuestions = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:8080/questions/iet/cipher/get', {
+      const response = await fetch('http://localhost:8080/questions/iet/venture/get', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -39,15 +36,12 @@ const AdminQuestions = () => {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
   
-      const data = await response.json();
-      // Check if data has the new structure (with questions and totalMarks)
+      const data = await response.json(); 
       if (data.questions && Array.isArray(data.questions)) {
         setQuestions(data.questions);
         setTotalMarks(data.totalMarks || 0);
       } else if (Array.isArray(data)) {
-        // Handle backward compatibility
         setQuestions(data);
-        // Calculate total marks manually if needed
         const total = data.reduce((sum, q) => sum + (q.marks || 1), 0);
         setTotalMarks(total);
       }
@@ -68,8 +62,7 @@ const AdminQuestions = () => {
     e.preventDefault();
     
     try {
-      // Get the current quiz settings
-      const settingsResponse = await fetch('http://localhost:8080/questions/iet/cipher/settings', {
+      const settingsResponse = await fetch('http://localhost:8080/questions/iet/venture/settings', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -82,11 +75,9 @@ const AdminQuestions = () => {
       }
       
       const quizSettings = await settingsResponse.json();
-      
-      // Combine question data with quiz settings
       const dataToSubmit = {
         ...questionData,
-        marks: parseInt(questionData.marks) || 1, // Ensure marks is a number
+        marks: parseInt(questionData.marks) || 1, 
         quizTimeLimitSeconds: quizSettings.quizTimeLimitSeconds,
         quizStartTime: quizSettings.quizStartTime,
         quizEndTime: quizSettings.quizEndTime
@@ -94,7 +85,7 @@ const AdminQuestions = () => {
       
       console.log("Submitting question:", dataToSubmit);
       
-      const response = await fetch("http://localhost:8080/questions/iet/cipher/add", {
+      const response = await fetch("http://localhost:8080/questions/iet/venture/add", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
@@ -134,7 +125,7 @@ const AdminQuestions = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this question?")) {
       try {
-        const response = await fetch(`http://localhost:8080/questions/iet/cipher/delete/${id}`, {
+        const response = await fetch(`http://localhost:8080/questions/iet/venture/delete/${id}`, {
           method: "DELETE",
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -145,7 +136,6 @@ const AdminQuestions = () => {
           setSuccess("Question deleted successfully!");
           setTimeout(() => setSuccess(null), 3000);
           setQuestions(questions.filter((q) => q._id !== id));
-          // Recalculate total marks
           const remainingQuestions = questions.filter((q) => q._id !== id);
           const newTotal = remainingQuestions.reduce((sum, q) => sum + (q.marks || 1), 0);
           setTotalMarks(newTotal);
@@ -176,7 +166,7 @@ const AdminQuestions = () => {
 
   const updateMarks = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/questions/iet/cipher/updateMarks/${editMarks.id}`, {
+      const response = await fetch(`http://localhost:8080/questions/iet/venture/updateMarks/${editMarks.id}`, {
         method: "PATCH",
         headers: {
           'Content-Type': 'application/json',
@@ -188,18 +178,12 @@ const AdminQuestions = () => {
       if (response.ok) {
         setSuccess("Marks updated successfully!");
         setTimeout(() => setSuccess(null), 3000);
-        
-        // Update the local state with the new marks
         const updatedQuestions = questions.map(q => 
           q._id === editMarks.id ? { ...q, marks: editMarks.value } : q
         );
         setQuestions(updatedQuestions);
-        
-        // Recalculate total marks
         const newTotal = updatedQuestions.reduce((sum, q) => sum + (q.marks || 1), 0);
         setTotalMarks(newTotal);
-        
-        // Reset edit state
         setEditMarks({ id: null, value: 1 });
       } else {
         const errorData = await response.json();
@@ -210,8 +194,6 @@ const AdminQuestions = () => {
       setError("An error occurred while updating marks");
     }
   };
-
-  // Toggle question expansion to show/hide options
   const toggleQuestionExpansion = (id) => {
     if (expandedQuestion === id) {
       setExpandedQuestion(null);
@@ -222,10 +204,7 @@ const AdminQuestions = () => {
   
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-6">
-      {/* Quiz Settings Component */}
       <QuizSettings totalMarks={totalMarks} totalQuestions={questions.length} />
-
-      {/* Question Form Section */}
       <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-2xl mb-6">
         <h2 className="text-2xl font-bold text-center mb-4 text-blue-600">
           Add a New Question
@@ -315,7 +294,6 @@ const AdminQuestions = () => {
         </form>
       </div>
       
-      {/* Display Questions */}
       <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-3xl">
         <h2 className="text-xl font-bold text-center mb-4 text-gray-700">
           Questions List (Total: {questions.length}, Total Marks: {totalMarks})

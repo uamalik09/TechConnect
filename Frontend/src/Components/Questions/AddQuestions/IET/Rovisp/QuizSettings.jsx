@@ -50,7 +50,7 @@ const QuizSettings = ({ totalMarks, totalQuestions }) => {
   const formatDateTimeForInput = (dateString) => {
     if (!dateString) return "";
     const date = new Date(dateString);
-    return date.toISOString().slice(0, 16); // Format as "YYYY-MM-DDThh:mm"
+    return date.toISOString().slice(0, 16); 
   };
 
   const handleChange = (e) => {
@@ -60,7 +60,6 @@ const QuizSettings = ({ totalMarks, totalQuestions }) => {
 
   const handleTimeChange = (e) => {
     if (e.target.name === "quizTimeLimitMinutes") {
-      // Convert minutes to seconds
       const seconds = parseInt(e.target.value) * 60;
       setQuizSettings({ ...quizSettings, quizTimeLimitSeconds: seconds });
     } else {
@@ -73,7 +72,6 @@ const QuizSettings = ({ totalMarks, totalQuestions }) => {
     e.preventDefault();
     
     try {
-      // Create a new settings object
       const settingsToSubmit = {
         quizTimeLimitSeconds: quizSettings.quizTimeLimitSeconds,
         quizStartTime: new Date(quizSettings.quizStartTime).toISOString(),
@@ -105,7 +103,6 @@ const QuizSettings = ({ totalMarks, totalQuestions }) => {
     }
   };
 
-  // Use props if they're provided, otherwise use the state values
   const displayTotalMarks = totalMarks !== undefined ? totalMarks : quizSettings.totalMarks;
   const displayTotalQuestions = totalQuestions !== undefined ? totalQuestions : quizSettings.totalQuestions;
 
@@ -204,4 +201,4 @@ const QuizSettings = ({ totalMarks, totalQuestions }) => {
   );
 };
 
-export default QuizSettings; 
+export default QuizSettings;

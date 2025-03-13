@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { FaBullhorn, FaVideo, FaCalendarAlt, FaUserCircle, FaClipboardList } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import QuizStatus from "../QuizStatus";
+// import QuizStatus from "../Questions/AddQuestions/IET/Cipher/QuizStatus";
 
 
 const StudentDashboard = () => {
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
+  const handleRegister=()=>{
+    navigate("/registration");
+  }
   const handleLogout = () => {
     // Perform any logout actions here (e.g., clearing tokens)
     navigate("/"); // Redirect to home page
@@ -31,6 +33,12 @@ const StudentDashboard = () => {
           {/* Dropdown Menu */}
           {dropdownOpen && (
             <div className="absolute right-0 mt-2 w-40 bg-gray-800 shadow-lg rounded-lg overflow-hidden">
+              <button
+                onClick={handleRegister}
+                className="block w-full text-left px-4 py-2 text-white hover:bg-red-500 transition"
+              >
+                Register
+              </button>
               <button
                 onClick={handleLogout}
                 className="block w-full text-left px-4 py-2 text-white hover:bg-red-500 transition"
@@ -68,9 +76,13 @@ const StudentDashboard = () => {
             <FaClipboardList size={40} className="text-purple-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-center mb-3">Online Assessment</h3>
           </div>
+          <div onClick={() => navigate("/ietstatus")} className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition cursor-pointer">
+            <FaClipboardList size={40} className="text-purple-400 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-center mb-3">Quiz Status</h3>
+          </div>
         </div>
       </div>
-      <QuizStatus />;
+      {/* <QuizStatus />; */}
     </div>
   );
 };

@@ -19,7 +19,7 @@ const QuizSettings = ({ totalMarks, totalQuestions }) => {
   const fetchQuizSettings = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:8080/questions/iet/cipher/settings', {
+      const response = await fetch('http://localhost:8080/questions/iet/venture/settings', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ const QuizSettings = ({ totalMarks, totalQuestions }) => {
   const formatDateTimeForInput = (dateString) => {
     if (!dateString) return "";
     const date = new Date(dateString);
-    return date.toISOString().slice(0, 16); // Format as "YYYY-MM-DDThh:mm"
+    return date.toISOString().slice(0, 16); 
   };
 
   const handleChange = (e) => {
@@ -60,7 +60,6 @@ const QuizSettings = ({ totalMarks, totalQuestions }) => {
 
   const handleTimeChange = (e) => {
     if (e.target.name === "quizTimeLimitMinutes") {
-      // Convert minutes to seconds
       const seconds = parseInt(e.target.value) * 60;
       setQuizSettings({ ...quizSettings, quizTimeLimitSeconds: seconds });
     } else {
@@ -73,7 +72,6 @@ const QuizSettings = ({ totalMarks, totalQuestions }) => {
     e.preventDefault();
     
     try {
-      // Create a new settings object
       const settingsToSubmit = {
         quizTimeLimitSeconds: quizSettings.quizTimeLimitSeconds,
         quizStartTime: new Date(quizSettings.quizStartTime).toISOString(),
@@ -82,7 +80,7 @@ const QuizSettings = ({ totalMarks, totalQuestions }) => {
       
       console.log("Submitting settings:", settingsToSubmit);
       
-      const response = await fetch("http://localhost:8080/questions/iet/cipher/settings/update", {
+      const response = await fetch("http://localhost:8080/questions/iet/venture/settings/update", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
@@ -105,7 +103,6 @@ const QuizSettings = ({ totalMarks, totalQuestions }) => {
     }
   };
 
-  // Use props if they're provided, otherwise use the state values
   const displayTotalMarks = totalMarks !== undefined ? totalMarks : quizSettings.totalMarks;
   const displayTotalQuestions = totalQuestions !== undefined ? totalQuestions : quizSettings.totalQuestions;
 

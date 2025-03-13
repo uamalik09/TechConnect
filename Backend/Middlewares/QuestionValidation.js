@@ -1,6 +1,5 @@
 const Joi = require("joi");
 
-// Define validation schema
 const questionSchema = Joi.object({
     question: Joi.string().min(5).max(500).required(),
     option1: Joi.string().min(1).max(200).required(),
