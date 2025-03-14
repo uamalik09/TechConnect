@@ -58,4 +58,30 @@ router.patch("/iet/media/updateMarks/:id", authenticateUser, authorizeRoles("iet
     updateQuestionMarks(req, res, "ietmedia")
 );
 
+router.post("/ieee/compsoc/add", authenticateUser, authorizeRoles("ieee"), validateQuestion, (req, res) => addQuestion(req, res, "ieeecompsoc"));
+router.get("/ieee/compsoc/get", authenticateUser, authorizeRoles("ieee", "user"), (req, res) => getQuestions(req, res, "ieeecompsoc"));
+router.delete("/ieee/compsoc/delete/:id", authenticateUser, authorizeRoles("ieee"), (req, res) => deleteQuestion(req, res, "ieeecompsoc"));
+router.get("/ieee/compsoc/settings", authenticateUser, authorizeRoles("ieee", "user"), (req, res) => getquizsettings(req, res, "ieeecompsoc"));
+router.post("/ieee/compsoc/settings/update", authenticateUser, authorizeRoles("ieee"), validateQuizSettings, (req, res) => updateQuizSettings(req, res, "ieeecompsoc"));
+router.patch("/ieee/compsoc/updateMarks/:id", authenticateUser, authorizeRoles("ieee"), (req, res) => 
+    updateQuestionMarks(req, res, "ieeecompsoc")
+);
+
+router.post("/ieee/piston/add", authenticateUser, authorizeRoles("ieee"), validateQuestion, (req, res) => addQuestion(req, res, "ieeepiston"));
+router.get("/ieee/piston/get", authenticateUser, authorizeRoles("ieee", "user"), (req, res) => getQuestions(req, res, "ieeepiston"));
+router.delete("/ieee/piston/delete/:id", authenticateUser, authorizeRoles("ieee"), (req, res) => deleteQuestion(req, res, "ieeepiston"));
+router.get("/ieee/piston/settings", authenticateUser, authorizeRoles("ieee", "user"), (req, res) => getquizsettings(req, res, "ieeepiston"));
+router.post("/ieee/piston/settings/update", authenticateUser, authorizeRoles("ieee"), validateQuizSettings, (req, res) => updateQuizSettings(req, res, "ieeepiston"));
+router.patch("/ieee/piston/updateMarks/:id", authenticateUser, authorizeRoles("ieee"), (req, res) => 
+    updateQuestionMarks(req, res, "ieeepiston")
+);
+
+router.post("/ieee/diode/add", authenticateUser, authorizeRoles("ieee"), validateQuestion, (req, res) => addQuestion(req, res, "ieeediode"));
+router.get("/ieee/diode/get", authenticateUser, authorizeRoles("ieee", "user"), (req, res) => getQuestions(req, res, "ieeediode"));
+router.delete("/ieee/diode/delete/:id", authenticateUser, authorizeRoles("ieee"), (req, res) => deleteQuestion(req, res, "ieeediode"));
+router.get("/ieee/diode/settings", authenticateUser, authorizeRoles("ieee", "user"), (req, res) => getquizsettings(req, res, "ieeediode"));
+router.post("/ieee/diode/settings/update", authenticateUser, authorizeRoles("ieee"), validateQuizSettings, (req, res) => updateQuizSettings(req, res, "ieeediode"));
+router.patch("/ieee/diode/updateMarks/:id", authenticateUser, authorizeRoles("ieee"), (req, res) => 
+    updateQuestionMarks(req, res, "ieeediode")
+);
 module.exports = router;

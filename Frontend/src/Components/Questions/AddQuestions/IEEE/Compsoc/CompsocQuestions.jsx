@@ -24,7 +24,7 @@ const AdminQuestions = () => {
   const fetchQuestions = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:8080/questions/iet/compsoc/get', {
+      const response = await fetch('http://localhost:8080/questions/ieee/compsoc/get', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ const AdminQuestions = () => {
     e.preventDefault();
     
     try {
-      const settingsResponse = await fetch('http://localhost:8080/questions/iet/compsoc/settings', {
+      const settingsResponse = await fetch('http://localhost:8080/questions/ieee/compsoc/settings', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ const AdminQuestions = () => {
       
       console.log("Submitting question:", dataToSubmit);
       
-      const response = await fetch("http://localhost:8080/questions/iet/compsoc/add", {
+      const response = await fetch("http://localhost:8080/questions/ieee/compsoc/add", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
@@ -125,7 +125,7 @@ const AdminQuestions = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this question?")) {
       try {
-        const response = await fetch(`http://localhost:8080/questions/iet/compsoc/delete/${id}`, {
+        const response = await fetch(`http://localhost:8080/questions/ieee/compsoc/delete/${id}`, {
           method: "DELETE",
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -166,7 +166,7 @@ const AdminQuestions = () => {
 
   const updateMarks = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/questions/iet/compsoc/updateMarks/${editMarks.id}`, {
+      const response = await fetch(`http://localhost:8080/questions/ieee/compsoc/updateMarks/${editMarks.id}`, {
         method: "PATCH",
         headers: {
           'Content-Type': 'application/json',

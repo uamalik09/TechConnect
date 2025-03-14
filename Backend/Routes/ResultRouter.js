@@ -41,4 +41,23 @@ router.post('/iet/media/submit', authenticateUser,validateSubmission, (req, res)
 router.get('/iet/media/submissions', authenticateUser, authorizeRoles('iet'), (req, res) => 
     getAllSubmissions(req, res, 'ietmedia'));
 router.patch('/iet/media/submissions/:submissionId/status', authenticateUser, authorizeRoles('iet'), (req, res)=>updateQualificationStatus(req, res, 'ietmedia'));
+
+router.post('/ieee/compsoc/submit', authenticateUser,validateSubmission, (req, res) => 
+    submitQuiz(req, res, 'ieeecompsoc'));
+router.get('/ieee/compsoc/submissions', authenticateUser, authorizeRoles('ieee'), (req, res) => 
+    getAllSubmissions(req, res, 'ieeecompsoc'));
+router.patch('/ieee/compsoc/submissions/:submissionId/status', authenticateUser, authorizeRoles('ieee'), (req, res)=>updateQualificationStatus(req, res, 'ieeecompsoc'));
+
+router.post('/ieee/diode/submit', authenticateUser,validateSubmission, (req, res) => 
+    submitQuiz(req, res, 'ieeediode'));
+router.get('/ieee/diode/submissions', authenticateUser, authorizeRoles('ieee'), (req, res) => 
+    getAllSubmissions(req, res, 'ieeediode'));
+router.patch('/ieee/diode/submissions/:submissionId/status', authenticateUser, authorizeRoles('ieee'), (req, res)=>updateQualificationStatus(req, res, 'ieeediode'));
+
+router.post('/ieee/piston/submit', authenticateUser,validateSubmission, (req, res) => 
+    submitQuiz(req, res, 'ieeepiston'));
+router.get('/ieee/piston/submissions', authenticateUser, authorizeRoles('ieee'), (req, res) => 
+    getAllSubmissions(req, res, 'ieeepiston'));
+router.patch('/ieee/piston/submissions/:submissionId/status', authenticateUser, authorizeRoles('ieee'), (req, res)=>updateQualificationStatus(req, res, 'ieeepiston'));
+
 module.exports = router;

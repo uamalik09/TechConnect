@@ -52,4 +52,25 @@ router.get('/iet/media/quiz-status', authenticateUser, authorizeRoles('iet', 'us
     }
 );
 
+router.get('/ieee/compsoc/quiz-status', authenticateUser, authorizeRoles('ieee', 'user'), 
+    (req, res) => {
+        req.params.quizModel = 'ieeecompsoc';
+        getSpecificQuizStatus(req, res);
+    }
+);
+
+router.get('/ieee/diode/quiz-status', authenticateUser, authorizeRoles('ieee', 'user'), 
+    (req, res) => {
+        req.params.quizModel = 'ieeediode';
+        getSpecificQuizStatus(req, res);
+    }
+);
+router.get('/ieee/piston/quiz-status', authenticateUser, authorizeRoles('ieee', 'user'), 
+    (req, res) => {
+        req.params.quizModel = 'ieeepiston';
+        getSpecificQuizStatus(req, res);
+    }
+);
+
+
 module.exports = router;

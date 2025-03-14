@@ -45,7 +45,8 @@ const SubmissionSchema = new Schema({
     },
     interviewSlot: {
         type: Date,
-        required:true
+        required:false,
+        default: null
     },
     submittedAt: {
         type: Date,

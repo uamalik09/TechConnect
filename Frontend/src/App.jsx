@@ -54,12 +54,18 @@ import TorsionQuestions from "./Components/Questions/AddQuestions/IET/Torsion/To
 import MediaQuestions from "./Components/Questions/AddQuestions/IET/Media/MediaQuestions";
 import InkheartQuestions from "./Components/Questions/AddQuestions/IET/Inkheart/InkheartQuestions";
 import VentureQuestions from "./Components/Questions/AddQuestions/IET/Venture/VentureQuestions";
+import CompsocQuestions from "./Components/Questions/AddQuestions/IEEE/Compsoc/CompsocQuestions";
+import DiodeQuestions from "./Components/Questions/AddQuestions/IEEE/Diode/DiodeQuestions";
+import PistonQuestions from "./Components/Questions/AddQuestions/IEEE/Piston/PistonQuestions";
 import CipherResults from "./Components/Questions/AddQuestions/IET/Cipher/Submissions";
 import RovispResults from "./Components/Questions/AddQuestions/IET/Rovisp/Submissions";
 import TorsionResults from "./Components/Questions/AddQuestions/IET/Torsion/Submissions";
 import MediaResults from "./Components/Questions/AddQuestions/IET/Media/Submissions";
 import InkheartResults from "./Components/Questions/AddQuestions/IET/Inkheart/Submissions";
 import VentureResults from "./Components/Questions/AddQuestions/IET/Venture/Submissions";
+import CompsocResults from "./Components/Questions/AddQuestions/IEEE/Compsoc/Submissions";
+import DiodeResults from "./Components/Questions/AddQuestions/IEEE/Diode/Submissions";
+import PistonResults from "./Components/Questions/AddQuestions/IEEE/Piston/Submissions";
 import Register from "./Components/StudentRegister";
 import CipherDetails from "./Components/Questions/AddQuestions/IET/Cipher/StudentDetails";
 import RovispDetails from "./Components/Questions/AddQuestions/IET//Rovisp/StudentDetails";
@@ -67,17 +73,34 @@ import TorsionDetails from "./Components/Questions/AddQuestions/IET/Torsion/Stud
 import MediaDetails from "./Components/Questions/AddQuestions/IET/Media/StudentDetails";
 import VentureDetails from "./Components/Questions/AddQuestions/IET/Venture/StudentDetails";
 import InkheartDetails from "./Components/Questions/AddQuestions/IET/Inkheart/StudentDetails";
+import CompsocDetails from "./Components/Questions/AddQuestions/IEEE/Compsoc/StudentDetails";
+import DiodeDetails from "./Components/Questions/AddQuestions/IEEE/Diode/StudentDetails";
+import PistonDetails from "./Components/Questions/AddQuestions/IEEE/Piston/StudentDetails";
 import CipherStatus from "./Components/Questions/AddQuestions/IET/Cipher/QuizStatus";
 import RovispStatus from "./Components/Questions/AddQuestions/IET//Rovisp/QuizStatus";
 import TorsionStatus from "./Components/Questions/AddQuestions/IET/Torsion/QuizStatus";
 import MediaStatus from "./Components/Questions/AddQuestions/IET/Media/QuizStatus";
 import VentureStatus from "./Components/Questions/AddQuestions/IET/Venture/QuizStatus";
 import InkheartStatus from "./Components/Questions/AddQuestions/IET/Inkheart/QuizStatus";
+import CompsocStatus from "./Components/Questions/AddQuestions/IEEE/Compsoc/QuizStatus";
+import DiodeStatus from "./Components/Questions/AddQuestions/IEEE/Diode/QuizStatus";
+import PistonStatus from "./Components/Questions/AddQuestions/IEEE/Piston/QuizStatus";
 import FrontPage from "./Components/FrontPage";
 import IetSig from "./Components/Questions/AddQuestions/IET/sigs";
+import IeeeSig from "./Components/Questions/AddQuestions/IEEE/sigs";
 import IetSigresults from "./Components/Questions/AddQuestions/IET/sigsforresults";
+import IeeeSigresults from "./Components/Questions/AddQuestions/IEEE/sigsforresults";
 import IetSigdetails from "./Components/Questions/AddQuestions/IET/sigsforregistrationdetails";
+import IeeeSigdetails from "./Components/Questions/AddQuestions/IEEE/sigsforregistrationdetails";
 import IetSigsstatus from "./Components/Questions/AddQuestions/IET/SigsforStatus";
+import IeeeSigsstatus from "./Components/Questions/AddQuestions/IEEE/SigsforStatus";
+import ClubStatus from "./Components/clubforStatus";
+import ClubList from "./Components/ChatBox/ClubList";
+import SigList from "./Components/ChatBox/SigList";
+import Chat from "./Components/chat";
+import IetSigs from "./Components/ChatBox/Ietsigs";
+import Cipherchat from "./Components/ChatBox/Iet/Cipherchat";
+// import Rovispchat from "./Components/ChatBox/Iet/Rovispchat";
 // import IeeeQuestions from "./Components/Questions/AddQuestions/IeeeQuestions";
 // import AcmQuestions from "./Components/Questions/AddQuestions/AcmQuestions";
 // import IeQuestions from "./Components/Questions/AddQuestions/IeQuestions";
@@ -165,6 +188,28 @@ function App() {
         <Route path="/ietresults" element={<IetSigresults />}/>
         <Route path="/ietdetails" element={<IetSigdetails />}/>
         <Route path="/ietstatus" element={<IetSigsstatus />}/>
+        <Route path="/addcompsocquestions" element={<CompsocQuestions />}/>
+        <Route path="/adddiodequestions" element={<DiodeQuestions />}/>
+        <Route path="/addpistonquestions" element={<PistonQuestions />}/>
+        <Route path="/getcompsocresults" element={<CompsocResults />}/>
+        <Route path="/getdioderesults" element={<DiodeResults />}/>
+        <Route path="/getpistonresults" element={<PistonResults />}/>
+        <Route path="/getcompsocdetails" element={<CompsocDetails />}/>
+        <Route path="/getdiodedetails" element={<DiodeDetails />}/>
+        <Route path="/getpistondetails" element={<PistonDetails />}/>
+        <Route path="/getcompsocstatus" element={<CompsocStatus />}/>
+        <Route path="/getdiodestatus" element={<DiodeStatus />}/>
+        <Route path="/getpistonstatus" element={<PistonStatus />}/>
+        <Route path="/ieee" element={<IeeeSig />}/>
+        <Route path="/ieeeresults" element={<IeeeSigresults />}/>
+        <Route path="/ieeedetails" element={<IeeeSigdetails />}/>
+        <Route path="/ieeestatus" element={<IeeeSigsstatus />}/>
+        <Route path="/clubstatus" element={<ClubStatus />}/>
+        <Route path="/club" element={<ClubList/>}/>
+        <Route path="/sig/:clubId" element={<SigList/>}/>
+        <Route path="/:clubId/:sigId/chat" element={<Chat />} />
+        <Route path="/ietsigs" element={<IetSigs />}/>
+        <Route path="/Cipherchat" element={<Cipherchat/>}/>
         {/* <Route path="/addieeequestions" element={<IeeeQuestions />}/> */}
         {/* <Route path="/addacmquestions" element={<AcmQuestions />}/> */}
         {/* <Route path="/addiequestions" element={<IeQuestions />}/> */}

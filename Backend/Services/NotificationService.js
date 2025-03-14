@@ -3,20 +3,19 @@ const Student = require('../Models/Student');
 const nodemailer = require('nodemailer');
 
 // Configure nodemailer (you'll need to set up your email provider)
+// SendGrid example
 const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false, 
+  host: 'smtp.sendgrid.net',
+  port: 587,
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD
+    user: 'apikey',
+    pass: process.env.SENDGRID_API_KEY
   }
 });
-
 const sendEmailNotification = async (student, subject, message) => {
   try {
     await transporter.sendMail({
-      from: 'hanvithapeteti@gmail.com',
+      from: 'haiisthebest@gmail.com',
       to: student.email,
       subject: subject,
       html: message

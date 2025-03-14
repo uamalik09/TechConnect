@@ -52,9 +52,9 @@ const models = {
     ietmedia: mongoose.model("ietmedia", QuestionSchema),
     iettorsion: mongoose.model("iettorsion", QuestionSchema),
   
-    ieeeCompsoc: mongoose.model("ieeecompsoc", QuestionSchema),
-    ieeePiston: mongoose.model("ieeepiston", QuestionSchema),
-    ieeeDiode: mongoose.model("ieeediode", QuestionSchema),
+    ieeecompsoc: mongoose.model("ieeecompsoc", QuestionSchema),
+    ieeepiston: mongoose.model("ieeepiston", QuestionSchema),
+    ieeediode: mongoose.model("ieeediode", QuestionSchema),
   
     ieCapital: mongoose.model("iecapital", QuestionSchema),
     ieCode: mongoose.model("iecode", QuestionSchema),

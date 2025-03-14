@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaBullhorn, FaVideo, FaCalendarAlt, FaUserCircle } from "react-icons/fa";
+import { FaBullhorn, FaVideo, FaCalendarAlt, FaUserCircle, FaQuestionCircle } from "react-icons/fa";
 import { FaClipboardList, FaChartBar } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -39,7 +39,7 @@ const IetDashboard = () => {
 
       <div className="container mx-auto py-10 px-6">
         <h2 className="text-3xl font-bold text-center mb-8">Admin Actions</h2>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-4 gap-6">
           <div className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition">
             <FaBullhorn size={40} className="text-yellow-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-center mb-3">Add Announcement</h3>
@@ -96,6 +96,16 @@ const IetDashboard = () => {
             <button
               onClick={() => navigate("/ietdetails")}
               className="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg transition"
+            >
+              Get
+            </button>
+          </div>
+          <div className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition">
+            <FaQuestionCircle size={40} className="text-red-400 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-center mb-3">Clarify doubts</h3>
+            <button
+              onClick={() => navigate("/ietsigs")}
+              className="w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg transition"
             >
               Get
             </button>

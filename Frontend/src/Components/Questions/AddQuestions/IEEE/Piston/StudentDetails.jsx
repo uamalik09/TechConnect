@@ -15,7 +15,7 @@ const AdminDashboard = () => {
           } catch (e) {
             console.error("Invalid token format");
           }
-        const response = await fetch('http://localhost:8080/students/iet/media/all', {
+        const response = await fetch('http://localhost:8080/students/ieee/piston/all', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ const AdminDashboard = () => {
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Roll Number</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email ID</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone Number</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                  {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th> */}
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -85,24 +85,7 @@ const AdminDashboard = () => {
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.rollNumber}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.email}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.phoneNumber}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <button 
-                          className="text-indigo-600 hover:text-indigo-900 mr-3"
-                          onClick={() => alert(`View details for ${student.name}`)}
-                        >
-                          View
-                        </button>
-                        <button 
-                          className="text-red-600 hover:text-red-900"
-                          onClick={() => {
-                            if (window.confirm(`Are you sure you want to delete ${student.name}?`)) {
-                              alert('Delete functionality would go here');
-                            }
-                          }}
-                        >
-                          Delete
-                        </button>
-                      </td>
+                      
                     </tr>
                   ))
                 ) : (

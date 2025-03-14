@@ -31,4 +31,17 @@ router.get('/iet/torsion/:rollNumber', authenticateUser, authorizeRoles('iet'), 
 router.get('/iet/venture/all', authenticateUser, authorizeRoles('iet'), getAllStudents);
 router.get('/iet/venture/:rollNumber', authenticateUser, authorizeRoles('iet'), getStudentByRollNumber);
 
+router.post('/ieee/compsoc/register', registerStudent);
+router.post('/ieee/diode/register', registerStudent);
+router.post('/ieee/piston/register', registerStudent);
+router.get('/ieee/compsoc/all', authenticateUser, authorizeRoles('ieee'), getAllStudents);
+router.get('/ieee/compsoc/:rollNumber', authenticateUser, authorizeRoles('ieee'), getStudentByRollNumber);
+
+router.get('/ieee/diode/all', authenticateUser, authorizeRoles('ieee'), getAllStudents);
+router.get('/ieee/diode/:rollNumber', authenticateUser, authorizeRoles('ieee'), getStudentByRollNumber);
+
+router.get('/ieee/piston/all', authenticateUser, authorizeRoles('ieee'), getAllStudents);
+router.get('/ieee/piston/:rollNumber', authenticateUser, authorizeRoles('ieee'), getStudentByRollNumber);
+
+
 module.exports = router;

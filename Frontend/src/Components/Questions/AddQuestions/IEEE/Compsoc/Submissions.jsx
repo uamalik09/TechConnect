@@ -26,7 +26,7 @@ const AdminSubmissionsDashboard = () => {
           console.error("Invalid token format");
         }
         
-        const response = await fetch('http://localhost:8080/results/iet/compsoc/submissions', {
+        const response = await fetch('http://localhost:8080/results/ieee/compsoc/submissions', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -106,22 +106,38 @@ const AdminSubmissionsDashboard = () => {
   };
 
   const handleInterviewSlotChange = (submissionId, value) => {
-    // Update interviewSlots state
+    console.log(`Setting interview slot for ${submissionId} to:`, value);
+    
+    // Update interviewSlots state with the raw value
     setInterviewSlots(prev => ({
       ...prev,
       [submissionId]: value
     }));
     
-    // Update the modifiedSubmissions state
-    setModifiedSubmissions(prev => ({
-      ...prev,
-      [submissionId]: {
-        ...prev[submissionId],
-        interviewSlot: value
-      }
-    }));
+    // Store ISO string in modified submissions
+    if (value) {
+      // Create a date object that correctly interprets the local datetime
+      const localDate = new Date(value);
+      
+      // Update the modifiedSubmissions state with the ISO string
+      setModifiedSubmissions(prev => ({
+        ...prev,
+        [submissionId]: {
+          ...prev[submissionId],
+          interviewSlot: localDate.toISOString()
+        }
+      }));
+    } else {
+      // Handle empty value
+      setModifiedSubmissions(prev => ({
+        ...prev,
+        [submissionId]: {
+          ...prev[submissionId],
+          interviewSlot: null
+        }
+      }));
+    }
   };
-
   const isModified = (submissionId) => {
     return !!modifiedSubmissions[submissionId];
   };
@@ -160,7 +176,20 @@ const AdminSubmissionsDashboard = () => {
     if (!dateString) return '';
     try {
       const date = new Date(dateString);
-      return date.toISOString().slice(0, 16); // Format as "YYYY-MM-DDThh:mm"
+      if (isNaN(date.getTime())) {
+        console.error("Invalid date format for:", dateString);
+        return '';
+      }
+      
+      // Format date in local timezone for datetime-local input
+      // YYYY-MM-DDThh:mm format
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const hours = String(date.getHours()).padStart(2, '0');
+      const minutes = String(date.getMinutes()).padStart(2, '0');
+      
+      return `${year}-${month}-${day}T${hours}:${minutes}`;
     } catch (error) {
       console.error("Invalid date format:", error);
       return '';
@@ -177,7 +206,7 @@ const AdminSubmissionsDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       const updatePromises = Object.entries(modifiedSubmissions).map(([submissionId, changes]) => {
-        return fetch(`http://localhost:8080/results/iet/compsoc/submissions/${submissionId}/status`, {
+        return fetch(`http://localhost:8080/results/ieee/compsoc/submissions/${submissionId}/status`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -384,8 +413,8 @@ const AdminSubmissionsDashboard = () => {
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Additional Marks</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Score</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Interview Slot</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Round 1</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Round 2</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Round 3</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Recruited</th>
                 </tr>
               </thead>
@@ -563,44 +592,7 @@ const AdminSubmissionsDashboard = () => {
               >
                 Auto-Qualify by Score
               </button>
-              <button 
-                onClick={() => {
-                  const confirmed = window.confirm("Are you sure you want to export all submission data as CSV?");
-                  if (confirmed) {
-                    // Create CSV content
-                    const headers = ["Name", "Roll Number", "Base Score", "Additional Marks", "Total Score", 
-                                    "Interview Slot", "Round 2", "Round 3", "Recruited"];
-                    const csvContent = [
-                      headers.join(','),
-                      ...submissions.map(sub => [
-                        `"${sub.studentName}"`,
-                        `"${sub.rollNumber}"`,
-                        sub.score,
-                        additionalMarks[sub._id] || 0,
-                        getTotalScore(sub),
-                        `"${interviewSlots[sub._id] || ''}"`,
-                        getCurrentValue(sub, 'qualifiedRound2') ? 'Yes' : 'No',
-                        getCurrentValue(sub, 'qualifiedRound3') ? 'Yes' : 'No',
-                        getCurrentValue(sub, 'recruited') ? 'Yes' : 'No'
-                      ].join(','))
-                    ].join('\n');
-                    
-                    // Create download link
-                    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-                    const url = URL.createObjectURL(blob);
-                    const link = document.createElement('a');
-                    link.setAttribute('href', url);
-                    link.setAttribute('download', 'submissions_export.csv');
-                    link.style.visibility = 'hidden';
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                  }
-                }}
-                className="w-full px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors"
-              >
-                Export as CSV
-              </button>
+             
               <button 
                 onClick={() => {
                   const confirmed = window.confirm("Are you sure you want to send email notifications to all qualified candidates?");
