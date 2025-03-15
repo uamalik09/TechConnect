@@ -3,10 +3,10 @@
 // };
 
 module.exports = {
-    overallAdmins: ["abc@gmail.com", "admin2@gmail.com"],
-    ietAdmins: ["iet_admin@gmail.com", "iet_manager@gmail.com"],
-    ieeeAdmins: ["ieee_admin@gmail.com"],
-    acmAdmins: ["acm_admin@gmail.com"],
-    ieAdmins: ["ie_admin@gmail.com"],
-    isteAdmins: ["iste_admin@gmail.com"]
+    overallAdmins: ["abc@nitk.edu.in", "admin2@nitk.edu.in"],
+    ietAdmins: ["iet_admin@nitk.edu.in", "iet_manager@nitk.edu.in"],
+    ieeeAdmins: ["ieee_admin@nitk.edu.in"],
+    acmAdmins: ["acm_admin@nitk.edu.in"],
+    ieAdmins: ["ie_admin@nitk.edu.in"],
+    isteAdmins: ["iste_admin@nitk.edu.in"]
 };
