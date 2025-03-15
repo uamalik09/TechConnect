@@ -1,49 +1,45 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaHome, FaBars, FaTimes, FaUserCircle, FaSignOutAlt, FaQuestionCircle, FaPuzzlePiece } from 'react-icons/fa';
+import { FaHome, FaBars, FaTimes, FaUserCircle, FaSignOutAlt, FaQuestionCircle, FaPuzzlePiece, FaTachometerAlt } from 'react-icons/fa';
+import { Menu, Home } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const IetSig = () => {
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hoveredClub, setHoveredClub] = useState(null);
 
-  // Array of club data with icons and descriptions
+  // Array of club data with images and descriptions
   const clubs = [
     { 
       name: 'Cipher', 
       path: '/getcipherdetails',
-      icon: '🔐',
-      color: 'from-blue-500 to-indigo-600'
+      image: '/images/cipher.png',
     },
     { 
-      name: 'ROVISP', 
+      name: 'Rovisp', 
       path: '/getrovispdetails',
-      icon: '👁️',
-      color: 'from-green-500 to-teal-600'
+      image: '/images/rovisp.png',
     },
     { 
       name: 'Venture', 
       path: '/getventuredetails',
-      icon: '🚀',
-      color: 'from-purple-500 to-pink-600'
+      image: '/images/venture.png',
     },
     { 
       name: 'Torsion', 
       path: '/gettorsiondetails',
-      icon: '⚙️',
-      color: 'from-orange-500 to-amber-600'
+      image: '/images/torsion.png',
     },
     { 
       name: 'Inkheart', 
       path: '/getinkheartdetails',
-      icon: '✒️',
-      color: 'from-red-500 to-rose-600'
+      image: '/images/inkheart.png',
     },
     { 
       name: 'Media', 
       path: '/getmediadetails',
-      icon: '📷',
-      color: 'from-cyan-500 to-sky-600'
+      image: '/images/media.png',
     }
   ];
 
@@ -58,127 +54,126 @@ const IetSig = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-slate-100">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white">
       {/* Navbar */}
-      <nav className="bg-white shadow-md sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <div className="flex-shrink-0 flex items-center">
-                <FaPuzzlePiece className="h-8 w-8 text-indigo-600" />
-                <span className="ml-2 text-xl font-bold text-gray-800">Tech Connect</span>
-              </div>
-              <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                <a href="/ietdashboard" className="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                  Dashboard
-                </a>
-              </div>
-            </div>
-            <div className="hidden sm:ml-6 sm:flex sm:items-center">
-              <div className="ml-3 relative">
-                <div className="flex items-center">
-                  <button
-                    onClick={handleLogout}
-                    className="bg-white p-1 rounded-full text-gray-400 hover:text-red-500 focus:outline-none transition duration-300"
-                  >
-                    <FaSignOutAlt className="h-6 w-6" />
-                  </button>
-                  <div className="ml-3 bg-indigo-100 rounded-full p-1">
-                    <FaUserCircle className="h-8 w-8 text-indigo-600" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="sm:hidden flex items-center">
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-              >
-                {mobileMenuOpen ? <FaTimes className="h-6 w-6" /> : <FaBars className="h-6 w-6" />}
-              </button>
-            </div>
+      <nav className="bg-gray-800 px-6 py-4 shadow-lg border-b border-gray-700 sticky top-0 z-10">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center">
+            <FaTachometerAlt className="h-8 w-8 text-blue-400 mr-2" />
+            <h1 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+              Tech Connect
+            </h1>
+          </div>
+          
+          <div className="hidden md:flex">
+            <Link to="/studentdashboard" className="hover:text-blue-400 flex items-center gap-2">
+              <Home className="h-5 w-5" /> Home
+            </Link>
+            {/* <button 
+              onClick={handleLogout}
+              className="ml-6 hover:text-red-400 flex items-center gap-2"
+            >
+              <FaSignOutAlt className="h-5 w-5" /> Logout
+            </button> */}
+          </div>
+          
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button 
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="text-gray-300 hover:text-white"
+            >
+              {mobileMenuOpen ? <FaTimes className="h-6 w-6" /> : <FaBars className="h-6 w-6" />}
+            </button>
           </div>
         </div>
-
+        
         {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="sm:hidden bg-white border-t border-gray-200 animate-fadeDown">
-            <div className="pt-2 pb-3 space-y-1">
-              <a href="#" className="bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
-                Dashboard
-              </a>
-              <div className="border-transparent hover:bg-gray-50 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
-                <button
-                  onClick={handleLogout}
-                  className="text-red-500 flex items-center"
-                >
-                  <FaSignOutAlt className="mr-2" /> Sign Out
-                </button>
-              </div>
+          <div className="md:hidden mt-4 animate-fadeDown">
+            <div className="flex flex-col space-y-4 px-2 pb-3 pt-2">
+              <Link 
+                to="/studentdashboard" 
+                className="text-gray-300 hover:text-blue-400 flex items-center gap-2 px-3 py-2 rounded-md"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Home className="h-5 w-5" /> Home
+              </Link>
+              {/* <button 
+                onClick={handleLogout}
+                className="text-gray-300 hover:text-red-400 flex items-center gap-2 px-3 py-2 rounded-md text-left"
+              >
+                <FaSignOutAlt className="h-5 w-5" /> Logout
+              </button> */}
             </div>
           </div>
         )}
       </nav>
 
-      {/* Page Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="text-center mb-12">
-          <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-            Special Interest Groups
-          </h1>
-          <p className="mt-4 text-lg text-gray-600 max-w-xl mx-auto">
-            Select a SIG to add questions or manage content for its respective domain
-          </p>
-        </div>
+      {/* Hero Section */}
+      <div className="bg-gradient-to-r from-blue-900 to-purple-900 py-8 px-6 text-center rounded-lg mx-4 sm:mx-8 mt-10 mb-10">
+        <h1 className="text-4xl font-bold mb-2">
+          IET SIGs
+        </h1>
+        <p className="max-w-2xl mx-auto text-gray-300">
+          Select a SIG to add details or manage content for its respective domain
+        </p>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Page Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 gap-6">
           {clubs.map((club, index) => (
             <div
               key={index}
-              className="relative overflow-hidden rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105"
+              className="flex flex-col"
               onMouseEnter={() => setHoveredClub(index)}
               onMouseLeave={() => setHoveredClub(null)}
               onClick={() => navigate(club.path)}
             >
-              <div className={`absolute inset-0 bg-gradient-to-br ${club.color} opacity-80`}></div>
-              <div className="relative p-8 h-full flex flex-col items-center justify-center">
-                <div className="text-4xl mb-4">{club.icon}</div>
-                <h2 className="text-2xl font-bold text-white mb-2">{club.name}</h2>
-                <p className={`text-white text-opacity-90 text-sm transition-opacity duration-300 ${hoveredClub === index ? 'opacity-100' : 'opacity-75'}`}>
-                  {club.description}
-                </p>
-                <div className={`mt-6 bg-white bg-opacity-25 rounded-full px-4 py-2 text-white text-sm font-medium transition-all duration-300 ${hoveredClub === index ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-                  Manage Questions
-                </div>
+              <div 
+                className="rounded-lg shadow-xl overflow-hidden relative group hover:scale-105 transition-all duration-300 h-65 w-75 mx-auto"
+                style={{
+                  backgroundImage: `url(${club.image})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }}
+              >
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t opacity-80 group-hover:opacity-70 transition-opacity"></div>
+                
+                {/* Bottom border */}
+                <div className="absolute bottom-0 left-0 w-full h-1 bg-white opacity-30"></div>
               </div>
+              <h2 className="text-lg font-semibold mt-2 text-center">
+                {club.name}
+              </h2>
+              {/* <div className="mt-2 text-center">
+                <button className="bg-blue-600 text-white px-3 py-1 rounded-lg hover:bg-blue-700 transition text-sm">
+                  Manage details
+                </button>
+              </div> */}
             </div>
           ))}
         </div>
       </div>
 
       {/* Footer */}
-      <footer className="bg-white mt-12 border-t border-gray-200">
-        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-sm text-gray-500">
+      <footer className="bg-gray-800 py-6 px-6 border-t border-gray-700 mt-12">
+        <div className="flex flex-col md:flex-row justify-between items-center">
+          <div className="text-gray-400 mb-4 md:mb-0">
             © 2025 Tech Connect. All rights reserved.
-          </p>
+          </div>
+          <div className="flex space-x-6">
+            <a href="#" className="text-gray-400 hover:text-blue-400">About</a>
+            <a href="#" className="text-gray-400 hover:text-blue-400">Contact</a>
+            <a href="#" className="text-gray-400 hover:text-blue-400">Privacy</a>
+            <a href="#" className="text-gray-400 hover:text-blue-400">Terms</a>
+          </div>
         </div>
       </footer>
     </div>
   );
 };
-
-// Add this for the animations
-const style = document.createElement('style');
-style.textContent = `
-@keyframes fadeDown {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.animate-fadeDown {
-  animation: fadeDown 0.2s ease-out;
-}
-`;
-document.head.appendChild(style);
 
 export default IetSig;

@@ -1,54 +1,63 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import { Menu, Home } from "lucide-react";
+import React, { useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { Home } from 'lucide-react';
+import { 
+  FaTachometerAlt,
+} from "react-icons/fa";
 
-const AllAnnouncement = () => {
-  const navigate = useNavigate();
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
+function ClubPage() {
+  // Use useParams to get clubId from URL if needed
+  // const { clubId } = useParams();
+  
+  const clubs = [
+    { 
+      id: 1, 
+      name: "Institution of Engineering and Technology",
+      shortName: "IET",
+      image: '/images/iet.jpeg'
+    },
+    { 
+      id: 2, 
+      name: "Institute of Electrical and Electronics Engineers",
+      shortName: "IEEE",
+      image: '/images/ieee.jpeg'
+    },
+    { 
+      id: 3, 
+      name: "Association for Computing Machinery",
+      shortName: "ACM",
+      image: '/images/acm.jpeg'
+    },
+    { 
+      id: 4, 
+      name: "Indian Society for Technical Education",
+      shortName: "ISTE",
+      image: '/images/iste.jpeg'
+    },
+    { 
+      id: 5, 
+      name: "Institution of Engineers",
+      shortName: "IE",
+      image: '/images/ie.jpeg'
     }
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { type: "spring", stiffness: 100 }
-    }
-  };
-
-  const announcementItems = [
-    { title: "IET Announcements", color: "bg-blue-600", route: "/getietannouncement", icon: "🔬" },
-    { title: "IEEE Announcements", color: "bg-red-600", route: "/getieeeannouncement", icon: "⚡" },
-    { title: "ACM Announcements", color: "bg-green-600", route: "/getacmannouncement", icon: "💻" },
-    { title: "IE Announcements", color: "bg-yellow-600", route: "/getieannouncement", icon: "🔧" },
-    { title: "ISTE Announcements", color: "bg-purple-600", route: "/getisteannouncement", icon: "🎓" },
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white flex flex-col">
-      {/* Simplified Navbar */}
+      {/* Navbar */}
       <nav className="bg-gray-800 px-6 py-4 shadow-lg border-b border-gray-700 sticky top-0 z-10">
         <div className="flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <Menu className="h-6 w-6 text-blue-400" />
-            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+          <div className="flex items-center">
+            <FaTachometerAlt className="h-8 w-8 text-blue-400 mr-2" />
+            <h1 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
               Tech Connect
-            </span>
+            </h1>
           </div>
           
           <div className="hidden md:flex">
-            <button className="hover:text-blue-400 flex items-center gap-2" onClick={() => navigate('/studentdashboard')}>
+            <Link to="/studentdashboard" className="hover:text-blue-400 flex items-center gap-2">
               <Home className="h-5 w-5" /> Home
-            </button>
+            </Link>
           </div>
         </div>
       </nav>
@@ -66,38 +75,26 @@ const AllAnnouncement = () => {
 
       {/* Main Content */}
       <div className="flex-1 py-12 px-6 md:px-12">
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {announcementItems.map((item, index) => (
-            <motion.div 
-              key={index} 
-              variants={itemVariants}
-              className="flex flex-col"
-            >
-              <h2 className="text-2xl font-semibold mb-3 flex items-center">
-                <span className="mr-2">{item.icon}</span> {item.title}
-              </h2>
-              <motion.div
-                className={`${item.color} p-6 h-52 rounded-xl shadow-xl flex items-center justify-center cursor-pointer overflow-hidden relative group`}
-                whileHover={{ scale: 1.03, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.7)" }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => navigate(item.route)}
-              >
-                <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity"></div>
-                <div className="relative z-10 text-center">
-                  <div className="text-4xl mb-3">{item.icon}</div>
-                  <h2 className="text-white text-xl font-bold mb-2">View {item.title.split(" ")[0]}</h2>
-                  <p className="text-white text-sm opacity-80">Latest updates and events</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+          {clubs.map((club) => (
+            <div key={club.id} className="flex flex-col items-center">
+              <Link to={`/get${club.shortName.toLowerCase()}announcement`}>
+                <div 
+                  className="rounded-lg shadow-xl overflow-hidden relative group hover:scale-105 transition-all duration-300 h-40 w-40 flex items-center justify-center bg-white"
+                >
+                  <img 
+                    src={club.image} 
+                    alt={`${club.name} logo`} 
+                    className="max-h-full max-w-full object-contain p-2" 
+                  />
                 </div>
-                <div className="absolute bottom-0 left-0 w-full h-1 bg-white opacity-30"></div>
-              </motion.div>
-            </motion.div>
+                <h2 className="text-lg font-semibold mt-3 text-center sm:text-left">
+                  {club.name}
+                </h2>
+              </Link>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       {/* Footer */}
@@ -116,6 +113,6 @@ const AllAnnouncement = () => {
       </footer>
     </div>
   );
-};
+}
 
-export default AllAnnouncement;
+export default ClubPage;

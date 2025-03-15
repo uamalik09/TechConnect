@@ -62,7 +62,7 @@ const AdminQuestions = () => {
     e.preventDefault();
     
     try {
-      const settingsResponse = await fetch('http://localhost:8080/questions/iet/inheart/settings', {
+      const settingsResponse = await fetch('http://localhost:8080/questions/iet/inkheart/settings', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ const AdminQuestions = () => {
       
       console.log("Submitting question:", dataToSubmit);
       
-      const response = await fetch("http://localhost:8080/questions/iet/inheart/add", {
+      const response = await fetch("http://localhost:8080/questions/iet/inkheart/add", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
@@ -125,7 +125,7 @@ const AdminQuestions = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this question?")) {
       try {
-        const response = await fetch(`http://localhost:8080/questions/iet/inheart/delete/${id}`, {
+        const response = await fetch(`http://localhost:8080/questions/iet/inkheart/delete/${id}`, {
           method: "DELETE",
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`

@@ -200,7 +200,8 @@ import {
   FaChartBar, 
   FaTachometerAlt,
   FaBell,
-  FaCog
+  FaCog,
+  FaListAlt
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -307,6 +308,13 @@ const IetDashboard = () => {
       icon: <FaQuestionCircle size={40} className="text-cyan-400" />,
       title: "Registered Student Details",
       path: "/ietdetails",
+      color: "from-cyan-500 to-sky-600",
+      hoverColor: "hover:from-cyan-600 hover:to-sky-700"
+    },
+    {
+      icon: <FaListAlt size={40} className="text-cyan-400" />,
+      title: "Preference Form of Students",
+      path: "/adminpreferences",
       color: "from-cyan-500 to-sky-600",
       hoverColor: "hover:from-cyan-600 hover:to-sky-700"
     }

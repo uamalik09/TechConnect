@@ -14,6 +14,7 @@ const TestStatusRoutes = require('./Routes/TestStatusRoutes');
 const QuizStatusRoutes = require('./Routes/QuizStatus');
 const DoubtRoutes = require('./Routes/DoubtRouter');
 const CodingRoutes = require('./Routes/CodingRoutes');
+const PreferenceRoutes=require('./Routes/PreferenceRoutes');
 
 app.use(cors({
     origin: ['http://localhost:5173','http://localhost:5174'], // Allow only frontend
@@ -44,9 +45,10 @@ app.use('/results', ResultRouter);
 app.use('/test-status',TestStatusRoutes);
 app.use('/superadmin', AdminRoutes);
 app.use('/students', StudentRoutes);
-app.use('/status', QuizStatusRoutes);
+app.use('/status', QuizStatusRoutes)    ;
 app.use('/api/doubts', DoubtRoutes);
 app.use('/coding', CodingRoutes);
+app.use('/api/preferences',PreferenceRoutes);
 app.listen(PORT, () => {
     console.log("Server is listening");
 });

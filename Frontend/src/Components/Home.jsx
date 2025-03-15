@@ -102,9 +102,9 @@ const HomePage = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end">
                     <div className="p-4 w-full">
-                      <span className="bg-white/80 backdrop-blur-sm text-gray-800 px-3 py-1 rounded-full text-sm font-medium">
+                      {/* <span className="bg-white/80 backdrop-blur-sm text-gray-800 px-3 py-1 rounded-full text-sm font-medium">
                         View Details
-                      </span>
+                      </span> */}
                     </div>
                   </div>
                 </div>

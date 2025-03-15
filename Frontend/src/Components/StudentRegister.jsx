@@ -252,78 +252,78 @@ const StudentRegistration = () => {
   };
   
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Student Registration</h2>
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+      <div className="w-full max-w-md bg-white rounded-xl shadow-xl p-8 transform transition-all duration-300 hover:shadow-2xl">
+        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6 relative pb-3 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-12 after:h-1 after:bg-gradient-to-r after:from-blue-600 after:to-indigo-600 after:rounded-full">Student Registration</h2>
         
         {submitMessage && (
-          <div className={`p-3 mb-4 rounded-md ${submitMessage.includes('successful') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+          <div className={`p-4 mb-6 rounded-lg text-center text-sm font-medium ${submitMessage.includes('successful') ? 'bg-green-100 text-green-700 border border-green-200' : 'bg-red-100 text-red-700 border border-red-200'}`}>
             {submitMessage}
           </div>
         )}
         
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">Full Name</label>
             <input
               type="text"
               id="name"
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-md ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
+              className={`w-full px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-offset-1 transition duration-200 ${errors.name ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:border-blue-500 focus:ring-blue-400'}`}
               placeholder="Enter your full name"
             />
-            {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
+            {errors.name && <p className="mt-1.5 text-sm text-red-600 font-medium">{errors.name}</p>}
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Roll Number</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">Roll Number</label>
             <input
               type="text"
               id="rollNumber"
               name="rollNumber"
               value={formData.rollNumber}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-md ${errors.rollNumber ? 'border-red-500' : 'border-gray-300'}`}
+              className={`w-full px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-offset-1 transition duration-200 ${errors.rollNumber ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:border-blue-500 focus:ring-blue-400'}`}
               placeholder="Enter your roll number"
             />
-            {errors.rollNumber && <p className="mt-1 text-sm text-red-600">{errors.rollNumber}</p>}
+            {errors.rollNumber && <p className="mt-1.5 text-sm text-red-600 font-medium">{errors.rollNumber}</p>}
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">Email Address</label>
             <input
               type="email"
               id="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-md ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
+              className={`w-full px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-offset-1 transition duration-200 ${errors.email ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:border-blue-500 focus:ring-blue-400'}`}
               placeholder="Enter your email address"
             />
-            {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
+            {errors.email && <p className="mt-1.5 text-sm text-red-600 font-medium">{errors.email}</p>}
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">Phone Number</label>
             <input
               type="text"
               id="phoneNumber"
               name="phoneNumber"
               value={formData.phoneNumber}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-md ${errors.phoneNumber ? 'border-red-500' : 'border-gray-300'}`}
+              className={`w-full px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-offset-1 transition duration-200 ${errors.phoneNumber ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:border-blue-500 focus:ring-blue-400'}`}
               placeholder="Enter your 10-digit phone number"
             />
-            {errors.phoneNumber && <p className="mt-1 text-sm text-red-600">{errors.phoneNumber}</p>}
+            {errors.phoneNumber && <p className="mt-1.5 text-sm text-red-600 font-medium">{errors.phoneNumber}</p>}
           </div>
           
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-3">Select Clubs (Multiple Selection Allowed)</label>
-            <div className="space-y-2 bg-gray-50 p-3 rounded-md">
+            <div className="space-y-2 bg-gray-50 p-4 rounded-lg border border-gray-100">
               {clubs.map(club => (
-                <div key={club.id} className="mb-4 border-b pb-3 last:border-b-0 last:pb-0">
+                <div key={club.id} className="mb-4 border-b border-gray-200 pb-4 last:border-b-0 last:pb-0 hover:bg-gray-50 rounded-md transition-colors duration-200">
                   <div className="flex items-center mb-2">
                     <input
                       type="checkbox"
@@ -331,29 +331,29 @@ const StudentRegistration = () => {
                       value={club.id.toString()}
                       checked={formData.selectedClubs.includes(club.id.toString())}
                       onChange={handleClubChange}
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                      className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded cursor-pointer"
                     />
-                    <label htmlFor={`club-${club.id}`} className="ml-2 block text-sm font-medium text-gray-700">
+                    <label htmlFor={`club-${club.id}`} className="ml-2 block text-sm font-medium text-gray-800 cursor-pointer">
                       {club.name} - {club.description}
                     </label>
                   </div>
                   {formData.selectedClubs.includes(club.id.toString()) && (
-                    <div className="ml-6 mt-2">
-                      <p className="text-sm font-medium text-gray-700 mb-1">Select SIGs for {club.name}:</p>
-                      <div className="space-y-1 bg-white p-2 rounded-md max-h-48 overflow-y-auto">
+                    <div className="ml-7 mt-3 animate-fadeIn">
+                      <p className="text-sm font-medium text-gray-700 mb-2">Select SIGs for {club.name}:</p>
+                      <div className="space-y-2 bg-white p-3 rounded-lg border border-gray-200 max-h-48 overflow-y-auto shadow-sm">
                         {(clubSigs[club.id] || []).map(sig => (
-                          <div key={sig.id} className="flex items-center">
+                          <div key={sig.id} className="flex items-center p-2 hover:bg-blue-50 rounded-md transition-colors duration-200">
                             <input
                               type="checkbox"
                               id={`sig-${club.id}-${sig.id}`}
                               value={sig.id.toString()}
                               checked={(formData.selectedSigs[club.id] || []).includes(sig.id.toString())}
                               onChange={(e) => handleSigChange(club.id.toString(), sig.id.toString(), e.target.checked)}
-                              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                              className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded cursor-pointer"
                             />
-                            <label htmlFor={`sig-${club.id}-${sig.id}`} className="ml-2 block text-sm text-gray-700">
-                              <span className="font-medium">{sig.name}</span> - {sig.description}
-                              <div className="text-xs text-gray-500">Test Time: {sig.testTime}</div>
+                            <label htmlFor={`sig-${club.id}-${sig.id}`} className="ml-2 block text-sm cursor-pointer">
+                              <span className="font-medium text-gray-800">{sig.name}</span> - {sig.description}
+                              <div className="text-xs text-gray-500 mt-1 font-medium">Test Time: {sig.testTime}</div>
                             </label>
                           </div>
                         ))}
@@ -363,27 +363,26 @@ const StudentRegistration = () => {
                 </div>
               ))}
             </div>
-            {errors.selectedClubs && <p className="mt-1 text-sm text-red-600">{errors.selectedClubs}</p>}
-            {errors.selectedSigs && <p className="mt-1 text-sm text-red-600">{errors.selectedSigs}</p>}
+            {errors.selectedClubs && <p className="mt-2 text-sm text-red-600 font-medium">{errors.selectedClubs}</p>}
+            {errors.selectedSigs && <p className="mt-2 text-sm text-red-600 font-medium">{errors.selectedSigs}</p>}
           </div>
           
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`w-full bg-blue-600 text-white font-medium py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+            className={`w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium py-2.5 px-4 rounded-lg hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 transform hover:-translate-y-0.5 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
           >
             {isSubmitting ? 'Registering...' : 'Register'}
           </button>
           
-          <div className="text-center mt-4">
+         {/* <div className="text-center mt-6">
             <p className="text-sm text-gray-600">
-              Already registered? <a href="/login" className="text-blue-600 hover:text-blue-800">Login here</a>
+              Already registered? <a href="/login" className="text-blue-600 hover:text-blue-800 font-medium">Login here</a>
             </p>
-          </div>
+          </div> */}
         </form>
       </div>
     </div>
   );
 };
-
 export default StudentRegistration;

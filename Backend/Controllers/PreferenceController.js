@@ -1,59 +1,34 @@
-const Student = require('../Models/Student');
+const Preference = require("../Models/Preference");
 
-// Find student by roll number
-const findStudentByRollNumber = async (req, res) => {
+// Submit preference
+const submitPreference = async (req, res) => {
   try {
-    const { rollNumber } = req.params;
-    
-    const student = await Student.findOne({ rollNumber });
-    
-    if (!student) {
-      return res.status(404).json({ message: 'Student not found. Please check your roll number.' });
-    }
-    
-    // Return only necessary information
-    res.json({
-      name: student.name,
-      rollNumber: student.rollNumber,
-      clubPreferences: student.clubPreferences || []
+    const { name, rollNo, preferences } = req.body;
+
+    const newPreference = new Preference({
+      name,
+      rollNo,
+      preferences,
     });
-    
+
+    await newPreference.save();
+
+    res.status(201).json({ message: "Preferences submitted successfully." });
   } catch (error) {
-    console.error('Error finding student:', error);
-    res.status(500).json({ message: 'Server error' });
+    console.error("Error submitting preferences:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
-// Update student preferences
-const updateStudentPreferences = async (req, res) => {
+// Get all preferences (for admin)
+const getPreferences = async (req, res) => {
   try {
-    const { rollNumber } = req.params;
-    const { clubPreferences } = req.body;
-    
-    // Find student
-    const student = await Student.findOne({ rollNumber });
-    
-    if (!student) {
-      return res.status(404).json({ message: 'Student not found' });
-    }
-    
-    // Update preferences
-    student.clubPreferences = clubPreferences;
-    await student.save();
-    
-    res.json({
-      message: 'Your preferences have been saved successfully!',
-      name: student.name,
-      rollNumber: student.rollNumber
-    });
-    
+    const preferences = await Preference.find();
+    res.status(200).json(preferences);
   } catch (error) {
-    console.error('Error updating preferences:', error);
-    res.status(500).json({ message: 'Failed to save preferences' });
+    console.error("Error fetching preferences:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
-module.exports = {
-  findStudentByRollNumber,
-  updateStudentPreferences
-};
+module.exports = { submitPreference, getPreferences };

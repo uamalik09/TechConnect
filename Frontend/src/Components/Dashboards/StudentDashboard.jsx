@@ -349,10 +349,13 @@ import {
   FaCalendarAlt, 
   FaUserCircle, 
   FaClipboardList, 
+  FaHourglassStart,
   FaComments, 
   FaSignOutAlt, 
   FaUserPlus,
-  FaTachometerAlt
+  FaTachometerAlt,
+  FaCode,
+  FaListAlt
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
@@ -439,7 +442,7 @@ const StudentDashboard = () => {
     },
     {
       title: "Coding Platform",
-      icon: <FaVideo size={40} className="text-blue-400" />,
+      icon: <FaCode size={40} className="text-red-400" />,
       path: "/allcodelinks",
       description: "Access coding challenges"
     },
@@ -451,7 +454,7 @@ const StudentDashboard = () => {
     },
     {
       title: "Quiz Status",
-      icon: <FaClipboardList size={40} className="text-purple-400" />,
+      icon: <FaHourglassStart size={40} className="text-orange-400" />,
       path: "/clubstatus",
       description: "Check quiz results"
     },
@@ -460,6 +463,12 @@ const StudentDashboard = () => {
       icon: <FaComments size={40} className="text-indigo-400" />,
       path: "/club",
       description: "Connect with mentors and peers"
+    },
+    {
+      title: "Preference Form",
+      icon: <FaListAlt size={40} className="text-indigo-400" />,
+      path: "/preferenceform",
+      description: "Give your preference oder for clubs"
     }
   ];
 

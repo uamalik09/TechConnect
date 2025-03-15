@@ -111,6 +111,9 @@ import AcmLink from "./Components/CodingLink.jsx/GetLink/AcmLink";
 import IeLink from "./Components/CodingLink.jsx/GetLink/IeLink";
 import IsteLink from "./Components/CodingLink.jsx/GetLink/IsteLink";
 import AllCode from "./Components/CodingLink.jsx/AllCode";
+import PreferenceForm from "./Components/PreferenceForm";
+import AdminPreferences from "./Components/AdminPreferences";
+
 // import Rovispchat from "./Components/ChatBox/Iet/Rovispchat";
 // import IeeeQuestions from "./Components/Questions/AddQuestions/IeeeQuestions";
 // import AcmQuestions from "./Components/Questions/AddQuestions/AcmQuestions";
@@ -232,6 +235,8 @@ function App() {
         <Route path="/istecode" element={<IsteCode/>}/>
         <Route path="/istelink" element={<IsteLink/>}/>
         <Route path="/allcodelinks" element={<AllCode/>}/>
+        <Route path="/preferenceform" element={<PreferenceForm/>}/>
+        <Route path="/adminpreferences" element={<AdminPreferences/>}/>
         {/* <Route path="/addieeequestions" element={<IeeeQuestions />}/> */}
         {/* <Route path="/addacmquestions" element={<AcmQuestions />}/> */}
         {/* <Route path="/addiequestions" element={<IeQuestions />}/> */}
