@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Menu, Home } from "lucide-react";
 
-const AllTalks = () => {
+const AllCode = () => {
   const navigate = useNavigate();
 
   const containerVariants = {
@@ -26,11 +26,11 @@ const AllTalks = () => {
   };
 
   const announcementItems = [
-    { title: "IET Announcements", color: "bg-blue-600", route: "/getiettalk", icon: "🔬" },
-    { title: "IEEE Announcements", color: "bg-red-600", route: "/getieeetalk", icon: "⚡" },
-    { title: "ACM Announcements", color: "bg-green-600", route: "/getacmtalk", icon: "💻" },
-    { title: "IE Announcements", color: "bg-yellow-600", route: "/getietalk", icon: "🔧" },
-    { title: "ISTE Announcements", color: "bg-purple-600", route: "/getistetalk", icon: "🎓" },
+    { title: "IET Announcements", color: "bg-blue-600", route: "/ietlink", icon: "🔬" },
+    { title: "IEEE Announcements", color: "bg-red-600", route: "/ieeelink", icon: "⚡" },
+    { title: "ACM Announcements", color: "bg-green-600", route: "/acmlink", icon: "💻" },
+    { title: "IE Announcements", color: "bg-yellow-600", route: "/ielink", icon: "🔧" },
+    { title: "ISTE Announcements", color: "bg-purple-600", route: "/istelink", icon: "🎓" },
   ];
 
   return (
@@ -44,7 +44,7 @@ const AllTalks = () => {
               Tech Connect
             </span>
           </div>
-          
+
           <div className="hidden md:flex">
             <button className="hover:text-blue-400 flex items-center gap-2" onClick={() => navigate('/studentdashboard')}>
               <Home className="h-5 w-5" /> Home
@@ -56,25 +56,24 @@ const AllTalks = () => {
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-900 to-purple-900 py-12 px-6 text-center">
         <h1 className="text-5xl font-bold mb-4 animate-pulse">
-          Pre-Recruitment Portal
+          Coding Portal
         </h1>
         <p className="max-w-2xl mx-auto text-gray-300 mb-6">
-          Stay updated with the latest news and events from all exclusive clubs on campus. 
-          Never miss an important talk again!
+          The best code is like magic—clear, powerful, and unforgettable.
         </p>
       </div>
 
       {/* Main Content */}
       <div className="flex-1 py-12 px-6 md:px-12">
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           {announcementItems.map((item, index) => (
-            <motion.div 
-              key={index} 
+            <motion.div
+              key={index}
               variants={itemVariants}
               className="flex flex-col"
             >
@@ -118,4 +117,4 @@ const AllTalks = () => {
   );
 };
 
-export default AllTalks;
+export default AllCode;

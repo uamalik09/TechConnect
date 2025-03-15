@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import {Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Axios } from "axios";
 
 function Signup() {
@@ -11,6 +11,8 @@ function Signup() {
         confirmPassword: "",
         termsAccepted: false
     });
+    const [error, setError] = useState("");
+
 
     const navigate = useNavigate();
 
@@ -23,20 +25,80 @@ function Signup() {
         }));
     };
 
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     console.log("Form Data before sending:", formData);
+
+
+    //     if (!formData.name || !formData.email || !formData.password) {
+    //         alert("All fields are required!");
+    //         return;
+    //     }
+
+    //     if (formData.password !== formData.confirmPassword) {
+    //         alert("Passwords do not match!");
+    //         return;
+    //     }
+    //     console.log("Form Submitted", formData);
+
+    //     try {
+    //         const url = "http://localhost:8080/auth/signup";
+    //         const response = await fetch(url, {
+    //             method: "POST",
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify({
+    //                 name: formData.name,
+    //                 email: formData.email,
+    //                 password: formData.password, 
+    //                 confirmPassword: formData.confirmPassword
+    //             }),
+    //         });
+
+    //         const result = await response.json();
+    //         const {success, message, error} = result;
+    //         if(success){
+    //             alert("Signup Successfull");
+    //             setTimeout(() => {
+    //                navigate('/login')
+    //             });
+    //         }
+    //         else if(error){
+    //             const details = error?.details[0].message;
+    //             alert(details);
+    //         }
+    //         else if(!success){
+    //             alert(message);
+    //         }
+    //     } catch (err) {
+    //         console.error("Signup error:", err);
+    //     }
+    // };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError(""); // Clear previous errors
+
         console.log("Form Data before sending:", formData);
 
-
         if (!formData.name || !formData.email || !formData.password) {
-            alert("All fields are required!");
+            setError("All fields are required!");
             return;
         }
-        
+
+        // Email validation for @nitk.edu.in
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@nitk\.edu\.in$/;
+        if (!emailRegex.test(formData.email)) {
+            setError("Please enter a valid NITK email (e.g., user@nitk.edu.in).");
+            return;
+        }
+
         if (formData.password !== formData.confirmPassword) {
-            alert("Passwords do not match!");
+            setError("Passwords do not match!");
             return;
         }
+
         console.log("Form Submitted", formData);
 
         try {
@@ -49,30 +111,31 @@ function Signup() {
                 body: JSON.stringify({
                     name: formData.name,
                     email: formData.email,
-                    password: formData.password, 
+                    password: formData.password,
                     confirmPassword: formData.confirmPassword
                 }),
             });
 
             const result = await response.json();
-            const {success, message, error} = result;
-            if(success){
-                alert("Signup Successfull");
+            const { success, message, error } = result;
+
+            if (success) {
+                alert("Signup Successful");
                 setTimeout(() => {
-                   navigate('/login')
+                    navigate('/login');
                 });
-            }
-            else if(error){
+            } else if (error) {
                 const details = error?.details[0].message;
-                alert(details);
-            }
-            else if(!success){
-                alert(message);
+                setError(details); // Show backend validation error on the page
+            } else if (!success) {
+                setError(message);
             }
         } catch (err) {
             console.error("Signup error:", err);
+            setError("An error occurred while signing up. Please try again.");
         }
     };
+
 
     return (
         <section className="bg-gray-50 dark:bg-gray-900">
@@ -156,6 +219,8 @@ function Signup() {
                                     </label>
                                 </div>
                             </div>
+                            {error && <p className="text-red-500 text-sm">{error}</p>}
+
                             <button
                                 type="submit"
                                 className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

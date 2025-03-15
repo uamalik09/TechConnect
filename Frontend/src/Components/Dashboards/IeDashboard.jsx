@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaBullhorn, FaVideo, FaCalendarAlt, FaUserCircle } from "react-icons/fa";
+import { FaBullhorn, FaVideo, FaCalendarAlt, FaUserCircle, FaClipboardList } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
 const IeDashboard = () => {
@@ -63,6 +63,17 @@ const IeDashboard = () => {
             <button
               onClick={() => navigate("/addietalk")}
               className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg transition"
+            >
+              Add
+            </button>
+          </div>
+
+          <div className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition cursor-pointer">
+            <FaClipboardList size={40} className="text-purple-400 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-center mb-3">Coding Platform</h3>
+            <button
+              onClick={() => navigate("/iecode")}
+              className="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg transition"
             >
               Add
             </button>

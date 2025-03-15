@@ -68,6 +68,17 @@ const IsteDashboard = () => {
             </button>
           </div>
 
+          <div className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition cursor-pointer">
+            <FaClipboardList size={40} className="text-purple-400 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-center mb-3">Coding Platform</h3>
+            <button
+              onClick={() => navigate("/istecode")}
+              className="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg transition"
+            >
+              Add
+            </button>
+          </div>
+
           {/* Add Interview Slot */}
           <div className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition">
             <FaCalendarAlt size={40} className="text-green-400 mx-auto mb-4" />

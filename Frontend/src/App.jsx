@@ -100,6 +100,17 @@ import SigList from "./Components/ChatBox/SigList";
 import Chat from "./Components/chat";
 import IetSigs from "./Components/ChatBox/Ietsigs";
 import Cipherchat from "./Components/ChatBox/Iet/Cipherchat";
+import IetCode from "./Components/CodingLink.jsx/IetCode";
+import IeeeCode from "./Components/CodingLink.jsx/IeeeCode";
+import AcmCode from "./Components/CodingLink.jsx/AcmCoding";
+import IeCode from "./Components/CodingLink.jsx/IeCoding";
+import IsteCode from "./Components/CodingLink.jsx/IsteCoding";
+import IetLink from "./Components/CodingLink.jsx/GetLink/IetLink";
+import IeeeLink from "./Components/CodingLink.jsx/GetLink/IeeeLink";
+import AcmLink from "./Components/CodingLink.jsx/GetLink/AcmLink";
+import IeLink from "./Components/CodingLink.jsx/GetLink/IeLink";
+import IsteLink from "./Components/CodingLink.jsx/GetLink/IsteLink";
+import AllCode from "./Components/CodingLink.jsx/AllCode";
 // import Rovispchat from "./Components/ChatBox/Iet/Rovispchat";
 // import IeeeQuestions from "./Components/Questions/AddQuestions/IeeeQuestions";
 // import AcmQuestions from "./Components/Questions/AddQuestions/AcmQuestions";
@@ -210,6 +221,17 @@ function App() {
         <Route path="/:clubId/:sigId/chat" element={<Chat />} />
         <Route path="/ietsigs" element={<IetSigs />}/>
         <Route path="/Cipherchat" element={<Cipherchat/>}/>
+        <Route path="/ietcode" element={<IetCode/>}/>
+        <Route path="/ietlink" element={<IetLink/>}/>
+        <Route path="/ieeecode" element={<IeeeCode/>}/>
+        <Route path="/ieeelink" element={<IeeeLink/>}/>
+        <Route path="/acmcode" element={<AcmCode/>}/>
+        <Route path="/acmlink" element={<AcmLink/>}/>
+        <Route path="/iecode" element={<IeCode/>}/>
+        <Route path="/ielink" element={<IeLink/>}/>
+        <Route path="/istecode" element={<IsteCode/>}/>
+        <Route path="/istelink" element={<IsteLink/>}/>
+        <Route path="/allcodelinks" element={<AllCode/>}/>
         {/* <Route path="/addieeequestions" element={<IeeeQuestions />}/> */}
         {/* <Route path="/addacmquestions" element={<AcmQuestions />}/> */}
         {/* <Route path="/addiequestions" element={<IeQuestions />}/> */}
