@@ -12,34 +12,34 @@ const IetSig = () => {
   // Array of club data with images and descriptions
   const clubs = [
     { 
-      name: 'Cipher', 
-      path: '/getcipherquestions',
-      image: '/images/cipher.png',
+      name: 'Abhivyakta', 
+      path: '/addabhivyaktaquestions',
+      image: '/images/abhivyakta.png',
     },
     { 
-      name: 'Rovisp', 
-      path: '/getrovispquestions',
-      image: '/images/rovisp.png',
+      name: 'Kaaryavarta', 
+      path: '/addkaaryavartaquestions',
+      image: '/images/kaaryavarta.png',
     },
     { 
-      name: 'Venture', 
-      path: '/getventurequestions',
-      image: '/images/venture.png',
+      name: 'Saahitya', 
+      path: '/addsaahityaquestions',
+      image: '/images/saahitya.png',
     },
     { 
-      name: 'Torsion', 
-      path: '/gettorsionquestions',
-      image: '/images/torsion.png',
+      name: 'Sanganitra', 
+      path: '/addsanganitraquestions',
+      image: '/images/sanganitra.png',
     },
     { 
-      name: 'Inkheart', 
-      path: '/getinkheartquestions',
-      image: '/images/inkheart.png',
+      name: 'Vidyut', 
+      path: '/addvidyutquestions',
+      image: '/images/vidyut.png',
     },
     { 
-      name: 'Media', 
-      path: '/getmediaquestions',
-      image: '/images/media.png',
+      name: 'Yantrika', 
+      path: '/addyantrikaquestions',
+      image: '/images/yantrika.png',
     }
   ];
 

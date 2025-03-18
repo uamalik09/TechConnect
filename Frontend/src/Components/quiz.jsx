@@ -457,18 +457,18 @@ const QuizPage = () => {
                     <p className="mb-6">You have already submitted this quiz.</p>
                     <div className="flex flex-col space-y-3">
                         <button
-                            onClick={() => navigate(`/${club}/${sig}/results`)}
+                            onClick={() => navigate(`/${club}/${sig}/submit`)}
                             className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
                         >
                             View Results
                         </button>
                     
-                        {/* <button
+                        <button
                             onClick={resetQuizState}
                             className="bg-red-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-red-600 transition duration-300"
                         >
                             Reset Quiz (For Testing)
-                        </button> */}
+                        </button>
                     </div>
                 </div>
             </div>

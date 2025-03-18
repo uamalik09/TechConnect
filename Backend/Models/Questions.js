@@ -63,17 +63,21 @@ const models = {
     ieGarage: mongoose.model("iegarage", QuestionSchema),
     ieTechtonic: mongoose.model("ietechtonic", QuestionSchema),
   
-    acmSanganitra: mongoose.model("acmsanganitra", QuestionSchema),
-    acmKaaryavarta: mongoose.model("acmkaaryavarta", QuestionSchema),
-    acmVidyut: mongoose.model("acmvidyut", QuestionSchema),
-    acmYantrika: mongoose.model("acmyantrika", QuestionSchema),
-    acmSaahitya: mongoose.model("acmsaahitya", QuestionSchema),
-    acmAbhivyakta: mongoose.model("acmabhivyakta", QuestionSchema),
+    acmsanganitra: mongoose.model("acmsanganitra", QuestionSchema),
+    acmkaaryavarta: mongoose.model("acmkaaryavarta", QuestionSchema),
+    acmvidyut: mongoose.model("acmvidyut", QuestionSchema),
+    acmyantrika: mongoose.model("acmyantrika", QuestionSchema),
+    acmsaahitya: mongoose.model("acmsaahitya", QuestionSchema),
+    acmabhivyakta: mongoose.model("acmabhivyakta", QuestionSchema),
   
-    isteCrypt: mongoose.model("istecrypt", QuestionSchema),
-    isteCharge: mongoose.model("istecharge", QuestionSchema),
-    isteCatalyst: mongoose.model("istecatalyst", QuestionSchema),
-    isteChronicle: mongoose.model("istechronicle", QuestionSchema),
+    istecrypt: mongoose.model("istecrypt", QuestionSchema),
+    istecharge: mongoose.model("istecharge", QuestionSchema),
+    istecatalyst: mongoose.model("istecatalyst", QuestionSchema),
+    istechronicle: mongoose.model("istechronicle", QuestionSchema),
+    isteclutch: mongoose.model("isteclutch", QuestionSchema),
+    isteconcrete: mongoose.model("isteconcrete", QuestionSchema),
+    istecredit: mongoose.model("istecredit", QuestionSchema),
+    istecreate: mongoose.model("istecreate", QuestionSchema),
   };
   
   module.exports = models;
