@@ -102,13 +102,13 @@ router.get('/iste/credit/:rollNumber', authenticateUser, authorizeRoles('iste'),
 router.get('/iste/crypt/all', authenticateUser, authorizeRoles('iste'), getAllStudents);
 router.get('/iste/crypt/:rollNumber', authenticateUser, authorizeRoles('iste'), getStudentByRollNumber);
 
-router.post('/ie/capital/regier', regierStudent);
-router.post('/ie/code/regier', regierStudent);
-router.post('/ie/robotics/regier', regierStudent);
-router.post('/ie/tectonic/regier', regierStudent);
-router.post('/ie/garage/regier', regierStudent);
-router.post('/ie/gadget/regier', regierStudent);
-router.post('/ie/script/regier', regierStudent);
+router.post('/ie/capital/register', registerStudent);
+router.post('/ie/code/register', registerStudent);
+router.post('/ie/robotics/register', registerStudent);
+router.post('/ie/tectonic/register', registerStudent);
+router.post('/ie/garage/register', registerStudent);
+router.post('/ie/gadget/register', registerStudent);
+router.post('/ie/script/register', registerStudent);
 
 router.get('/ie/capital/all', authenticateUser, authorizeRoles('ie'), getAllStudents);
 router.get('/ie/capital/:rollNumber', authenticateUser, authorizeRoles('ie'), getStudentByRollNumber);
