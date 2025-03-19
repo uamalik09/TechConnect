@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const CipherChat = () => {
+const RovispChat = () => {
   const [messages, setMessages] = useState([]);
   const [adminReply, setAdminReply] = useState({});
 
@@ -50,7 +50,7 @@ const CipherChat = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white p-6">
-      <h1 className="text-2xl font-bold mb-4">Cipher Doubts</h1>
+      <h1 className="text-2xl font-bold mb-4">Rovisp Doubts</h1>
   
       {messages.length === 0 ? (
         <p>No doubts asked yet!</p>
@@ -87,4 +87,4 @@ const CipherChat = () => {
   );
 };
 
-export default CipherChat;
+export default RovispChat;

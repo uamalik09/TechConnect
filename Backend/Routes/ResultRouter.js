@@ -145,5 +145,47 @@ router.get('/iste/crypt/submissions', authenticateUser, authorizeRoles('iste'), 
 router.patch('/iste/crypt/submissions/:submissionId/status', authenticateUser, authorizeRoles('iste'), (req, res)=>updateQualificationStatus(req, res, 'istecrypt'));
 
 
+router.post('/ie/capital/submit', authenticateUser,validateSubmission, (req, res) => 
+    submitQuiz(req, res, 'iecapital'));
+router.get('/ie/capital/submissions', authenticateUser, authorizeRoles('ie'), (req, res) => 
+    getAllSubmissions(req, res, 'iecapital'));
+router.patch('/ie/capital/submissions/:submissionId/status', authenticateUser, authorizeRoles('ie'), (req, res)=>updateQualificationStatus(req, res, 'iecapital'));
+
+router.post('/ie/code/submit', authenticateUser,validateSubmission, (req, res) => 
+    submitQuiz(req, res, 'iecode'));
+router.get('/ie/code/submissions', authenticateUser, authorizeRoles('ie'), (req, res) => 
+    getAllSubmissions(req, res, 'iecode'));
+router.patch('/ie/code/submissions/:submissionId/status', authenticateUser, authorizeRoles('ie'), (req, res)=>updateQualificationStatus(req, res, 'iecode'));
+
+router.post('/ie/gadget/submit', authenticateUser,validateSubmission, (req, res) => 
+    submitQuiz(req, res, 'iegadget'));
+router.get('/ie/gadget/submissions', authenticateUser, authorizeRoles('ie'), (req, res) => 
+    getAllSubmissions(req, res, 'iegadget'));
+router.patch('/ie/gadget/submissions/:submissionId/status', authenticateUser, authorizeRoles('ie'), (req, res)=>updateQualificationStatus(req, res, 'iegadget'));
+
+router.post('/ie/robotics/submit', authenticateUser,validateSubmission, (req, res) => 
+    submitQuiz(req, res, 'ierobotics'));
+router.get('/ie/robotics/submissions', authenticateUser, authorizeRoles('ie'), (req, res) => 
+    getAllSubmissions(req, res, 'ierobotics'));
+router.patch('/ie/robotics/submissions/:submissionId/status', authenticateUser, authorizeRoles('ie'), (req, res)=>updateQualificationStatus(req, res, 'ierobotics'));
+
+router.post('/ie/garage/submit', authenticateUser,validateSubmission, (req, res) => 
+    submitQuiz(req, res, 'iegarage'));
+router.get('/ie/garage/submissions', authenticateUser, authorizeRoles('ie'), (req, res) => 
+    getAllSubmissions(req, res, 'iegarage'));
+router.patch('/ie/garage/submissions/:submissionId/status', authenticateUser, authorizeRoles('ie'), (req, res)=>updateQualificationStatus(req, res, 'iegarage'));
+
+router.post('/ie/tectonic/submit', authenticateUser,validateSubmission, (req, res) => 
+    submitQuiz(req, res, 'ietectonic'));
+router.get('/ie/tectonic/submissions', authenticateUser, authorizeRoles('ie'), (req, res) => 
+    getAllSubmissions(req, res, 'ietectonic'));
+router.patch('/ie/tectonic/submissions/:submissionId/status', authenticateUser, authorizeRoles('ie'), (req, res)=>updateQualificationStatus(req, res, 'ietectonic'));
+
+router.post('/ie/script/submit', authenticateUser,validateSubmission, (req, res) => 
+    submitQuiz(req, res, 'iescript'));
+router.get('/ie/script/submissions', authenticateUser, authorizeRoles('ie'), (req, res) => 
+    getAllSubmissions(req, res, 'iescript'));
+router.patch('/ie/script/submissions/:submissionId/status', authenticateUser, authorizeRoles('ie'), (req, res)=>updateQualificationStatus(req, res, 'iescript'));
+
 
 module.exports = router;

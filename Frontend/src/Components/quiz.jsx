@@ -462,13 +462,13 @@ const QuizPage = () => {
                         >
                             View Results
                         </button>
-                    
+{/*                     
                         <button
                             onClick={resetQuizState}
                             className="bg-red-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-red-600 transition duration-300"
                         >
                             Reset Quiz (For Testing)
-                        </button>
+                        </button> */}
                     </div>
                 </div>
             </div>

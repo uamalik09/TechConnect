@@ -122,12 +122,21 @@ import AcmSig from "./Components/Questions/AddQuestions/ACM/sigs";
 import AcmSigresults from "./Components/Questions/AddQuestions/ACM/sigsforresults";
 import AcmSigdetails from "./Components/Questions/AddQuestions/ACM/sigsforregistrationdetails";
 import AcmSigsstatus from "./Components/Questions/AddQuestions/ACM/SigsforStatus";
+import IsteSig from "./Components/Questions/AddQuestions/ISTE/sigs";
+import IsteSigresults from "./Components/Questions/AddQuestions/ISTE/sigsforresults";
+import IsteSigdetails from "./Components/Questions/AddQuestions/ISTE/sigsforregistrationdetails";
+import IsteSigsstatus from "./Components/Questions/AddQuestions/ISTE/SigsforStatus";
 import ClubStatus from "./Components/clubforStatus";
 import ClubList from "./Components/ChatBox/ClubList";
 import SigList from "./Components/ChatBox/SigList";
 import Chat from "./Components/chat";
 import IetSigs from "./Components/ChatBox/Ietsigs";
 import Cipherchat from "./Components/ChatBox/Iet/Cipherchat";
+import Rovispchat from "./Components/ChatBox/Iet/Rovispchat";
+import Inkheartchat from "./Components/ChatBox/Iet/Inkheartchat";
+import Mediachat from "./Components/ChatBox/Iet/Mediachat";
+import Torsionchat from "./Components/ChatBox/Iet/Torsionchat";
+import Venturechat from "./Components/ChatBox/Iet/Venturechat";
 import IetCode from "./Components/CodingLink.jsx/IetCode";
 import IeeeCode from "./Components/CodingLink.jsx/IeeeCode";
 import AcmCode from "./Components/CodingLink.jsx/AcmCoding";
@@ -141,6 +150,78 @@ import IsteLink from "./Components/CodingLink.jsx/GetLink/IsteLink";
 import AllCode from "./Components/CodingLink.jsx/AllCode";
 import PreferenceForm from "./Components/PreferenceForm";
 import AdminPreferences from "./Components/AdminPreferences";
+import CatalystQuestions from "./Components/Questions/AddQuestions/ISTE/Catalyst/CatalystQuestions";
+import ChargeQuestions from "./Components/Questions/AddQuestions/ISTE/Charge/ChargeQuestions";
+import ChronicleQuestions from "./Components/Questions/AddQuestions/ISTE/Chronicle/ChronicleQuestions";
+import ClutchQuestions from "./Components/Questions/AddQuestions/ISTE/Clutch/ClutchQuestions";
+import ConcreteQuestions from "./Components/Questions/AddQuestions/ISTE/Concrete/ConcreteQuestions";
+import CreateQuestions from "./Components/Questions/AddQuestions/ISTE/Create/CreateQuestions";
+import CreditQuestions from "./Components/Questions/AddQuestions/ISTE/Credit/CreditQuestions";
+import CryptQuestions from "./Components/Questions/AddQuestions/ISTE/Crypt/CryptQuestions";
+
+import CatalystResults from "./Components/Questions/AddQuestions/ISTE/Catalyst/Submissions";
+import ChargeResults from "./Components/Questions/AddQuestions/ISTE/Charge/Submissions";
+import ChronicleResults from "./Components/Questions/AddQuestions/ISTE/Chronicle/Submissions";
+import ClutchResults from "./Components/Questions/AddQuestions/ISTE/Clutch/Submissions";
+import ConcreteResults from "./Components/Questions/AddQuestions/ISTE/Concrete/Submissions";
+import CreateResults from "./Components/Questions/AddQuestions/ISTE/Create/Submissions";
+import CreditResults from "./Components/Questions/AddQuestions/ISTE/Credit/Submissions";
+import CryptResults from "./Components/Questions/AddQuestions/ISTE/Crypt/Submissions";
+
+import CatalystDetails from "./Components/Questions/AddQuestions/ISTE/Catalyst/StudentDetails";
+import ChargeDetails from "./Components/Questions/AddQuestions/ISTE//Charge/StudentDetails";
+import ChronicleDetails from "./Components/Questions/AddQuestions/ISTE/Chronicle/StudentDetails";
+import ClutchDetails from "./Components/Questions/AddQuestions/ISTE/Clutch/StudentDetails";
+import CreateDetails from "./Components/Questions/AddQuestions/ISTE/Create/StudentDetails";
+import ConcreteDetails from "./Components/Questions/AddQuestions/ISTE/Concrete/StudentDetails";
+import CreditDetails from "./Components/Questions/AddQuestions/ISTE/Credit/StudentDetails";
+import CryptDetails from "./Components/Questions/AddQuestions/ISTE/Crypt/StudentDetails";
+
+import CatalystStatus from "./Components/Questions/AddQuestions/ISTE/Catalyst/QuizStatus";
+import ChargeStatus from "./Components/Questions/AddQuestions/ISTE//Charge/QuizStatus";
+import ChronicleStatus from "./Components/Questions/AddQuestions/ISTE/Chronicle/QuizStatus";
+import ClutchStatus from "./Components/Questions/AddQuestions/ISTE/Clutch/QuizStatus";
+import CreateStatus from "./Components/Questions/AddQuestions/ISTE/Create/QuizStatus";
+import ConcreteStatus from "./Components/Questions/AddQuestions/ISTE/Concrete/QuizStatus";
+import CreditStatus from "./Components/Questions/AddQuestions/ISTE/Credit/QuizStatus";
+import CryptStatus from "./Components/Questions/AddQuestions/ISTE/Crypt/QuizStatus";
+
+import CapitalQuestions from "./Components/Questions/AddQuestions/IE/Capital/CapitalQuestions";
+import CodeQuestions from "./Components/Questions/AddQuestions/IE/Code/CodeQuestions";
+import GadgetQuestions from "./Components/Questions/AddQuestions/IE/Gadget/GadgetQuestions";
+import GarageQuestions from "./Components/Questions/AddQuestions/IE/Garage/GarageQuestions";
+import RoboticsQuestions from "./Components/Questions/AddQuestions/IE/Robotics/RoboticsQuestions";
+import ScriptQuestions from "./Components/Questions/AddQuestions/IE/Script/ScriptQuestions";
+import TectonicQuestions from "./Components/Questions/AddQuestions/IE/Tectonic/TectonicQuestions";
+
+import CapitalResults from "./Components/Questions/AddQuestions/IE/Capital/Submissions";
+import CodeResults from "./Components/Questions/AddQuestions/IE/Code/Submissions";
+import GadgetResults from "./Components/Questions/AddQuestions/IE/Gadget/Submissions";
+import GarageResults from "./Components/Questions/AddQuestions/IE/Garage/Submissions";
+import RoboticsResults from "./Components/Questions/AddQuestions/IE/Robotics/Submissions";
+import ScriptResults from "./Components/Questions/AddQuestions/IE/Script/Submissions";
+import TectonicResults from "./Components/Questions/AddQuestions/IE/Tectonic/Submissions";
+
+import CapitalDetails from "./Components/Questions/AddQuestions/IE/Capital/StudentDetails";
+import CodeDetails from "./Components/Questions/AddQuestions/IE//Code/StudentDetails";
+import GadgetDetails from "./Components/Questions/AddQuestions/IE/Gadget/StudentDetails";
+import GarageDetails from "./Components/Questions/AddQuestions/IE/Garage/StudentDetails";
+import ScriptDetails from "./Components/Questions/AddQuestions/IE/Script/StudentDetails";
+import RoboticsDetails from "./Components/Questions/AddQuestions/IE/Robotics/StudentDetails";
+import TectonicDetails from "./Components/Questions/AddQuestions/IE/Tectonic/StudentDetails";
+
+import CapitalStatus from "./Components/Questions/AddQuestions/IE/Capital/QuizStatus";
+import CodeStatus from "./Components/Questions/AddQuestions/IE//Code/QuizStatus";
+import GadgetStatus from "./Components/Questions/AddQuestions/IE/Gadget/QuizStatus";
+import GarageStatus from "./Components/Questions/AddQuestions/IE/Garage/QuizStatus";
+import ScriptStatus from "./Components/Questions/AddQuestions/IE/Script/QuizStatus";
+import RoboticsStatus from "./Components/Questions/AddQuestions/IE/Robotics/QuizStatus";
+import TectonicStatus from "./Components/Questions/AddQuestions/IE/Tectonic/QuizStatus";
+
+import IeSig from "./Components/Questions/AddQuestions/IE/sigs";
+import IeSigresults from "./Components/Questions/AddQuestions/IE/sigsforresults";
+import IeSigdetails from "./Components/Questions/AddQuestions/IE/sigsforregistrationdetails";
+import IeSigsstatus from "./Components/Questions/AddQuestions/IE/SigsforStatus";
 
 // import Rovispchat from "./Components/ChatBox/Iet/Rovispchat";
 // import IeeeQuestions from "./Components/Questions/AddQuestions/IeeeQuestions";
@@ -280,6 +361,11 @@ function App() {
         <Route path="/:clubId/:sigId/chat" element={<Chat />} />
         <Route path="/ietsigs" element={<IetSigs />}/>
         <Route path="/Cipherchat" element={<Cipherchat/>}/>
+        <Route path="/Rovispchat" element={<Rovispchat/>}/>
+        <Route path="/Inkheartchat" element={<Inkheartchat/>}/>
+        <Route path="/Mediachat" element={<Mediachat/>}/>
+        <Route path="/Torsionchat" element={<Torsionchat/>}/>
+        <Route path="/Venturechat" element={<Venturechat/>}/>
         <Route path="/ietcode" element={<IetCode/>}/>
         <Route path="/ietlink" element={<IetLink/>}/>
         <Route path="/ieeecode" element={<IeeeCode/>}/>
@@ -293,6 +379,79 @@ function App() {
         <Route path="/allcodelinks" element={<AllCode/>}/>
         <Route path="/preferenceform" element={<PreferenceForm/>}/>
         <Route path="/adminpreferences" element={<AdminPreferences/>}/>
+        <Route path="/addcatalystquestions" element={<CatalystQuestions />}/>
+        <Route path="/addchargequestions" element={<ChargeQuestions />}/>
+        <Route path="/addchroniclequestions" element={<ChronicleQuestions />}/>
+        <Route path="/addclutchquestions" element={<ClutchQuestions />}/>
+        <Route path="/addconcretequestions" element={<ConcreteQuestions />}/>
+        <Route path="/addcreatequestions" element={<CreateQuestions />}/>
+        <Route path="/getcatalystresults" element={<CatalystResults />}/>
+        <Route path="/getchargeresults" element={<ChargeResults />}/>
+        <Route path="/getchronicleresults" element={<ChronicleResults />}/>
+        <Route path="/getclutchresults" element={<ClutchResults />}/>
+        <Route path="/getconcreteresults" element={<ConcreteResults />}/>
+        <Route path="/getcreateresults" element={<CreateResults />}/>
+        <Route path="/getcatalystdetails" element={<CatalystDetails />}/>
+        <Route path="/getchargedetails" element={<ChargeDetails />}/>
+        <Route path="/getchronicledetails" element={<ChronicleDetails />}/>
+        <Route path="/getconcretedetails" element={<ConcreteDetails />}/>
+        <Route path="/getclutchdetails" element={<ClutchDetails />}/>
+        <Route path="/getcreatedetails" element={<CreateDetails />}/>
+        <Route path="/getcatalyststatus" element={<CatalystStatus />}/>
+        <Route path="/getchargestatus" element={<ChargeStatus />}/>
+        <Route path="/getchroniclestatus" element={<ChronicleStatus />}/>
+        <Route path="/getconcretestatus" element={<ConcreteStatus />}/>
+        <Route path="/getclutchstatus" element={<ClutchStatus />}/>
+        <Route path="/getcreatestatus" element={<CreateStatus />}/>
+        <Route path="/addcreditquestions" element={<CreditQuestions />}/>
+        <Route path="/addcryptquestions" element={<CryptQuestions />}/>
+        <Route path="/getcreditresults" element={<CreditResults />}/>
+        <Route path="/getcryptresults" element={<CryptResults />}/>
+        <Route path="/getcreditdetails" element={<CreditDetails />}/>
+        <Route path="/getcryptdetails" element={<CryptDetails />}/>
+        <Route path="/getcreditstatus" element={<CreditStatus />}/>
+        <Route path="/getcryptstatus" element={<CryptStatus />}/>
+        <Route path="/iste" element={<IsteSig />}/>
+        <Route path="/isteresults" element={<IsteSigresults />}/>
+        <Route path="/istedetails" element={<IsteSigdetails />}/>
+        <Route path="/istestatus" element={<IsteSigsstatus />}/>
+        
+
+        <Route path="/addcapitalquestions" element={<CapitalQuestions />}/>
+        <Route path="/addcodequestions" element={<CodeQuestions />}/>
+        <Route path="/addgadgetquestions" element={<GadgetQuestions />}/>
+        <Route path="/addgaragequestions" element={<GarageQuestions />}/>
+        <Route path="/addroboticsquestions" element={<RoboticsQuestions />}/>
+        <Route path="/addscriptquestions" element={<ScriptQuestions />}/>
+        <Route path="/getcapitalresults" element={<CapitalResults />}/>
+        <Route path="/getcoderesults" element={<CodeResults />}/>
+        <Route path="/getgadgetresults" element={<GadgetResults />}/>
+        <Route path="/getgarageresults" element={<GarageResults />}/>
+        <Route path="/getroboticsresults" element={<RoboticsResults />}/>
+        <Route path="/getscriptresults" element={<ScriptResults />}/>
+        <Route path="/getcapitaldetails" element={<CapitalDetails />}/>
+        <Route path="/getcodedetails" element={<CodeDetails />}/>
+        <Route path="/getgadgetdetails" element={<GadgetDetails />}/>
+        <Route path="/getroboticsdetails" element={<RoboticsDetails />}/>
+        <Route path="/getgaragedetails" element={<GarageDetails />}/>
+        <Route path="/getscriptdetails" element={<ScriptDetails />}/>
+        <Route path="/getcapitalstatus" element={<CapitalStatus />}/>
+        <Route path="/getcodestatus" element={<CodeStatus />}/>
+        <Route path="/getgadgetstatus" element={<GadgetStatus />}/>
+        <Route path="/getroboticsstatus" element={<RoboticsStatus />}/>
+        <Route path="/getgaragestatus" element={<GarageStatus />}/>
+        <Route path="/getscriptstatus" element={<ScriptStatus />}/>
+        <Route path="/addtectonicquestions" element={<TectonicQuestions />}/>
+        <Route path="/gettectonicresults" element={<TectonicResults />}/>
+        <Route path="/gettectonicdetails" element={<TectonicDetails />}/>
+        <Route path="/gettectonicstatus" element={<TectonicStatus />}/>
+        <Route path="/ie" element={<IeSig />}/>
+        <Route path="/ieresults" element={<IeSigresults />}/>
+        <Route path="/iedetails" element={<IeSigdetails />}/>
+        <Route path="/iestatus" element={<IeSigsstatus />}/>
+
+
+
         {/* <Route path="/addieeequestions" element={<IeeeQuestions />}/> */}
         {/* <Route path="/addacmquestions" element={<AcmQuestions />}/> */}
         {/* <Route path="/addiequestions" element={<IeQuestions />}/> */}

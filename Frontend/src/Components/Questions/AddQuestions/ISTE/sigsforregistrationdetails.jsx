@@ -12,34 +12,44 @@ const IetSig = () => {
   // Array of club data with images and descriptions
   const clubs = [
     { 
-      name: 'Cipher', 
-      path: '/getcipherdetails',
-      image: '/images/cipher.png',
+      name: 'Catalyst', 
+      path: '/getcatalystdetails',
+      image: '/images/catalyst.png',
     },
     { 
-      name: 'Rovisp', 
-      path: '/getrovispdetails',
-      image: '/images/rovisp.png',
+      name: 'Charge', 
+      path: '/getchargedetails',
+      image: '/images/charge.png',
     },
     { 
-      name: 'Venture', 
-      path: '/getventuredetails',
-      image: '/images/venture.png',
+      name: 'Chronicle', 
+      path: '/getchronicledetails',
+      image: '/images/chronicle.png',
     },
     { 
-      name: 'Torsion', 
-      path: '/gettorsiondetails',
-      image: '/images/torsion.png',
+      name: 'Clutch', 
+      path: '/getclutchdetails',
+      image: '/images/clutch.png',
     },
     { 
-      name: 'Inkheart', 
-      path: '/getinkheartdetails',
-      image: '/images/inkheart.png',
+      name: 'Concrete', 
+      path: '/getconcretedetails',
+      image: '/images/concrete.png',
     },
     { 
-      name: 'Media', 
-      path: '/getmediadetails',
-      image: '/images/media.png',
+      name: 'Create', 
+      path: '/getcreatedetails',
+      image: '/images/create.png',
+    },
+    { 
+      name: 'Credit', 
+      path: '/getcreditdetails',
+      image: '/images/credit.png',
+    },
+    { 
+      name: 'Crypt', 
+      path: '/getcryptdetails',
+      image: '/images/crypt.png',
     }
   ];
 

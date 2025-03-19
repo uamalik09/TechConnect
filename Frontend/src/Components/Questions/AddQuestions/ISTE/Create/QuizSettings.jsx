@@ -19,7 +19,7 @@ const QuizSettings = ({ totalMarks, totalQuestions }) => {
   const fetchQuizSettings = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:8080/questions/iet/cipher/settings', {
+      const response = await fetch('http://localhost:8080/questions/iste/create/settings', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ const QuizSettings = ({ totalMarks, totalQuestions }) => {
       
       console.log("Submitting settings:", settingsToSubmit);
       
-      const response = await fetch("http://localhost:8080/questions/iet/cipher/settings/update", {
+      const response = await fetch("http://localhost:8080/questions/iste/create/settings/update", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",

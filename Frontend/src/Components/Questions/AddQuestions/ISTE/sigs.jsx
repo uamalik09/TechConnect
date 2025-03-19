@@ -12,34 +12,44 @@ const IetSig = () => {
   // Array of club data with images and descriptions
   const clubs = [
     { 
-      name: 'Cipher', 
-      path: '/addcipherquestions',
-      image: '/images/cipher.png',
+      name: 'Catalyst', 
+      path: '/addcatalystquestions',
+      image: '/images/catalyst.png',
     },
     { 
-      name: 'Rovisp', 
-      path: '/addrovispquestions',
-      image: '/images/rovisp.png',
+      name: 'Charge', 
+      path: '/addchargequestions',
+      image: '/images/charge.png',
     },
     { 
-      name: 'Venture', 
-      path: '/addventurequestions',
-      image: '/images/venture.png',
+      name: 'Chronicle', 
+      path: '/addchroniclequestions',
+      image: '/images/chronicle.png',
     },
     { 
-      name: 'Torsion', 
-      path: '/addtorsionquestions',
-      image: '/images/torsion.png',
+      name: 'Clutch', 
+      path: '/addclutchquestions',
+      image: '/images/clutch.png',
     },
     { 
-      name: 'Inkheart', 
-      path: '/addinkheartquestions',
-      image: '/images/inkheart.png',
+      name: 'Concrete', 
+      path: '/addconcretequestions',
+      image: '/images/concrete.png',
     },
     { 
-      name: 'Media', 
-      path: '/addmediaquestions',
-      image: '/images/media.png',
+      name: 'Create', 
+      path: '/addcreatequestions',
+      image: '/images/create.png',
+    },
+    { 
+      name: 'Credit', 
+      path: '/addcreditquestions',
+      image: '/images/credit.png',
+    },
+    { 
+      name: 'Crypt', 
+      path: '/addcryptquestions',
+      image: '/images/crypt.png',
     }
   ];
 

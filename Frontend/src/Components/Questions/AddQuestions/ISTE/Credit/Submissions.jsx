@@ -26,7 +26,7 @@ const AdminSubmissionsDashboard = () => {
           console.error("Invalid token format");
         }
         
-        const response = await fetch('http://localhost:8080/results/iet/cipher/submissions', {
+        const response = await fetch('http://localhost:8080/results/iste/credit/submissions', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -207,7 +207,7 @@ const AdminSubmissionsDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       const updatePromises = Object.entries(modifiedSubmissions).map(([submissionId, changes]) => {
-        return fetch(`http://localhost:8080/results/iet/cipher/submissions/${submissionId}/status`, {
+        return fetch(`http://localhost:8080/results/iste/credit/submissions/${submissionId}/status`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',

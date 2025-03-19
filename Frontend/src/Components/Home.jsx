@@ -9,7 +9,8 @@ const HomePage = () => {
       description: "Connect with industry leaders and gain access to exclusive resources and events with IET.",
       color: "from-blue-500 to-blue-700",
       lightColor: "bg-blue-50",
-      accentColor: "text-blue-600"
+      accentColor: "text-blue-600",
+      officialWebsite: "https://iet.nitk.ac.in/"
     },
     {
       id: "IEEE",
@@ -17,7 +18,8 @@ const HomePage = () => {
       description: "Join the world's largest technical professional organization dedicated to advancing technology.",
       color: "from-teal-500 to-teal-700",
       lightColor: "bg-teal-50",
-      accentColor: "text-teal-600"
+      accentColor: "text-teal-600",
+      officialWebsite: "https://ieee.nitk.ac.in/"
     },
     {
       id: "ACM",
@@ -25,7 +27,8 @@ const HomePage = () => {
       description: "Be part of the premier organization for computing professionals worldwide.",
       color: "from-purple-500 to-purple-700",
       lightColor: "bg-purple-50",
-      accentColor: "text-purple-600"
+      accentColor: "text-purple-600",
+      officialWebsite: "https://nitk.acm.org/#/"
     },
     {
       id: "IE",
@@ -33,7 +36,8 @@ const HomePage = () => {
       description: "Develop your professional skills through workshops, competitions, and networking events.",
       color: "from-red-500 to-red-700",
       lightColor: "bg-red-50",
-      accentColor: "text-red-600"
+      accentColor: "text-red-600",
+      officialWebsite: "https://in.linkedin.com/company/ienitk"
     },
     {
       id: "ISTE",
@@ -41,7 +45,8 @@ const HomePage = () => {
       description: "Enhance your technical knowledge and stay updated with the latest industry trends.",
       color: "from-green-500 to-green-700",
       lightColor: "bg-green-50",
-      accentColor: "text-green-600"
+      accentColor: "text-green-600",
+      officialWebsite: "https://iste.nitk.ac.in/#/"
     }
   ];
 
@@ -136,15 +141,17 @@ const HomePage = () => {
                       <span className="text-sm text-gray-500">180+ members</span>
                     </div>
                     
-                    <Link 
-                      to={`/clubs/${club.id.toLowerCase()}`} 
+                    <a 
+                      href={club.officialWebsite} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
                       className={`inline-flex items-center px-5 py-2.5 rounded-lg bg-gradient-to-r ${club.color} text-white font-medium shadow-md transition-transform hover:shadow-lg hover:scale-105`}
                     >
                       Learn More
                       <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                       </svg>
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </div>

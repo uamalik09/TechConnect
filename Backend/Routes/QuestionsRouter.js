@@ -208,4 +208,66 @@ router.post("/iste/crypt/settings/update", authenticateUser, authorizeRoles("ist
 router.patch("/iste/crypt/updateMarks/:id", authenticateUser, authorizeRoles("iste"), (req, res) => 
     updateQuestionMarks(req, res, "istecrypt")
 );
+
+router.post("/ie/capital/add", authenticateUser, authorizeRoles("ie"), validateQuestion, (req, res) => addQuestion(req, res, "iecapital"));
+router.get("/ie/capital/get", authenticateUser, authorizeRoles("ie", "user"), (req, res) => getQuestions(req, res, "iecapital"));
+router.delete("/ie/capital/delete/:id", authenticateUser, authorizeRoles("ie"), (req, res) => deleteQuestion(req, res, "iecapital"));
+router.get("/ie/capital/settings", authenticateUser, authorizeRoles("ie", "user"), (req, res) => getquizsettings(req, res, "iecapital"));
+router.post("/ie/capital/settings/update", authenticateUser, authorizeRoles("ie"), validateQuizSettings, (req, res) => updateQuizSettings(req, res, "iecapital"));
+router.patch("/ie/capital/updateMarks/:id", authenticateUser, authorizeRoles("ie"), (req, res) => 
+    updateQuestionMarks(req, res, "iecapital"));
+
+router.post("/ie/code/add", authenticateUser, authorizeRoles("ie"), validateQuestion, (req, res) => addQuestion(req, res, "iecode"));
+router.get("/ie/code/get", authenticateUser, authorizeRoles("ie", "user"), (req, res) => getQuestions(req, res, "iecode"));
+router.delete("/ie/code/delete/:id", authenticateUser, authorizeRoles("ie"), (req, res) => deleteQuestion(req, res, "iecode"));
+router.get("/ie/code/settings", authenticateUser, authorizeRoles("ie", "user"), (req, res) => getquizsettings(req, res, "iecode"));
+router.post("/ie/code/settings/update", authenticateUser, authorizeRoles("ie"), validateQuizSettings, (req, res) => updateQuizSettings(req, res, "iecode"));
+router.patch("/ie/code/updateMarks/:id", authenticateUser, authorizeRoles("ie"), (req, res) => 
+    updateQuestionMarks(req, res, "iecode")
+);
+
+router.post("/ie/gadget/add", authenticateUser, authorizeRoles("ie"), validateQuestion, (req, res) => addQuestion(req, res, "iegadget"));
+router.get("/ie/gadget/get", authenticateUser, authorizeRoles("ie", "user"), (req, res) => getQuestions(req, res, "iegadget"));
+router.delete("/ie/gadget/delete/:id", authenticateUser, authorizeRoles("ie"), (req, res) => deleteQuestion(req, res, "iegadget"));
+router.get("/ie/gadget/settings", authenticateUser, authorizeRoles("ie", "user"), (req, res) => getquizsettings(req, res, "iegadget"));
+router.post("/ie/gadget/settings/update", authenticateUser, authorizeRoles("ie"), validateQuizSettings, (req, res) => updateQuizSettings(req, res, "iegadget"));
+router.patch("/ie/gadget/updateMarks/:id", authenticateUser, authorizeRoles("ie"), (req, res) => 
+    updateQuestionMarks(req, res, "iegadget")
+);
+
+router.post("/ie/garage/add", authenticateUser, authorizeRoles("ie"), validateQuestion, (req, res) => addQuestion(req, res, "iegarage"));
+router.get("/ie/garage/get", authenticateUser, authorizeRoles("ie", "user"), (req, res) => getQuestions(req, res, "iegarage"));
+router.delete("/ie/garage/delete/:id", authenticateUser, authorizeRoles("ie"), (req, res) => deleteQuestion(req, res, "iegarage"));
+router.get("/ie/garage/settings", authenticateUser, authorizeRoles("ie", "user"), (req, res) => getquizsettings(req, res, "iegarage"));
+router.post("/ie/garage/settings/update", authenticateUser, authorizeRoles("ie"), validateQuizSettings, (req, res) => updateQuizSettings(req, res, "iegarage"));
+router.patch("/ie/garage/updateMarks/:id", authenticateUser, authorizeRoles("ie"), (req, res) => 
+    updateQuestionMarks(req, res, "iegarage")
+);
+
+router.post("/ie/robotics/add", authenticateUser, authorizeRoles("ie"), validateQuestion, (req, res) => addQuestion(req, res, "ierobotics"));
+router.get("/ie/robotics/get", authenticateUser, authorizeRoles("ie", "user"), (req, res) => getQuestions(req, res, "ierobotics"));
+router.delete("/ie/robotics/delete/:id", authenticateUser, authorizeRoles("ie"), (req, res) => deleteQuestion(req, res, "ierobotics"));
+router.get("/ie/robotics/settings", authenticateUser, authorizeRoles("ie", "user"), (req, res) => getquizsettings(req, res, "ierobotics"));
+router.post("/ie/robotics/settings/update", authenticateUser, authorizeRoles("ie"), validateQuizSettings, (req, res) => updateQuizSettings(req, res, "ierobotics"));
+router.patch("/ie/robotics/updateMarks/:id", authenticateUser, authorizeRoles("ie"), (req, res) => 
+    updateQuestionMarks(req, res, "ierobotics")
+);
+
+router.post("/ie/tectonic/add", authenticateUser, authorizeRoles("ie"), validateQuestion, (req, res) => addQuestion(req, res, "ietectonic"));
+router.get("/ie/tectonic/get", authenticateUser, authorizeRoles("ie", "user"), (req, res) => getQuestions(req, res, "ietectonic"));
+router.delete("/ie/tectonic/delete/:id", authenticateUser, authorizeRoles("ie"), (req, res) => deleteQuestion(req, res, "ietectonic"));
+router.get("/ie/tectonic/settings", authenticateUser, authorizeRoles("ie", "user"), (req, res) => getquizsettings(req, res, "ietectonic"));
+router.post("/ie/tectonic/settings/update", authenticateUser, authorizeRoles("ie"), validateQuizSettings, (req, res) => updateQuizSettings(req, res, "ietectonic"));
+router.patch("/ie/tectonic/updateMarks/:id", authenticateUser, authorizeRoles("ie"), (req, res) => 
+    updateQuestionMarks(req, res, "ietectonic")
+);
+
+router.post("/ie/script/add", authenticateUser, authorizeRoles("ie"), validateQuestion, (req, res) => addQuestion(req, res, "iescript"));
+router.get("/ie/script/get", authenticateUser, authorizeRoles("ie", "user"), (req, res) => getQuestions(req, res, "iescript"));
+router.delete("/ie/script/delete/:id", authenticateUser, authorizeRoles("ie"), (req, res) => deleteQuestion(req, res, "iescript"));
+router.get("/ie/script/settings", authenticateUser, authorizeRoles("ie", "user"), (req, res) => getquizsettings(req, res, "iescript"));
+router.post("/ie/script/settings/update", authenticateUser, authorizeRoles("ie"), validateQuizSettings, (req, res) => updateQuizSettings(req, res, "iescript"));
+router.patch("/ie/script/updateMarks/:id", authenticateUser, authorizeRoles("ie"), (req, res) => 
+    updateQuestionMarks(req, res, "iescript")
+);
 module.exports = router;
