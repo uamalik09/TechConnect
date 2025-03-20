@@ -4,10 +4,13 @@ const {
   postDoubt,
   adminReply,
 } = require("../Controllers/DoubtController");
-
+const { doesDoubtExist } = require("../Middlewares/DoubtValidation");
+const { authenticateUser, authorizeRoles } = require("../Middlewares/AuthMiddleware");
 const router = express.Router();
-router.get("/:clubId/:sigId", getDoubts);
-router.post("/:clubId/:sigId", postDoubt);
-router.post("/:clubId/:sigId/admin", adminReply);
+router.get("/:clubId/:sigId",authenticateUser, getDoubts);
+// router.post("/:clubId/:sigId", postDoubt);
+// router.post("/:clubId/:sigId/admin", adminReply);
+router.post("/:clubId/:sigId", authenticateUser, postDoubt);
+router.post("/:clubId/:sigId/admin/:doubtId", authenticateUser, authorizeRoles("admin"),doesDoubtExist, adminReply);
 
 module.exports = router;

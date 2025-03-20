@@ -1,3 +1,4 @@
+// 
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { FaPaperPlane, FaArrowLeft } from "react-icons/fa";
@@ -10,10 +11,10 @@ const Chat = () => {
   const [newMessage, setNewMessage] = useState("");
   const messagesEndRef = useRef(null);
 
-  // Fetch user data from local storage
+  // Fetch user data & token from localStorage
   const getUserData = () => {
     const userData = localStorage.getItem("userData");
-    return userData ? JSON.parse(userData) : { name: "Student", userId: null };
+    return userData ? JSON.parse(userData) : { name: "Student", userId: null, token: null };
   };
 
   const userData = getUserData();
@@ -21,9 +22,20 @@ const Chat = () => {
   // Fetch messages from backend
   const fetchMessages = async () => {
     try {
-      const res = await fetch(`http://localhost:8080/api/doubts/${clubId}/${sigId}`);
+      const res = await fetch(`http://localhost:8080/api/doubts/${clubId}/${sigId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${userData.token}`, // Attach token
+        },
+      });
+
+      if (res.status === 401) {
+        console.error("Unauthorized: Invalid or missing token.");
+        return;
+      }
+
       const data = await res.json();
-      
       if (!Array.isArray(data)) {
         console.error("Unexpected data format:", data);
         return;
@@ -49,9 +61,17 @@ const Chat = () => {
     try {
       const res = await fetch(`http://localhost:8080/api/doubts/${clubId}/${sigId}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${userData.token}`, // Attach token
+        },
         body: JSON.stringify(doubtData),
       });
+
+      if (res.status === 401) {
+        console.error("Unauthorized: Invalid or missing token.");
+        return;
+      }
 
       if (!res.ok) throw new Error("Failed to send doubt");
 

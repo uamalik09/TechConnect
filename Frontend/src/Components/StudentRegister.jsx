@@ -33,7 +33,7 @@ const StudentRegistration = () => {
       { id: 6, name: 'MEDIA', description: 'Digital Media and Content Creation', testTime: '2025-01-31 03:00 PM' },
     ],
     2: [
-      { id: 1, name: 'COMSOC', description: 'Communications Society', testTime: '2025-01-28 10:00 AM' },
+      { id: 1, name: 'COMPSOC', description: 'Communications Society', testTime: '2025-01-28 10:00 AM' },
       { id: 2, name: 'DIODE', description: 'Electronics and Circuit Design', testTime: '2025-01-29 02:00 PM' },
       { id: 3, name: 'PISTON', description: 'Automotive Engineering', testTime: '2025-01-29 02:00 PM' },
     ],

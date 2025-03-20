@@ -141,6 +141,8 @@ import IsteLink from "./Components/CodingLink.jsx/GetLink/IsteLink";
 import AllCode from "./Components/CodingLink.jsx/AllCode";
 import PreferenceForm from "./Components/PreferenceForm";
 import AdminPreferences from "./Components/AdminPreferences";
+import { AuthProvider } from "./Context/AuthContext"; 
+
 
 // import Rovispchat from "./Components/ChatBox/Iet/Rovispchat";
 // import IeeeQuestions from "./Components/Questions/AddQuestions/IeeeQuestions";
@@ -152,6 +154,7 @@ function App() {
 
   return (
     <div className="App">
+      <AuthProvider>
       <Routes>
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/login" element={<Login />} />
@@ -277,7 +280,11 @@ function App() {
         <Route path="/clubstatus" element={<ClubStatus />}/>
         <Route path="/club" element={<ClubList/>}/>
         <Route path="/sig/:clubId" element={<SigList/>}/>
-        <Route path="/:clubId/:sigId/chat" element={<Chat />} />
+        
+        <Route element={<ProtectedRoute />}>
+          <Route path="/chat/:clubId/:sigId" element={<Chat />} />
+        </Route>
+        
         <Route path="/ietsigs" element={<IetSigs />}/>
         <Route path="/Cipherchat" element={<Cipherchat/>}/>
         <Route path="/ietcode" element={<IetCode/>}/>
@@ -298,6 +305,7 @@ function App() {
         {/* <Route path="/addiequestions" element={<IeQuestions />}/> */}
         {/* <Route path="/addistequestions" element={<IsteQuestions />}/> */}
       </Routes>
+      </AuthProvider>
     </div>
   );
 }

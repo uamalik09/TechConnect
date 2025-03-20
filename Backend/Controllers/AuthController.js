@@ -66,23 +66,29 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
-        const user = await UserModel.findOne({ email });
+        console.log("🔹 Login attempt for:", email);
 
+        const user = await UserModel.findOne({ email });
         if (!user) {
+            console.log("❌ User not found");
             return res.status(403).json({ message: "Auth failed: email or password is incorrect", success: false });
         }
 
         const isPassEqual = await bcrypt.compare(password, user.password);
         if (!isPassEqual) {
+            console.log("❌ Incorrect password");
             return res.status(403).json({ message: "Auth failed: email or password is incorrect", success: false });
         }
 
         // Generate JWT Token
         const jwtToken = jwt.sign(
-            { userId: user._id, email: user.email, role: user.role },  // Include userId
+            { userId: user._id, email: user.email, role: user.role },  
             process.env.JWT_SECRET,
             { expiresIn: '24h' }
         );
+
+        console.log("✅ Login successful for:", user.email);
+        console.log("🔹 Sending user data:", { name: user.name, email: user.email, role: user.role });
 
         res.status(200).json({
             message: "Login successful",
@@ -96,7 +102,26 @@ const login = async (req, res) => {
         });
 
     } catch (err) {
-        console.error("Login Error:", err);
+        console.error("❌ Login Error:", err);
+        res.status(500).json({
+            message: "Internal Server error",
+            success: false
+        });
+    }
+};
+const getUser = async (req, res) => {
+    try {
+        const user = await UserModel.findById(req.user.userId).select("-password"); // Exclude password
+        if (!user) {
+            return res.status(404).json({ message: "User not found", success: false });
+        }
+
+        res.status(200).json({ 
+            success: true, 
+            user 
+        });
+    } catch (err) {
+        console.error("❌ Error fetching user:", err);
         res.status(500).json({
             message: "Internal Server error",
             success: false
@@ -104,6 +129,6 @@ const login = async (req, res) => {
     }
 };
 
-module.exports = { signup, login };
+module.exports = { signup, login,getUser };
 
 

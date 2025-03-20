@@ -111,7 +111,7 @@ function SigPage() {
             key={sig.id}
             className="flex flex-col"
           >
-            <Link to={`/${clubId}/${sig.id}/chat`}>
+            <Link to={`/chat/${clubId}/${sig.id}`}>
               <div 
                 className="rounded-lg shadow-xl overflow-hidden relative group hover:scale-105 transition-all duration-300 h-65 w-75 mx-auto"
                 style={{
