@@ -72,5 +72,101 @@ router.get('/ieee/piston/quiz-status', authenticateUser, authorizeRoles('ieee', 
     }
 );
 
+router.get('/acm/sanganitra/quiz-status', authenticateUser, authorizeRoles('acm', 'user'), 
+    (req, res) => {
+        req.params.quizModel = 'acmsanganitra';
+        getSpecificQuizStatus(req, res);
+    }
+);
+
+router.get('/acm/kaaryavarta/quiz-status', authenticateUser, authorizeRoles('acm', 'user'), 
+    (req, res) => {
+        req.params.quizModel = 'acmkaaryavarta';
+        getSpecificQuizStatus(req, res);
+    }
+);
+router.get('/acm/vidyut/quiz-status', authenticateUser, authorizeRoles('acm', 'user'), 
+    (req, res) => {
+        req.params.quizModel = 'acmvidyut';
+        getSpecificQuizStatus(req, res);
+    }
+);
+
+router.get('/acm/yantrika/quiz-status', authenticateUser, authorizeRoles('acm', 'user'), 
+    (req, res) => {
+        req.params.quizModel = 'acmyantrika';
+        getSpecificQuizStatus(req, res);
+    }
+);
+
+router.get('/acm/saahitya/quiz-status', authenticateUser, authorizeRoles('acm', 'user'), 
+    (req, res) => {
+        req.params.quizModel = 'acmsaahitya';
+        getSpecificQuizStatus(req, res);
+    }
+);
+
+router.get('/acm/abhivyakta/quiz-status', authenticateUser, authorizeRoles('acm', 'user'), 
+    (req, res) => {
+        req.params.quizModel = 'acmabhivyakta';
+        getSpecificQuizStatus(req, res);
+    }
+);
+
+router.get('/iste/catalyst/quiz-status', authenticateUser, authorizeRoles('iste', 'user'), 
+    (req, res) => {
+        req.params.quizModel = 'istecatalyst';
+        getSpecificQuizStatus(req, res);
+    }
+);
+
+router.get('/iste/charge/quiz-status', authenticateUser, authorizeRoles('iste', 'user'), 
+    (req, res) => {
+        req.params.quizModel = 'istecharge';
+        getSpecificQuizStatus(req, res);
+    }
+);
+router.get('/iste/chronicle/quiz-status', authenticateUser, authorizeRoles('iste', 'user'), 
+    (req, res) => {
+        req.params.quizModel = 'istechronicle';
+        getSpecificQuizStatus(req, res);
+    }
+);
+
+router.get('/iste/concrete/quiz-status', authenticateUser, authorizeRoles('iste', 'user'), 
+    (req, res) => {
+        req.params.quizModel = 'isteconcrete';
+        getSpecificQuizStatus(req, res);
+    }
+);
+
+router.get('/iste/clutch/quiz-status', authenticateUser, authorizeRoles('iste', 'user'), 
+    (req, res) => {
+        req.params.quizModel = 'isteclutch';
+        getSpecificQuizStatus(req, res);
+    }
+);
+
+router.get('/iste/create/quiz-status', authenticateUser, authorizeRoles('iste', 'user'), 
+    (req, res) => {
+        req.params.quizModel = 'istecreate';
+        getSpecificQuizStatus(req, res);
+    }
+);
+
+router.get('/iste/credit/quiz-status', authenticateUser, authorizeRoles('iste', 'user'), 
+    (req, res) => {
+        req.params.quizModel = 'istecredit';
+        getSpecificQuizStatus(req, res);
+    }
+);
+
+router.get('/iste/crypt/quiz-status', authenticateUser, authorizeRoles('iste', 'user'), 
+    (req, res) => {
+        req.params.quizModel = 'istecrypt';
+        getSpecificQuizStatus(req, res);
+    }
+);
+
 
 module.exports = router;

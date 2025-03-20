@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import QuizSettings from "./QuizSettings"; 
+
 const AdminQuestions = () => {
   const [questions, setQuestions] = useState([]);
   const [totalMarks, setTotalMarks] = useState(0);
@@ -21,10 +22,11 @@ const AdminQuestions = () => {
   useEffect(() => {
     fetchQuestions();
   }, []);
+
   const fetchQuestions = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:8080/questions/iet/inkheart/get', {
+      const response = await fetch('http://localhost:8080/questions/acm/yantrika/get', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -62,7 +64,7 @@ const AdminQuestions = () => {
     e.preventDefault();
     
     try {
-      const settingsResponse = await fetch('http://localhost:8080/questions/iet/inkheart/settings', {
+      const settingsResponse = await fetch('http://localhost:8080/questions/acm/yantrika/settings', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -85,7 +87,7 @@ const AdminQuestions = () => {
       
       console.log("Submitting question:", dataToSubmit);
       
-      const response = await fetch("http://localhost:8080/questions/iet/inkheart/add", {
+      const response = await fetch("http://localhost:8080/questions/acm/yantrika/add", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
@@ -125,7 +127,7 @@ const AdminQuestions = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this question?")) {
       try {
-        const response = await fetch(`http://localhost:8080/questions/iet/inkheart/delete/${id}`, {
+        const response = await fetch(`http://localhost:8080/questions/acm/yantrika/delete/${id}`, {
           method: "DELETE",
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -166,7 +168,7 @@ const AdminQuestions = () => {
 
   const updateMarks = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/questions/iet/inkheart/updateMarks/${editMarks.id}`, {
+      const response = await fetch(`http://localhost:8080/questions/acm/yantrika/updateMarks/${editMarks.id}`, {
         method: "PATCH",
         headers: {
           'Content-Type': 'application/json',
@@ -194,6 +196,7 @@ const AdminQuestions = () => {
       setError("An error occurred while updating marks");
     }
   };
+
   const toggleQuestionExpansion = (id) => {
     if (expandedQuestion === id) {
       setExpandedQuestion(null);
@@ -203,28 +206,31 @@ const AdminQuestions = () => {
   };
   
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-6">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-gray-200 p-6">
       <QuizSettings totalMarks={totalMarks} totalQuestions={questions.length} />
-      <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-2xl mb-6">
-        <h2 className="text-2xl font-bold text-center mb-4 text-blue-600">
+      
+      {/* Add Question Form */}
+      <div className="bg-gray-800 shadow-xl rounded-lg p-6 w-full max-w-2xl mb-6 border border-gray-700">
+        <h2 className="text-2xl font-bold text-center mb-6 text-purple-400 border-b border-gray-700 pb-3">
           Add a New Question
         </h2>
+        
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-gray-700 font-medium">Question:</label>
+            <label className="block text-gray-300 font-medium mb-1">Question:</label>
             <input
               type="text"
               name="question"
               value={questionData.question}
               onChange={handleChange}
               required
-              className="w-full border border-gray-300 rounded-md p-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
+              className="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:border-purple-500 focus:ring-2 focus:ring-purple-500 text-white"
             />
           </div>
 
           {["option1", "option2", "option3", "option4"].map((option, index) => (
             <div key={index}>
-              <label className="block text-gray-700 font-medium">
+              <label className="block text-gray-300 font-medium mb-1">
                 Option {index + 1}:
               </label>
               <input
@@ -233,13 +239,13 @@ const AdminQuestions = () => {
                 value={questionData[option]}
                 onChange={handleChange}
                 required
-                className="w-full border border-gray-300 rounded-md p-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
+                className="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:border-purple-500 focus:ring-2 focus:ring-purple-500 text-white"
               />
             </div>
           ))}
 
           <div>
-            <label className="block text-gray-700 font-medium">
+            <label className="block text-gray-300 font-medium mb-1">
               Correct Answer:
             </label>
             <select
@@ -247,7 +253,7 @@ const AdminQuestions = () => {
               value={questionData.correctAnswer}
               onChange={handleChange}
               required
-              className="w-full border border-gray-300 rounded-md p-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
+              className="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:border-purple-500 focus:ring-2 focus:ring-purple-500 text-white"
             >
               <option value="">Select the correct answer</option>
               <option value={questionData.option1}>{questionData.option1}</option>
@@ -258,7 +264,7 @@ const AdminQuestions = () => {
           </div>
 
           <div>
-            <label className="block text-gray-700 font-medium">
+            <label className="block text-gray-300 font-medium mb-1">
               Marks:
             </label>
             <input
@@ -269,79 +275,98 @@ const AdminQuestions = () => {
               min="1"
               max="100"
               required
-              className="w-full border border-gray-300 rounded-md p-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
+              className="w-full bg-gray-700 border border-gray-600 rounded-md p-2 focus:border-purple-500 focus:ring-2 focus:ring-purple-500 text-white"
             />
           </div>
 
           {error && (
-            <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+            <div className="p-3 bg-red-900/50 border border-red-700 text-red-200 rounded">
               {error}
             </div>
           )}
           
           {success && (
-            <div className="p-3 bg-green-100 border border-green-400 text-green-700 rounded">
+            <div className="p-3 bg-green-900/50 border border-green-700 text-green-200 rounded">
               {success}
             </div>
           )}
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+            className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition font-medium"
           >
             Add Question
           </button>
         </form>
       </div>
       
-      <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-3xl">
-        <h2 className="text-xl font-bold text-center mb-4 text-gray-700">
+      {/* Questions List */}
+      <div className="bg-gray-800 shadow-xl rounded-lg p-6 w-full max-w-3xl border border-gray-700">
+        <h2 className="text-xl font-bold text-center mb-6 text-purple-400 border-b border-gray-700 pb-3">
           Questions List (Total: {questions.length}, Total Marks: {totalMarks})
         </h2>
         
         {loading ? (
-          <div className="flex justify-center items-center p-4">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+          <div className="flex justify-center items-center p-8">
+            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-purple-500"></div>
           </div>
         ) : (
-          <ul className="divide-y divide-gray-300">
+          <ul className="divide-y divide-gray-700">
             {questions.length === 0 ? (
-              <p className="text-center text-gray-500">No questions found.</p>
+              <p className="text-center text-gray-400 py-6">No questions found.</p>
             ) : (
               questions.map((question) => (
-                <li key={question._id} className="p-4">
+                <li key={question._id} className="py-4 px-3 hover:bg-gray-750 rounded-md transition">
                   <div className="flex justify-between items-start mb-2">
                     <div className="flex flex-col">
-                      <span className="font-medium">{question.question}</span>
+                      <span className="font-medium text-gray-200">{question.question}</span>
                       <button 
                         onClick={() => toggleQuestionExpansion(question._id)}
-                        className="text-blue-600 text-sm hover:text-blue-800 mt-1 transition text-left"
+                        className="text-purple-400 text-sm hover:text-purple-300 mt-2 transition text-left flex items-center"
                       >
-                        {expandedQuestion === question._id ? "Hide options" : "Show options"}
+                        {expandedQuestion === question._id ? (
+                          <>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                            Hide options
+                          </>
+                        ) : (
+                          <>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                            Show options
+                          </>
+                        )}
                       </button>
                       
                       {expandedQuestion === question._id && (
-                        <div className="mt-2 ml-2 bg-gray-50 p-3 rounded-md">
-                          <p className="text-sm font-medium mb-1">Options:</p>
-                          <ul className="list-disc list-inside text-sm">
-                            <li className={question.correctAnswer === question.option1 ? "text-green-600 font-medium" : ""}>
-                              {question.option1} {question.correctAnswer === question.option1 && "✓"}
+                        <div className="mt-2 ml-2 bg-gray-750 p-3 rounded-md border border-gray-700">
+                          <p className="text-sm font-medium mb-2 text-gray-300">Options:</p>
+                          <ul className="space-y-1 text-sm">
+                            <li className={`flex items-center ${question.correctAnswer === question.option1 ? "text-green-400 font-medium" : "text-gray-300"}`}>
+                              <span className="mr-2">{question.correctAnswer === question.option1 ? '✓' : '•'}</span>
+                              {question.option1}
                             </li>
-                            <li className={question.correctAnswer === question.option2 ? "text-green-600 font-medium" : ""}>
-                              {question.option2} {question.correctAnswer === question.option2 && "✓"}
+                            <li className={`flex items-center ${question.correctAnswer === question.option2 ? "text-green-400 font-medium" : "text-gray-300"}`}>
+                              <span className="mr-2">{question.correctAnswer === question.option2 ? '✓' : '•'}</span>
+                              {question.option2}
                             </li>
-                            <li className={question.correctAnswer === question.option3 ? "text-green-600 font-medium" : ""}>
-                              {question.option3} {question.correctAnswer === question.option3 && "✓"}
+                            <li className={`flex items-center ${question.correctAnswer === question.option3 ? "text-green-400 font-medium" : "text-gray-300"}`}>
+                              <span className="mr-2">{question.correctAnswer === question.option3 ? '✓' : '•'}</span>
+                              {question.option3}
                             </li>
-                            <li className={question.correctAnswer === question.option4 ? "text-green-600 font-medium" : ""}>
-                              {question.option4} {question.correctAnswer === question.option4 && "✓"}
+                            <li className={`flex items-center ${question.correctAnswer === question.option4 ? "text-green-400 font-medium" : "text-gray-300"}`}>
+                            <span className="mr-2">{question.correctAnswer === question.option4 ? '✓' : '•'}</span>
+                              {question.option4}
                             </li>
                           </ul>
                         </div>
                       )}
                       
-                      <div className="text-sm text-gray-600 mt-2">
-                        <p>Correct answer: <span className="text-green-600 font-medium">{question.correctAnswer}</span></p>
+                      <div className="text-sm text-gray-400 mt-2">
+                        <p>Correct answer: <span className="text-green-400 font-medium">{question.correctAnswer}</span></p>
                       </div>
                     </div>
                     <div className="flex flex-col items-end space-y-2">
@@ -353,33 +378,36 @@ const AdminQuestions = () => {
                             onChange={handleMarksChange}
                             min="1"
                             max="100"
-                            className="w-16 border border-gray-300 rounded-md p-1 focus:border-blue-500"
+                            className="w-16 bg-gray-700 border border-gray-600 rounded-md p-1 focus:border-purple-500 focus:ring focus:ring-purple-500 text-white"
                           />
                           <button
                             onClick={updateMarks}
-                            className="bg-blue-500 text-white px-2 py-1 rounded-md hover:bg-blue-700 transition text-sm"
+                            className="bg-purple-600 text-white px-2 py-1 rounded-md hover:bg-purple-700 transition text-sm"
                           >
                             Save
                           </button>
                         </div>
                       ) : (
                         <div className="flex items-center space-x-2">
-                          <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-md text-sm">
+                          <span className="px-2 py-1 bg-purple-900/40 text-purple-300 rounded-md text-sm border border-purple-700/50">
                             {question.marks || 1} mark{(question.marks || 1) !== 1 ? 's' : ''}
                           </span>
                           <button
                             onClick={() => startEditMarks(question)}
-                            className="bg-gray-200 text-gray-700 px-2 py-1 rounded-md hover:bg-gray-300 transition text-sm"
+                            className="bg-gray-700 text-gray-300 px-2 py-1 rounded-md hover:bg-gray-600 transition text-sm"
                           >
-                            Edit Marks
+                            Edit
                           </button>
                         </div>
                       )}
                       <button
                         onClick={() => handleDelete(question._id)}
-                        className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-700 transition"
+                        className="bg-red-700 text-white px-3 py-1 rounded-md hover:bg-red-800 transition flex items-center space-x-1"
                       >
-                        Delete
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                        <span>Delete</span>
                       </button>
                     </div>
                   </div>

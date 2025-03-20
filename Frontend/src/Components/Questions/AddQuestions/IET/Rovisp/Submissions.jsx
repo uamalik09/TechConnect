@@ -138,6 +138,7 @@ const AdminSubmissionsDashboard = () => {
       }));
     }
   };
+
   const isModified = (submissionId) => {
     return !!modifiedSubmissions[submissionId];
   };
@@ -303,16 +304,16 @@ const AdminSubmissionsDashboard = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="text-xl font-semibold">Loading...</div>
+      <div className="flex justify-center items-center min-h-screen bg-gray-900">
+        <div className="text-xl font-semibold text-gray-200">Loading...</div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="text-xl font-semibold text-red-600">Error: {error}</div>
+      <div className="flex justify-center items-center min-h-screen bg-gray-900">
+        <div className="text-xl font-semibold text-red-400">Error: {error}</div>
       </div>
     );
   }
@@ -321,22 +322,22 @@ const AdminSubmissionsDashboard = () => {
   const filteredSubmissions = getFilteredAndSortedSubmissions();
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div className="p-6 bg-gray-900 min-h-screen text-gray-200">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6">Quiz Submissions Dashboard</h1>
+        <h1 className="text-3xl font-bold text-gray-100 mb-6">Quiz Submissions Dashboard</h1>
         
-        <div className="bg-white rounded-lg shadow-md overflow-hidden mb-6">
-          <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+        <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden mb-6 border border-gray-700">
+          <div className="px-6 py-4 border-b border-gray-700 flex justify-between items-center">
             <div>
-              <h2 className="text-xl font-semibold text-gray-800">Student Submissions</h2>
-              <p className="text-gray-600">Total: {submissions.length} submissions</p>
+              <h2 className="text-xl font-semibold text-gray-100">Student Submissions</h2>
+              <p className="text-gray-400">Total: {submissions.length} submissions</p>
             </div>
             <div className="flex space-x-4">
               {hasModifications && (
                 <>
                   <button
                     onClick={cancelChanges}
-                    className="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition-colors"
+                    className="px-4 py-2 bg-gray-700 text-gray-200 rounded hover:bg-gray-600 transition-colors"
                     disabled={isSaving}
                   >
                     Cancel
@@ -354,26 +355,26 @@ const AdminSubmissionsDashboard = () => {
           </div>
           
           {/* Search and filter controls */}
-          <div className="px-6 py-3 bg-gray-50 border-b border-gray-200 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="px-6 py-3 bg-gray-750 border-b border-gray-700 grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label htmlFor="search" className="block text-sm font-medium text-gray-700 mb-1">Search</label>
+              <label htmlFor="search" className="block text-sm font-medium text-gray-300 mb-1">Search</label>
               <input
                 type="text"
                 id="search"
                 value={filter.searchTerm}
                 onChange={(e) => setFilter({...filter, searchTerm: e.target.value})}
                 placeholder="Search by name or roll number"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-200"
               />
             </div>
             <div>
-              <label htmlFor="sortBy" className="block text-sm font-medium text-gray-700 mb-1">Sort By</label>
+              <label htmlFor="sortBy" className="block text-sm font-medium text-gray-300 mb-1">Sort By</label>
               <div className="flex space-x-2">
                 <select
                   id="sortBy"
                   value={filter.sortBy}
                   onChange={(e) => setFilter({...filter, sortBy: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-200"
                 >
                   <option value="totalScore">Total Score</option>
                   <option value="studentName">Name</option>
@@ -381,19 +382,19 @@ const AdminSubmissionsDashboard = () => {
                 </select>
                 <button
                   onClick={() => setFilter({...filter, sortOrder: filter.sortOrder === 'asc' ? 'desc' : 'asc'})}
-                  className="px-3 py-2 bg-gray-200 rounded-md hover:bg-gray-300"
+                  className="px-3 py-2 bg-gray-600 rounded-md hover:bg-gray-500 text-gray-200"
                 >
                   {filter.sortOrder === 'asc' ? '↑' : '↓'}
                 </button>
               </div>
             </div>
             <div>
-              <label htmlFor="filterQualified" className="block text-sm font-medium text-gray-700 mb-1">Filter By Status</label>
+              <label htmlFor="filterQualified" className="block text-sm font-medium text-gray-300 mb-1">Filter By Status</label>
               <select
                 id="filterQualified"
                 value={filter.filterQualified}
                 onChange={(e) => setFilter({...filter, filterQualified: e.target.value})}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-200"
               >
                 <option value="all">All Submissions</option>
                 <option value="qualified2">Qualified for Round 2</option>
@@ -404,33 +405,33 @@ const AdminSubmissionsDashboard = () => {
           </div>
           
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+            <table className="min-w-full divide-y divide-gray-700">
+              <thead className="bg-gray-750">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Roll Number</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Base Score</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Additional Marks</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Score</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Interview Slot</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Round 1</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Round 2</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Recruited</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Name</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Roll Number</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Base Score</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Additional Marks</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Total Score</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Interview Slot</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Round 1</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Round 2</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Recruited</th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="bg-gray-800 divide-y divide-gray-700">
                 {filteredSubmissions.length > 0 ? (
                   filteredSubmissions.map((submission, index) => {
                     const rowModified = isModified(submission._id);
                     return (
                       <tr 
                         key={submission._id} 
-                        className={`${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} ${rowModified ? 'bg-blue-50' : ''}`}
+                        className={`${index % 2 === 0 ? 'bg-gray-800' : 'bg-gray-750'} ${rowModified ? 'bg-blue-900' : ''}`}
                       >
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{submission.studentName}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{submission.rollNumber}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{submission.score}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-200">{submission.studentName}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{submission.rollNumber}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{submission.score}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
                           <input 
                             type="text" 
                             value={additionalMarks[submission._id] || 0}
@@ -440,18 +441,18 @@ const AdminSubmissionsDashboard = () => {
                                 handleAdditionalMarksChange(submission._id, value);
                               }
                             }}
-                            className="w-16 px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-16 px-2 py-1 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-200"
                           />
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-600">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-400">
                           {getTotalScore(submission)}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
                           <input 
                             type="datetime-local" 
                             value={formatDate(interviewSlots[submission._id])}
                             onChange={(e) => handleInterviewSlotChange(submission._id, e.target.value)}
-                            className="px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="px-2 py-1 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-200"
                           />
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
@@ -460,9 +461,9 @@ const AdminSubmissionsDashboard = () => {
                               type="checkbox" 
                               checked={getCurrentValue(submission, 'qualifiedRound2')} 
                               onChange={(e) => handleStatusChange(submission._id, 'qualifiedRound2', e.target.checked)}
-                              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                              className="h-4 w-4 text-blue-600 focus:ring-blue-500 bg-gray-700 border-gray-500 rounded"
                             />
-                            <span className="ml-2 text-sm text-gray-600">
+                            <span className="ml-2 text-sm text-gray-400">
                               {getCurrentValue(submission, 'qualifiedRound2') ? 'Qualified' : 'Not Qualified'}
                             </span>
                           </div>
@@ -473,9 +474,9 @@ const AdminSubmissionsDashboard = () => {
                               type="checkbox" 
                               checked={getCurrentValue(submission, 'qualifiedRound3')} 
                               onChange={(e) => handleStatusChange(submission._id, 'qualifiedRound3', e.target.checked)}
-                              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                              className="h-4 w-4 text-blue-600 focus:ring-blue-500 bg-gray-700 border-gray-500 rounded"
                             />
-                            <span className="ml-2 text-sm text-gray-600">
+                            <span className="ml-2 text-sm text-gray-400">
                               {getCurrentValue(submission, 'qualifiedRound3') ? 'Qualified' : 'Not Qualified'}
                             </span>
                           </div>
@@ -486,9 +487,9 @@ const AdminSubmissionsDashboard = () => {
                               type="checkbox" 
                               checked={getCurrentValue(submission, 'recruited')} 
                               onChange={(e) => handleStatusChange(submission._id, 'recruited', e.target.checked)}
-                              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                              className="h-4 w-4 text-blue-600 focus:ring-blue-500 bg-gray-700 border-gray-500 rounded"
                             />
-                            <span className="ml-2 text-sm text-gray-600">
+                            <span className="ml-2 text-sm text-gray-400">
                               {getCurrentValue(submission, 'recruited') ? 'Recruited' : 'Not Recruited'}
                             </span>
                           </div>
@@ -498,7 +499,7 @@ const AdminSubmissionsDashboard = () => {
                   })
                 ) : (
                   <tr>
-                    <td colSpan="9" className="px-6 py-4 text-center text-sm text-gray-500">
+                    <td colSpan="9" className="px-6 py-4 text-center text-sm text-gray-400">
                       No submissions found.
                     </td>
                   </tr>
@@ -510,56 +511,56 @@ const AdminSubmissionsDashboard = () => {
         
         {/* Stats Dashboard */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Qualification Stats</h3>
+          <div className="bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-700">
+            <h3 className="text-lg font-semibold text-gray-100 mb-4">Qualification Stats</h3>
             <div className="space-y-3">
               <div className="flex justify-between">
-                <span className="text-gray-600">Total Submissions:</span>
-                <span className="font-medium">{submissions.length}</span>
+                <span className="text-gray-400">Total Submissions:</span>
+                <span className="font-medium text-gray-200">{submissions.length}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Qualified for Round 2:</span>
-                <span className="font-medium">
+                <span className="text-gray-400">Qualified for Round 2:</span>
+                <span className="font-medium text-gray-200">
                   {submissions.filter(s => getCurrentValue(s, 'qualifiedRound2')).length}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Qualified for Round 3:</span>
-                <span className="font-medium">
+                <span className="text-gray-400">Qualified for Round 3:</span>
+                <span className="font-medium text-gray-200">
                   {submissions.filter(s => getCurrentValue(s, 'qualifiedRound3')).length}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Recruited:</span>
-                <span className="font-medium">
+                <span className="text-gray-400">Recruited:</span>
+                <span className="font-medium text-gray-200">
                   {submissions.filter(s => getCurrentValue(s, 'recruited')).length}
                 </span>
               </div>
             </div>
           </div>
           
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Score Distribution</h3>
+          <div className="bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-700">
+            <h3 className="text-lg font-semibold text-gray-100 mb-4">Score Distribution</h3>
             <div className="space-y-3">
               <div className="flex justify-between">
-                <span className="text-gray-600">Average Score:</span>
-                <span className="font-medium">
+                <span className="text-gray-400">Average Score:</span>
+                <span className="font-medium text-gray-200">
                   {submissions.length 
                     ? (submissions.reduce((sum, s) => sum + getTotalScore(s), 0) / submissions.length).toFixed(2) 
                     : 'N/A'}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Highest Score:</span>
-                <span className="font-medium">
+                <span className="text-gray-400">Highest Score:</span>
+                <span className="font-medium text-gray-200">
                   {submissions.length 
                     ? Math.max(...submissions.map(s => getTotalScore(s))).toFixed(2) 
                     : 'N/A'}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Lowest Score:</span>
-                <span className="font-medium">
+                <span className="text-gray-400">Lowest Score:</span>
+                <span className="font-medium text-gray-200">
                   {submissions.length 
                     ? Math.min(...submissions.map(s => getTotalScore(s))).toFixed(2) 
                     : 'N/A'}
@@ -568,8 +569,8 @@ const AdminSubmissionsDashboard = () => {
             </div>
           </div>
           
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Quick Actions</h3>
+          <div className="bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-700">
+            <h3 className="text-lg font-semibold text-gray-100 mb-4">Quick Actions</h3>
             <div className="space-y-3">
               <button 
                 onClick={() => {
@@ -609,11 +610,11 @@ const AdminSubmissionsDashboard = () => {
         </div>
         
         {hasModifications && (
-          <div className="fixed bottom-0 left-0 right-0 bg-blue-50 border-t border-blue-200 p-4 flex justify-center shadow-lg">
+          <div className="fixed bottom-0 left-0 right-0 bg-gray-800 border-t border-gray-700 p-4 flex justify-center shadow-lg">
             <div className="flex space-x-4">
               <button
                 onClick={cancelChanges}
-                className="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition-colors"
+                className="px-4 py-2 bg-gray-700 text-gray-200 rounded hover:bg-gray-600 transition-colors"
                 disabled={isSaving}
               >
                 Cancel Changes

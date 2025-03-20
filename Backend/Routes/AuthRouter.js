@@ -16,11 +16,11 @@
 const express = require("express");
 const { signup, login } = require("../Controllers/AuthController");
 const { signupValidation, loginValidation } = require('../Middlewares/AuthValidation');
-
+const {authenticateUser,getUser}= require('../Middlewares/AuthMiddleware');
 const router = express.Router();
 
 router.post("/signup", signupValidation,signup);
 router.post("/login", loginValidation,login);
-
+router.get("/user", authenticateUser, getUser);
 module.exports = router;
 

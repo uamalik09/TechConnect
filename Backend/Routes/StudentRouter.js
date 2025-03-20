@@ -43,5 +43,64 @@ router.get('/ieee/diode/:rollNumber', authenticateUser, authorizeRoles('ieee'), 
 router.get('/ieee/piston/all', authenticateUser, authorizeRoles('ieee'), getAllStudents);
 router.get('/ieee/piston/:rollNumber', authenticateUser, authorizeRoles('ieee'), getStudentByRollNumber);
 
+router.get('/acm/sanganitra/all', authenticateUser, authorizeRoles('acm'), getAllStudents);
+router.get('/acm/sanganitra/:rollNumber', authenticateUser, authorizeRoles('acm'), getStudentByRollNumber);
+
+router.get('/acm/kaaryavarta/all', authenticateUser, authorizeRoles('acm'), getAllStudents);
+router.get('/acm/kaaryavarta/:rollNumber', authenticateUser, authorizeRoles('acm'), getStudentByRollNumber);
+
+router.get('/acm/saahitya/all', authenticateUser, authorizeRoles('acm'), getAllStudents);
+router.get('/acm/saahitya/:rollNumber', authenticateUser, authorizeRoles('acm'), getStudentByRollNumber);
+
+router.get('/acm/abhivyakta/all', authenticateUser, authorizeRoles('acm'), getAllStudents);
+router.get('/acm/abhivyakta/:rollNumber', authenticateUser, authorizeRoles('acm'), getStudentByRollNumber);
+
+router.get('/acm/yantrika/all', authenticateUser, authorizeRoles('acm'), getAllStudents);
+router.get('/acm/yantrika/:rollNumber', authenticateUser, authorizeRoles('acm'), getStudentByRollNumber);
+
+router.get('/acm/vidyut/all', authenticateUser, authorizeRoles('acm'), getAllStudents);
+router.get('/acm/vidyut/:rollNumber', authenticateUser, authorizeRoles('acm'), getStudentByRollNumber);
+
+router.post('/acm/sanganitra/register', registerStudent);
+router.post('/acm/kaaryavarta/register', registerStudent);
+router.post('/acm/yantrika/register', registerStudent);
+router.post('/acm/abhivyakta/register', registerStudent);
+router.post('/acm/saahitya/register', registerStudent);
+router.post('/acm/vidyut/register', registerStudent);
+
+
+router.post('/iste/catalyst/register', registerStudent);
+router.post('/iste/charge/register', registerStudent);
+router.post('/iste/concrete/register', registerStudent);
+router.post('/iste/create/register', registerStudent);
+router.post('/iste/clutch/register', registerStudent);
+router.post('/iste/chronicle/register', registerStudent);
+router.post('/iste/credit/register', registerStudent);
+router.post('/iste/crypt/register', registerStudent);
+
+router.get('/iste/catalyst/all', authenticateUser, authorizeRoles('iste'), getAllStudents);
+router.get('/iste/catalyst/:rollNumber', authenticateUser, authorizeRoles('iste'), getStudentByRollNumber);
+
+router.get('/iste/charge/all', authenticateUser, authorizeRoles('iste'), getAllStudents);
+router.get('/iste/charge/:rollNumber', authenticateUser, authorizeRoles('iste'), getStudentByRollNumber);
+
+router.get('/iste/clutch/all', authenticateUser, authorizeRoles('iste'), getAllStudents);
+router.get('/iste/clutch/:rollNumber', authenticateUser, authorizeRoles('iste'), getStudentByRollNumber);
+
+router.get('/iste/create/all', authenticateUser, authorizeRoles('iste'), getAllStudents);
+router.get('/iste/create/:rollNumber', authenticateUser, authorizeRoles('iste'), getStudentByRollNumber);
+
+router.get('/iste/concrete/all', authenticateUser, authorizeRoles('iste'), getAllStudents);
+router.get('/iste/concrete/:rollNumber', authenticateUser, authorizeRoles('iste'), getStudentByRollNumber);
+
+router.get('/iste/chronicle/all', authenticateUser, authorizeRoles('iste'), getAllStudents);
+router.get('/iste/chronicle/:rollNumber', authenticateUser, authorizeRoles('iste'), getStudentByRollNumber);
+
+router.get('/iste/credit/all', authenticateUser, authorizeRoles('iste'), getAllStudents);
+router.get('/iste/credit/:rollNumber', authenticateUser, authorizeRoles('iste'), getStudentByRollNumber);
+
+router.get('/iste/crypt/all', authenticateUser, authorizeRoles('iste'), getAllStudents);
+router.get('/iste/crypt/:rollNumber', authenticateUser, authorizeRoles('iste'), getStudentByRollNumber);
+
 
 module.exports = router;

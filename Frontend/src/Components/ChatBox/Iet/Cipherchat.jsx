@@ -1,21 +1,42 @@
-import React, { useState, useEffect } from 'react';
+// 
+import React, { useState, useEffect } from "react";
 
 const CipherChat = () => {
   const [messages, setMessages] = useState([]);
   const [adminReply, setAdminReply] = useState({});
 
-  // 📍 Fetch messages from backend
+  // Fetch user data & token from localStorage
+  const getUserData = () => {
+    const userData = localStorage.getItem("userData");
+    return userData ? JSON.parse(userData) : { token: null };
+  };
+
+  const userData = getUserData();
+
+  // Fetch messages from backend
   const fetchMessages = async () => {
     try {
-      const res = await fetch('/api/doubts/1/1');
+      const res = await fetch("http://localhost:8080/api/doubts/1/1", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userData.token}`,
+        },
+      });
+
+      if (res.status === 401) {
+        console.error("Unauthorized: Invalid or missing token.");
+        return;
+      }
+
       const data = await res.json();
       setMessages(data);
     } catch (error) {
-      console.error('Error fetching messages:', error);
+      console.error("Error fetching messages:", error);
     }
   };
 
-  // 📍 Handle input change for each message
+  // Handle input change for admin reply
   const handleAdminReplyChange = (e, messageId) => {
     setAdminReply({
       ...adminReply,
@@ -23,20 +44,26 @@ const CipherChat = () => {
     });
   };
 
-  // 📍 Handle sending admin reply
+  // Handle sending admin reply
   const handleAdminReply = async (doubtId) => {
     try {
-      const res = await fetch('/api/doubts/1/1/admin', {
+      const res = await fetch("http://localhost:8080/api/doubts/1/1/admin", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userData.token}`,
+        },
         body: JSON.stringify({
           text: adminReply[doubtId],
         }),
       });
 
-      const newReply = await res.json();
+      if (res.status === 401) {
+        console.error("Unauthorized: Invalid or missing token.");
+        return;
+      }
 
-      // 🛑 Prevent Admin from replying to his own messages
+      const newReply = await res.json();
       setMessages((prev) => [...prev, newReply]);
       setAdminReply({ ...adminReply, [doubtId]: "" });
     } catch (error) {
@@ -45,13 +72,13 @@ const CipherChat = () => {
   };
 
   useEffect(() => {
-    fetchMessages(); // Fetch messages when admin opens the page
+    fetchMessages();
   }, []);
 
   return (
     <div className="min-h-screen bg-gray-900 text-white p-6">
       <h1 className="text-2xl font-bold mb-4">Cipher Doubts</h1>
-  
+
       {messages.length === 0 ? (
         <p>No doubts asked yet!</p>
       ) : (
@@ -62,7 +89,6 @@ const CipherChat = () => {
             </p>
             <p>{message.text}</p>
 
-            {/* ✅ Admin can reply only to student's doubt */}
             {message.senderName !== "Admin" && (
               <div className="mt-2">
                 <input
@@ -87,4 +113,4 @@ const CipherChat = () => {
   );
 };
 
-export default CipherChat;
+export default CipherChat;

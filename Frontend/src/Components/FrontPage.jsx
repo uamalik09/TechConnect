@@ -30,7 +30,7 @@ const FrontPage = () => {
       { id: 6, name: "MEDIA", description: "Instructions" },
     ],
     "2": [
-      { id: 1, name: "COMSOC", description: "Instructions" },
+      { id: 1, name: "COMPSOC", description: "Instructions" },
       { id: 2, name: "DIODE", description: "Instructions" },
       { id: 3, name: "PISTON", description: "Instructions" },
     ],

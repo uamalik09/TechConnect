@@ -13,7 +13,7 @@ const QuizStatus = () => {
         const token = localStorage.getItem('token');                  
         
         // Make the fetch request with the token in the Authorization header
-        const response = await fetch('http://localhost:8080/status/iet/cipher/quiz-status', {
+        const response = await fetch('http://localhost:8080/status/acm/sanganitra/quiz-status', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,

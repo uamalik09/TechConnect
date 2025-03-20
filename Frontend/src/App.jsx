@@ -57,6 +57,12 @@ import VentureQuestions from "./Components/Questions/AddQuestions/IET/Venture/Ve
 import CompsocQuestions from "./Components/Questions/AddQuestions/IEEE/Compsoc/CompsocQuestions";
 import DiodeQuestions from "./Components/Questions/AddQuestions/IEEE/Diode/DiodeQuestions";
 import PistonQuestions from "./Components/Questions/AddQuestions/IEEE/Piston/PistonQuestions";
+import AbhivyaktaQuestions from "./Components/Questions/AddQuestions/ACM/Abhivyakta/AbhivyaktaQuestions";
+import KaaryavartaQuestions from "./Components/Questions/AddQuestions/ACM/Kaaryavarta/KaaryavartaQuestions";
+import SaahityaQuestions from "./Components/Questions/AddQuestions/ACM/Saahitya/SaahityaQuestions";
+import SanganitraQuestions from "./Components/Questions/AddQuestions/ACM/Sanganitra/SanganitraQuestions";
+import VidyutQuestions from "./Components/Questions/AddQuestions/ACM/Vidyut/VidyutQuestions";
+import YantrikaQuestions from "./Components/Questions/AddQuestions/ACM/Yantrika/YantrikaQuestions";
 import CipherResults from "./Components/Questions/AddQuestions/IET/Cipher/Submissions";
 import RovispResults from "./Components/Questions/AddQuestions/IET/Rovisp/Submissions";
 import TorsionResults from "./Components/Questions/AddQuestions/IET/Torsion/Submissions";
@@ -66,6 +72,12 @@ import VentureResults from "./Components/Questions/AddQuestions/IET/Venture/Subm
 import CompsocResults from "./Components/Questions/AddQuestions/IEEE/Compsoc/Submissions";
 import DiodeResults from "./Components/Questions/AddQuestions/IEEE/Diode/Submissions";
 import PistonResults from "./Components/Questions/AddQuestions/IEEE/Piston/Submissions";
+import AbhivyaktaResults from "./Components/Questions/AddQuestions/ACM/Abhivyakta/Submissions";
+import KaaryavartaResults from "./Components/Questions/AddQuestions/ACM/Kaaryavarta/Submissions";
+import SaahityaResults from "./Components/Questions/AddQuestions/ACM/Saahitya/Submissions";
+import SanganitraResults from "./Components/Questions/AddQuestions/ACM/Sanganitra/Submissions";
+import VidyutResults from "./Components/Questions/AddQuestions/ACM/Vidyut/Submissions";
+import YantrikaResults from "./Components/Questions/AddQuestions/ACM/Yantrika/Submissions";
 import Register from "./Components/StudentRegister";
 import CipherDetails from "./Components/Questions/AddQuestions/IET/Cipher/StudentDetails";
 import RovispDetails from "./Components/Questions/AddQuestions/IET//Rovisp/StudentDetails";
@@ -76,6 +88,12 @@ import InkheartDetails from "./Components/Questions/AddQuestions/IET/Inkheart/St
 import CompsocDetails from "./Components/Questions/AddQuestions/IEEE/Compsoc/StudentDetails";
 import DiodeDetails from "./Components/Questions/AddQuestions/IEEE/Diode/StudentDetails";
 import PistonDetails from "./Components/Questions/AddQuestions/IEEE/Piston/StudentDetails";
+import AbhivyaktaDetails from "./Components/Questions/AddQuestions/ACM/Abhivyakta/StudentDetails";
+import KaaryavartaDetails from "./Components/Questions/AddQuestions/ACM/Kaaryavarta/StudentDetails";
+import SaahityaDetails from "./Components/Questions/AddQuestions/ACM/Saahitya/StudentDetails";
+import SanganitraDetails from "./Components/Questions/AddQuestions/ACM/Sanganitra/StudentDetails";
+import VidyutDetails from "./Components/Questions/AddQuestions/ACM/Vidyut/StudentDetails";
+import YantrikaDetails from "./Components/Questions/AddQuestions/ACM/Yantrika/StudentDetails";
 import CipherStatus from "./Components/Questions/AddQuestions/IET/Cipher/QuizStatus";
 import RovispStatus from "./Components/Questions/AddQuestions/IET//Rovisp/QuizStatus";
 import TorsionStatus from "./Components/Questions/AddQuestions/IET/Torsion/QuizStatus";
@@ -85,15 +103,25 @@ import InkheartStatus from "./Components/Questions/AddQuestions/IET/Inkheart/Qui
 import CompsocStatus from "./Components/Questions/AddQuestions/IEEE/Compsoc/QuizStatus";
 import DiodeStatus from "./Components/Questions/AddQuestions/IEEE/Diode/QuizStatus";
 import PistonStatus from "./Components/Questions/AddQuestions/IEEE/Piston/QuizStatus";
+import AbhivyaktaStatus from "./Components/Questions/AddQuestions/ACM/Abhivyakta/QuizStatus";
+import KaaryavartaStatus from "./Components/Questions/AddQuestions/ACM/Kaaryavarta/QuizStatus";
+import SaahityaStatus from "./Components/Questions/AddQuestions/ACM/Saahitya/QuizStatus";
+import SanganitraStatus from "./Components/Questions/AddQuestions/ACM/Sanganitra/QuizStatus";
+import VidyutStatus from "./Components/Questions/AddQuestions/ACM/Vidyut/QuizStatus";
+import YantrikaStatus from "./Components/Questions/AddQuestions/ACM/Yantrika/QuizStatus";
 import FrontPage from "./Components/FrontPage";
 import IetSig from "./Components/Questions/AddQuestions/IET/sigs";
-import IeeeSig from "./Components/Questions/AddQuestions/IEEE/sigs";
 import IetSigresults from "./Components/Questions/AddQuestions/IET/sigsforresults";
-import IeeeSigresults from "./Components/Questions/AddQuestions/IEEE/sigsforresults";
 import IetSigdetails from "./Components/Questions/AddQuestions/IET/sigsforregistrationdetails";
-import IeeeSigdetails from "./Components/Questions/AddQuestions/IEEE/sigsforregistrationdetails";
 import IetSigsstatus from "./Components/Questions/AddQuestions/IET/SigsforStatus";
+import IeeeSig from "./Components/Questions/AddQuestions/IEEE/sigs";
+import IeeeSigresults from "./Components/Questions/AddQuestions/IEEE/sigsforresults";
+import IeeeSigdetails from "./Components/Questions/AddQuestions/IEEE/sigsforregistrationdetails";
 import IeeeSigsstatus from "./Components/Questions/AddQuestions/IEEE/SigsforStatus";
+import AcmSig from "./Components/Questions/AddQuestions/ACM/sigs";
+import AcmSigresults from "./Components/Questions/AddQuestions/ACM/sigsforresults";
+import AcmSigdetails from "./Components/Questions/AddQuestions/ACM/sigsforregistrationdetails";
+import AcmSigsstatus from "./Components/Questions/AddQuestions/ACM/SigsforStatus";
 import ClubStatus from "./Components/clubforStatus";
 import ClubList from "./Components/ChatBox/ClubList";
 import SigList from "./Components/ChatBox/SigList";
@@ -113,6 +141,8 @@ import IsteLink from "./Components/CodingLink.jsx/GetLink/IsteLink";
 import AllCode from "./Components/CodingLink.jsx/AllCode";
 import PreferenceForm from "./Components/PreferenceForm";
 import AdminPreferences from "./Components/AdminPreferences";
+import { AuthProvider } from "./Context/AuthContext"; 
+
 
 // import Rovispchat from "./Components/ChatBox/Iet/Rovispchat";
 // import IeeeQuestions from "./Components/Questions/AddQuestions/IeeeQuestions";
@@ -124,6 +154,7 @@ function App() {
 
   return (
     <div className="App">
+      <AuthProvider>
       <Routes>
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/login" element={<Login />} />
@@ -218,10 +249,42 @@ function App() {
         <Route path="/ieeeresults" element={<IeeeSigresults />}/>
         <Route path="/ieeedetails" element={<IeeeSigdetails />}/>
         <Route path="/ieeestatus" element={<IeeeSigsstatus />}/>
+        <Route path="/addabhivyaktaquestions" element={<AbhivyaktaQuestions />}/>
+        <Route path="/addkaaryavartaquestions" element={<KaaryavartaQuestions />}/>
+        <Route path="/addsaahityaquestions" element={<SaahityaQuestions />}/>
+        <Route path="/addsanganitraquestions" element={<SanganitraQuestions />}/>
+        <Route path="/addvidyutquestions" element={<VidyutQuestions />}/>
+        <Route path="/addyantrikaquestions" element={<YantrikaQuestions />}/>
+        <Route path="/getabhivyaktaresults" element={<AbhivyaktaResults />}/>
+        <Route path="/getkaaryavartaresults" element={<KaaryavartaResults />}/>
+        <Route path="/getsaahityaresults" element={<SaahityaResults />}/>
+        <Route path="/getsanganitraresults" element={<SanganitraResults />}/>
+        <Route path="/getvidyutresults" element={<VidyutResults />}/>
+        <Route path="/getyantrikaresults" element={<YantrikaResults />}/>
+        <Route path="/getabhivyaktadetails" element={<AbhivyaktaDetails />}/>
+        <Route path="/getkaaryavartadetails" element={<KaaryavartaDetails />}/>
+        <Route path="/getsaahityadetails" element={<SaahityaDetails />}/>
+        <Route path="/getvidyutdetails" element={<VidyutDetails />}/>
+        <Route path="/getsanganitradetails" element={<SanganitraDetails />}/>
+        <Route path="/getyantrikadetails" element={<YantrikaDetails />}/>
+        <Route path="/getabhivyaktastatus" element={<AbhivyaktaStatus />}/>
+        <Route path="/getkaaryavartastatus" element={<KaaryavartaStatus />}/>
+        <Route path="/getsaahityastatus" element={<SaahityaStatus />}/>
+        <Route path="/getvidyutstatus" element={<VidyutStatus />}/>
+        <Route path="/getsanganitrastatus" element={<SanganitraStatus />}/>
+        <Route path="/getyantrikastatus" element={<YantrikaStatus />}/>
+        <Route path="/acm" element={<AcmSig />}/>
+        <Route path="/acmresults" element={<AcmSigresults />}/>
+        <Route path="/acmdetails" element={<AcmSigdetails />}/>
+        <Route path="/acmstatus" element={<AcmSigsstatus />}/>
         <Route path="/clubstatus" element={<ClubStatus />}/>
         <Route path="/club" element={<ClubList/>}/>
         <Route path="/sig/:clubId" element={<SigList/>}/>
-        <Route path="/:clubId/:sigId/chat" element={<Chat />} />
+        
+        <Route element={<ProtectedRoute />}>
+          <Route path="/chat/:clubId/:sigId" element={<Chat />} />
+        </Route>
+        
         <Route path="/ietsigs" element={<IetSigs />}/>
         <Route path="/Cipherchat" element={<Cipherchat/>}/>
         <Route path="/ietcode" element={<IetCode/>}/>
@@ -242,6 +305,7 @@ function App() {
         {/* <Route path="/addiequestions" element={<IeQuestions />}/> */}
         {/* <Route path="/addistequestions" element={<IsteQuestions />}/> */}
       </Routes>
+      </AuthProvider>
     </div>
   );
 }
