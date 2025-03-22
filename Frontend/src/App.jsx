@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate,Router } from "react-router-dom";
 import './index.css';
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
@@ -283,8 +283,9 @@ function App() {
         
         <Route element={<ProtectedRoute />}>
           <Route path="/chat/:clubId/:sigId" element={<Chat />} />
+          <Route path="/Cipherchat" element={<Cipherchat/>}/>
         </Route>
-        
+        <Route path="/preferenceform" element={<PreferenceForm/>}/>
         <Route path="/ietsigs" element={<IetSigs />}/>
         <Route path="/Cipherchat" element={<Cipherchat/>}/>
         <Route path="/ietcode" element={<IetCode/>}/>
@@ -298,7 +299,7 @@ function App() {
         <Route path="/istecode" element={<IsteCode/>}/>
         <Route path="/istelink" element={<IsteLink/>}/>
         <Route path="/allcodelinks" element={<AllCode/>}/>
-        <Route path="/preferenceform" element={<PreferenceForm/>}/>
+        
         <Route path="/adminpreferences" element={<AdminPreferences/>}/>
         {/* <Route path="/addieeequestions" element={<IeeeQuestions />}/> */}
         {/* <Route path="/addacmquestions" element={<AcmQuestions />}/> */}

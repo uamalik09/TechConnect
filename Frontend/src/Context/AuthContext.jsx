@@ -1,73 +1,156 @@
- import { createContext, useContext, useState, useEffect } from "react";
+// import { createContext, useState, useContext, useEffect } from 'react';
+// import axios from 'axios'; // Make sure to import axios
 
-// const AuthContext = createContext();
+// // Create the auth context
+// const AuthContext = createContext(null);
 
-// // AuthProvider: Manages login state and provides login/logout functions
+// // Custom hook to use the auth context
+// export const useAuth = () => {
+//   const context = useContext(AuthContext);
+//   if (!context) {
+//     throw new Error('useAuth must be used within an AuthProvider');
+//   }
+//   return context;
+// };
+
 // export const AuthProvider = ({ children }) => {
 //   const [user, setUser] = useState(null);
+//   const [loading, setLoading] = useState(true);
 
-//   // Load user data from localStorage when the app starts
-//   useEffect(() => {
-//     const storedUser = localStorage.getItem("userData");
-//     if (storedUser) {
-//       setUser(JSON.parse(storedUser));
+//   const verifyToken = async (token) => {
+//     // Set the authorization header
+//     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    
+//     try {
+//       // Make a request to your authentication verification endpoint
+//       const response = await axios.get('/api/auth/verify');
+//       return response.data.valid; // Assuming your API returns a valid flag
+//     } catch (error) {
+//       console.error("Token validation failed:", error);
+//       return false;
 //     }
-//   }, []);
-
-//   // Function to log in
-//   const login = (userData) => {
-//     localStorage.setItem("userData", JSON.stringify(userData));
-//     setUser(userData);
 //   };
 
-//   // Function to log out
+//   useEffect(() => {
+//     // Load and verify user data from localStorage on initial mount
+//     const loadUser = async () => {
+//       const storedUser = localStorage.getItem("user");
+      
+//       if (storedUser) {
+//         try {
+//           const userData = JSON.parse(storedUser);
+          
+//           // Verify the token with backend
+//           if (userData.token && await verifyToken(userData.token)) {
+//             setUser(userData);
+//           } else {
+//             // Token invalid or expired
+//             localStorage.removeItem("user");
+//             setUser(null);
+//           }
+//         } catch (error) {
+//           console.error("Error parsing stored user data:", error);
+//           localStorage.removeItem("user");
+//         }
+//       }
+      
+//       setLoading(false);
+//     };
+
+//     loadUser();
+//   }, []);
+
+//   // Function to handle login
+//   const login = (userData) => {
+//     // Make sure the token is included in userData
+//     setUser(userData);
+//     localStorage.setItem("user", JSON.stringify(userData));
+    
+//     // Set the authorization header for future requests
+//     if (userData && userData.token) {
+//       axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
+//     }
+//   };
+
+//   // Function to handle logout
 //   const logout = () => {
-//     localStorage.removeItem("userData");
 //     setUser(null);
+//     localStorage.removeItem("user");
+//     // Remove the authorization header
+//     delete axios.defaults.headers.common['Authorization'];
 //   };
 
 //   return (
-//     <AuthContext.Provider value={{ user, login, logout }}>
+//     <AuthContext.Provider value={{ user, login, logout, loading }}>
 //       {children}
 //     </AuthContext.Provider>
 //   );
 // };
 
-// // Custom hook to access authentication state
-// export const useAuth = () => {
-//   return useContext(AuthContext);
-// };
-// import { createContext, useContext, useState, useEffect } from "react";
+// export default AuthContext;
+import { createContext, useState, useContext, useEffect } from "react";
+import axios from "axios";
 
-const AuthContext = createContext();
+export const AuthContext = createContext(null);
+
+export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(() => {
-        // Load from localStorage if available
-        const storedUser = localStorage.getItem("user");
-        return storedUser ? JSON.parse(storedUser) : null;
-    });
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    // Function to handle login
-    const login = (userData) => {
-        setUser(userData);
-        localStorage.setItem("user", JSON.stringify(userData)); // Store in localStorage
+  useEffect(() => {
+    const loadUser = async () => {
+      const storedUser = localStorage.getItem("user");
+
+      if (storedUser) {
+        try {
+          const userData = JSON.parse(storedUser);
+          const isValid = await verifyToken(userData.token);
+          if (isValid) {
+            setUser(userData);
+            axios.defaults.headers.common["Authorization"] = `Bearer ${userData.token}`;
+          } else {
+            logout();
+          }
+        } catch (error) {
+          console.error("Error parsing stored user data:", error);
+          logout();
+        }
+      }
+      setLoading(false);
     };
 
-    // Function to handle logout
-    const logout = () => {
-        setUser(null);
-        localStorage.removeItem("user"); // Clear localStorage
-    };
+    loadUser();
+  }, []);
 
-    return (
-        <AuthContext.Provider value={{ user, login, logout }}>
-            {children}
-        </AuthContext.Provider>
-    );
-};
+  const verifyToken = async (token) => {
+    try {
+      const response = await axios.get("/api/auth/verify", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return response.data.valid;
+    } catch (error) {
+      console.error("Token validation failed:", error);
+      return false;
+    }
+  };
 
-// Custom hook to use AuthContext
-export const useAuth = () => {
-    return useContext(AuthContext);
+  const login = (userData) => {
+    setUser(userData);
+    localStorage.setItem("user", JSON.stringify(userData));
+    axios.defaults.headers.common["Authorization"] = `Bearer ${userData.token}`;
+  };
+
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem("user");
+    delete axios.defaults.headers.common["Authorization"];
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, login, logout, loading }}>
+      {!loading ? children : <div>Loading...</div>} {/* ✅ Waits for auth state */}
+    </AuthContext.Provider>
+  );
 };
