@@ -37,6 +37,7 @@ app.use(bodyParser.json());
 
 app.use('/auth', AuthRouter);
 //app.use('/organizer', OrganizerRouter);
+app.use("/api/auth", AuthRouter);
 app.use('/admin', AdminRouter);
 app.use('/api', AnnouncementRouter);
 app.use('/api', TalkRouter);

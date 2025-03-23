@@ -15,7 +15,7 @@ const authenticateUser = (req, res, next) => {
         req.user = decoded; // Contains { userId, email, role }
         next();
     } catch (error) {
-        console.error("❌ Authentication Error:", error.message);
+        console.error("Authentication Error:", error.message);
         res.status(403).json({ message: "Invalid or expired token." });
     }
 };

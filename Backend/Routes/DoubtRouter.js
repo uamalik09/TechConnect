@@ -11,6 +11,6 @@ router.get("/:clubId/:sigId",authenticateUser, getDoubts);
 // router.post("/:clubId/:sigId", postDoubt);
 // router.post("/:clubId/:sigId/admin", adminReply);
 router.post("/:clubId/:sigId", authenticateUser, postDoubt);
-router.post("/:clubId/:sigId/admin/:doubtId", authenticateUser, authorizeRoles("admin"),doesDoubtExist, adminReply);
+router.post("/:clubId/:sigId/admin/:doubtId", authenticateUser, authorizeRoles("iet"),doesDoubtExist, adminReply);
 
 module.exports = router;

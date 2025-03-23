@@ -70,13 +70,13 @@ const login = async (req, res) => {
 
         const user = await UserModel.findOne({ email });
         if (!user) {
-            console.log("❌ User not found");
+            console.log("User not found");
             return res.status(403).json({ message: "Auth failed: email or password is incorrect", success: false });
         }
 
         const isPassEqual = await bcrypt.compare(password, user.password);
         if (!isPassEqual) {
-            console.log("❌ Incorrect password");
+            console.log(" Incorrect password");
             return res.status(403).json({ message: "Auth failed: email or password is incorrect", success: false });
         }
 
@@ -102,7 +102,7 @@ const login = async (req, res) => {
         });
 
     } catch (err) {
-        console.error("❌ Login Error:", err);
+        console.error("Login Error:", err);
         res.status(500).json({
             message: "Internal Server error",
             success: false
@@ -121,7 +121,7 @@ const getUser = async (req, res) => {
             user 
         });
     } catch (err) {
-        console.error("❌ Error fetching user:", err);
+        console.error("Error fetching user:", err);
         res.status(500).json({
             message: "Internal Server error",
             success: false
