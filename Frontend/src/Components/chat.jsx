@@ -40,9 +40,9 @@ const Chat = () => {
     const userData = getUserData();
     
     // Redirect to login if no valid user data
-    if (!userData) {
+    if (!userData||userData.role!="user") {
       console.error("No authenticated user found");
-      navigate("/login");
+      navigate("/home");
       return;
     }
     
@@ -100,7 +100,7 @@ const Chat = () => {
     e.preventDefault();
     
     const userData = getUserData();
-    if (!userData) {
+    if (!userData||userData.role!="user") {
       navigate("/login");
       return;
     }

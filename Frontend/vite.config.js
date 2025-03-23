@@ -9,7 +9,10 @@ export default defineConfig({
       '/api': {
         target: 'http://localhost:8080',
         changeOrigin: true,
-      },
+      }
     },
-  },
-})
+    watch: {
+      usePolling: true,  // Ensures file changes are detected
+    }
+  }
+});

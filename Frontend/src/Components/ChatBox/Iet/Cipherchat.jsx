@@ -38,6 +38,10 @@ const CipherChat = () => {
     }
     if (userData.role) {
       setUserRole(userData.role);
+      if (userData.role !== "iet") {
+        console.error("Unauthorized role, redirecting.");
+        navigate("/home");
+    }
     }
   }, [userData.role, navigate]);
 
@@ -166,7 +170,7 @@ const CipherChat = () => {
 
   // Check if user is allowed to reply (has the correct admin role)
   const canReply = () => {
-    return ["iet", "ieee", "acm", "ie", "iste"].includes(userRole);
+    return ["iet"].includes(userRole);
   };
 
   return (
@@ -228,7 +232,7 @@ const CipherChat = () => {
                           </button>
                           <button
                             onClick={() => handleAdminReply(message._id)}
-                            className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded"
+                       x     className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded"
                             disabled={!adminReply[message._id]?.trim()}
                           >
                             Send Reply
