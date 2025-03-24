@@ -128,6 +128,11 @@ import SigList from "./Components/ChatBox/SigList";
 import Chat from "./Components/chat";
 import IetSigs from "./Components/ChatBox/Ietsigs";
 import Cipherchat from "./Components/ChatBox/Iet/Cipherchat";
+import Inkheartchat from "./Components/ChatBox/Iet/Inkheartchat";
+import Rovispchat from "./Components/ChatBox/Iet/Rovispchat";
+import Mediachat from "./Components/ChatBox/Iet/Mediachat";
+import Venturechat from "./Components/ChatBox/Iet/Venturechat";
+import Torsionchat from "./Components/ChatBox/Iet/Torsionchat";
 import IetCode from "./Components/CodingLink.jsx/IetCode";
 import IeeeCode from "./Components/CodingLink.jsx/IeeeCode";
 import AcmCode from "./Components/CodingLink.jsx/AcmCoding";
@@ -284,6 +289,11 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/chat/:clubId/:sigId" element={<Chat />} />
           <Route path="/Cipherchat" element={<Cipherchat/>}/>
+          <Route path="/Rovispchat" element={<Rovispchat/>}/>
+          <Route path="/Venturechat" element={<Venturechat/>}/>
+          <Route path="/Mediachat" element={<Mediachat/>}/>
+          <Route path="/Inkheartchat" element={<Inkheartchat/>}/>
+          <Route path="/Torsionchat" element={<Torsionchat/>}/>
         </Route>
         <Route path="/preferenceform" element={<PreferenceForm/>}/>
         <Route path="/ietsigs" element={<IetSigs />}/>
