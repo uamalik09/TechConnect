@@ -378,7 +378,7 @@ const AdminSubmissionsDashboard = () => {
                 >
                   <option value="totalScore">Total Score</option>
                   <option value="studentName">Name</option>
-                  <option value="score">Base Score</option>
+                  <option value="score">Test Score</option>
                 </select>
                 <button
                   onClick={() => setFilter({...filter, sortOrder: filter.sortOrder === 'asc' ? 'desc' : 'asc'})}
@@ -410,8 +410,8 @@ const AdminSubmissionsDashboard = () => {
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Name</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Roll Number</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Base Score</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Additional Marks</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Test Score</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Code Marks</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Total Score</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Interview Slot</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Round 1</th>
