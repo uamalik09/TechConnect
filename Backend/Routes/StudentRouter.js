@@ -102,5 +102,33 @@ router.get('/iste/credit/:rollNumber', authenticateUser, authorizeRoles('iste'),
 router.get('/iste/crypt/all', authenticateUser, authorizeRoles('iste'), getAllStudents);
 router.get('/iste/crypt/:rollNumber', authenticateUser, authorizeRoles('iste'), getStudentByRollNumber);
 
+router.post('/ie/capital/register', registerStudent);
+router.post('/ie/code/register', registerStudent);
+router.post('/ie/robotics/register', registerStudent);
+router.post('/ie/tectonic/register', registerStudent);
+router.post('/ie/garage/register', registerStudent);
+router.post('/ie/gadget/register', registerStudent);
+router.post('/ie/script/register', registerStudent);
+
+router.get('/ie/capital/all', authenticateUser, authorizeRoles('ie'), getAllStudents);
+router.get('/ie/capital/:rollNumber', authenticateUser, authorizeRoles('ie'), getStudentByRollNumber);
+
+router.get('/ie/code/all', authenticateUser, authorizeRoles('ie'), getAllStudents);
+router.get('/ie/code/:rollNumber', authenticateUser, authorizeRoles('ie'), getStudentByRollNumber);
+
+router.get('/ie/garage/all', authenticateUser, authorizeRoles('ie'), getAllStudents);
+router.get('/ie/garage/:rollNumber', authenticateUser, authorizeRoles('ie'), getStudentByRollNumber);
+
+router.get('/ie/tectonic/all', authenticateUser, authorizeRoles('ie'), getAllStudents);
+router.get('/ie/tectonic/:rollNumber', authenticateUser, authorizeRoles('ie'), getStudentByRollNumber);
+
+router.get('/ie/robotics/all', authenticateUser, authorizeRoles('ie'), getAllStudents);
+router.get('/ie/robotics/:rollNumber', authenticateUser, authorizeRoles('ie'), getStudentByRollNumber);
+
+router.get('/ie/gadget/all', authenticateUser, authorizeRoles('ie'), getAllStudents);
+router.get('/ie/gadget/:rollNumber', authenticateUser, authorizeRoles('ie'), getStudentByRollNumber);
+
+router.get('/ie/script/all', authenticateUser, authorizeRoles('ie'), getAllStudents);
+router.get('/ie/script/:rollNumber', authenticateUser, authorizeRoles('ie'), getStudentByRollNumber);
 
 module.exports = router;

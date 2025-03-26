@@ -26,7 +26,7 @@ const AdminSubmissionsDashboard = () => {
           console.error("Invalid token format");
         }
         
-        const response = await fetch('http://localhost:8080/results/iet/cipher/submissions', {
+        const response = await fetch('http://localhost:8080/results/iste/create/submissions', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -207,7 +207,7 @@ const AdminSubmissionsDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       const updatePromises = Object.entries(modifiedSubmissions).map(([submissionId, changes]) => {
-        return fetch(`http://localhost:8080/results/iet/cipher/submissions/${submissionId}/status`, {
+        return fetch(`http://localhost:8080/results/iste/create/submissions/${submissionId}/status`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -594,7 +594,7 @@ const AdminSubmissionsDashboard = () => {
                 Auto-Qualify by Score
               </button>
              
-              <button 
+              {/* <button 
                 onClick={() => {
                   const confirmed = window.confirm("Are you sure you want to send email notifications to all qualified candidates?");
                   if (confirmed) {
@@ -604,7 +604,7 @@ const AdminSubmissionsDashboard = () => {
                 className="w-full px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition-colors"
               >
                 Notify Qualified Candidates
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

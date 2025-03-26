@@ -26,7 +26,7 @@ const AdminQuestions = () => {
   const fetchQuestions = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:8080/questions/iet/cipher/get', {
+      const response = await fetch('http://localhost:8080/questions/ie/script/get', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ const AdminQuestions = () => {
     e.preventDefault();
     
     try {
-      const settingsResponse = await fetch('http://localhost:8080/questions/iet/cipher/settings', {
+      const settingsResponse = await fetch('http://localhost:8080/questions/ie/script/settings', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ const AdminQuestions = () => {
       
       console.log("Submitting question:", dataToSubmit);
       
-      const response = await fetch("http://localhost:8080/questions/iet/cipher/add", {
+      const response = await fetch("http://localhost:8080/questions/ie/script/add", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
@@ -127,7 +127,7 @@ const AdminQuestions = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this question?")) {
       try {
-        const response = await fetch(`http://localhost:8080/questions/iet/cipher/delete/${id}`, {
+        const response = await fetch(`http://localhost:8080/questions/ie/script/delete/${id}`, {
           method: "DELETE",
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -168,7 +168,7 @@ const AdminQuestions = () => {
 
   const updateMarks = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/questions/iet/cipher/updateMarks/${editMarks.id}`, {
+      const response = await fetch(`http://localhost:8080/questions/ie/script/updateMarks/${editMarks.id}`, {
         method: "PATCH",
         headers: {
           'Content-Type': 'application/json',

@@ -56,12 +56,12 @@ const models = {
     ieeepiston: mongoose.model("ieeepiston", QuestionSchema),
     ieeediode: mongoose.model("ieeediode", QuestionSchema),
   
-    ieCapital: mongoose.model("iecapital", QuestionSchema),
-    ieCode: mongoose.model("iecode", QuestionSchema),
-    ieGadget: mongoose.model("iegadget", QuestionSchema),
-    ieRobotics: mongoose.model("ierobotics", QuestionSchema),
-    ieGarage: mongoose.model("iegarage", QuestionSchema),
-    ieTechtonic: mongoose.model("ietechtonic", QuestionSchema),
+    iecapital: mongoose.model("iecapital", QuestionSchema),
+    iecode: mongoose.model("iecode", QuestionSchema),
+    iegadget: mongoose.model("iegadget", QuestionSchema),
+    ierobotics: mongoose.model("ierobotics", QuestionSchema),
+    iegarage: mongoose.model("iegarage", QuestionSchema),
+    ietechtonic: mongoose.model("ietechtonic", QuestionSchema),
   
     acmsanganitra: mongoose.model("acmsanganitra", QuestionSchema),
     acmkaaryavarta: mongoose.model("acmkaaryavarta", QuestionSchema),

@@ -168,5 +168,52 @@ router.get('/iste/crypt/quiz-status', authenticateUser, authorizeRoles('iste', '
     }
 );
 
+router.get('/ie/capital/quiz-status', authenticateUser, authorizeRoles('ie', 'user'), 
+    (req, res) => {
+        req.params.quizModel = 'iecapital';
+        getSpecificQuizStatus(req, res);
+    }
+);
+
+router.get('/ie/code/quiz-status', authenticateUser, authorizeRoles('ie', 'user'), 
+    (req, res) => {
+        req.params.quizModel = 'iecode';
+        getSpecificQuizStatus(req, res);
+    }
+);
+router.get('/ie/gadget/quiz-status', authenticateUser, authorizeRoles('ie', 'user'), 
+    (req, res) => {
+        req.params.quizModel = 'iegadget';
+        getSpecificQuizStatus(req, res);
+    }
+);
+
+router.get('/ie/robotics/quiz-status', authenticateUser, authorizeRoles('ie', 'user'), 
+    (req, res) => {
+        req.params.quizModel = 'ierobotics';
+        getSpecificQuizStatus(req, res);
+    }
+);
+
+router.get('/ie/garage/quiz-status', authenticateUser, authorizeRoles('ie', 'user'), 
+    (req, res) => {
+        req.params.quizModel = 'iegarage';
+        getSpecificQuizStatus(req, res);
+    }
+);
+
+router.get('/ie/tectonic/quiz-status', authenticateUser, authorizeRoles('ie', 'user'), 
+    (req, res) => {
+        req.params.quizModel = 'ietectonic';
+        getSpecificQuizStatus(req, res);
+    }
+);
+
+router.get('/ie/script/quiz-status', authenticateUser, authorizeRoles('ie', 'user'), 
+    (req, res) => {
+        req.params.quizModel = 'iescript';
+        getSpecificQuizStatus(req, res);
+    }
+);
 
 module.exports = router;
