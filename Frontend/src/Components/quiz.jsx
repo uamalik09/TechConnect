@@ -480,14 +480,8 @@ const QuizPage = () => {
                             className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
                         >
                             View Results
-                        </button>
-<<<<<<< HEAD
-                    
+                        </button>     
                         {/* <button
-=======
-{/*                     
-                        <button
->>>>>>> origin/Hanvitha
                             onClick={resetQuizState}
                             className="bg-red-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-red-600 transition duration-300"
                         >

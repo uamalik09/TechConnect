@@ -1,38 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
+// Fetch user data & token from localStorage
+const getUserData = () => {
+  try {
+    const userData = localStorage.getItem("user");
+    if (!userData) {
+      throw new Error("No user data found");
+    }
+    
+    const parsedData = JSON.parse(userData);
+    if (!parsedData.token) {
+      throw new Error("No valid token found");
+    }
+    
+    return parsedData;
+  } catch (error) {
+    console.error("Error retrieving user data:", error.message);
+    return { token: null, role: "" };
+  }
+};
 const SigChat = () => {
   const [messages, setMessages] = useState([]);
   const [adminReply, setAdminReply] = useState({});
-  const [userRole, setUserRole] = useState(""); 
+  const [userRole, setUserRole] = useState("null"); 
   const [replyingTo, setReplyingTo] = useState(null);
   const navigate = useNavigate();
   const { sigId } = useParams(); // Get the SIG ID from URL params
 
-  // Fetch user data & token from localStorage
-  const getUserData = () => {
-    try {
-      const userData = localStorage.getItem("user");
-      if (!userData) {
-        throw new Error("No user data found");
-      }
-      
-      const parsedData = JSON.parse(userData);
-      if (!parsedData.token) {
-        throw new Error("No valid token found");
-      }
-      
-      return parsedData;
-    } catch (error) {
-      console.error("Error retrieving user data:", error.message);
-      return { token: null, role: "" };
-    }
-  };
+  
 
   const userData = getUserData();
 
   useEffect(() => {
-    if (!userData.token) {
+    if (!userData||!userData.token) {
       console.error("No token found, redirecting to login.");
       navigate("/login");
       return;
