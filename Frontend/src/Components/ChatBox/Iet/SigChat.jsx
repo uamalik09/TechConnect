@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const RovispChat = () => {
+const SigChat = () => {
   const [messages, setMessages] = useState([]);
   const [adminReply, setAdminReply] = useState({});
   const [userRole, setUserRole] = useState(""); 
   const [replyingTo, setReplyingTo] = useState(null);
   const navigate = useNavigate();
+  const { sigId } = useParams(); // Get the SIG ID from URL params
 
   // Fetch user data & token from localStorage
   const getUserData = () => {
@@ -41,16 +42,16 @@ const RovispChat = () => {
       if (userData.role !== "iet") {
         console.error("Unauthorized role, redirecting.");
         navigate("/home");
-    }
+      }
     }
   }, [userData.role, navigate]);
 
   // Fetch messages from backend
   const fetchMessages = async () => {
     try {
-      console.log("Fetching doubts with token:", userData.token?.substring(0, 10) + "...");
+      console.log(`Fetching doubts for SIG ${sigId} with token:`, userData.token?.substring(0, 10) + "...");
       
-      const res = await fetch("http://localhost:8080/api/doubts/1/2", {
+      const res = await fetch(`http://localhost:8080/api/doubts/1/${sigId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -121,7 +122,7 @@ const RovispChat = () => {
       const replyText = `@${originalDoubt.senderName}: "${originalDoubt.text.substring(0, 40)}${originalDoubt.text.length > 40 ? '...' : ''}" - ${adminReply[doubtId].trim()}`;
       
       const res = await fetch(
-        `http://localhost:8080/api/doubts/1/2/admin/${doubtId}`,
+        `http://localhost:8080/api/doubts/1/${sigId}/admin/${doubtId}`,
         {
           method: "POST",
           headers: {
@@ -157,7 +158,7 @@ const RovispChat = () => {
     fetchMessages();
     const interval = setInterval(fetchMessages, 10000); // Auto-refresh every 10 seconds
     return () => clearInterval(interval);
-  }, []);
+  }, [sigId]); // Add sigId to dependency array to refetch when SIG changes
 
   const formatTime = (timestamp) => {
     return new Date(timestamp).toLocaleString("en-US", {
@@ -173,9 +174,19 @@ const RovispChat = () => {
     return ["iet"].includes(userRole);
   };
 
+  // Map SIG IDs to names
+  const sigNames = {
+    1: 'Cipher',
+    2: 'Rovisp', 
+    3: 'Torsion',
+    4: 'Venture',
+    5: 'Inkheart',
+    6: 'Media'
+  };
+
   return (
     <div className="min-h-screen bg-gray-900 text-white p-6">
-      <h1 className="text-2xl font-bold mb-4">Rovisp Doubts</h1>
+      <h1 className="text-2xl font-bold mb-4">{sigNames[sigId]} Doubts</h1>
 
       {messages.length === 0 ? (
         <p className="text-center text-gray-500 mt-10">No doubts asked yet!</p>
@@ -232,7 +243,7 @@ const RovispChat = () => {
                           </button>
                           <button
                             onClick={() => handleAdminReply(message._id)}
-                       x     className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded"
+                            className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded"
                             disabled={!adminReply[message._id]?.trim()}
                           >
                             Send Reply
@@ -251,4 +262,4 @@ const RovispChat = () => {
   );
 };
 
-export default RovispChat;
+export default SigChat;

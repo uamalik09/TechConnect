@@ -127,12 +127,7 @@ import ClubList from "./Components/ChatBox/ClubList";
 import SigList from "./Components/ChatBox/SigList";
 import Chat from "./Components/chat";
 import IetSigs from "./Components/ChatBox/Ietsigs";
-import Cipherchat from "./Components/ChatBox/Iet/Cipherchat";
-import Inkheartchat from "./Components/ChatBox/Iet/Inkheartchat";
-import Rovispchat from "./Components/ChatBox/Iet/Rovispchat";
-import Mediachat from "./Components/ChatBox/Iet/Mediachat";
-import Venturechat from "./Components/ChatBox/Iet/Venturechat";
-import Torsionchat from "./Components/ChatBox/Iet/Torsionchat";
+import SigChat from "./Components/ChatBox/Iet/SigChat";
 import IetCode from "./Components/CodingLink.jsx/IetCode";
 import IeeeCode from "./Components/CodingLink.jsx/IeeeCode";
 import AcmCode from "./Components/CodingLink.jsx/AcmCoding";
@@ -189,7 +184,7 @@ function App() {
         <Route path="/studentdashboard" element={<StudentDashboard/>}/>
         <Route path="/choice" element={<ChoicePage/>}/>
         <Route path="/adminquestions" element={<AdminQuestions />} />
-        <Route path="/:club/:sig/quiz" element={<Quiz />} /> 
+         
         <Route path="/clubs" element={<ClubPage/>}/>
         <Route path="/sigs/:clubId" element={<SigPage/>}/>
         <Route path="/sig-details/:clubId/:sigId" element={<SigDetails/>}/>
@@ -208,7 +203,7 @@ function App() {
         <Route path="/addistetalk" element={<IsteTalk />}/>
         <Route path="/getistetalk" element={<IsteTalksPage />}/>
         <Route path="/alltalks" element={<AllTalks />}/>
-        <Route path="/addcipherquestions" element={<CipherQuestions />}/>
+        
         <Route path="/addrovispquestions" element={<RovispQuestions />}/>
         <Route path="/addtorsionquestions" element={<TorsionQuestions />}/>
         <Route path="/addmediaquestions" element={<MediaQuestions />}/>
@@ -288,18 +283,14 @@ function App() {
         
         <Route element={<ProtectedRoute />}>
           <Route path="/chat/:clubId/:sigId" element={<Chat />} />
-          <Route path="/Cipherchat" element={<Cipherchat/>}/>
-          <Route path="/Rovispchat" element={<Rovispchat/>}/>
-          <Route path="/Venturechat" element={<Venturechat/>}/>
-          <Route path="/Mediachat" element={<Mediachat/>}/>
-          <Route path="/Inkheartchat" element={<Inkheartchat/>}/>
-          <Route path="/Torsionchat" element={<Torsionchat/>}/>
+          <Route path="/:sigId/chat" element={<SigChat/>}/>
           <Route path="/preferenceform" element={<PreferenceForm/>}/>
           <Route path="/adminpreferences" element={<AdminPreferences/>}/>
+          <Route path="/:club/:sig/quiz" element={<Quiz />} />
+          <Route path="/addcipherquestions" element={<CipherQuestions />}/>
         </Route>
        
         <Route path="/ietsigs" element={<IetSigs />}/>
-        <Route path="/Cipherchat" element={<Cipherchat/>}/>
         <Route path="/ietcode" element={<IetCode/>}/>
         <Route path="/ietlink" element={<IetLink/>}/>
         <Route path="/ieeecode" element={<IeeeCode/>}/>

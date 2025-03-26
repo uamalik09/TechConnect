@@ -1,5 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+const getUserData = () => {
+    try {
+      const userData = localStorage.getItem("user");
+      if (!userData) {
+        throw new Error("No user data found");
+      }
+      
+      const parsedData = JSON.parse(userData);
+      if (!parsedData.token) {
+        throw new Error("No valid token found");
+      }
+      
+      return parsedData;
+    } catch (error) {
+      console.error("Error retrieving user data:", error.message);
+      return null;
+    }
+  };
+    
 
 const QuizPage = () => {
     const [questions, setQuestions] = useState([]);
@@ -58,16 +77,16 @@ const QuizPage = () => {
     // };
 
     const fetchQuizSettings = () => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            navigate('/login');
+        const userData = getUserData(); 
+        if (!userData||userData.role!="user") {
+            navigate('/home');
             return;
         }
         // First, fetch quiz settings - this will tell us if the quiz exists and is available
         fetch(`http://localhost:8080/questions/${club}/${sig}/settings`, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`,
+                'Authorization': `Bearer ${userData.token}`,
                 'Content-Type': 'application/json'
             }
         })
@@ -134,16 +153,16 @@ const QuizPage = () => {
 
     // Fetch questions function
     const fetchQuestions = (uniqueQuizId) => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            navigate('/login');
+        const userData = getUserData(); 
+        if (!userData||userData.role!="user") {
+            navigate('/home');
             return;
         }
         
-        fetch(`http://localhost:8080/questions/${club}/${sig}/get`, {
+        fetch(`http://localhost:8080/questions/${club}/${sig}/get/student`, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`,
+                'Authorization': `Bearer ${userData.token}`,
                 'Content-Type': 'application/json'
             }
         })
@@ -216,9 +235,9 @@ const QuizPage = () => {
     }, [timeLeft, quizStatus, club, sig]);
    
     const submitQuiz = async () => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            navigate('/login');
+        const userData = getUserData(); 
+        if (!userData||userData.role!="user") {
+            navigate('/home');
             return;
         }
         const uniqueQuizId = `${club}_${sig}`;
@@ -253,7 +272,7 @@ const QuizPage = () => {
             const response = await fetch(`http://localhost:8080/results/${club}/${sig}/submit`, {
                 method: "POST",
                 headers: {
-                    'Authorization': `Bearer ${token}`,
+                    'Authorization': `Bearer ${userData.token}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(payload) 
