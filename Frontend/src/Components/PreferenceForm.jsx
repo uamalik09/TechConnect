@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const clubs = ["IET", "IEEE", "IE", "ISTE", "ACM"];
 
@@ -6,6 +7,39 @@ const PreferenceForm = () => {
   const [name, setName] = useState("");
   const [rollNo, setRollNo] = useState("");
   const [preferences, setPreferences] = useState({});
+  const navigate = useNavigate();
+
+  // ✅ Function to get user data
+  const getUserData = () => {
+    try {
+      const userData = localStorage.getItem("user");
+      if (!userData) {
+        throw new Error("No user data found");
+      }
+      
+      const parsedData = JSON.parse(userData);
+      if (!parsedData.token) {
+        throw new Error("No valid token found");
+      }
+
+      return parsedData;
+    } catch (error) {
+      console.error("Error retrieving user data:", error.message);
+      return null;
+    }
+  };
+
+  // ✅ Check Authentication on Load
+  useEffect(() => {
+    const userData = getUserData();
+    if (!userData || userData.role !== "user") {
+      console.error("Unauthorized access - redirecting");
+      navigate("/home");
+    } else {
+      setName(userData.name);
+      setRollNo(userData.rollNo || "");  // Roll number might not always be stored
+    }
+  }, []);
 
   const handlePreferenceChange = (club, value) => {
     const updatedPreferences = { ...preferences, [club]: value };
@@ -25,30 +59,43 @@ const PreferenceForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    const response = await fetch("http://localhost:8080/api/preferences/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        rollNo,
-        preferences,
-      }),
-    });
-  
-    const data = await response.json();
-  
-    if (response.ok) {
-      alert("Preferences submitted successfully!");
-      setName("");
-      setRollNo("");
-      setPreferences({});
-    } else {
-      alert(data.message || "Failed to submit preferences.");
+    const userData = getUserData();
+
+    if (!userData) {
+      alert("You must be logged in to submit preferences.");
+      navigate("/login");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:8080/api/preferences/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${userData.token}`,  // ✅ Attach token
+        },
+        body: JSON.stringify({
+          name,
+          rollNo,
+          preferences,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("Preferences submitted successfully!");
+        setPreferences({});
+      } else {
+        alert(data.message || "Failed to submit preferences.");
+      }
+    } catch (error) {
+      console.error("Error submitting preferences:", error);
+      alert("An error occurred. Please try again.");
     }
   };
+
+
 
   return (
     <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">

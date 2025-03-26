@@ -1,42 +1,76 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const PreferencesAdmin = () => {
   const [preferences, setPreferences] = useState([]);
-  const [allPreferences, setAllPreferences] = useState([]); // Store all preferences
-  const [searchTerm, setSearchTerm] = useState(""); // For search input
-  
-  // Fetch all preferences from backend
-  const fetchPreferences = async () => {
+  const [allPreferences, setAllPreferences] = useState([]); // Store all preferences for filtering
+  const [searchTerm, setSearchTerm] = useState(""); // Search input state
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  // ✅ Function to get admin user data securely
+  const getAdminData = () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/preferences/all");
+      const userData = localStorage.getItem("user");
+      if (!userData) {
+        throw new Error("No user data found");
+      }
+
+      const parsedData = JSON.parse(userData);
+      if (!parsedData.token || parsedData.role !== "admin") {
+        throw new Error("Unauthorized access");
+      }
+
+      return parsedData;
+    } catch (error) {
+      console.error("Authentication Error:", error.message);
+      return null;
+    }
+  };
+
+  // ✅ Fetch all preferences from backend
+  const fetchPreferences = async () => {
+    const adminData = getAdminData();
+    if (!adminData) {
+      localStorage.removeItem("user"); // Clear invalid session
+      navigate("/home");
+      return;
+    }
+
+    try {
+      const response = await axios.get("http://localhost:8080/api/preferences/all", {
+        headers: {
+          Authorization: `Bearer ${adminData.token}`, // ✅ Attach token
+        },
+      });
       setPreferences(response.data);
       setAllPreferences(response.data); // Store complete data for filtering
     } catch (error) {
       console.error("Error fetching preferences:", error);
+      setError("Failed to fetch preferences. Please try again.");
     }
   };
-  
+
   useEffect(() => {
     fetchPreferences();
   }, []);
-  
-  // Handle search input change
+
+  // ✅ Handle search input change
   const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
-    
+
     // Filter preferences based on search term
     if (term.trim() === "") {
       setPreferences(allPreferences); // Show all if search is empty
     } else {
-      const filtered = allPreferences.filter(student => 
-        student.name.toLowerCase().includes(term)
+      const filtered = allPreferences.filter((student) =>
+        student.name.toLowerCase().includes(term) || student.rollNo.includes(term)
       );
       setPreferences(filtered);
     }
   };
-  
   return (
     <div className="min-h-screen bg-gray-900 text-white p-8">
       <h1 className="text-3xl font-bold mb-6">Student Preferences</h1>

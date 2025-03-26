@@ -8,11 +8,11 @@ const authenticateUser = (req, res, next) => {
         return res.status(401).json({ message: "Access denied. No valid token provided." });
     }
 
-    const token = authHeader.split(" ")[1]; // Extract token after "Bearer"
+    const token = authHeader.split(" ")[1]; 
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = decoded; // Contains { userId, email, role }
+        req.user = decoded; 
         next();
     } catch (error) {
         console.error("Authentication Error:", error.message);
@@ -20,7 +20,6 @@ const authenticateUser = (req, res, next) => {
     }
 };
 
-// Middleware to check if the user has the required role
 const authorizeRoles = (...allowedRoles) => {
     return (req, res, next) => {
         if (!req.user || !allowedRoles.includes(req.user.role)) {

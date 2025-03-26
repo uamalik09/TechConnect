@@ -294,8 +294,10 @@ function App() {
           <Route path="/Mediachat" element={<Mediachat/>}/>
           <Route path="/Inkheartchat" element={<Inkheartchat/>}/>
           <Route path="/Torsionchat" element={<Torsionchat/>}/>
+          <Route path="/preferenceform" element={<PreferenceForm/>}/>
+          <Route path="/adminpreferences" element={<AdminPreferences/>}/>
         </Route>
-        <Route path="/preferenceform" element={<PreferenceForm/>}/>
+       
         <Route path="/ietsigs" element={<IetSigs />}/>
         <Route path="/Cipherchat" element={<Cipherchat/>}/>
         <Route path="/ietcode" element={<IetCode/>}/>
@@ -310,7 +312,7 @@ function App() {
         <Route path="/istelink" element={<IsteLink/>}/>
         <Route path="/allcodelinks" element={<AllCode/>}/>
         
-        <Route path="/adminpreferences" element={<AdminPreferences/>}/>
+        
         {/* <Route path="/addieeequestions" element={<IeeeQuestions />}/> */}
         {/* <Route path="/addacmquestions" element={<AcmQuestions />}/> */}
         {/* <Route path="/addiequestions" element={<IeQuestions />}/> */}
