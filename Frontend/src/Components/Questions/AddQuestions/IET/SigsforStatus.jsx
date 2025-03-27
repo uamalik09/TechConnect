@@ -13,36 +13,35 @@ const IetSig = () => {
   const clubs = [
     { 
       name: 'Cipher', 
-      path: '/getcipherstatus',
+      path: '/cipher/getietstatus',
       image: '/images/cipher.png',
     },
     { 
-      name: 'ROVISP', 
-      path: '/getrovispstatus',
+      name: 'Rovisp', 
+      path: '/rovisp/getietstatus',
       image: '/images/rovisp.png',
     },
     { 
       name: 'Venture', 
-      path: '/getventurestatus',
+      path: '/venture/getietstatus',
       image: '/images/venture.png',
     },
     { 
       name: 'Torsion', 
-      path: '/gettorsionstatus',
+      path: '/torsion/getietstatus',
       image: '/images/torsion.png',
     },
     { 
       name: 'Inkheart', 
-      path: '/getinkheartstatus',
+      path: '/inkheart/getietstatus',
       image: '/images/inkheart.png',
     },
     { 
       name: 'Media', 
-      path: '/getmediastatus',
+      path: '/media/getietstatus',
       image: '/images/media.png',
     }
   ];
-
   const handleLogout = () => {
     // Clear localStorage items
     localStorage.removeItem("userInfo");

@@ -13,32 +13,32 @@ const IetSig = () => {
   const clubs = [
     { 
       name: 'Cipher', 
-      path: '/getcipherresults',
+      path: '/cipher/getietresults',
       image: '/images/cipher.png',
     },
     { 
       name: 'Rovisp', 
-      path: '/getrovispresults',
+      path: '/rovisp/getietresults',
       image: '/images/rovisp.png',
     },
     { 
       name: 'Venture', 
-      path: '/getventureresults',
+      path: '/venture/getietresults',
       image: '/images/venture.png',
     },
     { 
       name: 'Torsion', 
-      path: '/gettorsionresults',
+      path: '/torsion/getietresults',
       image: '/images/torsion.png',
     },
     { 
       name: 'Inkheart', 
-      path: '/getinkheartresults',
+      path: '/inkheart/getietresults',
       image: '/images/inkheart.png',
     },
     { 
       name: 'Media', 
-      path: '/getmediaresults',
+      path: '/media/getietresults',
       image: '/images/media.png',
     }
   ];

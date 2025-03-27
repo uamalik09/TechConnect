@@ -146,7 +146,10 @@ import AllCode from "./Components/CodingLink.jsx/AllCode";
 import PreferenceForm from "./Components/PreferenceForm";
 import AdminPreferences from "./Components/AdminPreferences";
 import { AuthProvider } from "./Context/AuthContext"; 
-
+import IETQuestions from "./Components/Questions/AddQuestions/IET/IETQuestions";
+import IETDetails from "./Components/Questions/AddQuestions/IET/StudentDetails";
+import IETStatus from "./Components/Questions/AddQuestions/IET/QuizStatus";
+import IETResults from "./Components/Questions/AddQuestions/IET/Submissions";
 
 // import Rovispchat from "./Components/ChatBox/Iet/Rovispchat";
 // import IeeeQuestions from "./Components/Questions/AddQuestions/IeeeQuestions";
@@ -292,6 +295,10 @@ function App() {
           <Route path="/adminpreferences" element={<AdminPreferences/>}/>
           <Route path="/:club/:sig/quiz" element={<Quiz />} />
           <Route path="/addcipherquestions" element={<CipherQuestions />}/>
+          <Route path="/:sig/addietquestions" element={<IETQuestions />}/>
+          <Route path="/:sig/getietdeatils" element={<IETDetails />}/>
+          <Route path="/:sig/getietresults" element={<IETResults />}/>
+          <Route path="/:sig/getietstatus" element={<IETStatus />}/>
         </Route>
        
         <Route path="/ietsigs" element={<IetSigs />}/>

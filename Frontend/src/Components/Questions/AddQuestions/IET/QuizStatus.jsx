@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'; 
+import {useParams} from "react-router-dom";
 
 const QuizStatus = () => {   
   const [loading, setLoading] = useState(true);   
   const [error, setError] = useState(null);   
-  const [status, setStatus] = useState(null);    
+  const [status, setStatus] = useState(null);
+  const {sig}=useParams();    
 
   useEffect(() => {     
     const fetchQuizStatus = async () => {       
@@ -13,7 +15,7 @@ const QuizStatus = () => {
         const token = localStorage.getItem('token');                  
         
         // Make the fetch request with the token in the Authorization header
-        const response = await fetch('http://localhost:8080/status/iet/rovisp/quiz-status', {
+        const response = await fetch(`http://localhost:8080/status/iet/${sig}/quiz-status`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,

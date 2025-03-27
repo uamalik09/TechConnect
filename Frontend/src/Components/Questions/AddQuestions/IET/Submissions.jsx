@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import {useParams} from "react-router-dom";
 const AdminSubmissionsDashboard = () => {
   const [submissions, setSubmissions] = useState([]);
   const [modifiedSubmissions, setModifiedSubmissions] = useState({});
@@ -8,6 +8,7 @@ const AdminSubmissionsDashboard = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [additionalMarks, setAdditionalMarks] = useState({});
   const [interviewSlots, setInterviewSlots] = useState({});
+  const {sig}=useParams();
   const [filter, setFilter] = useState({
     searchTerm: '',
     sortBy: 'totalScore',
@@ -26,7 +27,7 @@ const AdminSubmissionsDashboard = () => {
           console.error("Invalid token format");
         }
         
-        const response = await fetch('http://localhost:8080/results/iet/inkheart/submissions', {
+        const response = await fetch(`http://localhost:8080/results/iet/${sig}/submissions`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -207,7 +208,7 @@ const AdminSubmissionsDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       const updatePromises = Object.entries(modifiedSubmissions).map(([submissionId, changes]) => {
-        return fetch(`http://localhost:8080/results/iet/inkheart/submissions/${submissionId}/status`, {
+        return fetch(`http://localhost:8080/results/iet/${sig}/submissions/${submissionId}/status`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -378,7 +379,7 @@ const AdminSubmissionsDashboard = () => {
                 >
                   <option value="totalScore">Total Score</option>
                   <option value="studentName">Name</option>
-                  <option value="score">Base Score</option>
+                  <option value="score">Test Score</option>
                 </select>
                 <button
                   onClick={() => setFilter({...filter, sortOrder: filter.sortOrder === 'asc' ? 'desc' : 'asc'})}
@@ -410,8 +411,8 @@ const AdminSubmissionsDashboard = () => {
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Name</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Roll Number</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Base Score</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Additional Marks</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Test Score</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Code Marks</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Total Score</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Interview Slot</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Round 1</th>

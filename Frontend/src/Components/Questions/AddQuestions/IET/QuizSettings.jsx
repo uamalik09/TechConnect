@@ -1,5 +1,23 @@
 import { useState, useEffect } from "react";
-
+import { useNavigate,useParams } from "react-router-dom";
+const getUserData = () => {
+  try {
+    const userData = localStorage.getItem("user");
+    if (!userData) {
+      throw new Error("No user data found");
+    }
+    
+    const parsedData = JSON.parse(userData);
+    if (!parsedData.token) {
+      throw new Error("No valid token found");
+    }
+    
+    return parsedData;
+  } catch (error) {
+    console.error("Error retrieving user data:", error.message);
+    return null;
+  }
+};
 const QuizSettings = ({ totalMarks, totalQuestions }) => {
   const [quizSettings, setQuizSettings] = useState({
     quizTimeLimitSeconds: 600,
@@ -8,10 +26,29 @@ const QuizSettings = ({ totalMarks, totalQuestions }) => {
     totalMarks: 0,
     totalQuestions: 0
   });
+  const [userRole, setUserRole] = useState(null);
+  const {sig}=useParams();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const userData = getUserData();
+  console.log("User Role:", userData.role);
 
+  useEffect(() => {
+    if (!userData.token) {
+      console.error("No token found, redirecting to login.");
+      navigate("/home");
+      return;
+    }
+    if (userData.role) {
+      setUserRole(userData.role);
+      if (userData.role !== "iet") {
+        console.error("Unauthorized role, redirecting.");
+        navigate("/home");
+    }
+    }
+  }, [userData.role, navigate]);
   useEffect(() => {
     fetchQuizSettings();
   }, []);
@@ -19,11 +56,11 @@ const QuizSettings = ({ totalMarks, totalQuestions }) => {
   const fetchQuizSettings = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:8080/questions/iet/torsion/settings', {
+      const response = await fetch(`http://localhost:8080/questions/iet/${sig}/settings`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${userData.token}`
         }
       });
 
@@ -80,11 +117,11 @@ const QuizSettings = ({ totalMarks, totalQuestions }) => {
       
       console.log("Submitting settings:", settingsToSubmit);
       
-      const response = await fetch("http://localhost:8080/questions/iet/torsion/settings/update", {
+      const response = await fetch(`http://localhost:8080/questions/iet/${sig}/settings/update`, {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem('token')}`
+          "Authorization": `Bearer ${userData.token}`
         },
         body: JSON.stringify(settingsToSubmit),
       });

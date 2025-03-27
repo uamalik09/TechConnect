@@ -1,9 +1,30 @@
 import { useState, useEffect } from "react";
 import QuizSettings from "./QuizSettings"; 
-
+import { useNavigate,useParams } from "react-router-dom";
+const getUserData = () => {
+  try {
+    const userData = localStorage.getItem("user");
+    if (!userData) {
+      throw new Error("No user data found");
+    }
+    
+    const parsedData = JSON.parse(userData);
+    if (!parsedData.token) {
+      throw new Error("No valid token found");
+    }
+    
+    return parsedData;
+  } catch (error) {
+    console.error("Error retrieving user data:", error.message);
+    return null;
+  }
+};
 const AdminQuestions = () => {
+
+  const navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
   const [totalMarks, setTotalMarks] = useState(0);
+  const [userRole, setUserRole] = useState(null);
   const [questionData, setQuestionData] = useState({
     question: "",
     option1: "",
@@ -17,7 +38,25 @@ const AdminQuestions = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [editMarks, setEditMarks] = useState({ id: null, value: 1 });
+  const {sig}=useParams();
   const [expandedQuestion, setExpandedQuestion] = useState(null);
+  const userData = getUserData();
+  console.log("User Role:", userData.role);
+
+  useEffect(() => {
+    if (!userData.token) {
+      console.error("No token found, redirecting to login.");
+      navigate("/home");
+      return;
+    }
+    if (userData.role) {
+      setUserRole(userData.role);
+      if (userData.role !== "iet") {
+        console.error("Unauthorized role, redirecting.");
+        navigate("/home");
+    }
+    }
+  }, [userData.role, navigate]);
 
   useEffect(() => {
     fetchQuestions();
@@ -26,11 +65,11 @@ const AdminQuestions = () => {
   const fetchQuestions = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:8080/questions/iet/venture/get', {
+      const response = await fetch(`http://localhost:8080/questions/iet/${sig}/get`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${userData.token}`
         }
       });
   
@@ -64,11 +103,11 @@ const AdminQuestions = () => {
     e.preventDefault();
     
     try {
-      const settingsResponse = await fetch('http://localhost:8080/questions/iet/venture/settings', {
+      const settingsResponse = await fetch(`http://localhost:8080/questions/iet/${sig}/settings`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${userData.token}`
         }
       });
       
@@ -87,11 +126,11 @@ const AdminQuestions = () => {
       
       console.log("Submitting question:", dataToSubmit);
       
-      const response = await fetch("http://localhost:8080/questions/iet/venture/add", {
+      const response = await fetch(`http://localhost:8080/questions/iet/${sig}/add`, {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem('token')}`
+          "Authorization": `Bearer ${userData.token}`
         },
         body: JSON.stringify(dataToSubmit),
       });
@@ -127,10 +166,10 @@ const AdminQuestions = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this question?")) {
       try {
-        const response = await fetch(`http://localhost:8080/questions/iet/venture/delete/${id}`, {
+        const response = await fetch(`http://localhost:8080/questions/iet/${sig}/delete/${id}`, {
           method: "DELETE",
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
+            'Authorization': `Bearer ${userData.token}`
           }
         });
   
@@ -168,11 +207,11 @@ const AdminQuestions = () => {
 
   const updateMarks = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/questions/iet/venture/updateMarks/${editMarks.id}`, {
+      const response = await fetch(`http://localhost:8080/questions/iet/${sig}/updateMarks/${editMarks.id}`, {
         method: "PATCH",
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${userData.token}`
         },
         body: JSON.stringify({ marks: editMarks.value })
       });
@@ -422,3 +461,137 @@ const AdminQuestions = () => {
 };
 
 export default AdminQuestions;
+// import { useState, useEffect } from "react";
+// import QuizSettings from "./QuizSettings";
+// import { useNavigate } from "react-router-dom";
+
+// const getUserData = () => {
+//   try {
+//     const userData = localStorage.getItem("user");
+//     if (!userData) {
+//       throw new Error("No user data found");
+//     }
+
+//     const parsedData = JSON.parse(userData);
+//     if (!parsedData.token) {
+//       throw new Error("No valid token found");
+//     }
+
+//     return parsedData;
+//   } catch (error) {
+//     console.error("Error retrieving user data:", error.message);
+//     return null;
+//   }
+// };
+
+// const AdminQuestions = () => {
+//   const navigate = useNavigate();
+//   const [questions, setQuestions] = useState([]);
+//   const [totalMarks, setTotalMarks] = useState(0);
+//   const [userRole, setUserRole] = useState(null);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
+//   const [success, setSuccess] = useState(null);
+//   const [expandedQuestion, setExpandedQuestion] = useState(null);
+//   const userData = getUserData();
+
+//   useEffect(() => {
+//     if (!userData || !userData.token) {
+//       console.error("No token found, redirecting to login.");
+//       navigate("/login");
+//       return;
+//     }
+//     if (userData.role) {
+//       setUserRole(userData.role);
+//       if (userData.role !== "iet") {
+//         console.error("Unauthorized role, redirecting.");
+//         navigate("/home");
+//       }
+//     }
+//   }, [navigate, userData]);
+
+//   useEffect(() => {
+//     fetchQuestions();
+//   }, []);
+
+//   const fetchQuestions = async () => {
+//     try {
+//       setLoading(true);
+//       const response = await fetch("http://localhost:8080/questions/iet/${sig}/get", {
+//         method: "GET",
+//         headers: {
+//           "Content-Type": "application/json",
+//           "Authorization": `Bearer ${userData.token}` // Fixed token retrieval
+//         }
+//       });
+
+//       if (!response.ok) {
+//         throw new Error(`HTTP error! Status: ${response.status}`);
+//       }
+
+//       const data = await response.json();
+//       if (Array.isArray(data)) {
+//         setQuestions(data);
+//         setTotalMarks(data.reduce((sum, q) => sum + (q.marks || 1), 0));
+//       } else if (data.questions && Array.isArray(data.questions)) {
+//         setQuestions(data.questions);
+//         setTotalMarks(data.totalMarks || 0);
+//       }
+
+//       setLoading(false);
+//     } catch (error) {
+//       console.error("Error fetching questions:", error);
+//       setError("Failed to load questions");
+//       setLoading(false);
+//     }
+//   };
+
+//   const handleDelete = async (id) => {
+//     if (window.confirm("Are you sure you want to delete this question?")) {
+//       try {
+//         const response = await fetch(`http://localhost:8080/questions/iet/${sig}/delete/${id}`, {
+//           method: "DELETE",
+//           headers: {
+//             "Authorization": `Bearer ${userData.token}` // Fixed token retrieval
+//           }
+//         });
+
+//         if (response.ok) {
+//           setSuccess("Question deleted successfully!");
+//           setTimeout(() => setSuccess(null), 3000);
+//           setQuestions((prev) => prev.filter((q) => q._id !== id));
+//           setTotalMarks((prev) => prev - 1);
+//         } else {
+//           const errorData = await response.json();
+//           setError(errorData.message || "Failed to delete question!");
+//         }
+//       } catch (error) {
+//         console.error("Error deleting question:", error);
+//         setError("An error occurred while deleting the question");
+//       }
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <h2>Admin Questions Panel</h2>
+//       {loading && <p>Loading...</p>}
+//       {error && <p className="error">{error}</p>}
+//       {success && <p className="success">{success}</p>}
+//       {questions.length > 0 ? (
+//         <ul>
+//           {questions.map((question) => (
+//             <li key={question._id}>
+//               <p>{question.question}</p>
+//               <button onClick={() => handleDelete(question._id)}>Delete</button>
+//             </li>
+//           ))}
+//         </ul>
+//       ) : (
+//         <p>No questions available.</p>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default AdminQuestions;

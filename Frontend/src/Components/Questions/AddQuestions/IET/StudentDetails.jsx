@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-
+import {useParams} from "react-router-dom";
 const AdminDashboard = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const {sig}=useParams();
   useEffect(() => {
     const fetchStudents = async () => {
       try {
@@ -15,7 +15,7 @@ const AdminDashboard = () => {
           } catch (e) {
             console.error("Invalid token format");
           }
-        const response = await fetch('http://localhost:8080/students/iet/venture/all', {
+        const response = await fetch(`http://localhost:8080/students/iet/${sig}/all`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
