@@ -1,6 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import {useParams} from "react-router-dom";
+import {useParams,useNavigate} from "react-router-dom";
+const getUserData = () => {
+  try {
+    const userData = localStorage.getItem("user");
+    if (!userData) {
+      throw new Error("No user data found");
+    }
+    
+    const parsedData = JSON.parse(userData);
+    if (!parsedData.token) {
+      throw new Error("No valid token found");
+    }
+    
+    return parsedData;
+  } catch (error) {
+    console.error("Error retrieving user data:", error.message);
+    return null;
+  }
+};
 const AdminSubmissionsDashboard = () => {
+  const navigate=useNavigate();
   const [submissions, setSubmissions] = useState([]);
   const [modifiedSubmissions, setModifiedSubmissions] = useState({});
   const [loading, setLoading] = useState(true);
@@ -8,18 +27,34 @@ const AdminSubmissionsDashboard = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [additionalMarks, setAdditionalMarks] = useState({});
   const [interviewSlots, setInterviewSlots] = useState({});
+  const [userRole, setUserRole] = useState(null);
   const {sig}=useParams();
+  const userData = getUserData();
   const [filter, setFilter] = useState({
     searchTerm: '',
     sortBy: 'totalScore',
     sortOrder: 'desc',
     filterQualified: 'all'
   });
+  useEffect(() => {
+    if (!userData.token) {
+      console.error("No token found, redirecting to login.");
+      navigate("/home");
+      return;
+    }
+    if (userData.role) {
+      setUserRole(userData.role);
+      if (userData.role !== "iet") {
+        console.error("Unauthorized role, redirecting.");
+        navigate("/home");
+    }
+    }
+  }, [userData.role, navigate]);
 
   useEffect(() => {
     const fetchSubmissions = async () => {
       try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('userData.token');
         try {
           const tokenData = JSON.parse(atob(token.split('.')[1]));
           console.log("Token payload:", tokenData);
@@ -31,7 +66,7 @@ const AdminSubmissionsDashboard = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${userData.token}`
           }
         });
 
@@ -206,13 +241,13 @@ const AdminSubmissionsDashboard = () => {
 
     setIsSaving(true);
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('userData.token');
       const updatePromises = Object.entries(modifiedSubmissions).map(([submissionId, changes]) => {
         return fetch(`http://localhost:8080/results/iet/${sig}/submissions/${submissionId}/status`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${userData.token}`
           },
           body: JSON.stringify(changes)
         });

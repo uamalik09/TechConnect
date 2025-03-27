@@ -1,10 +1,45 @@
 import React, { useState, useEffect } from 'react';
-import {useParams} from "react-router-dom";
+import {useParams,useNavigate} from "react-router-dom";
+const getUserData = () => {
+  try {
+    const userData = localStorage.getItem("user");
+    if (!userData) {
+      throw new Error("No user data found");
+    }
+    
+    const parsedData = JSON.parse(userData);
+    if (!parsedData.token) {
+      throw new Error("No valid token found");
+    }
+    
+    return parsedData;
+  } catch (error) {
+    console.error("Error retrieving user data:", error.message);
+    return null;
+  }
+};
 const AdminDashboard = () => {
+  const navigate=useNavigate();
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [userRole, setUserRole] = useState(null);
   const {sig}=useParams();
+  const userData=getUserData();
+  useEffect(() => {
+    if (!userData.token) {
+      console.error("No token found, redirecting to login.");
+      navigate("/home");
+      return;
+    }
+    if (userData.role) {
+      setUserRole(userData.role);
+      if (userData.role !== "iet") {
+        console.error("Unauthorized role, redirecting.");
+        navigate("/home");
+    }
+    }
+  }, [userData.role, navigate]);
   useEffect(() => {
     const fetchStudents = async () => {
       try {
@@ -19,7 +54,7 @@ const AdminDashboard = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
+            'Authorization': `Bearer ${userData.token}`
           }
         });
 

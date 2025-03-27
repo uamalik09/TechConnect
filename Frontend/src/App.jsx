@@ -48,12 +48,12 @@ import IsteTalksPage from "./Components/Talks/GetTalks/GetIsteTalk";
 import AllTalks from "./Components/Talks/AllTalks";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import RoleBasedRoute from "./Components/RoleBasedRoute";
-import CipherQuestions from "./Components/Questions/AddQuestions/IET/Cipher/CipherQuestions";
-import RovispQuestions from "./Components/Questions/AddQuestions/IET/Rovisp/RovispQuestions";
-import TorsionQuestions from "./Components/Questions/AddQuestions/IET/Torsion/TorsionQuestions";
-import MediaQuestions from "./Components/Questions/AddQuestions/IET/Media/MediaQuestions";
-import InkheartQuestions from "./Components/Questions/AddQuestions/IET/Inkheart/InkheartQuestions";
-import VentureQuestions from "./Components/Questions/AddQuestions/IET/Venture/VentureQuestions";
+// import CipherQuestions from "./Components/Questions/AddQuestions/IET/Cipher/CipherQuestions";
+// import RovispQuestions from "./Components/Questions/AddQuestions/IET/Rovisp/RovispQuestions";
+// import TorsionQuestions from "./Components/Questions/AddQuestions/IET/Torsion/TorsionQuestions";
+// import MediaQuestions from "./Components/Questions/AddQuestions/IET/Media/MediaQuestions";
+// import InkheartQuestions from "./Components/Questions/AddQuestions/IET/Inkheart/InkheartQuestions";
+// import VentureQuestions from "./Components/Questions/AddQuestions/IET/Venture/VentureQuestions";
 import CompsocQuestions from "./Components/Questions/AddQuestions/IEEE/Compsoc/CompsocQuestions";
 import DiodeQuestions from "./Components/Questions/AddQuestions/IEEE/Diode/DiodeQuestions";
 import PistonQuestions from "./Components/Questions/AddQuestions/IEEE/Piston/PistonQuestions";
@@ -63,12 +63,12 @@ import SaahityaQuestions from "./Components/Questions/AddQuestions/ACM/Saahitya/
 import SanganitraQuestions from "./Components/Questions/AddQuestions/ACM/Sanganitra/SanganitraQuestions";
 import VidyutQuestions from "./Components/Questions/AddQuestions/ACM/Vidyut/VidyutQuestions";
 import YantrikaQuestions from "./Components/Questions/AddQuestions/ACM/Yantrika/YantrikaQuestions";
-import CipherResults from "./Components/Questions/AddQuestions/IET/Cipher/Submissions";
-import RovispResults from "./Components/Questions/AddQuestions/IET/Rovisp/Submissions";
-import TorsionResults from "./Components/Questions/AddQuestions/IET/Torsion/Submissions";
-import MediaResults from "./Components/Questions/AddQuestions/IET/Media/Submissions";
-import InkheartResults from "./Components/Questions/AddQuestions/IET/Inkheart/Submissions";
-import VentureResults from "./Components/Questions/AddQuestions/IET/Venture/Submissions";
+// import CipherResults from "./Components/Questions/AddQuestions/IET/Cipher/Submissions";
+// import RovispResults from "./Components/Questions/AddQuestions/IET/Rovisp/Submissions";
+// import TorsionResults from "./Components/Questions/AddQuestions/IET/Torsion/Submissions";
+// import MediaResults from "./Components/Questions/AddQuestions/IET/Media/Submissions";
+// import InkheartResults from "./Components/Questions/AddQuestions/IET/Inkheart/Submissions";
+// import VentureResults from "./Components/Questions/AddQuestions/IET/Venture/Submissions";
 import CompsocResults from "./Components/Questions/AddQuestions/IEEE/Compsoc/Submissions";
 import DiodeResults from "./Components/Questions/AddQuestions/IEEE/Diode/Submissions";
 import PistonResults from "./Components/Questions/AddQuestions/IEEE/Piston/Submissions";
@@ -79,12 +79,12 @@ import SanganitraResults from "./Components/Questions/AddQuestions/ACM/Sanganitr
 import VidyutResults from "./Components/Questions/AddQuestions/ACM/Vidyut/Submissions";
 import YantrikaResults from "./Components/Questions/AddQuestions/ACM/Yantrika/Submissions";
 import Register from "./Components/StudentRegister";
-import CipherDetails from "./Components/Questions/AddQuestions/IET/Cipher/StudentDetails";
-import RovispDetails from "./Components/Questions/AddQuestions/IET//Rovisp/StudentDetails";
-import TorsionDetails from "./Components/Questions/AddQuestions/IET/Torsion/StudentDetails";
-import MediaDetails from "./Components/Questions/AddQuestions/IET/Media/StudentDetails";
-import VentureDetails from "./Components/Questions/AddQuestions/IET/Venture/StudentDetails";
-import InkheartDetails from "./Components/Questions/AddQuestions/IET/Inkheart/StudentDetails";
+// import CipherDetails from "./Components/Questions/AddQuestions/IET/Cipher/StudentDetails";
+// import RovispDetails from "./Components/Questions/AddQuestions/IET//Rovisp/StudentDetails";
+// import TorsionDetails from "./Components/Questions/AddQuestions/IET/Torsion/StudentDetails";
+// import MediaDetails from "./Components/Questions/AddQuestions/IET/Media/StudentDetails";
+// import VentureDetails from "./Components/Questions/AddQuestions/IET/Venture/StudentDetails";
+// import InkheartDetails from "./Components/Questions/AddQuestions/IET/Inkheart/StudentDetails";
 import CompsocDetails from "./Components/Questions/AddQuestions/IEEE/Compsoc/StudentDetails";
 import DiodeDetails from "./Components/Questions/AddQuestions/IEEE/Diode/StudentDetails";
 import PistonDetails from "./Components/Questions/AddQuestions/IEEE/Piston/StudentDetails";
@@ -94,12 +94,12 @@ import SaahityaDetails from "./Components/Questions/AddQuestions/ACM/Saahitya/St
 import SanganitraDetails from "./Components/Questions/AddQuestions/ACM/Sanganitra/StudentDetails";
 import VidyutDetails from "./Components/Questions/AddQuestions/ACM/Vidyut/StudentDetails";
 import YantrikaDetails from "./Components/Questions/AddQuestions/ACM/Yantrika/StudentDetails";
-import CipherStatus from "./Components/Questions/AddQuestions/IET/Cipher/QuizStatus";
-import RovispStatus from "./Components/Questions/AddQuestions/IET//Rovisp/QuizStatus";
-import TorsionStatus from "./Components/Questions/AddQuestions/IET/Torsion/QuizStatus";
-import MediaStatus from "./Components/Questions/AddQuestions/IET/Media/QuizStatus";
-import VentureStatus from "./Components/Questions/AddQuestions/IET/Venture/QuizStatus";
-import InkheartStatus from "./Components/Questions/AddQuestions/IET/Inkheart/QuizStatus";
+// import CipherStatus from "./Components/Questions/AddQuestions/IET/Cipher/QuizStatus";
+// import RovispStatus from "./Components/Questions/AddQuestions/IET//Rovisp/QuizStatus";
+// import TorsionStatus from "./Components/Questions/AddQuestions/IET/Torsion/QuizStatus";
+// import MediaStatus from "./Components/Questions/AddQuestions/IET/Media/QuizStatus";
+// import VentureStatus from "./Components/Questions/AddQuestions/IET/Venture/QuizStatus";
+// import InkheartStatus from "./Components/Questions/AddQuestions/IET/Inkheart/QuizStatus";
 import CompsocStatus from "./Components/Questions/AddQuestions/IEEE/Compsoc/QuizStatus";
 import DiodeStatus from "./Components/Questions/AddQuestions/IEEE/Diode/QuizStatus";
 import PistonStatus from "./Components/Questions/AddQuestions/IEEE/Piston/QuizStatus";
@@ -211,7 +211,7 @@ function App() {
         <Route path="/getistetalk" element={<IsteTalksPage />}/>
         <Route path="/alltalks" element={<AllTalks />}/>
         
-        <Route path="/addrovispquestions" element={<RovispQuestions />}/>
+        {/* <Route path="/addrovispquestions" element={<RovispQuestions />}/>
         <Route path="/addtorsionquestions" element={<TorsionQuestions />}/>
         <Route path="/addmediaquestions" element={<MediaQuestions />}/>
         <Route path="/addinkheartquestions" element={<InkheartQuestions />}/>
@@ -221,9 +221,9 @@ function App() {
         <Route path="/gettorsionresults" element={<TorsionResults />}/>
         <Route path="/getmediaresults" element={<MediaResults />}/>
         <Route path="/getinkheartresults" element={<InkheartResults />}/>
-        <Route path="/getventureresults" element={<VentureResults />}/>
+        <Route path="/getventureresults" element={<VentureResults />}/> */}
         <Route path="/registration" element={<Register />}/>
-        <Route path="/getcipherdetails" element={<CipherDetails />}/>
+        {/* <Route path="/getcipherdetails" element={<CipherDetails />}/>
         <Route path="/getrovispdetails" element={<RovispDetails />}/>
         <Route path="/gettorsiondetails" element={<TorsionDetails />}/>
         <Route path="/getinkheartdetails" element={<InkheartDetails />}/>
@@ -234,8 +234,8 @@ function App() {
         <Route path="/gettorsionstatus" element={<TorsionStatus />}/>
         <Route path="/getinkheartstatus" element={<InkheartStatus />}/>
         <Route path="/getmediastatus" element={<MediaStatus />}/>
-        <Route path="/getventurestatus" element={<VentureStatus />}/>
-        <Route path="/:clubId/:sigId/frontpage" element={<FrontPage />}/>
+        <Route path="/getventurestatus" element={<VentureStatus />}/> */}
+        {/* <Route path="/:clubId/:sigId/frontpage" element={<FrontPage />}/> */}
         <Route path="/iet" element={<IetSig />}/>
         <Route path="/ietresults" element={<IetSigresults />}/>
         <Route path="/ietdetails" element={<IetSigdetails />}/>
@@ -294,9 +294,9 @@ function App() {
           <Route path="/preferenceform" element={<PreferenceForm/>}/>
           <Route path="/adminpreferences" element={<AdminPreferences/>}/>
           <Route path="/:club/:sig/quiz" element={<Quiz />} />
-          <Route path="/addcipherquestions" element={<CipherQuestions />}/>
+          {/* <Route path="/addcipherquestions" element={<CipherQuestions />}/> */}
           <Route path="/:sig/addietquestions" element={<IETQuestions />}/>
-          <Route path="/:sig/getietdeatils" element={<IETDetails />}/>
+          <Route path="/:sig/getietdetails" element={<IETDetails />}/>
           <Route path="/:sig/getietresults" element={<IETResults />}/>
           <Route path="/:sig/getietstatus" element={<IETStatus />}/>
         </Route>

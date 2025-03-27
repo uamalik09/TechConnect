@@ -61,18 +61,23 @@ function SigDetails() {
 
   // Check if the SIG exists in the data
   const selectedSig = sigDetails[clubId]?.find(sig => sig.id === parseInt(sigId));
-  const clubName = clubNames[clubId] || "Club Id";
-  const sigName = selectedSig?.name || "SIG Id";
+  const clubName = clubNames[clubId];
+  const sigName = selectedSig?.name;
 
   console.log("Selected SIG:", selectedSig);
 
   if (!selectedSig) {
     return <p className="text-center text-red-500">SIG Not Found</p>;
   }
-  const clubUrlParam = clubName.split(' ')[0].toLowerCase();
-  const sigUrlParam = sigName.toLowerCase();
+  
   // Handle the start of the test
   const handleStartTest = () => {
+    const clubUrlParam = clubName.split(' ')[0].toLowerCase();
+  const sigUrlParam = sigName.toLowerCase();
+    if (!clubName || !sigName) {
+      console.error("Club Name or SIG Name is undefined.");
+      return;
+    }
     navigate(`/${clubUrlParam}/${sigUrlParam}/quiz`);  // Navigate to the quiz page when "Start" button is clicked
   };
 

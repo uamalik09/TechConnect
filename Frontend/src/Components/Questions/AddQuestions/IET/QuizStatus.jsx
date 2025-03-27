@@ -1,12 +1,45 @@
 import React, { useEffect, useState } from 'react'; 
-import {useParams} from "react-router-dom";
-
+import {useParams,useNavigate} from "react-router-dom";
+const getUserData = () => {
+  try {
+    const userData = localStorage.getItem("user");
+    if (!userData) {
+      throw new Error("No user data found");
+    }
+    
+    const parsedData = JSON.parse(userData);
+    if (!parsedData.token) {
+      throw new Error("No valid token found");
+    }
+    
+    return parsedData;
+  } catch (error) {
+    console.error("Error retrieving user data:", error.message);
+    return null;
+  }
+};
 const QuizStatus = () => {   
+  const navigate=useNavigate();
   const [loading, setLoading] = useState(true);   
   const [error, setError] = useState(null);   
   const [status, setStatus] = useState(null);
+  const [userRole, setUserRole] = useState(null);
   const {sig}=useParams();    
-
+  const userData=getUserData();
+  useEffect(() => {
+    if (!userData.token) {
+      console.error("No token found, redirecting to login.");
+      navigate("/home");
+      return;
+    }
+    if (userData.role) {
+      setUserRole(userData.role);
+      if (userData.role !== "user") {
+        console.error("Unauthorized role, redirecting.");
+        navigate("/home");
+    }
+    }
+  }, [userData.role, navigate]);
   useEffect(() => {     
     const fetchQuizStatus = async () => {       
       try {         
@@ -18,7 +51,7 @@ const QuizStatus = () => {
         const response = await fetch(`http://localhost:8080/status/iet/${sig}/quiz-status`, {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `Bearer ${userData.token}`,
             'Content-Type': 'application/json'
           }
         });
