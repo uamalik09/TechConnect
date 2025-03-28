@@ -13,42 +13,42 @@ const IetSig = () => {
   const clubs = [
     { 
       name: 'Catalyst', 
-      path: '/getcatalystdetails',
+      path: '/catalyst/getistedetails',
       image: '/images/catalyst.png',
     },
     { 
       name: 'Charge', 
-      path: '/getchargedetails',
+      path: '/charge/getistedetails',
       image: '/images/charge.png',
     },
     { 
       name: 'Chronicle', 
-      path: '/getchronicledetails',
+      path: '/chronicle/getistedetails',
       image: '/images/chronicle.png',
     },
     { 
       name: 'Clutch', 
-      path: '/getclutchdetails',
+      path: '/clutch/getistedetails',
       image: '/images/clutch.png',
     },
     { 
       name: 'Concrete', 
-      path: '/getconcretedetails',
+      path: '/concrete/getistedetails',
       image: '/images/concrete.png',
     },
     { 
       name: 'Create', 
-      path: '/getcreatedetails',
+      path: '/create/getistedetails',
       image: '/images/create.png',
     },
     { 
       name: 'Credit', 
-      path: '/getcreditdetails',
+      path: '/credit/getistedetails',
       image: '/images/credit.png',
     },
     { 
       name: 'Crypt', 
-      path: '/getcryptdetails',
+      path: '/crypt/getistedetails',
       image: '/images/crypt.png',
     }
   ];
@@ -76,7 +76,7 @@ const IetSig = () => {
           </div>
           
           <div className="hidden md:flex">
-            <Link to="/studentdashboard" className="hover:text-blue-400 flex items-center gap-2">
+            <Link to="/istedashboard" className="hover:text-blue-400 flex items-center gap-2">
               <Home className="h-5 w-5" /> Home
             </Link>
             {/* <button 
@@ -103,7 +103,7 @@ const IetSig = () => {
           <div className="md:hidden mt-4 animate-fadeDown">
             <div className="flex flex-col space-y-4 px-2 pb-3 pt-2">
               <Link 
-                to="/studentdashboard" 
+                to="/istedashboard" 
                 className="text-gray-300 hover:text-blue-400 flex items-center gap-2 px-3 py-2 rounded-md"
                 onClick={() => setMobileMenuOpen(false)}
               >

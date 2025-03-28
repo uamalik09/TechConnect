@@ -13,37 +13,37 @@ const IetSig = () => {
   const clubs = [
     { 
       name: 'Capital', 
-      path: '/getcapitalstatus',
+      path: '/capital/getiestatus',
       image: '/images/capital.png',
     },
     { 
       name: 'Code', 
-      path: '/getcodestatus',
+      path: '/code/getiestatus',
       image: '/images/code.png',
     },
     { 
       name: 'Gadget', 
-      path: '/getgadgetstatus',
+      path: '/gadget/getiestatus',
       image: '/images/gadget.png',
     },
     { 
       name: 'Garage', 
-      path: '/getgaragestatus',
+      path: '/garage/getiestatus',
       image: '/images/garage.png',
     },
     { 
       name: 'Robotics', 
-      path: '/getroboticsstatus',
+      path: '/robotics/getiestatus',
       image: '/images/robotics.png',
     },
     { 
       name: 'Script', 
-      path: '/getscriptstatus',
+      path: '/script/getiestatus',
       image: '/images/script.png',
     },
     { 
       name: 'Tectonic', 
-      path: '/gettectonicstatus',
+      path: '/tectonic/getiestatus',
       image: '/images/tectonic.png',
     }
   ];
@@ -71,7 +71,7 @@ const IetSig = () => {
           </div>
           
           <div className="hidden md:flex">
-            <Link to="/studentdashboard" className="hover:text-blue-400 flex items-center gap-2">
+            <Link to="/iedashboard" className="hover:text-blue-400 flex items-center gap-2">
               <Home className="h-5 w-5" /> Home
             </Link>
             {/* <button 
@@ -98,7 +98,7 @@ const IetSig = () => {
           <div className="md:hidden mt-4 animate-fadeDown">
             <div className="flex flex-col space-y-4 px-2 pb-3 pt-2">
               <Link 
-                to="/studentdashboard" 
+                to="/iedashboard" 
                 className="text-gray-300 hover:text-blue-400 flex items-center gap-2 px-3 py-2 rounded-md"
                 onClick={() => setMobileMenuOpen(false)}
               >

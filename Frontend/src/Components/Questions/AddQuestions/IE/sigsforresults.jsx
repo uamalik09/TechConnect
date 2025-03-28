@@ -13,41 +13,40 @@ const IetSig = () => {
   const clubs = [
     { 
       name: 'Capital', 
-      path: '/getcapitalresults',
+      path: '/capital/getieresults',
       image: '/images/capital.png',
     },
     { 
       name: 'Code', 
-      path: '/getchargeresults',
-      image: '/images/charge.png',
+      path: '/code/getieresults',
+      image: '/images/code.png',
     },
     { 
       name: 'Gadget', 
-      path: '/getgadgetresults',
+      path: '/gadget/getieresults',
       image: '/images/gadget.png',
     },
     { 
       name: 'Garage', 
-      path: '/getgarageresults',
+      path: '/garage/getieresults',
       image: '/images/garage.png',
     },
     { 
       name: 'Robotics', 
-      path: '/getroboticsresults',
+      path: '/robotics/getieresults',
       image: '/images/robotics.png',
     },
     { 
       name: 'Script', 
-      path: '/getscriptresults',
+      path: '/script/getieresults',
       image: '/images/script.png',
     },
     { 
       name: 'Tectonic', 
-      path: '/gettectonicresults',
+      path: '/tectonic/getieresults',
       image: '/images/tectonic.png',
     }
   ];
-
   const handleLogout = () => {
     // Clear localStorage items
     localStorage.removeItem("userInfo");
@@ -71,7 +70,7 @@ const IetSig = () => {
           </div>
           
           <div className="hidden md:flex">
-            <Link to="/studentdashboard" className="hover:text-blue-400 flex items-center gap-2">
+            <Link to="/iedashboard" className="hover:text-blue-400 flex items-center gap-2">
               <Home className="h-5 w-5" /> Home
             </Link>
             {/* <button 
@@ -98,7 +97,7 @@ const IetSig = () => {
           <div className="md:hidden mt-4 animate-fadeDown">
             <div className="flex flex-col space-y-4 px-2 pb-3 pt-2">
               <Link 
-                to="/studentdashboard" 
+                to="/iedashboard" 
                 className="text-gray-300 hover:text-blue-400 flex items-center gap-2 px-3 py-2 rounded-md"
                 onClick={() => setMobileMenuOpen(false)}
               >

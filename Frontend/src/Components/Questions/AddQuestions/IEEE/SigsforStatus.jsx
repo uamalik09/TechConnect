@@ -13,17 +13,17 @@ const IetSig = () => {
   const clubs = [
     { 
       name: 'Compsoc', 
-      path: '/getcompsocstatus',
+      path: '/compsoc/getieeestatus',
       image: '/images/compsoc.png',
     },
     { 
       name: 'Diode', 
-      path: '/getdiodestatus',
+      path: '/diode/getieeestatus',
       image: '/images/diode.png',
     },
     { 
       name: 'Piston', 
-      path: '/getpistonstatus',
+      path: '/piston/getieeestatus',
       image: '/images/piston.png',
     },
   ];
@@ -51,7 +51,7 @@ const IetSig = () => {
           </div>
           
           <div className="hidden md:flex">
-            <Link to="/studentdashboard" className="hover:text-blue-400 flex items-center gap-2">
+            <Link to="/ieeedashboard" className="hover:text-blue-400 flex items-center gap-2">
               <Home className="h-5 w-5" /> Home
             </Link>
             {/* <button 
@@ -78,7 +78,7 @@ const IetSig = () => {
           <div className="md:hidden mt-4 animate-fadeDown">
             <div className="flex flex-col space-y-4 px-2 pb-3 pt-2">
               <Link 
-                to="/studentdashboard" 
+                to="/ieeedashboard" 
                 className="text-gray-300 hover:text-blue-400 flex items-center gap-2 px-3 py-2 rounded-md"
                 onClick={() => setMobileMenuOpen(false)}
               >

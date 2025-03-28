@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const IetLink = () => {
+const IeeestuLink = () => {
   const [links, setLinks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,7 +12,7 @@ const IetLink = () => {
         const token = localStorage.getItem("token"); // Get token from local storage
         if (!token) throw new Error("Unauthorized: No token found");
 
-        const res = await axios.get("http://localhost:8080/coding/iet/getcode", {
+        const res = await axios.get("http://localhost:8080/coding/ieee/getcode/student", {
           headers: {
             Authorization: `Bearer ${token}`, // Send token in headers
           },
@@ -96,4 +96,4 @@ const IetLink = () => {
   );
 };
 
-export default IetLink;
+export default IeeestuLink;

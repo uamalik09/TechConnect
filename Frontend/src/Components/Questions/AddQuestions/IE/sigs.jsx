@@ -13,37 +13,37 @@ const IetSig = () => {
   const clubs = [
     { 
       name: 'Capital', 
-      path: '/addcapitalquestions',
+      path: '/capital/addiequestions',
       image: '/images/capital.png',
     },
     { 
       name: 'Code', 
-      path: '/addcodequestions',
+      path: '/code/addiequestions',
       image: '/images/code.png',
     },
     { 
       name: 'Gadget', 
-      path: '/addgadgetquestions',
+      path: '/gadget/addiequestions',
       image: '/images/gadget.png',
     },
     { 
       name: 'Garage', 
-      path: '/addgaragequestions',
+      path: '/garage/addiequestions',
       image: '/images/garage.png',
     },
     { 
       name: 'Robotics', 
-      path: '/addroboticsquestions',
+      path: '/robotics/addiequestions',
       image: '/images/robotics.png',
     },
     { 
       name: 'Script', 
-      path: '/addscriptquestions',
+      path: '/script/addiequestions',
       image: '/images/script.png',
     },
     { 
       name: 'Tectonic', 
-      path: '/addtectonicquestions',
+      path: '/tectonic/addiequestions',
       image: '/images/tectonic.png',
     }
   ];
@@ -98,7 +98,7 @@ const IetSig = () => {
           <div className="md:hidden mt-4 animate-fadeDown">
             <div className="flex flex-col space-y-4 px-2 pb-3 pt-2">
               <Link 
-                to="/studentdashboard" 
+                to="/iedashboard" 
                 className="text-gray-300 hover:text-blue-400 flex items-center gap-2 px-3 py-2 rounded-md"
                 onClick={() => setMobileMenuOpen(false)}
               >

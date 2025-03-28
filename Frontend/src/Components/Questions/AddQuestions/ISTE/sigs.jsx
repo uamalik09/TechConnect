@@ -13,42 +13,42 @@ const IetSig = () => {
   const clubs = [
     { 
       name: 'Catalyst', 
-      path: '/addcatalystquestions',
+      path: '/catalyst/addistequestions',
       image: '/images/catalyst.png',
     },
     { 
       name: 'Charge', 
-      path: '/addchargequestions',
+      path: '/charge/addistequestions',
       image: '/images/charge.png',
     },
     { 
       name: 'Chronicle', 
-      path: '/addchroniclequestions',
+      path: '/chronicle/addistequestions',
       image: '/images/chronicle.png',
     },
     { 
       name: 'Clutch', 
-      path: '/addclutchquestions',
+      path: '/clutch/addistequestions',
       image: '/images/clutch.png',
     },
     { 
       name: 'Concrete', 
-      path: '/addconcretequestions',
+      path: '/concrete/addistequestions',
       image: '/images/concrete.png',
     },
     { 
       name: 'Create', 
-      path: '/addcreatequestions',
+      path: '/create/addistequestions',
       image: '/images/create.png',
     },
     { 
       name: 'Credit', 
-      path: '/addcreditquestions',
+      path: '/credit/addistequestions',
       image: '/images/credit.png',
     },
     { 
       name: 'Crypt', 
-      path: '/addcryptquestions',
+      path: '/crypt/addistequestions',
       image: '/images/crypt.png',
     }
   ];

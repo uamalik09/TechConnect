@@ -1,43 +1,54 @@
-import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { Home } from 'lucide-react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Menu, Home } from 'lucide-react';
 import { 
+  FaBullhorn, 
+  FaVideo, 
+  FaCalendarAlt, 
+  FaUserCircle, 
+  FaClipboardList, 
+  FaHourglassStart,
+  FaComments, 
+  FaSignOutAlt, 
+  FaUserPlus,
   FaTachometerAlt,
+  FaCode,
+  FaListAlt
 } from "react-icons/fa";
 
-function ClubPage() {
-  // Use useParams to get clubId from URL if needed
-  // const { clubId } = useParams();
-  
+function ClubPageStu() {
   const clubs = [
     { 
       id: 1, 
       name: "Institution of Engineering and Technology",
-      shortName: "IET",
+      shortName:'iet',
       image: '/images/iet.jpeg'
     },
     { 
       id: 2, 
       name: "Institute of Electrical and Electronics Engineers",
-      shortName: "IEEE",
+      shortName:'ieee',
       image: '/images/ieee.jpeg'
     },
     { 
       id: 3, 
       name: "Association for Computing Machinery",
-      shortName: "ACM",
+      shortName:'acm',
+      // color: 'from-green-900/80 to-green-600/90',
       image: '/images/acm.jpeg'
     },
     { 
       id: 4, 
       name: "Indian Society for Technical Education",
-      shortName: "ISTE",
+      shortName:'iste',
+      // color: 'from-purple-900/80 to-purple-600/90',
       image: '/images/iste.jpeg'
     },
     { 
       id: 5, 
       name: "Institution of Engineers",
-      shortName: "IE",
+      shortName:'ie',
+      // color: 'from-yellow-900/80 to-yellow-600/90',
       image: '/images/ie.jpeg'
     }
   ];
@@ -47,11 +58,11 @@ function ClubPage() {
       {/* Navbar */}
       <nav className="bg-gray-800 px-6 py-4 shadow-lg border-b border-gray-700 sticky top-0 z-10">
         <div className="flex justify-between items-center">
-          <div className="flex items-center">
-            <FaTachometerAlt className="h-8 w-8 text-blue-400 mr-2" />
-            <h1 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-              Tech Connect
-            </h1>
+         <div className="flex items-center">
+              <FaTachometerAlt className="h-8 w-8 text-blue-400 mr-2" />
+              <h1 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                  Tech Connect
+              </h1>
           </div>
           
           <div className="hidden md:flex">
@@ -65,20 +76,19 @@ function ClubPage() {
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-900 to-purple-900 py-12 px-6 text-center">
         <h1 className="text-5xl font-bold mb-4 animate-pulse">
-          Announcements Portal
+          Coding Portal
         </h1>
         <p className="max-w-2xl mx-auto text-gray-300 mb-6">
-          Stay updated with the latest news and events from all exclusive clubs on campus. 
-          Never miss an important announcement again!
+          The best code is like magic—clear, powerful, and unforgettable.
         </p>
       </div>
 
       {/* Main Content */}
       <div className="flex-1 py-12 px-6 md:px-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
           {clubs.map((club) => (
             <div key={club.id} className="flex flex-col items-center">
-              <Link to={`/get${club.shortName.toLowerCase()}announcement`}>
+              <Link to={`/${club.shortName}stulink`}>
                 <div 
                   className="rounded-lg shadow-xl overflow-hidden relative group hover:scale-105 transition-all duration-300 h-40 w-40 flex items-center justify-center bg-white"
                 >
@@ -88,7 +98,7 @@ function ClubPage() {
                     className="max-h-full max-w-full object-contain p-2" 
                   />
                 </div>
-                <h2 className="text-lg font-semibold mt-3 text-center sm:text-left">
+                <h2 className="text-lg font-semibold mt-3 text-left">
                   {club.name}
                 </h2>
               </Link>
@@ -109,4 +119,4 @@ function ClubPage() {
   );
 }
 
-export default ClubPage;
+export default ClubPageStu;

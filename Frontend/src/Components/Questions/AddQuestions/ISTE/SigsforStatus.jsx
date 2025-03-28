@@ -13,46 +13,45 @@ const IetSig = () => {
   const clubs = [
     { 
       name: 'Catalyst', 
-      path: '/getcatalyststatus',
+      path: '/catalyst/getistestatus',
       image: '/images/catalyst.png',
     },
     { 
       name: 'Charge', 
-      path: '/getchargestatus',
+      path: '/charge/getistestatus',
       image: '/images/charge.png',
     },
     { 
       name: 'Chronicle', 
-      path: '/getchroniclestatus',
+      path: '/chronicle/getistestatus',
       image: '/images/chronicle.png',
     },
     { 
       name: 'Clutch', 
-      path: '/getclutchstatus',
+      path: '/clutch/getistestatus',
       image: '/images/clutch.png',
     },
     { 
       name: 'Concrete', 
-      path: '/getconcretestatus',
+      path: '/concrete/getistestatus',
       image: '/images/concrete.png',
     },
     { 
       name: 'Create', 
-      path: '/getcreatestatus',
+      path: '/create/getistestatus',
       image: '/images/create.png',
     },
     { 
       name: 'Credit', 
-      path: '/getcreditstatus',
+      path: '/credit/getistestatus',
       image: '/images/credit.png',
     },
     { 
       name: 'Crypt', 
-      path: '/getcryptstatus',
+      path: '/crypt/getistestatus',
       image: '/images/crypt.png',
     }
   ];
-
   const handleLogout = () => {
     // Clear localStorage items
     localStorage.removeItem("userInfo");
@@ -76,7 +75,7 @@ const IetSig = () => {
           </div>
           
           <div className="hidden md:flex">
-            <Link to="/studentdashboard" className="hover:text-blue-400 flex items-center gap-2">
+            <Link to="/istedashboard" className="hover:text-blue-400 flex items-center gap-2">
               <Home className="h-5 w-5" /> Home
             </Link>
             {/* <button 
@@ -103,7 +102,7 @@ const IetSig = () => {
           <div className="md:hidden mt-4 animate-fadeDown">
             <div className="flex flex-col space-y-4 px-2 pb-3 pt-2">
               <Link 
-                to="/studentdashboard" 
+                to="/istedashboard" 
                 className="text-gray-300 hover:text-blue-400 flex items-center gap-2 px-3 py-2 rounded-md"
                 onClick={() => setMobileMenuOpen(false)}
               >

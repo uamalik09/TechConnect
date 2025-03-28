@@ -13,37 +13,37 @@ const IetSig = () => {
   const clubs = [
     { 
       name: 'Capital', 
-      path: '/getcapitaldetails',
+      path: '/capital/getiedetails',
       image: '/images/capital.png',
     },
     { 
       name: 'Code', 
-      path: '/getcodedetails',
+      path: '/code/getiedetails',
       image: '/images/code.png',
     },
     { 
       name: 'Gadget', 
-      path: '/getgadgetdetails',
+      path: '/gadget/getiedetails',
       image: '/images/gadget.png',
     },
     { 
       name: 'Garage', 
-      path: '/getgaragedetails',
+      path: '/garage/getiedetails',
       image: '/images/garage.png',
     },
     { 
       name: 'Robotics', 
-      path: '/getroboticsdetails',
+      path: '/robotics/getiedetails',
       image: '/images/robotics.png',
     },
     { 
       name: 'Script', 
-      path: '/getscriptdetails',
+      path: '/script/getiedetails',
       image: '/images/script.png',
     },
     { 
       name: 'Tectonic', 
-      path: '/gettectonicdetails',
+      path: '/tectonic/getiedetails',
       image: '/images/tectonic.png',
     }
   ];

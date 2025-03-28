@@ -13,32 +13,32 @@ const IetSig = () => {
   const clubs = [
     { 
       name: 'Abhivyakta', 
-      path: '/getabhivyaktadetails',
+      path: '/abhivyakta/getacmdetails',
       image: '/images/abhivyakta.png',
     },
     { 
       name: 'Kaaryavarta', 
-      path: '/getkaaryavartadetails',
+      path: '/kaaryavarta/getacmdetails',
       image: '/images/kaaryavarta.png',
     },
     { 
       name: 'Saahitya', 
-      path: '/getsaahityadetails',
+      path: '/saahitya/getacmdetails',
       image: '/images/saahitya.png',
     },
     { 
       name: 'Sanganitra', 
-      path: '/getsanganitradetails',
+      path: '/sanganitra/getacmdetails',
       image: '/images/sanganitra.png',
     },
     { 
       name: 'Vidyut', 
-      path: '/getvidyutdetails',
+      path: '/vidyut/getacmdetails',
       image: '/images/vidyut.png',
     },
     { 
       name: 'Yantrika', 
-      path: '/getyantrikadetails',
+      path: '/yantrika/getacmdetails',
       image: '/images/yantrika.png',
     }
   ];

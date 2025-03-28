@@ -13,35 +13,36 @@ const IetSig = () => {
   const clubs = [
     { 
       name: 'Abhivyakta', 
-      path: '/getabhivyaktaresults',
+      path: '/abhivyakta/getacmresults',
       image: '/images/abhivyakta.png',
     },
     { 
       name: 'Kaaryavarta', 
-      path: '/getkaaryavartaresults',
+      path: '/kaaryavarta/getacmresults',
       image: '/images/kaaryavarta.png',
     },
     { 
       name: 'Saahitya', 
-      path: '/getsaahityaresults',
+      path: '/saahitya/getacmresults',
       image: '/images/saahitya.png',
     },
     { 
       name: 'Sanganitra', 
-      path: '/getsanganitraresults',
+      path: '/sanganitra/getacmresults',
       image: '/images/sanganitra.png',
     },
     { 
       name: 'Vidyut', 
-      path: '/getvidyutresults',
+      path: '/vidyut/getacmresults',
       image: '/images/vidyut.png',
     },
     { 
       name: 'Yantrika', 
-      path: '/getyantrikaresults',
+      path: '/yantrika/getacmresults',
       image: '/images/yantrika.png',
     }
   ];
+  
 
   const handleLogout = () => {
     // Clear localStorage items

@@ -5,7 +5,7 @@ import {
   FaTachometerAlt,
 } from "react-icons/fa";
 
-function ClubPage() {
+function ClubPageStu() {
   // Use useParams to get clubId from URL if needed
   // const { clubId } = useParams();
   
@@ -78,7 +78,7 @@ function ClubPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
           {clubs.map((club) => (
             <div key={club.id} className="flex flex-col items-center">
-              <Link to={`/get${club.shortName.toLowerCase()}announcement`}>
+              <Link to={`/getstu${club.shortName.toLowerCase()}announcement`}>
                 <div 
                   className="rounded-lg shadow-xl overflow-hidden relative group hover:scale-105 transition-all duration-300 h-40 w-40 flex items-center justify-center bg-white"
                 >
@@ -109,4 +109,4 @@ function ClubPage() {
   );
 }
 
-export default ClubPage;
+export default ClubPageStu;
