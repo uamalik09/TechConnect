@@ -13,7 +13,6 @@ function Signup() {
     });
     const [error, setError] = useState("");
 
-
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -84,7 +83,6 @@ function Signup() {
             setError("An error occurred while signing up. Please try again.");
         }
     };
-
 
     return (
         <section className="bg-gray-50 dark:bg-gray-900">
