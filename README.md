@@ -44,7 +44,7 @@ TechConnect is built using the MERN stack:
 
 1. **Clone the repository**
    ```bash
-   [git clone https://github.com/yourusername/techconnect.git](https://github.com/uamalik09/TechConnect.git)
+   git clone https://github.com/uamalik09/TechConnect.git
    cd TechConnect
    ```
 
