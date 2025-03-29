@@ -37,11 +37,11 @@ router.get('/verify', async (req, res) => {
         }
 
         const token = authHeader.split(" ")[1];
-        console.log("🔹 Extracted Token:", token);
+        
 
         // Verify JWT
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        console.log("🔹 Decoded Token:", decoded);
+       
 
         const user = await UserModel.findById(decoded.userId).select("-password");
         if (!user) {

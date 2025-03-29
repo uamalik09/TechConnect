@@ -25,57 +25,6 @@ function Signup() {
         }));
     };
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     console.log("Form Data before sending:", formData);
-
-
-    //     if (!formData.name || !formData.email || !formData.password) {
-    //         alert("All fields are required!");
-    //         return;
-    //     }
-
-    //     if (formData.password !== formData.confirmPassword) {
-    //         alert("Passwords do not match!");
-    //         return;
-    //     }
-    //     console.log("Form Submitted", formData);
-
-    //     try {
-    //         const url = "http://localhost:8080/auth/signup";
-    //         const response = await fetch(url, {
-    //             method: "POST",
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify({
-    //                 name: formData.name,
-    //                 email: formData.email,
-    //                 password: formData.password, 
-    //                 confirmPassword: formData.confirmPassword
-    //             }),
-    //         });
-
-    //         const result = await response.json();
-    //         const {success, message, error} = result;
-    //         if(success){
-    //             alert("Signup Successfull");
-    //             setTimeout(() => {
-    //                navigate('/login')
-    //             });
-    //         }
-    //         else if(error){
-    //             const details = error?.details[0].message;
-    //             alert(details);
-    //         }
-    //         else if(!success){
-    //             alert(message);
-    //         }
-    //     } catch (err) {
-    //         console.error("Signup error:", err);
-    //     }
-    // };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(""); // Clear previous errors
