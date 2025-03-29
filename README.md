@@ -52,12 +52,9 @@ TechConnect is built using the MERN stack:
    ```bash
    # Navigate to the backend directory
    cd Backend
-   
-   # Create .env file (replace with your configuration)
-   echo "MONGODB_URI=mongodb://localhost:27017/techconnect
-   PORT=5000
-   JWT_SECRET=your_jwt_secret
-   NODE_ENV=development" > .env
+
+   # Install dependencies
+   npm install
 
    # Start the server
    nodemon index.js
