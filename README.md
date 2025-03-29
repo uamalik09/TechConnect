@@ -15,7 +15,6 @@ Managing club recruitment activities such as registrations, pre-recruitment talk
 - Real-time progress tracking through the recruitment process
 - Online assessment portal with built-in timers
 - Communication with organizers via chat feature
-- Notification system for updates and announcements
 
 ### For Admins
 - Comprehensive dashboard to manage the entire recruitment process
