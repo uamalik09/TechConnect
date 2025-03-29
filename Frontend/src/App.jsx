@@ -3,8 +3,6 @@ import './index.css';
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
 import Home from "./Components/Home";
-import AdLogin from "./Components/AdminLogin";
-import AdSignup from "./Components/AdminSignup";
 import IetAnnouncements from "./Components/Announcements/AddAnnouncement/IetAnnouncement";
 import IeeeAnnouncements from "./Components/Announcements/AddAnnouncement/IeeeAnnouncement";
 import AcmAnnouncements from "./Components/Announcements/AddAnnouncement/AcmAnnouncement";
@@ -17,7 +15,6 @@ import TalksPage from "./Components/TalksPage";
 import AdminDashboard from "./Components/AdminDashboard";
 import ChoicePage from "./Components/Choice";
 import StudentDashboard from "./Components/Dashboards/StudentDashboard";
-import AdminQuestions from "./Components/AdminQuestions";
 import Quiz from "./Components/quiz";
 import ClubPage from "./Components/ClubPage";
 import SigPage from "./Components/SigPage";
@@ -25,11 +22,6 @@ import SigDetails from "./Components/SigDetails";
 import Result from "./Components/result";
 import SuperAdminPanel from "./Components/SuperAdmin";
 import FAQ from "./Components/FAQs";
-import GetIetAnnouncements from "./Components/Announcements/GetAnnouncement/GetIetAn";
-import GetIeeeAnnouncements from "./Components/Announcements/GetAnnouncement/GetIeeeAn";
-import GetAcmAnnouncements from "./Components/Announcements/GetAnnouncement/GetAcmAn";
-import GetIeAnnouncements from "./Components/Announcements/GetAnnouncement/GetIeAn";
-import GetIsteAnnouncements from "./Components/Announcements/GetAnnouncement/GetIsteAn";
 import AllAnnouncement from "./Components/Announcements/AllAnnouncements";
 import IetDashboard from "./Components/Dashboards/IetDashboard";
 import IeeeDashboard from "./Components/Dashboards/IeeeDashboard";
@@ -81,11 +73,6 @@ import IeeeCode from "./Components/CodingLink.jsx/IeeeCode";
 import AcmCode from "./Components/CodingLink.jsx/AcmCoding";
 import IeCode from "./Components/CodingLink.jsx/IeCoding";
 import IsteCode from "./Components/CodingLink.jsx/IsteCoding";
-import IetLink from "./Components/CodingLink.jsx/GetLink/IetLink";
-import IeeeLink from "./Components/CodingLink.jsx/GetLink/IeeeLink";
-import AcmLink from "./Components/CodingLink.jsx/GetLink/AcmLink";
-import IeLink from "./Components/CodingLink.jsx/GetLink/IeLink";
-import IsteLink from "./Components/CodingLink.jsx/GetLink/IsteLink";
 import AllCode from "./Components/CodingLink.jsx/AllCode";
 import PreferenceForm from "./Components/PreferenceForm";
 import AdminPreferences from "./Components/AdminPreferences";
@@ -115,6 +102,7 @@ import ACMQuestions from "./Components/Questions/AddQuestions/ACM/ACMQuestions";
 import ACMDetails from "./Components/Questions/AddQuestions/ACM/StudentDetails";
 import ACMStatus from "./Components/Questions/AddQuestions/ACM/QuizStatus";
 import ACMResults from "./Components/Questions/AddQuestions/ACM/Submissions";
+
 import GetstuAcmAnnouncements from "./Components/Announcements/StudentAnnouncement/AcmAnn";
 import GetstuIeAnnouncements from "./Components/Announcements/StudentAnnouncement/IeAnn";
 import GetstuIeeeAnnouncements from "./Components/Announcements/StudentAnnouncement/IeeeAnn";
@@ -137,24 +125,7 @@ function App() {
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/adminlogin" element={<AdLogin />} />
-        <Route path="/adminsignup" element={<AdSignup />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/ietannouncement" element={<IetAnnouncements/>}/>
-        <Route path="/getietannouncement" element={<GetIetAnnouncements/>}/>
-        <Route path="/getstuietannouncement" element={<GetstuIetAnnouncements/>}/>
-        <Route path="/ieeeannouncement" element={<IeeeAnnouncements/>}/>
-        <Route path="/getieeeannouncement" element={<GetIeeeAnnouncements/>}/>
-        <Route path="/getstuieeeannouncement" element={<GetstuIeeeAnnouncements/>}/>
-        <Route path="/acmannouncement" element={<AcmAnnouncements/>}/>
-        <Route path="/getacmannouncement" element={<GetAcmAnnouncements/>}/>
-        <Route path="/getstuacmannouncement" element={<GetstuAcmAnnouncements/>}/>
-        <Route path="/ieannouncement" element={<IeAnnouncements/>}/>
-        <Route path="/getieannouncement" element={<GetIeAnnouncements/>}/>
-        <Route path="/getstuieannouncement" element={<GetstuIeAnnouncements/>}/>
-        <Route path="/isteannouncement" element={<IsteAnnouncements/>}/>
-        <Route path="/getisteannouncement" element={<GetIsteAnnouncements/>}/>
-        <Route path="/getstuisteannouncement" element={<GetstuIsteAnnouncements/>}/>
         <Route path="/getannouncement" element={<GetAnnouncements/>}/>
         <Route path="/getstuannouncement" element={<GetStuAnnouncement/>}/>
         <Route path="/addtalks" element={<AddTalk/>}/>
@@ -166,9 +137,7 @@ function App() {
         <Route path="/iedashboard" element={<IeDashboard/>}/>
         <Route path="/istedashboard" element={<IsteDashboard/>}/>
         <Route path="/studentdashboard" element={<StudentDashboard/>}/>
-        <Route path="/choice" element={<ChoicePage/>}/>
-        <Route path="/adminquestions" element={<AdminQuestions />} />
-         
+        <Route path="/choice" element={<ChoicePage/>}/>      
         <Route path="/clubs" element={<ClubPage/>}/>
         <Route path="/sigs/:clubId" element={<SigPage/>}/>
         <Route path="/sig-details/:clubId/:sigId" element={<SigDetails/>}/>
@@ -176,18 +145,10 @@ function App() {
         <Route path="/superadmin" element={<SuperAdminPanel />}/>
         <Route path="/faqs" element={<FAQ />}/>
         <Route path="/allannouncement" element={<AllAnnouncement />}/>
-        <Route path="/addiettalk" element={<IetTalk />}/>
-        <Route path="/getiettalk" element={<IetTalksPage />}/>
-        <Route path="/addieeetalk" element={<IeeeTalk />}/>
-        <Route path="/getieeetalk" element={<IeeeTalksPage />}/>
-        <Route path="/addacmtalk" element={<AcmTalk />}/>
-        <Route path="/getacmtalk" element={<AcmTalksPage />}/>
-        <Route path="/addietalk" element={<IeTalk />}/>
-        <Route path="/getietalk" element={<IeTalksPage />}/>
-        <Route path="/addistetalk" element={<IsteTalk />}/>
-        <Route path="/getistetalk" element={<IsteTalksPage />}/>
         <Route path="/alltalks" element={<AllTalks />}/>
-      
+        <Route path="/ietsigs" element={<IetSigs />}/>
+        <Route path="/allcodelinks" element={<AllCode/>}/>
+        <Route path="/allcodestulinks" element={<ClubPageStu/>}/>
         <Route path="/registration" element={<Register />}/>
         <Route path="/iet" element={<IetSig />}/>
         <Route path="/ietresults" element={<IetSigresults />}/>
@@ -239,27 +200,37 @@ function App() {
           <Route path="/:sig/getacmdetails" element={<ACMDetails />}/>
           <Route path="/:sig/getacmresults" element={<ACMResults />}/>
           <Route path="/:sig/getacmstatus" element={<ACMStatus />}/>
+          <Route path="/ietannouncement" element={<IetAnnouncements/>}/>
+          <Route path="/getstuietannouncement" element={<GetstuIetAnnouncements/>}/>
+          <Route path="/ieeeannouncement" element={<IeeeAnnouncements/>}/>
+          <Route path="/getstuieeeannouncement" element={<GetstuIeeeAnnouncements/>}/>
+          <Route path="/acmannouncement" element={<AcmAnnouncements/>}/>
+          <Route path="/getstuacmannouncement" element={<GetstuAcmAnnouncements/>}/>
+          <Route path="/ieannouncement" element={<IeAnnouncements/>}/>
+          <Route path="/getstuieannouncement" element={<GetstuIeAnnouncements/>}/>
+          <Route path="/isteannouncement" element={<IsteAnnouncements/>}/>
+          <Route path="/getstuisteannouncement" element={<GetstuIsteAnnouncements/>}/>
+          <Route path="/addiettalk" element={<IetTalk />}/>
+          <Route path="/getiettalk" element={<IetTalksPage />}/>
+          <Route path="/addieeetalk" element={<IeeeTalk />}/>
+          <Route path="/getieeetalk" element={<IeeeTalksPage />}/>
+          <Route path="/addacmtalk" element={<AcmTalk />}/>
+          <Route path="/getacmtalk" element={<AcmTalksPage />}/>
+          <Route path="/addietalk" element={<IeTalk />}/>
+          <Route path="/getietalk" element={<IeTalksPage />}/>
+          <Route path="/addistetalk" element={<IsteTalk />}/>
+          <Route path="/getistetalk" element={<IsteTalksPage />}/>
+          <Route path="/ietcode" element={<IetCode/>}/>
+          <Route path="/ietstulink" element={<IetstuLink/>}/>
+          <Route path="/ieeecode" element={<IeeeCode/>}/>
+          <Route path="/ieeestulink" element={<IeeestuLink/>}/>
+          <Route path="/acmcode" element={<AcmCode/>}/>
+          <Route path="/acmstulink" element={<AcmstuLink/>}/>
+          <Route path="/iecode" element={<IeCode/>}/>
+          <Route path="/iestulink" element={<IestuLink/>}/>
+          <Route path="/istecode" element={<IsteCode/>}/>
+          <Route path="/istestulink" element={<IstestuLink/>}/>
         </Route>
-       
-        <Route path="/ietsigs" element={<IetSigs />}/>
-        <Route path="/ietcode" element={<IetCode/>}/>
-        <Route path="/ietlink" element={<IetLink/>}/>
-        <Route path="/ietstulink" element={<IetstuLink/>}/>
-        <Route path="/ieeecode" element={<IeeeCode/>}/>
-        <Route path="/ieeelink" element={<IeeeLink/>}/>
-        <Route path="/ieeestulink" element={<IeeestuLink/>}/>
-        <Route path="/acmcode" element={<AcmCode/>}/>
-        <Route path="/acmlink" element={<AcmLink/>}/>
-        <Route path="/acmstulink" element={<AcmstuLink/>}/>
-        <Route path="/iecode" element={<IeCode/>}/>
-        <Route path="/ielink" element={<IeLink/>}/>
-        <Route path="/iestulink" element={<IestuLink/>}/>
-        <Route path="/istecode" element={<IsteCode/>}/>
-        <Route path="/istelink" element={<IsteLink/>}/>
-        <Route path="/istestulink" element={<IstestuLink/>}/>
-        <Route path="/allcodelinks" element={<AllCode/>}/>
-        <Route path="/allcodestulinks" element={<ClubPageStu/>}/>
-        
         
       </Routes>
       </AuthProvider>

@@ -1,12 +1,48 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+const getUserData = () => {
+  try {
+    const userData = localStorage.getItem("user");
+    if (!userData) {
+      throw new Error("No user data found");
+    }
+    
+    const parsedData = JSON.parse(userData);
+    if (!parsedData.token) {
+      throw new Error("No valid token found");
+    }
+    
+    return parsedData;
+  } catch (error) {
+    console.error("Error retrieving user data:", error.message);
+    return { token: null, role: "" };
+  }
+};
 
 const AcmAnnouncements = () => {
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
   const [announcements, setAnnouncements] = useState([]);
+  const [userRole, setUserRole] = useState("null"); 
+  const navigate = useNavigate();
+  const userData = getUserData();
 
+  useEffect(() => {
+    if (!userData||!userData.token) {
+      console.error("No token found, redirecting to login.");
+      navigate("/login");
+      return;
+    }
+    if (userData.role) {
+      setUserRole(userData.role);
+      if (userData.role !== "acm") {
+        console.error("Unauthorized role, redirecting.");
+        navigate("/home");
+      }
+    }
+  }, [userData.role, navigate]);
   // Fetch announcements
   useEffect(() => {
     fetchAnnouncements();
@@ -14,11 +50,9 @@ const AcmAnnouncements = () => {
 
   const fetchAnnouncements = async () => {
     try {
-      const token = localStorage.getItem("token");
-  
       const response = await axios.get("http://localhost:8080/api/acm/get", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${userData.token}`,
         },
         withCredentials: true,
       });
@@ -39,7 +73,7 @@ const AcmAnnouncements = () => {
     e.preventDefault(); // ✅ Prevent default form submission
   
     try {
-      const token = localStorage.getItem("token");
+      const token = userData.token;
       if (!token) {
         throw new Error("No token found, user is not authenticated.");
       }
@@ -51,7 +85,7 @@ const AcmAnnouncements = () => {
         newAnnouncement,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${userData.token}`,
             "Content-Type": "application/json",
           },
           withCredentials: true,
@@ -77,14 +111,14 @@ const AcmAnnouncements = () => {
 
   const handleDelete = async (id) => {
     try {
-      const token = localStorage.getItem("token"); // ✅ Get the token
+      const token = userData.token;// ✅ Get the token
       if (!token) {
         throw new Error("No token found, user is not authenticated.");
       }
   
       await axios.delete(`http://localhost:8080/api/acm/delete/${id}`, {
         headers: {
-          Authorization: `Bearer ${token}`, // ✅ Include token
+          Authorization: `Bearer ${userData.token}`, // ✅ Include token
         },
         withCredentials: true, // ✅ Ensure cookies are sent if needed
       });
@@ -110,7 +144,7 @@ const AcmAnnouncements = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-2xl font-bold text-center mb-4">ACM Announcement</h2>
+        <h2 className="text-2xl font-bold text-center mb-4">IET Announcement</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"

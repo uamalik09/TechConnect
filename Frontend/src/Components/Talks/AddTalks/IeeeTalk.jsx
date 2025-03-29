@@ -1,11 +1,48 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+const getUserData = () => {
+  try {
+    const userData = localStorage.getItem("user");
+    if (!userData) {
+      throw new Error("No user data found");
+    }
+    
+    const parsedData = JSON.parse(userData);
+    if (!parsedData.token) {
+      throw new Error("No valid token found");
+    }
+    
+    return parsedData;
+  } catch (error) {
+    console.error("Error retrieving user data:", error.message);
+    return { token: null, role: "" };
+  }
+};
 const IeeeTalk = () => {
   const [title, setTitle] = useState("");
   const [talkUrl, setTalkUrl] = useState("");
   const [date, setDate] = useState("");
   const [talks, setTalks] = useState([]);
+  const [userRole, setUserRole] = useState("null");
+  const navigate = useNavigate();
+  const userData = getUserData();
+
+  useEffect(() => {
+    if (!userData||!userData.token) {
+      console.error("No token found, redirecting to login.");
+      navigate("/login");
+      return;
+    }
+    if (userData.role) {
+      setUserRole(userData.role);
+      if (userData.role !== "ieee") {
+        console.error("Unauthorized role, redirecting.");
+        navigate("/home");
+      }
+    }
+  }, [userData.role, navigate]);
+
 
   useEffect(() => {
     fetchTalks();
@@ -13,9 +50,9 @@ const IeeeTalk = () => {
 
   const fetchTalks = async () => {
     try {
-      const token = localStorage.getItem("token");
+      
       const response = await axios.get("http://localhost:8080/api/ieee/gettalks", {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${userData.token}` },
       });
 
       if (Array.isArray(response.data)) {
@@ -31,11 +68,11 @@ const IeeeTalk = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem("token");
+     
       const response = await axios.post(
         "http://localhost:8080/api/ieee/addtalk",
         { title, talkUrl, date },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { Authorization: `Bearer ${userData.token}` } }
       );
 
       if (response.data && response.data._id) {
@@ -59,9 +96,9 @@ const IeeeTalk = () => {
     }
 
     try {
-      const token = localStorage.getItem("token");
+     
       await axios.delete(`http://localhost:8080/api/ieee/deletetalk/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${userData.token}` },
       });
 
       setTalks(talks.filter((talk) => talk._id !== id));

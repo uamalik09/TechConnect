@@ -1,16 +1,49 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { FaClipboardList } from "react-icons/fa";
-
+import { useNavigate } from "react-router-dom";
+const getUserData = () => {
+  try {
+    const userData = localStorage.getItem("user");
+    if (!userData) {
+      throw new Error("No user data found");
+    }
+    
+    const parsedData = JSON.parse(userData);
+    if (!parsedData.token) {
+      throw new Error("No valid token found");
+    }
+    
+    return parsedData;
+  } catch (error) {
+    console.error("Error retrieving user data:", error.message);
+    return { token: null, role: "" };
+  }
+};
 
 const IeCode = () => {
+  const navigate = useNavigate();
   const [url, setUrl] = useState("");
   const [links, setLinks] = useState([]);
   const [editing, setEditing] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const token = localStorage.getItem("token");
-
+  const [userRole, setUserRole] = useState("null"); 
+  const userData = getUserData();
+  const token = userData.token;
+  useEffect(() => {
+    if (!userData||!userData.token) {
+      console.error("No token found, redirecting to login.");
+      navigate("/login");
+      return;
+    }
+    if (userData.role) {
+      setUserRole(userData.role);
+      if (userData.role !== "ie") {
+        console.error("Unauthorized role, redirecting.");
+        navigate("/home");
+      }
+    }
+  }, [userData.role, navigate]);
   useEffect(() => {
     fetchLinks();
   }, []);

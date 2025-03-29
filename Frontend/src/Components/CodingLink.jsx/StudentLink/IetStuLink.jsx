@@ -1,15 +1,43 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import {  useNavigate } from "react-router-dom";
 
 const IetstuLink = () => {
   const [links, setLinks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const navigate = useNavigate();
+  const getUserData = () => {
+    try {
+      const userData = localStorage.getItem("user");
+      if (!userData) {
+        throw new Error("No user data found");
+      }
+      
+      const parsedData = JSON.parse(userData);
+      if (!parsedData.token) {
+        throw new Error("No valid token found");
+      }
+      
+      return parsedData;
+    } catch (error) {
+      console.error("Error retrieving user data:", error.message);
+      return null;
+    }
+  };
   useEffect(() => {
     const fetchLinks = async () => {
+      const userData = getUserData();
+    
+    // Redirect to login if no valid user data
+    if (!userData||userData.role!="user") {
+      console.error("No authenticated user found");
+      navigate("/home");
+      return;
+    }
+    
       try {
-        const token = localStorage.getItem("token"); // Get token from local storage
+        const token = userData.token; // Get token from local storage
         if (!token) throw new Error("Unauthorized: No token found");
 
         const res = await axios.get("http://localhost:8080/coding/iet/getcode/student", {

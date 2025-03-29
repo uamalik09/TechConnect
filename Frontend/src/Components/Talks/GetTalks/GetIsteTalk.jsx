@@ -1,20 +1,46 @@
 import React, { useEffect, useState } from "react";
+import {useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const IsteTalksPage = () => {
+const GetTalks = () => {
+  const navigate = useNavigate();
   const [talks, setTalks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
+  const getUserData = () => {
+    try {
+      const userData = localStorage.getItem("user");
+      if (!userData) {
+        throw new Error("No user data found");
+      }
+      
+      const parsedData = JSON.parse(userData);
+      if (!parsedData.token) {
+        throw new Error("No valid token found");
+      }
+      
+      return parsedData;
+    } catch (error) {
+      console.error("Error retrieving user data:", error.message);
+      return null;
+    }
+  };
   useEffect(() => {
     fetchTalks();
   }, []);
 
   const fetchTalks = async () => {
+    const userData = getUserData();
+     // Redirect to login if no valid user data
+     if (!userData||userData.role!="user") {
+      console.error("No authenticated user found");
+      navigate("/home");
+      return;
+    }
     try {
-      const token = localStorage.getItem("token");
+     
       const response = await axios.get("http://localhost:8080/api/iste/gettalks", {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${userData.token}` },
       });
 
       if (Array.isArray(response.data)) {
@@ -69,4 +95,4 @@ const IsteTalksPage = () => {
   );
 };
 
-export default IsteTalksPage;
+export default GetTalks;

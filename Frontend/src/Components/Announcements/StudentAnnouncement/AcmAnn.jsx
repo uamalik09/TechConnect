@@ -1,21 +1,49 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
-
+import { useNavigate } from "react-router-dom";
+const getUserData = () => {
+  try {
+    const userData = localStorage.getItem("user");
+    if (!userData) {
+      throw new Error("No user data found");
+    }
+    
+    const parsedData = JSON.parse(userData);
+    if (!parsedData.token) {
+      throw new Error("No valid token found");
+    }
+    
+    return parsedData;
+  } catch (error) {
+    console.error("Error retrieving user data:", error.message);
+    return null;
+  }
+};
 const GetstuAcmAnnouncements = () => {
   const [announcements, setAnnouncements] = useState([]);
+  const navigate = useNavigate();
+  const userData = getUserData();
+    
+    
 
   useEffect(() => {
     fetchAnnouncements();
   }, []);
 
   const fetchAnnouncements = async () => {
+    // Redirect to login if no valid user data
+    if (!userData||userData.role!="user") {
+      console.error("No authenticated user found");
+      navigate("/home");
+      return;
+    }
+
     try {
-      const token = localStorage.getItem("token");
       
       const response = await axios.get("http://localhost:8080/api/acm/get/student", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${userData.token}`,
         },
         withCredentials: true,
       });
