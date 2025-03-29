@@ -37,7 +37,7 @@ const IetAnnouncements = () => {
     }
     if (userData.role) {
       setUserRole(userData.role);
-      if (userData.role !== "iet") {
+      if (userData.role.toLowerCase() !== "iet") {
         console.error("Unauthorized role, redirecting.");
         navigate("/home");
       }

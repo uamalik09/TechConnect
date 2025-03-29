@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../Context/AuthContext"; // Import useAuth
 
 function Login() {
+    const { login } = useAuth(); // Use the AuthContext
     const [loginData, setLoginData] = useState({
         email: "",
         password: "",
-        remember: false,
     });
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -13,10 +14,10 @@ function Login() {
     const navigate = useNavigate();
 
     const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
+        const { name, value } = e.target;
         setLoginData({
             ...loginData,
-            [name]: type === "checkbox" ? checked : value,
+            [name]: value,
         });
     };
 
@@ -24,19 +25,15 @@ function Login() {
         e.preventDefault();
         setIsLoading(true);
         setErrorMessage("");
-        console.log("Form Data before sending:", loginData);
-    
+
         if (!loginData.email || !loginData.password) {
             setErrorMessage("All fields are required!");
             setIsLoading(false);
             return;
         }
-    
-        console.log("Form Submitted", loginData);
-    
+
         try {
-            const url = "http://localhost:8080/auth/login";
-            const response = await fetch(url, {
+            const response = await fetch("http://localhost:8080/auth/login", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -46,66 +43,31 @@ function Login() {
                     password: loginData.password,
                 }),
             });
-    
+
             const result = await response.json();
-            console.log(result); // Log the full response to verify the structure
-            
-            // Check if response has a success flag
+            console.log(result);
+
             if (result.success) {
-                // Safely access user object and its properties
-                const jwtToken = result.jwtToken || result.token;
-                const user = result.user || {};
-                const name = user?.name || "User";
-                const role = user?.role || "student";
-                
-                // Store token and simple values as regular strings
-                localStorage.setItem('token', jwtToken);
-                localStorage.setItem('loggedInUser', name);
-                localStorage.setItem('userRole', role);
-                
-                // Store complete user info as properly formatted JSON
-                if (user) {
-                    const userInfo = {
-                        name: name,
-                        email: user.email || loginData.email,
-                        role: role,
-                        id: user.id || user._id || ""
-                    };
-                    localStorage.setItem('userInfo', JSON.stringify(userInfo));
-                }
-                
-                console.log("User Role: ", role);
-                
-                // Navigate based on role
-                switch(role.toLowerCase()) {
-                    case 'admin':
-                        navigate('/admindashboard');
-                        break;
-                    case 'iet':
-                        navigate('/ietdashboard');
-                        break;
-                    case 'ieee':
-                        navigate('/ieeedashboard');
-                        break;
-                    case 'acm':
-                        navigate('/acmdashboard');
-                        break;
-                    case 'ie':
-                        navigate('/iedashboard');
-                        break;
-                    case 'iste':
-                        navigate('/istedashboard');
-                        break;
-                    default:
-                        navigate('/studentdashboard');
+                const user = {
+                    name: result.user?.name || "User",
+                    email: result.user?.email || loginData.email,
+                    role: result.user?.role || "student",
+                    token: result.jwtToken || result.token
+                };
+
+                login(user);
+
+                switch (user.role.toLowerCase()) {
+                    case 'admin': navigate('/admindashboard'); break;
+                    case 'iet': navigate('/ietdashboard'); break;
+                    case 'ieee': navigate('/ieeedashboard'); break;
+                    case 'acm': navigate('/acmdashboard'); break;
+                    case 'ie': navigate('/iedashboard'); break;
+                    case 'iste': navigate('/istedashboard'); break;
+                    default: navigate('/studentdashboard');
                 }
             } else {
-                // Handle server-side error messages
-                if (result.error && result.error.details && result.error.details.length > 0) {
-                    setErrorMessage(result.error.details[0].message);
-                } else {
-                    setErrorMessage(result.message || "Login failed. Please try again.");
-                }
+                setErrorMessage(result.message || "Login failed. Please try again.");
             }
         } catch (err) {
             console.error("Login error:", err);
@@ -126,13 +88,13 @@ function Login() {
                         <h1 className="text-xl font-bold leading-tight tracking-tight text-white md:text-2xl">
                             Sign in to your account
                         </h1>
-                        
+
                         {errorMessage && (
-                            <div className="p-4 mb-4 text-sm rounded-lg bg-red-900 text-red-100 border border-red-800" role="alert">
+                            <div className="p-4 mb-4 text-sm rounded-lg bg-red-900 text-red-100 border border-red-800">
                                 <span className="font-medium">Error:</span> {errorMessage}
                             </div>
                         )}
-                        
+
                         <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                             <div>
                                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-white">Your email</label>
@@ -160,40 +122,12 @@ function Login() {
                                     required 
                                 />
                             </div>
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-start">
-                                    <div className="flex items-center h-5">
-                                        <input 
-                                            id="remember" 
-                                            name="remember" 
-                                            type="checkbox" 
-                                            checked={loginData.remember} 
-                                            onChange={handleChange} 
-                                            className="w-4 h-4 border border-gray-600 rounded bg-gray-700 focus:ring-3 focus:ring-blue-600" 
-                                        />
-                                    </div>
-                                    <div className="ml-3 text-sm">
-                                        <label htmlFor="remember" className="text-gray-300">Remember me</label>
-                                    </div>
-                                </div>
-                                <a href="/forgot-password" className="text-sm font-medium text-blue-400 hover:text-blue-300">
-                                    Forgot password?
-                                </a>
-                            </div>
                             <button 
                                 type="submit" 
                                 disabled={isLoading}
-                                className={`w-full text-white ${isLoading ? 'bg-blue-700 opacity-70' : 'bg-blue-600 hover:bg-blue-700'} focus:ring-4 focus:outline-none focus:ring-blue-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-all duration-200 flex justify-center items-center`}
+                                className={`w-full text-white ${isLoading ? 'bg-blue-700 opacity-70' : 'bg-blue-600 hover:bg-blue-700'} focus:ring-4 focus:outline-none focus:ring-blue-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center`}
                             >
-                                {isLoading ? (
-                                    <>
-                                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                        </svg>
-                                        Signing in...
-                                    </>
-                                ) : "Sign in"}
+                                {isLoading ? "Signing in..." : "Sign in"}
                             </button>
                             <p className="text-sm font-light text-gray-400">
                                 Don't have an account yet? <a href="/signup" className="font-medium text-blue-400 hover:text-blue-300">Sign up</a>

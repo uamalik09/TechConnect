@@ -13,8 +13,6 @@ export default function ChoicePage() {
     if (userRole === "admin" || userRole === "overallAdmin") {
       setIsAdmin(true);
     }
-    
-    // Trigger animations after component mounts
     setTimeout(() => setLoaded(true), 100);
   }, []);
 
@@ -133,12 +131,6 @@ export default function ChoicePage() {
               <motion.a href="/home" variants={navItemVariants} className="hover:text-blue-300 transition-colors">
                 <FaHome className="inline mr-2" /> Home
               </motion.a>
-              <motion.a href="/about" variants={navItemVariants} className="hover:text-blue-300 transition-colors">
-                <FaInfoCircle className="inline mr-2" /> About
-              </motion.a>
-              <motion.a href="contact" variants={navItemVariants} className="hover:text-blue-300 transition-colors">
-                <FaPhone className="inline mr-2" /> Contact
-              </motion.a>
             </motion.div>
 
             {/* Mobile Navigation Button */}
@@ -164,14 +156,8 @@ export default function ChoicePage() {
               className="bg-slate-800 md:hidden"
             >
               <div className="container mx-auto px-6 py-4 flex flex-col space-y-4">
-                <a href="#" className="hover:text-blue-300 transition-colors py-2">
+                <a href="/home" className="hover:text-blue-300 transition-colors py-2">
                   <FaHome className="inline mr-2" /> Home
-                </a>
-                <a href="#" className="hover:text-blue-300 transition-colors py-2">
-                  <FaInfoCircle className="inline mr-2" /> About
-                </a>
-                <a href="#" className="hover:text-blue-300 transition-colors py-2">
-                  <FaPhone className="inline mr-2" /> Contact
                 </a>
                 <a 
                   href="#" 
