@@ -82,19 +82,31 @@ function SigDetails() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <h2 className="text-3xl font-bold text-center mb-4">{selectedSig.name}</h2>
-      <p className="text-lg text-gray-700 mb-6">{selectedSig.description}</p>
-      <div className="flex justify-center">
-        <button 
-          onClick={handleStartTest} 
-          className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
-        >
-          Start Test
-        </button>
+    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center p-6">
+      <h2 className="text-3xl font-bold text-center mb-6">{selectedSig.name}</h2>
+      
+      {/* Instructions Box */}
+      <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-3xl">
+        <h3 className="text-xl font-semibold mb-3">Instructions:</h3>
+        <ul className="list-disc pl-6 space-y-2 text-gray-300">
+          <li>Select the most appropriate answer for each question.</li>
+          <li>Each correct answer awards points.</li>
+          <li>Ensure a stable internet connection before starting.</li>
+          <li>Timer will start as soon as you begin the test.</li>
+          <li>You cannot start the test before the scheduled start time.</li>
+        </ul>
       </div>
+  
+      {/* Start Test Button */}
+      <button 
+        onClick={handleStartTest} 
+        className="mt-6 bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-300"
+      >
+        Start Test
+      </button>
     </div>
   );
+  
 }
 
 export default SigDetails;

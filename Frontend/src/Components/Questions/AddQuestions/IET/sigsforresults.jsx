@@ -66,7 +66,7 @@ const IetSig = () => {
           </div>
           
           <div className="hidden md:flex">
-            <Link to="/studentdashboard" className="hover:text-blue-400 flex items-center gap-2">
+            <Link to="/ietdashboard" className="hover:text-blue-400 flex items-center gap-2">
               <Home className="h-5 w-5" /> Home
             </Link>
             {/* <button 
@@ -93,7 +93,7 @@ const IetSig = () => {
           <div className="md:hidden mt-4 animate-fadeDown">
             <div className="flex flex-col space-y-4 px-2 pb-3 pt-2">
               <Link 
-                to="/studentdashboard" 
+                to="/ietdashboard" 
                 className="text-gray-300 hover:text-blue-400 flex items-center gap-2 px-3 py-2 rounded-md"
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -122,7 +122,7 @@ const IetSig = () => {
 
       {/* Page Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {clubs.map((club, index) => (
             <div
               key={index}

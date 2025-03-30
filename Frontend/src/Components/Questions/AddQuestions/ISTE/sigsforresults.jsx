@@ -123,7 +123,7 @@ const IetSig = () => {
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-900 to-purple-900 py-8 px-6 text-center rounded-lg mx-4 sm:mx-8 mt-10 mb-10">
         <h1 className="text-4xl font-bold mb-2">
-          IET SIGs
+          ISTE SIGs
         </h1>
         <p className="max-w-2xl mx-auto text-gray-300">
           Select a SIG to get results
@@ -132,7 +132,7 @@ const IetSig = () => {
 
       {/* Page Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {clubs.map((club, index) => (
             <div
               key={index}

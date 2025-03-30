@@ -83,7 +83,7 @@ const QuizPage = () => {
             return;
         }
         // First, fetch quiz settings - this will tell us if the quiz exists and is available
-        fetch(`http://localhost:8080/questions/${club}/${sig}/settings`, {
+        fetch(`http://localhost:8080/questions/${club}/${sig}/settings/student`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${userData.token}`,
@@ -285,7 +285,6 @@ const QuizPage = () => {
             
             const data = await response.json();
             setScoredMarks(data.score || 0);
-            console.log('Marks:',data.score);
             navigate(`/${club}/${sig}/results`, {
                 state: {
                     name: name,
@@ -475,12 +474,12 @@ const QuizPage = () => {
                     <h1 className="text-2xl font-bold mb-4">Quiz Already Submitted</h1>
                     <p className="mb-6">You have already submitted this quiz.</p>
                     <div className="flex flex-col space-y-3">
-                        <button
+                       {/* <button
                             onClick={() => navigate(`/${club}/${sig}/results`)}
                             className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
                         >
                             View Results
-                        </button>     
+                        </button> */}    
                         {/* <button
                             onClick={resetQuizState}
                             className="bg-red-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-red-600 transition duration-300"

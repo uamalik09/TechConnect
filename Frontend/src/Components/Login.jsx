@@ -54,6 +54,10 @@ function Login() {
                     role: result.user?.role || "student",
                     token: result.jwtToken || result.token
                 };
+                localStorage.setItem('token', user.token);
+                localStorage.setItem('loggedInUser', user.name);
+                localStorage.setItem('userRole', user.role);
+
 
                 login(user);
 

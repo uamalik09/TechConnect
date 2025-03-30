@@ -18,7 +18,8 @@ const PreferencesAdmin = () => {
       }
 
       const parsedData = JSON.parse(userData);
-      if (!parsedData.token || parsedData.role !== "admin") {
+      const allowedRoles = ["iet", "ieee", "iste", "ie", "acm"];
+      if (!parsedData.token || !allowedRoles.includes(parsedData.role.toLowerCase())) {
         throw new Error("Unauthorized access");
       }
 

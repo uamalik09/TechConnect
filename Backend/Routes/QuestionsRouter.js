@@ -8,6 +8,10 @@ router.get("/:club/:sig/get/student", authenticateUser, authorizeRoles("user"), 
     const {club,sig}=req.params;
     getQuestions(req, res,`${club}${sig}`);
 });
+router.get("/:club/:sig/settings/student", authenticateUser, authorizeRoles("user"), (req, res) => {
+    const {club,sig}=req.params;
+    getquizsettings(req, res,`${club}${sig}`);
+});
 router.post("/iet/cipher/add", authenticateUser, authorizeRoles("iet"), validateQuestion, (req, res) => addQuestion(req, res, "ietcipher"));
 router.get("/iet/cipher/get", authenticateUser, authorizeRoles("iet"), (req, res) => getQuestions(req, res, "ietcipher"));
 router.delete("/iet/cipher/delete/:id", authenticateUser, authorizeRoles("iet"), (req, res) => deleteQuestion(req, res, "ietcipher"));
