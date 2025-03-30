@@ -1,41 +1,26 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaHome, FaBars, FaTimes, FaUserCircle, FaSignOutAlt, FaQuestionCircle, FaPuzzlePiece, FaTachometerAlt } from 'react-icons/fa';
-import { Menu, Home } from 'lucide-react';
+import { FaHome, FaBars, FaTimes, FaTachometerAlt } from 'react-icons/fa';
+import { Home } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const IetSig = () => {
+const IeeeSig = () => {
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hoveredClub, setHoveredClub] = useState(null);
 
-  // Array of club data with images and descriptions
-  const clubs = [
-    { 
-        name: 'Compsoc', 
-        path: '/Compsocchat',
-        image: '/images/compsoc.png',
-      },
-      { 
-        name: 'Diode', 
-        path: '/Diodechat',
-        image: '/images/diode.png',
-      },
-      { 
-        name: 'Piston', 
-        path: '/Pistonchat',
-        image: '/images/piston.png',
-      }
+  // Array of club data with IDs, names, and images
+  const ieee = [
+    { id: 1, name: 'COMPSOC', image: '/images/compsoc.png'},
+    { id: 2, name: 'DIODE', image: '/images/diode.png' },
+    { id: 3, name: 'PISTON', image: '/images/piston.png' },
+    
   ];
 
-  const handleLogout = () => {
-    // Clear localStorage items
-    localStorage.removeItem("userInfo");
-    localStorage.removeItem("token");
-    localStorage.removeItem("loggedInUser");
-    localStorage.removeItem("userRole");
-    // Navigate to home page
-    navigate("/");
+  const handleSigClick = (sig) => {
+    // Navigate to chat with the specific SIG ID
+    navigate(`/ieee/${sig.id}/chat`);
   };
 
   return (
@@ -51,15 +36,9 @@ const IetSig = () => {
           </div>
           
           <div className="hidden md:flex">
-            <Link to="/studentdashboard" className="hover:text-blue-400 flex items-center gap-2">
+            <Link to="/ieeedashboard" className="hover:text-blue-400 flex items-center gap-2">
               <Home className="h-5 w-5" /> Home
             </Link>
-            {/* <button 
-              onClick={handleLogout}
-              className="ml-6 hover:text-red-400 flex items-center gap-2"
-            >
-              <FaSignOutAlt className="h-5 w-5" /> Logout
-            </button> */}
           </div>
           
           {/* Mobile menu button */}
@@ -78,18 +57,12 @@ const IetSig = () => {
           <div className="md:hidden mt-4 animate-fadeDown">
             <div className="flex flex-col space-y-4 px-2 pb-3 pt-2">
               <Link 
-                to="/studentdashboard" 
+                to="/ieeedashboard" 
                 className="text-gray-300 hover:text-blue-400 flex items-center gap-2 px-3 py-2 rounded-md"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <Home className="h-5 w-5" /> Home
               </Link>
-              {/* <button 
-                onClick={handleLogout}
-                className="text-gray-300 hover:text-red-400 flex items-center gap-2 px-3 py-2 rounded-md text-left"
-              >
-                <FaSignOutAlt className="h-5 w-5" /> Logout
-              </button> */}
             </div>
           </div>
         )}
@@ -98,7 +71,7 @@ const IetSig = () => {
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-900 to-purple-900 py-8 px-6 text-center rounded-lg mx-4 sm:mx-8 mt-10 mb-10">
         <h1 className="text-4xl font-bold mb-2">
-          IET SIGs
+          IEEE SIGs
         </h1>
         <p className="max-w-2xl mx-auto text-gray-300">
           Select a SIG to add questions or manage content for its respective domain
@@ -108,13 +81,13 @@ const IetSig = () => {
       {/* Page Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 gap-6">
-          {clubs.map((club, index) => (
+          {ieee.map((club) => (
             <div
-              key={index}
-              className="flex flex-col"
-              onMouseEnter={() => setHoveredClub(index)}
+              key={club.id}
+              className="flex flex-col cursor-pointer"
+              onMouseEnter={() => setHoveredClub(club.id)}
               onMouseLeave={() => setHoveredClub(null)}
-              onClick={() => navigate(club.path)}
+              onClick={() => handleSigClick(club)}
             >
               <div 
                 className="rounded-lg shadow-xl overflow-hidden relative group hover:scale-105 transition-all duration-300 h-65 w-75 mx-auto"
@@ -133,11 +106,6 @@ const IetSig = () => {
               <h2 className="text-lg font-semibold mt-2 text-center">
                 {club.name}
               </h2>
-              {/* <div className="mt-2 text-center">
-                <button className="bg-blue-600 text-white px-3 py-1 rounded-lg hover:bg-blue-700 transition text-sm">
-                  Manage Questions
-                </button>
-              </div> */}
             </div>
           ))}
         </div>
@@ -161,4 +129,4 @@ const IetSig = () => {
   );
 };
 
-export default IetSig;
+export default IeeeSig;

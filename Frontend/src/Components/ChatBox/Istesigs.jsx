@@ -5,24 +5,26 @@ import { FaHome, FaBars, FaTimes, FaTachometerAlt } from 'react-icons/fa';
 import { Home } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const IetSig = () => {
+const IsteSig = () => {
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hoveredClub, setHoveredClub] = useState(null);
 
   // Array of club data with IDs, names, and images
-  const iet = [
-    { id: 1, name: 'CIPHER', image: '/images/cipher.png'},
-    { id: 2, name: 'ROVISP', image: '/images/rovisp.png' },
-    { id: 3, name: 'TORSION', image: '/images/torsion.png' },
-    { id: 4, name: 'VENTURE', image: '/images/venture.png'},
-    { id: 5, name: 'INKHEART', image: '/images/inkheart.png'},
-    { id: 6, name: 'MEDIA', image: '/images/media.png'},
+  const iste = [
+    { id: 1, name: 'CATALYST', image: '/images/catalyst.png'},
+      { id: 2, name: 'CHARGE', image: '/images/charge.png'},
+      { id: 3, name: 'CHRONICLE', image: '/images/chronicle.png' },
+      { id: 4, name: 'CLUTCH', image: '/images/clutch.png' },
+      { id: 5, name: 'CONCRETE', image: '/images/concrete.png'},
+      { id: 6, name: 'CREDIT', image: '/images/credit.png'},
+      { id: 7, name: 'CRYPT', image: '/images/crypt.png'},
+      { id: 8, name: 'CREATE', image: '/images/create.png'},
   ];
 
   const handleSigClick = (sig) => {
     // Navigate to chat with the specific SIG ID
-    navigate(`/iet/${sig.id}/chat`);
+    navigate(`/iste/${sig.id}/chat`);
   };
 
   return (
@@ -38,7 +40,7 @@ const IetSig = () => {
           </div>
           
           <div className="hidden md:flex">
-            <Link to="/ietdashboard" className="hover:text-blue-400 flex items-center gap-2">
+            <Link to="/istedashboard" className="hover:text-blue-400 flex items-center gap-2">
               <Home className="h-5 w-5" /> Home
             </Link>
           </div>
@@ -59,7 +61,7 @@ const IetSig = () => {
           <div className="md:hidden mt-4 animate-fadeDown">
             <div className="flex flex-col space-y-4 px-2 pb-3 pt-2">
               <Link 
-                to="/ietdashboard" 
+                to="/istedashboard" 
                 className="text-gray-300 hover:text-blue-400 flex items-center gap-2 px-3 py-2 rounded-md"
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -73,7 +75,7 @@ const IetSig = () => {
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-900 to-purple-900 py-8 px-6 text-center rounded-lg mx-4 sm:mx-8 mt-10 mb-10">
         <h1 className="text-4xl font-bold mb-2">
-          IET SIGs
+          ISTE SIGs
         </h1>
         <p className="max-w-2xl mx-auto text-gray-300">
           Select a SIG to add questions or manage content for its respective domain
@@ -83,7 +85,7 @@ const IetSig = () => {
       {/* Page Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 gap-6">
-          {iet.map((club) => (
+          {iste.map((club) => (
             <div
               key={club.id}
               className="flex flex-col cursor-pointer"
@@ -131,4 +133,4 @@ const IetSig = () => {
   );
 };
 
-export default IetSig;
+export default IsteSig;

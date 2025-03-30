@@ -67,7 +67,15 @@ import ClubList from "./Components/ChatBox/ClubList";
 import SigList from "./Components/ChatBox/SigList";
 import Chat from "./Components/chat";
 import IetSigs from "./Components/ChatBox/Ietsigs";
-import SigChat from "./Components/ChatBox/Iet/SigChat";
+import IeeeSigs from "./Components/ChatBox/Ieeesigs";
+import AcmSigs from "./Components/ChatBox/Acmsigs";
+import IsteSigs from "./Components/ChatBox/Istesigs";
+import IeSigs from "./Components/ChatBox/Iesigs";
+import SigChat1 from "./Components/ChatBox/Iet/SigChat";
+import SigChat2 from "./Components/ChatBox/Ieee/SigChat";
+import SigChat3 from "./Components/ChatBox/Acm/SigChat";
+import SigChat4 from "./Components/ChatBox/Iste/SigChat";
+import SigChat5 from "./Components/ChatBox/Ie/SigChat";
 import IetCode from "./Components/CodingLink.jsx/IetCode";
 import IeeeCode from "./Components/CodingLink.jsx/IeeeCode";
 import AcmCode from "./Components/CodingLink.jsx/AcmCoding";
@@ -147,6 +155,10 @@ function App() {
         <Route path="/allannouncement" element={<AllAnnouncement />}/>
         <Route path="/alltalks" element={<AllTalks />}/>
         <Route path="/ietsigs" element={<IetSigs />}/>
+        <Route path="/ieeesigs" element={<IeeeSigs />}/>
+        <Route path="/acmsigs" element={<AcmSigs />}/>
+        <Route path="/istesigs" element={<IsteSigs />}/>
+        <Route path="/iesigs" element={<IeSigs />}/>
         <Route path="/allcodelinks" element={<AllCode/>}/>
         <Route path="/allcodestulinks" element={<ClubPageStu/>}/>
         <Route path="/registration" element={<Register />}/>
@@ -176,7 +188,11 @@ function App() {
         
         <Route element={<ProtectedRoute />}>
           <Route path="/chat/:clubId/:sigId" element={<Chat />} />
-          <Route path="/:sigId/chat" element={<SigChat/>}/>
+          <Route path="/iet/:sigId/chat" element={<SigChat1/>}/>
+          <Route path="ieee/:sigId/chat" element={<SigChat2/>}/>
+          <Route path="acm/:sigId/chat" element={<SigChat3/>}/>
+          <Route path="iste/:sigId/chat" element={<SigChat4/>}/>
+          <Route path="ie/:sigId/chat" element={<SigChat5/>}/>
           <Route path="/preferenceform" element={<PreferenceForm/>}/>
           <Route path="/adminpreferences" element={<AdminPreferences/>}/>
           <Route path="/:club/:sig/quiz" element={<Quiz />} />
