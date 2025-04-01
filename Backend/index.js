@@ -50,6 +50,12 @@ app.use('/status', QuizStatusRoutes)    ;
 app.use('/api/doubts', DoubtRoutes);
 app.use('/coding', CodingRoutes);
 app.use('/api/preferences',PreferenceRoutes);
+
+app.use(express.static("./Frontend/build"));
+app.get("*", (req, res) => {
+    res.sendFile(Path2D.resolve(__dirname, "Frontend", "build", "index.html"))
+});
+
 app.listen(PORT, () => {
     console.log("Server is listening");
 });
