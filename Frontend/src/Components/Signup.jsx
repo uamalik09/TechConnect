@@ -50,7 +50,7 @@ function Signup() {
         console.log("Form Submitted", formData);
 
         try {
-            const url = "http://localhost:8080/auth/signup";
+            const url = "https://tech--connect.azurewebsites.net/auth/signup";
             const response = await fetch(url, {
                 method: "POST",
                 headers: {

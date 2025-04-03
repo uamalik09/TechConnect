@@ -51,7 +51,7 @@ const SigChat = () => {
     try {
       console.log(`Fetching doubts for SIG ${sigId} with token:`, userData.token?.substring(0, 10) + "...");
       
-      const res = await fetch(`http://localhost:8080/api/doubts/2/${sigId}`, {
+      const res = await fetch(`https://tech--connect.azurewebsites.net/api/doubts/2/${sigId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -122,7 +122,7 @@ const SigChat = () => {
       const replyText = `@${originalDoubt.senderName}: "${originalDoubt.text.substring(0, 40)}${originalDoubt.text.length > 40 ? '...' : ''}" - ${adminReply[doubtId].trim()}`;
       
       const res = await fetch(
-        `http://localhost:8080/api/doubts/2/${sigId}/admin/${doubtId}`,
+        `https://tech--connect.azurewebsites.net/api/doubts/2/${sigId}/admin/${doubtId}`,
         {
           method: "POST",
           headers: {

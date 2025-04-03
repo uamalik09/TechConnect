@@ -48,7 +48,7 @@ const QuizStatus = () => {
         const token = localStorage.getItem('token');                  
         
         // Make the fetch request with the token in the Authorization header
-        const response = await fetch(`http://localhost:8080/status/iet/${sig}/quiz-status`, {
+        const response = await fetch(`https://tech--connect.azurewebsites.net/status/iet/${sig}/quiz-status`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${userData.token}`,

@@ -27,7 +27,7 @@ const ResultsPage = () => {
       }
 
       // Fetch results from the server
-      fetch(`http://localhost:8080/results/user/${userInfo.rollNumber}`, {
+      fetch(`https://tech--connect.azurewebsites.net/results/user/${userInfo.rollNumber}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,

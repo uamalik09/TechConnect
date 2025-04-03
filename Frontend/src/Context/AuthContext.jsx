@@ -107,7 +107,7 @@ export const AuthProvider = ({ children }) => {
   const verifyToken = async (token) => {
     try {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      const response = await axios.get('http://localhost:8080/api/auth/verify'); // Make sure this API route exists
+      const response = await axios.get('https://tech--connect.azurewebsites.net/api/auth/verify'); // Make sure this API route exists
       return response.data.valid;
     } catch (error) {
       console.error("Token validation failed:", error);

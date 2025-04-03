@@ -51,7 +51,7 @@ const IsteAnnouncements = () => {
   const fetchAnnouncements = async () => {
     try {
   
-      const response = await axios.get("http://localhost:8080/api/iste/get", {
+      const response = await axios.get("https://tech--connect.azurewebsites.net/api/iste/get", {
         headers: {
           Authorization: `Bearer ${userData.token}`,
         },
@@ -82,7 +82,7 @@ const IsteAnnouncements = () => {
       const newAnnouncement = { title, message }; // ✅ Capture input values
   
       const response = await axios.post(
-        "http://localhost:8080/api/iste/add",
+        "https://tech--connect.azurewebsites.net/api/iste/add",
         newAnnouncement,
         {
           headers: {
@@ -117,7 +117,7 @@ const IsteAnnouncements = () => {
         throw new Error("No token found, user is not authenticated.");
       }
   
-      await axios.delete(`http://localhost:8080/api/iste/delete/${id}`, {
+      await axios.delete(`https://tech--connect.azurewebsites.net/api/iste/delete/${id}`, {
         headers: {
           Authorization: `Bearer ${userData.token}`, // ✅ Include token
         },

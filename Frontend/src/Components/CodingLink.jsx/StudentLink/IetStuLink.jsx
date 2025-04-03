@@ -40,7 +40,7 @@ const IetstuLink = () => {
         const token = userData.token; // Get token from local storage
         if (!token) throw new Error("Unauthorized: No token found");
 
-        const res = await axios.get("http://localhost:8080/coding/iet/getcode/student", {
+        const res = await axios.get("https://tech--connect.azurewebsites.net/coding/iet/getcode/student", {
           headers: {
             Authorization: `Bearer ${token}`, // Send token in headers
           },

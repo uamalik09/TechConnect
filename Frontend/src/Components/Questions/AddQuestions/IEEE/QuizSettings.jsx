@@ -56,7 +56,7 @@ const QuizSettings = ({ totalMarks, totalQuestions }) => {
   const fetchQuizSettings = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:8080/questions/ieee/${sig}/settings`, {
+      const response = await fetch(`https://tech--connect.azurewebsites.net/questions/ieee/${sig}/settings`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -117,7 +117,7 @@ const QuizSettings = ({ totalMarks, totalQuestions }) => {
       
       console.log("Submitting settings:", settingsToSubmit);
       
-      const response = await fetch(`http://localhost:8080/questions/ieee/${sig}/settings/update`, {
+      const response = await fetch(`https://tech--connect.azurewebsites.net/questions/ieee/${sig}/settings/update`, {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",

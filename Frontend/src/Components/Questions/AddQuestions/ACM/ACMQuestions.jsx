@@ -65,7 +65,7 @@ const AdminQuestions = () => {
   const fetchQuestions = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:8080/questions/acm/${sig}/get`, {
+      const response = await fetch(`https://tech--connect.azurewebsites.net/questions/acm/${sig}/get`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -103,7 +103,7 @@ const AdminQuestions = () => {
     e.preventDefault();
     
     try {
-      const settingsResponse = await fetch(`http://localhost:8080/questions/acm/${sig}/settings`, {
+      const settingsResponse = await fetch(`https://tech--connect.azurewebsites.net/questions/acm/${sig}/settings`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -126,7 +126,7 @@ const AdminQuestions = () => {
       
       console.log("Submitting question:", dataToSubmit);
       
-      const response = await fetch(`http://localhost:8080/questions/acm/${sig}/add`, {
+      const response = await fetch(`https://tech--connect.azurewebsites.net/questions/acm/${sig}/add`, {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
@@ -166,7 +166,7 @@ const AdminQuestions = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this question?")) {
       try {
-        const response = await fetch(`http://localhost:8080/questions/acm/${sig}/delete/${id}`, {
+        const response = await fetch(`https://tech--connect.azurewebsites.net/questions/acm/${sig}/delete/${id}`, {
           method: "DELETE",
           headers: {
             'Authorization': `Bearer ${userData.token}`
@@ -207,7 +207,7 @@ const AdminQuestions = () => {
 
   const updateMarks = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/questions/acm/${sig}/updateMarks/${editMarks.id}`, {
+      const response = await fetch(`https://tech--connect.azurewebsites.net/questions/acm/${sig}/updateMarks/${editMarks.id}`, {
         method: "PATCH",
         headers: {
           'Content-Type': 'application/json',
@@ -517,7 +517,7 @@ export default AdminQuestions;
 //   const fetchQuestions = async () => {
 //     try {
 //       setLoading(true);
-//       const response = await fetch("http://localhost:8080/questions/acm/${sig}/get", {
+//       const response = await fetch("https://tech--connect.azurewebsites.net/questions/acm/${sig}/get", {
 //         method: "GET",
 //         headers: {
 //           "Content-Type": "application/json",
@@ -549,7 +549,7 @@ export default AdminQuestions;
 //   const handleDelete = async (id) => {
 //     if (window.confirm("Are you sure you want to delete this question?")) {
 //       try {
-//         const response = await fetch(`http://localhost:8080/questions/acm/${sig}/delete/${id}`, {
+//         const response = await fetch(`https://tech--connect.azurewebsites.net/questions/acm/${sig}/delete/${id}`, {
 //           method: "DELETE",
 //           headers: {
 //             "Authorization": `Bearer ${userData.token}` // Fixed token retrieval

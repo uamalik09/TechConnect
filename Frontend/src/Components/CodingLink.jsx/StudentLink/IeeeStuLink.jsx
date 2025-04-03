@@ -40,7 +40,7 @@ const IeeestuLink = () => {
         const token = userData.token; // Get token from local storage
         if (!token) throw new Error("Unauthorized: No token found");
 
-        const res = await axios.get("http://localhost:8080/coding/ieee/getcode/student", {
+        const res = await axios.get("https://tech--connect.azurewebsites.net/coding/ieee/getcode/student", {
           headers: {
             Authorization: `Bearer ${token}`, // Send token in headers
           },

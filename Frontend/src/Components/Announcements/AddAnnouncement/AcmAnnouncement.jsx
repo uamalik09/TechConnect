@@ -50,7 +50,7 @@ const AcmAnnouncements = () => {
 
   const fetchAnnouncements = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/acm/get", {
+      const response = await axios.get("https://tech--connect.azurewebsites.net/api/acm/get", {
         headers: {
           Authorization: `Bearer ${userData.token}`,
         },
@@ -81,7 +81,7 @@ const AcmAnnouncements = () => {
       const newAnnouncement = { title, message }; // ✅ Capture input values
   
       const response = await axios.post(
-        "http://localhost:8080/api/acm/add",
+        "https://tech--connect.azurewebsites.net/api/acm/add",
         newAnnouncement,
         {
           headers: {
@@ -116,7 +116,7 @@ const AcmAnnouncements = () => {
         throw new Error("No token found, user is not authenticated.");
       }
   
-      await axios.delete(`http://localhost:8080/api/acm/delete/${id}`, {
+      await axios.delete(`https://tech--connect.azurewebsites.net/api/acm/delete/${id}`, {
         headers: {
           Authorization: `Bearer ${userData.token}`, // ✅ Include token
         },

@@ -52,7 +52,7 @@ const IetCode = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const res = await axios.get("http://localhost:8080/coding/iet/getcode", {
+      const res = await axios.get("https://tech--connect.azurewebsites.net/coding/iet/getcode", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -71,12 +71,12 @@ const IetCode = () => {
     if (!url) return;
     try {
       if (editing) {
-        await axios.put(`http://localhost:8080/coding/iet/update/${editing}`, { url }, {
+        await axios.put(`https://tech--connect.azurewebsites.net/coding/iet/update/${editing}`, { url }, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setEditing(null);
       } else {
-        await axios.post("http://localhost:8080/coding/iet/addcode", { url }, {
+        await axios.post("https://tech--connect.azurewebsites.net/coding/iet/addcode", { url }, {
           headers: { Authorization: `Bearer ${token}` },
         });
       }
@@ -90,7 +90,7 @@ const IetCode = () => {
 
   const deleteLink = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/coding/iet/delete/${id}`, {
+      await axios.delete(`https://tech--connect.azurewebsites.net/coding/iet/delete/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchLinks();

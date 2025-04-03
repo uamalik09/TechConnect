@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const path = require("path");
 const bodyParser = require('body-parser');
 const AuthRouter = require('./Routes/AuthRouter');
 const AdminRouter = require('./Routes/AdminRouter');
@@ -17,7 +18,7 @@ const CodingRoutes = require('./Routes/CodingRoutes');
 const PreferenceRoutes=require('./Routes/PreferenceRoutes');
 
 app.use(cors({
-    origin: ['http://localhost:5173','http://localhost:5174'], // Allow only frontend
+  origin: process.env.FRONTEND_URL, // Allow only frontend
     credentials: true, // Allow cookies/authentication headers
     methods: ["GET", "POST", "PUT", "DELETE","PATCH"], // Allowed HTTP methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
@@ -50,11 +51,12 @@ app.use('/status', QuizStatusRoutes)    ;
 app.use('/api/doubts', DoubtRoutes);
 app.use('/coding', CodingRoutes);
 app.use('/api/preferences',PreferenceRoutes);
-
-app.use(express.static("./Frontend/build"));
-app.get("*", (req, res) => {
-    res.sendFile(Path2D.resolve(__dirname, "Frontend", "build", "index.html"))
-});
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("Frontend/dist")); 
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "Frontend", "dist", "index.html")); 
+  });
+}
 
 app.listen(PORT, () => {
     console.log("Server is listening");

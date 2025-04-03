@@ -41,7 +41,7 @@ const GetstuAcmAnnouncements = () => {
 
     try {
       
-      const response = await axios.get("http://localhost:8080/api/acm/get/student", {
+      const response = await axios.get("https://tech--connect.azurewebsites.net/api/acm/get/student", {
         headers: {
           Authorization: `Bearer ${userData.token}`,
         },

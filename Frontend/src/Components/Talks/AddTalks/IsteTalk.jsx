@@ -51,7 +51,7 @@ const IsteTalk = () => {
   const fetchTalks = async () => {
     try {
       
-      const response = await axios.get("http://localhost:8080/api/iste/gettalks", {
+      const response = await axios.get("https://tech--connect.azurewebsites.net/api/iste/gettalks", {
         headers: { Authorization: `Bearer ${userData.token}` },
       });
 
@@ -70,7 +70,7 @@ const IsteTalk = () => {
     try {
      
       const response = await axios.post(
-        "http://localhost:8080/api/iste/addtalk",
+        "https://tech--connect.azurewebsites.net/api/iste/addtalk",
         { title, talkUrl, date },
         { headers: { Authorization: `Bearer ${userData.token}` } }
       );
@@ -97,7 +97,7 @@ const IsteTalk = () => {
 
     try {
      
-      await axios.delete(`http://localhost:8080/api/iste/deletetalk/${id}`, {
+      await axios.delete(`https://tech--connect.azurewebsites.net/api/iste/deletetalk/${id}`, {
         headers: { Authorization: `Bearer ${userData.token}` },
       });
 

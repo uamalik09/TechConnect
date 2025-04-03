@@ -68,7 +68,7 @@ const PreferenceForm = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:8080/api/preferences/submit", {
+      const response = await fetch("https://tech--connect.azurewebsites.net/api/preferences/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -40,7 +40,7 @@ const PreferencesAdmin = () => {
     }
 
     try {
-      const response = await axios.get("http://localhost:8080/api/preferences/all", {
+      const response = await axios.get("https://tech--connect.azurewebsites.net/api/preferences/all", {
         headers: {
           Authorization: `Bearer ${adminData.token}`, // ✅ Attach token
         },

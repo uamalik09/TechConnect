@@ -51,7 +51,7 @@ const IetTalk = () => {
   const fetchTalks = async () => {
     try {
       
-      const response = await axios.get("http://localhost:8080/api/iet/gettalks", {
+      const response = await axios.get("https://tech--connect.azurewebsites.net/api/iet/gettalks", {
         headers: { Authorization: `Bearer ${userData.token}` },
       });
 
@@ -70,7 +70,7 @@ const IetTalk = () => {
     try {
      
       const response = await axios.post(
-        "http://localhost:8080/api/iet/addtalk",
+        "https://tech--connect.azurewebsites.net/api/iet/addtalk",
         { title, talkUrl, date },
         { headers: { Authorization: `Bearer ${userData.token}` } }
       );
@@ -97,7 +97,7 @@ const IetTalk = () => {
 
     try {
      
-      await axios.delete(`http://localhost:8080/api/iet/deletetalk/${id}`, {
+      await axios.delete(`https://tech--connect.azurewebsites.net/api/iet/deletetalk/${id}`, {
         headers: { Authorization: `Bearer ${userData.token}` },
       });
 

@@ -52,7 +52,7 @@ const IeeeCode = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const res = await axios.get("http://localhost:8080/coding/ieee/getcode", {
+      const res = await axios.get("https://tech--connect.azurewebsites.net/coding/ieee/getcode", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -71,12 +71,12 @@ const IeeeCode = () => {
     if (!url) return;
     try {
       if (editing) {
-        await axios.put(`http://localhost:8080/coding/ieee/update/${editing}`, { url }, {
+        await axios.put(`https://tech--connect.azurewebsites.net/coding/ieee/update/${editing}`, { url }, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setEditing(null);
       } else {
-        await axios.post("http://localhost:8080/coding/ieee/addcode", { url }, {
+        await axios.post("https://tech--connect.azurewebsites.net/coding/ieee/addcode", { url }, {
           headers: { Authorization: `Bearer ${token}` },
         });
       }
@@ -90,7 +90,7 @@ const IeeeCode = () => {
 
   const deleteLink = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/coding/ieee/delete/${id}`, {
+      await axios.delete(`https://tech--connect.azurewebsites.net/coding/ieee/delete/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchLinks();

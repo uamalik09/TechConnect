@@ -215,7 +215,7 @@ const StudentRegistration = () => {
         const registrationPromises = [];
         for (const registration of registrationData.registrations) {
           const registrationPath = `${registration.clubName.toLowerCase()}/${registration.sigName.toLowerCase()}/register`;
-          const registrationPromise = fetch(`http://localhost:8080/students/${registrationPath}`, {
+          const registrationPromise = fetch(`https://tech--connect.azurewebsites.net/students/${registrationPath}`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'

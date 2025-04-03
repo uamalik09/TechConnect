@@ -51,7 +51,7 @@ const IeeeTalk = () => {
   const fetchTalks = async () => {
     try {
       
-      const response = await axios.get("http://localhost:8080/api/ieee/gettalks", {
+      const response = await axios.get("https://tech--connect.azurewebsites.net/api/ieee/gettalks", {
         headers: { Authorization: `Bearer ${userData.token}` },
       });
 
@@ -70,7 +70,7 @@ const IeeeTalk = () => {
     try {
      
       const response = await axios.post(
-        "http://localhost:8080/api/ieee/addtalk",
+        "https://tech--connect.azurewebsites.net/api/ieee/addtalk",
         { title, talkUrl, date },
         { headers: { Authorization: `Bearer ${userData.token}` } }
       );
@@ -97,7 +97,7 @@ const IeeeTalk = () => {
 
     try {
      
-      await axios.delete(`http://localhost:8080/api/ieee/deletetalk/${id}`, {
+      await axios.delete(`https://tech--connect.azurewebsites.net/api/ieee/deletetalk/${id}`, {
         headers: { Authorization: `Bearer ${userData.token}` },
       });
 

@@ -62,7 +62,7 @@ const AdminSubmissionsDashboard = () => {
           console.error("Invalid token format");
         }
         
-        const response = await fetch(`http://localhost:8080/results/ie/${sig}/submissions`, {
+        const response = await fetch(`https://tech--connect.azurewebsites.net/results/ie/${sig}/submissions`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -243,7 +243,7 @@ const AdminSubmissionsDashboard = () => {
     try {
       const token = localStorage.getItem('userData.token');
       const updatePromises = Object.entries(modifiedSubmissions).map(([submissionId, changes]) => {
-        return fetch(`http://localhost:8080/results/ie/${sig}/submissions/${submissionId}/status`, {
+        return fetch(`https://tech--connect.azurewebsites.net/results/ie/${sig}/submissions/${submissionId}/status`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',

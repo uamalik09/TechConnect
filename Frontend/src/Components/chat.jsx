@@ -49,7 +49,7 @@ const Chat = () => {
     try {
       console.log("Fetching doubts with token:", userData.token.substring(0, 10) + "...");
       
-      const res = await fetch(`http://localhost:8080/api/doubts/${clubId}/${sigId}`, {
+      const res = await fetch(`https://tech--connect.azurewebsites.net/api/doubts/${clubId}/${sigId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -114,7 +114,7 @@ const Chat = () => {
     };
 
     try {
-      const res = await fetch(`http://localhost:8080/api/doubts/${clubId}/${sigId}`, {
+      const res = await fetch(`https://tech--connect.azurewebsites.net/api/doubts/${clubId}/${sigId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
